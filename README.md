@@ -13,6 +13,7 @@ DEPLOY_SECRET="your-deploy-secret"
 DISCORD_CLIENT_ID="your-client-id"
 DISCORD_PUBLIC_KEY="discord-public-key"
 DISCORD_BOT_TOKEN="your-bot-token"
+HELPER_COMMAND_WEBHOOK_URL="https://your-worker.example.workers.dev"
 ```
 
 2. Install dependencies:
@@ -28,6 +29,8 @@ bun run dev
 ## Commands
 
 - `/github` - Look up an issue or PR (defaults to openclaw/hermit)
+- `/helper warn-new-thread` - Post a helper-channel warning for long threads
+- `/helper close-thread` - Post a close notice and archive/lock the current thread
 
 ## Gateway Events
 

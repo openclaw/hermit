@@ -3,6 +3,7 @@ import { GatewayIntents, GatewayPlugin } from "@buape/carbon/gateway"
 import GithubCommand from "./commands/github.js"
 import SayRootCommand from "./commands/say.js"
 import RoleCommand from "./commands/role.js"
+import HelperRootCommand from "./commands/helper.js"
 import AutoModerationActionExecution from "./events/autoModerationActionExecution.js"
 import AutoPublishMessageCreate from "./events/autoPublishMessageCreate.js"
 import Ready from "./events/ready.js"
@@ -33,7 +34,8 @@ const client = new Client(
 		commands: [
 			new GithubCommand(),
 			new SayRootCommand(),
-			new RoleCommand()
+			new RoleCommand(),
+			new HelperRootCommand()
 		],
 		listeners: [
 			new AutoModerationActionExecution(),
@@ -52,6 +54,7 @@ declare global {
 			DISCORD_CLIENT_ID: string;
 			DISCORD_PUBLIC_KEY: string;
 			DISCORD_BOT_TOKEN: string;
+			HELPER_COMMAND_WEBHOOK_URL?: string;
 		}
 	}
 }
