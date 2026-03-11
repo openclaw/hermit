@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1762300800000,
+      "tag": "0000_key_value",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1762300800001,
+      "tag": "0001_init",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1762300800002,
+      "tag": "0002_generic_worker_events",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1762300800003,
+      "tag": "0003_tracked_thread_state",
+      "breakpoints": true
+    }
+  ]
+}

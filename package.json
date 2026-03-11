@@ -5,8 +5,11 @@
 	"type": "module",
 	"main": "./src/index.ts",
 	"scripts": {
-		"dev": "bun run . --watch",
-		"start": "bun run ."
+		"dev": "bun --watch run src/index.ts",
+		"start": "bun run src/index.ts",
+		"typecheck": "tsc --noEmit",
+		"db:migrate": "bun run src/scripts/migrate.ts",
+		"db:generate": "drizzle-kit generate"
 	},
 	"dependencies": {
 		"@buape/carbon": "^0.0.0-beta-20260216184201",

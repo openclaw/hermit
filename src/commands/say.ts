@@ -40,13 +40,6 @@ class SayModelCommand extends SayCommand {
 	protected message = "Any discussion about various AI models should be taken to <#1478196963563409520>."
 }
 
-class SayNewThreadCommand extends SayCommand {
-	name = "new-thread"
-	description = "Ask for a new thread when topics change"
-	protected message = "This thread is getting very long and answers may not be accurate due to the large context. Please start a new thread for any different problems/topics. <@1457407575476801641> please sum up the answer to the initial message and the conversation briefly."
-	protected useRawContent = true
-}
-
 class SayStuckCommand extends SayCommand {
 	name = "stuck"
 	description = "Share the fastest way to get unstuck"
@@ -111,7 +104,6 @@ export default class SayRootCommand extends CommandWithSubcommands {
 	contexts = [InteractionContextType.Guild, InteractionContextType.BotDM]
 	subcommands = [
 		new SayModelCommand(),
-		new SayNewThreadCommand(),
 		new SayHelpCommand(),
 		new SayUserHelpCommand(),
 		new SayServerFaqCommand(),
