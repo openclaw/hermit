@@ -6,7 +6,9 @@
 	"main": "./src/index.ts",
 	"scripts": {
 		"dev": "bun run . --watch",
-		"start": "bun run ."
+		"start": "bun run .",
+		"test": "bun test",
+		"test:watch": "bun test --watch"
 	},
 	"dependencies": {
 		"@buape/carbon": "^0.0.0-beta-20260216184201",
