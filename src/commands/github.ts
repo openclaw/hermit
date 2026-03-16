@@ -85,18 +85,18 @@ export default class GithubCommand extends BaseCommand {
 		{
 			name: "number",
 			description: "Issue or pull request number",
-			type: ApplicationCommandOptionType.Integer,
+			type: ApplicationCommandOptionType.Integer as const,
 			required: true
 		},
 		{
 			name: "user",
 			description: "Repository owner (default: openclaw)",
-			type: ApplicationCommandOptionType.String
+			type: ApplicationCommandOptionType.String as const
 		},
 		{
 			name: "repo",
 			description: "Repository name (default: hermit)",
-			type: ApplicationCommandOptionType.String
+			type: ApplicationCommandOptionType.String as const
 		}
 	]
 
