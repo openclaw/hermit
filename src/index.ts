@@ -3,6 +3,7 @@ import { GatewayIntents, GatewayPlugin } from "@buape/carbon/gateway"
 import GithubCommand from "./commands/github.js"
 import SayRootCommand from "./commands/say.js"
 import RoleCommand from "./commands/role.js"
+import AdminCommand from "./commands/admin.js"
 import AutoModerationActionExecution from "./events/autoModerationActionExecution.js"
 import AutoPublishMessageCreate from "./events/autoPublishMessageCreate.js"
 import Ready from "./events/ready.js"
@@ -33,7 +34,8 @@ const client = new Client(
 		commands: [
 			new GithubCommand(),
 			new SayRootCommand(),
-			new RoleCommand()
+			new RoleCommand(),
+			new AdminCommand()
 		],
 		listeners: [
 			new AutoModerationActionExecution(),
