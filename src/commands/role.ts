@@ -28,7 +28,6 @@ class RoleToggle extends BaseCommand {
 		this.name = name
 		this.roleId = roleId
 		this.description = `Toggle the ${this.name} role on someone`
-		this.permission = Permission.ManageRoles
 		this.contexts = [InteractionContextType.Guild]
 		this.integrationTypes = [ApplicationIntegrationType.GuildInstall]
 	}

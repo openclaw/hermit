@@ -5,6 +5,7 @@ import SolvedModCommand from "./commands/solvedMod.js"
 import SayRootCommand from "./commands/say.js"
 import RoleCommand from "./commands/role.js"
 import HelperRootCommand from "./commands/helper.js"
+import AdminCommand from "./commands/admin.js"
 import AutoModerationActionExecution from "./events/autoModerationActionExecution.js"
 import AutoPublishMessageCreate from "./events/autoPublishMessageCreate.js"
 import Ready from "./events/ready.js"
@@ -41,7 +42,8 @@ const client = new Client(
 			new SolvedModCommand(),
 			new SayRootCommand(),
 			new RoleCommand(),
-			new HelperRootCommand()
+			new HelperRootCommand(),
+			new AdminCommand()
 		],
 		listeners: [
 			new AutoModerationActionExecution(),
