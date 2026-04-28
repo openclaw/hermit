@@ -14,7 +14,7 @@ Discord bot built with Carbon on Cloudflare Workers.
 1. Install deps:
 
 ```bash
-pnpm install
+bun install
 ```
 
 2. Create `.env` from `.env.example`.
@@ -47,25 +47,25 @@ THREAD_LENGTH_CHECK_INTERVAL_HOURS=
 4. Apply D1 migrations:
 
 ```bash
-pnpm run db:apply:local
+bun run db:apply:local
 # or
-pnpm run db:apply:remote
+bun run db:apply:remote
 ```
 
 5. Run locally:
 
 ```bash
-pnpm run dev
+bun run dev
 ```
 
 ## Scripts
 
-- `pnpm run dev` → `wrangler dev --env-file .env`
-- `pnpm run deploy` → deploy worker
-- `pnpm run cf-typegen` → regenerate `worker-configuration.d.ts`
-- `pnpm run typecheck` → TypeScript check
-- `pnpm run db:generate` → generate Drizzle SQL
-- `pnpm run db:apply:local` / `db:apply:remote` → apply D1 migrations
+- `bun run dev` → `wrangler dev --env-file .env`
+- `bun run deploy` → deploy worker
+- `bun run cf-typegen` → regenerate `worker-configuration.d.ts`
+- `bun run typecheck` → TypeScript check
+- `bun run db:generate` → generate Drizzle SQL
+- `bun run db:apply:local` / `db:apply:remote` → apply D1 migrations
 
 ## Notes
 
