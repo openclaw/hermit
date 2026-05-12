@@ -67,9 +67,9 @@ Before asking for review, make sure the PR is free of merge conflicts, user-test
 class SayClawtributorCommand extends SayCommand {
 	name = "clawtributor"
 	description = "Share Clawtributor role request instructions"
-	protected message = `Before requesting the Clawtributor role, connect your GitHub account to your Discord profile in Settings -> Connections -> GitHub.
+	protected message = `To request the Clawtributor role, connect your GitHub account to your Discord profile in Settings -> Connections -> GitHub.
 
-Then ping a Community Staff member with links to the PRs you had merged.`
+Then run </claim:0>. Hermit will check your merged OpenClaw PRs and send the request to the team for review.`
 }
 
 class SayImpersonationCommand extends SayCommand {
