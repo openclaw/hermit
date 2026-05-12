@@ -56,6 +56,40 @@ The team is aware of those and will handle them directly on the codebase, not on
 Thank you.`
 }
 
+class SayPrReviewCommand extends SayCommand {
+	name = "pr-review"
+	description = "Share expectations for posting PRs for review"
+	protected message = `When posting a PR for review, please include the PR link and a couple sentences explaining why the change is important.
+
+Before asking for review, make sure the PR is free of merge conflicts, user-tested, and not failing tests except for failures you have confirmed are unrelated to your code.`
+}
+
+class SayClawtributorCommand extends SayCommand {
+	name = "clawtributor"
+	description = "Share Clawtributor role request instructions"
+	protected message = `Before requesting the Clawtributor role, connect your GitHub account to your Discord profile in Settings -> Connections -> GitHub.
+
+Then ping a Community Staff member with links to the PRs you had merged.`
+}
+
+class SayImpersonationCommand extends SayCommand {
+	name = "impersonation"
+	description = "Warn about fake Krill and support impersonation"
+	protected message = `⚠️ PSA: impersonation / fake Krill accounts
+
+We've seen reports of fake accounts pretending to be Krill or otherwise acting like official OpenClaw helpers.
+
+Please be careful:
+Don't trust random DMs claiming to be support
+Don't run commands or install anything from unverified accounts
+Don't share tokens, API keys, auth codes, or config files
+If something feels off, ask in the server and check with the mod team
+
+If you spot an impersonator, please report it to the mods/admins so we can deal with it.
+
+Tiny support crustaceans are real. Scammers are not 🦐`
+}
+
 class SayAnswerOverflowCommand extends SayCommand {
 	name = "answeroverflow"
 	description = "Share the Answer Overflow skill and community links"
@@ -110,6 +144,9 @@ export default class SayRootCommand extends CommandWithSubcommands {
 		new SayGuideCommand(),
 		new SayStuckCommand(),
 		new SayCiCommand(),
+		new SayPrReviewCommand(),
+		new SayClawtributorCommand(),
+		new SayImpersonationCommand(),
 		new SayAnswerOverflowCommand(),
 		new SayPingingCommand(),
 		new SayDocsCommand(),

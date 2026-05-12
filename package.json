@@ -16,12 +16,12 @@
 	},
 	"dependencies": {
 		"@buape/carbon": "0.0.0-beta-20260427233936",
-		"drizzle-orm": "^0.45.1"
+		"drizzle-orm": "0.45.2"
 	},
 	"devDependencies": {
-		"@types/node": "^25.6.0",
-		"drizzle-kit": "^0.31.8",
+		"@types/node": "25.6.0",
+		"drizzle-kit": "0.31.9",
 		"typescript": "5.9.3",
-		"wrangler": "^4.85.0"
+		"wrangler": "4.85.0"
 	}
 }
