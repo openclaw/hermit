@@ -17,6 +17,13 @@ import {
 	TextInput,
 	TextInputStyle
 } from "@buape/carbon"
+import {
+	createClaimRequest,
+	deleteClaimRequest,
+	getClaimRequest,
+	markClaimRequestSubmitted,
+	recordClaimDecision
+} from "../data/claimRequests.js"
 
 const clawtributorsRoleId = "1458375944111915051"
 const claimReviewRoleId = "1460436814627078433"
@@ -27,6 +34,18 @@ const githubRepo = "openclaw"
 const discordApiBase = "https://discord.com/api/v10"
 const stateTtlMs = 10 * 60 * 1000
 const reasonInputId = "claim-review-reason"
+
+const existingClaimPageMessage = (status: string) => {
+	if (status === "accepted") {
+		return "Your clawtributor claim has already been accepted."
+	}
+
+	if (status === "rejected") {
+		return "Your clawtributor claim has already been reviewed. Ask a moderator if you think this needs another look."
+	}
+
+	return "Your clawtributor claim has already been submitted for review. You will receive a DM after it is accepted or rejected."
+}
 
 export const createClaimUrl = async (userId: string, guildId: string) => {
 	const baseUrl = process.env.BASE_URL?.replace(/\/$/, "")
@@ -178,6 +197,15 @@ class ClaimReviewAcceptButton extends Button {
 			})
 			return
 		}
+
+		await recordClaimDecision({
+			userId,
+			guildId,
+			status: "accepted",
+			decidedById: interaction.user?.id
+		}).catch((error) => {
+			console.error("Failed to record accepted claim:", error)
+		})
 
 		const user = await interaction.client.fetchUser(userId).catch(() => null)
 		await user?.send({
@@ -420,8 +448,12 @@ class ClaimReviewRejectModal extends Modal {
 			typeof data.userId === "string" && data.userId.startsWith("s")
 				? data.userId.slice(1)
 				: null
+		const guildId =
+			typeof data.guildId === "string" && data.guildId.startsWith("s")
+				? data.guildId.slice(1)
+				: null
 		const reason = interaction.fields.getText(reasonInputId)?.trim()
-		if (!userId) {
+		if (!userId || !guildId) {
 			await interaction.reply({
 				components: [
 					new Container(
@@ -436,6 +468,16 @@ class ClaimReviewRejectModal extends Modal {
 			})
 			return
 		}
+
+		await recordClaimDecision({
+			userId,
+			guildId,
+			status: "rejected",
+			decidedById: interaction.user?.id,
+			decisionReason: reason
+		}).catch((error) => {
+			console.error("Failed to record rejected claim:", error)
+		})
 
 		const user = await interaction.client.fetchUser(userId).catch(() => null)
 		await user?.send({
@@ -612,6 +654,15 @@ const handleClaimCallback = async (request: Request, client: Client) => {
 		return render("Claim link expired", "Run /claim in Discord again to get a fresh link.", 400)
 	}
 
+	const existingClaim = await getClaimRequest(payload.userId, payload.guildId)
+	if (existingClaim) {
+		return render(
+			"Claim already exists",
+			existingClaimPageMessage(existingClaim.status),
+			409
+		)
+	}
+
 	const tokenResponse = await fetch(`${discordApiBase}/oauth2/token`, {
 		method: "POST",
 		headers: {
@@ -744,6 +795,20 @@ const handleClaimCallback = async (request: Request, client: Client) => {
 		)
 	}
 
+	const claimRequestResult = await createClaimRequest({
+		userId: payload.userId,
+		guildId: payload.guildId,
+		githubUsername: qualifyingSummary.username,
+		mergedPrCount: qualifyingSummary.totalCount
+	})
+	if (!claimRequestResult.created) {
+		return render(
+			"Claim already exists",
+			existingClaimPageMessage(claimRequestResult.claimRequest?.status ?? "submitted"),
+			409
+		)
+	}
+
 	const recentPullRequests =
 		qualifyingSummary.recentPullRequests.length > 0
 			? qualifyingSummary.recentPullRequests
@@ -765,36 +830,69 @@ const handleClaimCallback = async (request: Request, client: Client) => {
 				})
 				.join("\n")
 			: "No recent merged pull requests found."
-	const message = await channel.send({
-		components: [
-			new Container(
-				[
-					new TextDisplay(`<@&${claimReviewRoleId}>`),
-					new TextDisplay("### Clawtributor Claim Request"),
-					new TextDisplay(
-						`- User: <@${payload.userId}>\n- ID: ${payload.userId}\n- GitHub: [@${qualifyingSummary.username}](<https://github.com/${qualifyingSummary.username}>)\n- Merged PRs: **${qualifyingSummary.totalCount}**`
-					),
-					new Separator({ divider: true, spacing: "small" }),
-					new TextDisplay("### 3 Most Recent Merged PRs"),
-					new TextDisplay(recentPullRequests),
-					new Separator({ divider: true, spacing: "small" }),
-					new Row([
-						new ClaimReviewAcceptButton(payload.userId, payload.guildId),
-						new ClaimReviewRejectButton(payload.userId, payload.guildId)
-					])
-				],
-				{ accentColor: "#f1c40f" }
-			)
-		],
-		allowedMentions: {
-			roles: [claimReviewRoleId],
-			users: []
-		}
+	const message = await channel
+		.send({
+			components: [
+				new Container(
+					[
+						new TextDisplay(`<@&${claimReviewRoleId}>`),
+						new TextDisplay("### Clawtributor Claim Request"),
+						new TextDisplay(
+							`- User: <@${payload.userId}>\n- ID: ${payload.userId}\n- GitHub: [@${qualifyingSummary.username}](<https://github.com/${qualifyingSummary.username}>)\n- Merged PRs: **${qualifyingSummary.totalCount}**`
+						),
+						new Separator({ divider: true, spacing: "small" }),
+						new TextDisplay("### 3 Most Recent Merged PRs"),
+						new TextDisplay(recentPullRequests),
+						new Separator({ divider: true, spacing: "small" }),
+						new Row([
+							new ClaimReviewAcceptButton(payload.userId, payload.guildId),
+							new ClaimReviewRejectButton(payload.userId, payload.guildId)
+						])
+					],
+					{ accentColor: "#f1c40f" }
+				)
+			],
+			allowedMentions: {
+				roles: [claimReviewRoleId],
+				users: []
+			}
+		})
+		.catch(async (error) => {
+			console.error("Failed to send claim review request:", error)
+			await deleteClaimRequest(claimRequestResult.claimRequest.id).catch((error) => {
+				console.error("Failed to clean up unsent claim request:", error)
+			})
+			return null
+		})
+	if (!message) {
+		return render(
+			"Could not submit request",
+			"The bot could not send the claim review request. Ask a moderator to check the notification channel configuration.",
+			500
+		)
+	}
+
+	await markClaimRequestSubmitted(claimRequestResult.claimRequest.id, {
+		reviewMessageId: message.id
+	}).catch((error) => {
+		console.error("Failed to mark claim submitted:", error)
 	})
-	await message.startThread({
-		name: `Clawtributor claim by ${qualifyingSummary.username}`.slice(0, 100),
-		auto_archive_duration: 1440
-	})
+
+	const thread = await message
+		.startThread({
+			name: `Clawtributor claim by ${qualifyingSummary.username}`.slice(0, 100),
+			auto_archive_duration: 1440
+		})
+		.catch(() => null)
+	if (thread && typeof thread === "object" && "id" in thread) {
+		await markClaimRequestSubmitted(claimRequestResult.claimRequest.id, {
+			reviewMessageId: message.id,
+			reviewThreadId:
+				typeof thread.id === "string" ? thread.id : String(thread.id)
+		}).catch((error) => {
+			console.error("Failed to record claim review thread:", error)
+		})
+	}
 
 	return render(
 		"Claim submitted",

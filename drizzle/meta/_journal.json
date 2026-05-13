@@ -8,6 +8,13 @@
       "when": 1775624708476,
       "tag": "0000_productive_tinkerer",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1778629335056,
+      "tag": "0001_empty_millenium_guard",
+      "breakpoints": true
     }
   ]
 }

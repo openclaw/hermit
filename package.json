@@ -9,6 +9,7 @@
 		"deploy": "wrangler deploy --env-file .env",
 		"cf-typegen": "wrangler types",
 		"postinstall": "wrangler types",
+		"test": "bun test",
 		"typecheck": "tsc --noEmit",
 		"db:generate": "drizzle-kit generate",
 		"db:apply:local": "wrangler d1 migrations apply hermit-db --local",

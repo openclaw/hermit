@@ -7,8 +7,21 @@ import {
 	Section,
 	TextDisplay
 } from "@buape/carbon"
+import { getClaimRequest } from "../data/claimRequests.js"
 import { createClaimUrl } from "../server/claimServer.js"
 import BaseCommand from "./base.js"
+
+const existingClaimMessage = (status: string) => {
+	if (status === "accepted") {
+		return "Your clawtributor claim has already been accepted."
+	}
+
+	if (status === "rejected") {
+		return "Your clawtributor claim has already been reviewed. Ask a moderator if you think this needs another look."
+	}
+
+	return "Your clawtributor claim has already been submitted for review."
+}
 
 class ClaimLinkButton extends LinkButton {
 	label = "Claim role"
@@ -37,6 +50,22 @@ export default class ClaimCommand extends BaseCommand {
 					new Container([
 						new TextDisplay("Run this command from the server where you want the role.")
 					])
+				]
+			})
+			return
+		}
+
+		const existingClaim = await getClaimRequest(userId, guildId)
+		if (existingClaim) {
+			await interaction.reply({
+				components: [
+					new Container(
+						[
+							new TextDisplay("### Claim already exists"),
+							new TextDisplay(existingClaimMessage(existingClaim.status))
+						],
+						{ accentColor: "#f1c40f" }
+					)
 				]
 			})
 			return

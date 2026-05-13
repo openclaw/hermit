@@ -1,5 +1,11 @@
 import { sql } from "drizzle-orm"
-import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
+import {
+	index,
+	integer,
+	sqliteTable,
+	text,
+	uniqueIndex
+} from "drizzle-orm/sqlite-core"
 
 export const keyValue = sqliteTable("keyValue", {
 	key: text().primaryKey(),
@@ -65,9 +71,39 @@ export const trackedThreads = sqliteTable(
 	]
 )
 
+export const claimRequests = sqliteTable(
+	"claim_requests",
+	{
+		id: integer().primaryKey({ autoIncrement: true }),
+		guildId: text("guild_id").notNull(),
+		userId: text("user_id").notNull(),
+		status: text().notNull().default("submitted"),
+		githubUsername: text("github_username"),
+		mergedPrCount: integer("merged_pr_count"),
+		reviewMessageId: text("review_message_id"),
+		reviewThreadId: text("review_thread_id"),
+		decidedAt: text("decided_at"),
+		decidedById: text("decided_by_id"),
+		decisionReason: text("decision_reason"),
+		createdAt: text("created_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`),
+		updatedAt: text("updated_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`)
+	},
+	(table) => [
+		uniqueIndex("idx_claim_requests_guild_user").on(table.guildId, table.userId),
+		index("idx_claim_requests_user_id").on(table.userId),
+		index("idx_claim_requests_status").on(table.status)
+	]
+)
+
 export type KeyValue = typeof keyValue.$inferSelect
 export type NewKeyValue = typeof keyValue.$inferInsert
 export type HelperEvent = typeof helperEvents.$inferSelect
 export type NewHelperEvent = typeof helperEvents.$inferInsert
 export type TrackedThread = typeof trackedThreads.$inferSelect
 export type NewTrackedThread = typeof trackedThreads.$inferInsert
+export type ClaimRequest = typeof claimRequests.$inferSelect
+export type NewClaimRequest = typeof claimRequests.$inferInsert
