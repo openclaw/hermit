@@ -30,6 +30,7 @@ export const client = new Client(
 			? [process.env.DISCORD_PUBLIC_KEY, process.env.FORWARDER_PUBLIC_KEY]
 			: process.env.DISCORD_PUBLIC_KEY,
 		token: process.env.DISCORD_BOT_TOKEN,
+		requestOptions: { queueRequests: false },
 		autoDeploy: true,
 		devGuilds: process.env.DISCORD_DEV_GUILDS?.split(",")
 	},
@@ -57,6 +58,33 @@ export const client = new Client(
 
 registerClaimRoutes(client)
 registerHelperLogsRoutes(client)
+
+const eventsRoute = client.routes.find(
+	(route) => route.method === "POST" && route.path === "/events"
+)
+if (eventsRoute) {
+	const handleEvents = eventsRoute.handler
+	eventsRoute.handler = async (request, context) => {
+		const response = await handleEvents(request, context)
+		context?.waitUntil?.(
+			(async () => {
+				for (let attempts = 0; attempts < 80; attempts += 1) {
+					const metrics = client.eventHandler.getMetrics()
+					if (
+						metrics.queueSize === 0 &&
+						metrics.processingByLane.critical === 0 &&
+						metrics.processingByLane.standard === 0 &&
+						metrics.processingByLane.background === 0
+					) {
+						return
+					}
+					await new Promise((resolve) => setTimeout(resolve, 100))
+				}
+			})()
+		)
+		return response
+	}
+}
 
 const handler = createHandler(client)
 
