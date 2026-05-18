@@ -5,9 +5,9 @@
 		"strict": true,
 		"skipLibCheck": true,
 		"lib": ["es2022"],
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext",
-		"types": ["node"],
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"types": ["bun"],
 		"rootDir": "src",
 		"outDir": "dist"
 	}

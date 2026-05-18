@@ -1,43 +1,48 @@
-import "dotenv/config"
 import { Client } from "@buape/carbon"
 import {
-  GatewayForwarderPlugin,
-  GatewayIntents
+	GatewayForwarderPlugin,
+	GatewayIntents
 } from "@buape/carbon/gateway-forwarder"
 
-const client = new Client(
-  {
-    baseUrl: process.env.BASE_URL,
-    deploySecret: process.env.DEPLOY_SECRET,
-    clientId: process.env.DISCORD_CLIENT_ID,
-    publicKey: process.env.DISCORD_PUBLIC_KEY,
-    token: process.env.DISCORD_BOT_TOKEN
-  },
-  {},
-  [
-    new GatewayForwarderPlugin({
-      intents: GatewayIntents.Guilds | 
-               GatewayIntents.GuildMessages | 
-               GatewayIntents.MessageContent,
-      webhookUrl: `${process.env.BASE_URL}/events`,
-      privateKey: process.env.FORWARDER_PRIVATE_KEY
-    })
-  ]
-)
+const {
+	BASE_URL,
+	DEPLOY_SECRET,
+	DISCORD_CLIENT_ID,
+	DISCORD_PUBLIC_KEY,
+	DISCORD_BOT_TOKEN,
+	FORWARDER_PRIVATE_KEY
+} = Bun.env
 
-console.log(
-  `Gateway forwarder initialized and ready to forward events to ${process.env.BASE_URL}/events`
-)
-
-declare global {
-  namespace NodeJS {
-    interface ProcessEnv {
-      BASE_URL: string;
-      DEPLOY_SECRET: string;
-      DISCORD_CLIENT_ID: string;
-      DISCORD_PUBLIC_KEY: string;
-      DISCORD_BOT_TOKEN: string;
-      FORWARDER_PRIVATE_KEY: string;
-    }
-  }
+if (
+	!BASE_URL ||
+	!DEPLOY_SECRET ||
+	!DISCORD_CLIENT_ID ||
+	!DISCORD_PUBLIC_KEY ||
+	!DISCORD_BOT_TOKEN ||
+	!FORWARDER_PRIVATE_KEY
+) {
+	throw new Error("Missing required forwarder env vars")
 }
+
+const client = new Client(
+	{
+		baseUrl: BASE_URL,
+		deploySecret: DEPLOY_SECRET,
+		clientId: DISCORD_CLIENT_ID,
+		publicKey: DISCORD_PUBLIC_KEY,
+		token: DISCORD_BOT_TOKEN
+	},
+	{},
+	[
+		new GatewayForwarderPlugin({
+			intents:
+				GatewayIntents.Guilds |
+				GatewayIntents.GuildMessages |
+				GatewayIntents.MessageContent,
+			webhookUrl: `${BASE_URL}/events`,
+			privateKey: FORWARDER_PRIVATE_KEY
+		})
+	]
+)
+
+console.log(`Gateway forwarder ready to forward events to ${BASE_URL}/events`)

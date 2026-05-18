@@ -6,7 +6,7 @@ Discord bot built with Carbon on Cloudflare Workers.
 
 - `@buape/carbon`
 - Cloudflare Workers (`@buape/carbon/adapters/fetch`)
-- Gateway plugin: `CloudflareGatewayPlugin` + `CloudflareGatewayDurableObject`
+- Gateway forwarding: `forwarder/` Bun process using `GatewayForwarderPlugin`
 - Cloudflare D1 + Drizzle ORM
 
 ## Setup
@@ -33,6 +33,7 @@ Optional:
 
 ```env
 DISCORD_DEV_GUILDS=
+FORWARDER_PUBLIC_KEY=
 ANSWER_OVERFLOW_API_KEY=
 HELPER_THREAD_WELCOME_PARENT_ID=
 HELPER_THREAD_WELCOME_TEMPLATE=
@@ -67,7 +68,44 @@ bun run dev
 - `bun run db:generate` → generate Drizzle SQL
 - `bun run db:apply:local` / `db:apply:remote` → apply D1 migrations
 
+## Gateway forwarder
+
+The main bot runs as a Cloudflare Worker. Gateway events are forwarded by the Bun app in `forwarder/`, usually running on Krill's machine.
+
+Forwarder setup:
+
+```bash
+cd forwarder
+bun install
+bun run dev
+```
+
+Forwarder production start:
+
+```bash
+cd forwarder
+bun run start
+```
+
+Forwarder env:
+
+```env
+BASE_URL=
+DEPLOY_SECRET=
+DISCORD_CLIENT_ID=
+DISCORD_PUBLIC_KEY=
+DISCORD_BOT_TOKEN=
+FORWARDER_PRIVATE_KEY=
+```
+
+The Worker must have the matching public key:
+
+```bash
+bunx wrangler secret put FORWARDER_PUBLIC_KEY
+```
+
 ## Notes
 
 - Answer Overflow base URL is hardcoded to `https://www.answeroverflow.com`.
 - Helper thread monitor runs via Worker cron (`wrangler.jsonc` `triggers.crons`).
+- The old Cloudflare Gateway Durable Object path is not the active gateway setup.
