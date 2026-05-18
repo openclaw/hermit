@@ -2,7 +2,6 @@ import {
 	ChannelType,
 	MessageCreateListener,
 	MessageFlags,
-	OverwriteType,
 	PermissionFlagsBits,
 	type APIChannel,
 	type APIRole,
@@ -18,6 +17,8 @@ const urlRegex = /https?:\/\/[^\s<>()]+/gi
 const trimUrl = (url: string) => url.replace(/[.,!?;:]+$/, "")
 const hasPermission = (permissions: bigint, permission: bigint) =>
 	(permissions & permission) === permission
+const isRoleOverwrite = (type: unknown) => type === 0 || type === "role"
+const isMemberOverwrite = (type: unknown) => type === 1 || type === "member"
 
 const findGifLink = (content: string) => {
 	for (const match of content.matchAll(urlRegex)) {
@@ -54,18 +55,27 @@ const getPermissionChannel = async (client: Client, channel: APIChannel) => {
 const applyOverwrite = (permissions: bigint, allow: string, deny: string) =>
 	(permissions & ~BigInt(deny)) | BigInt(allow)
 
+const isEmbedLinksDeniedForEveryone = (channel: APIChannel, guildId: string) => {
+	const overwrites =
+		"permission_overwrites" in channel ? channel.permission_overwrites ?? [] : []
+	return overwrites.some(
+		(overwrite) =>
+			isRoleOverwrite(overwrite.type) &&
+			overwrite.id === guildId &&
+			hasPermission(BigInt(overwrite.deny), PermissionFlagsBits.EmbedLinks)
+	)
+}
+
 const canEmbedLinksInChannel = async (
 	client: Client,
-	data: ListenerEventData["MESSAGE_CREATE"]
+	data: ListenerEventData["MESSAGE_CREATE"],
+	permissionChannel: APIChannel
 ) => {
 	if (!data.guild_id || !data.rawMember) {
 		return true
 	}
 
-	const [roles, channel] = await Promise.all([
-		client.rest.get(Routes.guildRoles(data.guild_id)) as Promise<APIRole[]>,
-		fetchChannel(client, data.channel_id)
-	])
+	const roles = (await client.rest.get(Routes.guildRoles(data.guild_id))) as APIRole[]
 	const roleMap = new Map(roles.map((role) => [role.id, BigInt(role.permissions)]))
 	let permissions = roleMap.get(data.guild_id) ?? 0n
 	for (const roleId of data.rawMember.roles) {
@@ -76,13 +86,12 @@ const canEmbedLinksInChannel = async (
 		return true
 	}
 
-	const permissionChannel = await getPermissionChannel(client, channel)
 	const overwrites =
 		"permission_overwrites" in permissionChannel
 			? permissionChannel.permission_overwrites ?? []
 			: []
 	const everyoneOverwrite = overwrites.find(
-		(overwrite) => overwrite.type === OverwriteType.Role && overwrite.id === data.guild_id
+		(overwrite) => isRoleOverwrite(overwrite.type) && overwrite.id === data.guild_id
 	)
 	if (everyoneOverwrite) {
 		permissions = applyOverwrite(
@@ -95,10 +104,7 @@ const canEmbedLinksInChannel = async (
 	let roleAllow = 0n
 	let roleDeny = 0n
 	for (const overwrite of overwrites) {
-		if (
-			overwrite.type === OverwriteType.Role &&
-			data.rawMember.roles.includes(overwrite.id)
-		) {
+		if (isRoleOverwrite(overwrite.type) && data.rawMember.roles.includes(overwrite.id)) {
 			roleAllow |= BigInt(overwrite.allow)
 			roleDeny |= BigInt(overwrite.deny)
 		}
@@ -106,7 +112,7 @@ const canEmbedLinksInChannel = async (
 	permissions = (permissions & ~roleDeny) | roleAllow
 
 	const memberOverwrite = overwrites.find(
-		(overwrite) => overwrite.type === OverwriteType.Member && overwrite.id === data.author.id
+		(overwrite) => isMemberOverwrite(overwrite.type) && overwrite.id === data.author.id
 	)
 	if (memberOverwrite) {
 		permissions = applyOverwrite(permissions, memberOverwrite.allow, memberOverwrite.deny)
@@ -117,7 +123,13 @@ const canEmbedLinksInChannel = async (
 
 export default class GifRepostMessageCreate extends MessageCreateListener {
 	async handle(data: ListenerEventData[this["type"]], client: Client) {
-		if (!data.channel_id || data.webhook_id || data.author.bot) {
+		if (!data.channel_id || data.webhook_id || data.author.bot || !data.guild_id) {
+			return
+		}
+
+		const channel = await fetchChannel(client, data.channel_id)
+		const permissionChannel = await getPermissionChannel(client, channel)
+		if (!isEmbedLinksDeniedForEveryone(permissionChannel, data.guild_id)) {
 			return
 		}
 
@@ -127,18 +139,11 @@ export default class GifRepostMessageCreate extends MessageCreateListener {
 		}
 
 		try {
-			if (await canEmbedLinksInChannel(client, data)) {
+			if (await canEmbedLinksInChannel(client, data, permissionChannel)) {
 				return
 			}
 
 			const webhook = await getOrCreateChannelWebhook(client, data.channel_id)
-			if (data.content.trim() === gifLink) {
-				await client.rest.delete(Routes.channelMessage(data.channel_id, data.id))
-			} else {
-				await client.rest.patch(Routes.channelMessage(data.channel_id, data.id), {
-					body: { flags: (data.flags ?? 0) | MessageFlags.SuppressEmbeds }
-				})
-			}
 			await sendWebhookMessage(webhook, {
 				content: gifLink,
 				username:
@@ -148,6 +153,14 @@ export default class GifRepostMessageCreate extends MessageCreateListener {
 					data.author.id,
 				avatar_url: data.member?.avatarUrl || data.author.avatarUrl || undefined
 			})
+
+			if (data.content.trim() === gifLink) {
+				await client.rest.delete(Routes.channelMessage(data.channel_id, data.id))
+			} else {
+				await client.rest.patch(Routes.channelMessage(data.channel_id, data.id), {
+					body: { flags: (data.flags ?? 0) | MessageFlags.SuppressEmbeds }
+				})
+			}
 		} catch (error) {
 			console.error("Failed to repost GIF link:", error)
 		}
