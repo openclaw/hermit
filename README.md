@@ -62,11 +62,28 @@ bun run dev
 ## Scripts
 
 - `bun run dev` → `wrangler dev --env-file .env`
-- `bun run deploy` → deploy worker
+- `bun run deploy` → deploy worker locally with `.env`
+- `bun run deploy:cf` → apply remote D1 migrations, then deploy Worker for Cloudflare Builds
+- `bun run deploy:dry-run` → validate the Worker bundle without deploying
 - `bun run cf-typegen` → regenerate `worker-configuration.d.ts`
 - `bun run typecheck` → TypeScript check
 - `bun run db:generate` → generate Drizzle SQL
 - `bun run db:apply:local` / `db:apply:remote` → apply D1 migrations
+
+## CI/CD
+
+Cloudflare Workers Builds deploys pushes to `main`. The deploy command should apply D1 migrations before deploying the Worker:
+
+```bash
+bun run deploy:cf
+```
+
+Drizzle only generates SQL migrations. Wrangler applies them to D1:
+
+```bash
+bun run db:generate
+bun run db:apply:remote
+```
 
 ## Gateway forwarder
 

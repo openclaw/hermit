@@ -7,6 +7,8 @@
 	"scripts": {
 		"dev": "wrangler dev --port 3000 --env-file .env",
 		"deploy": "wrangler deploy --env-file .env",
+		"deploy:cf": "wrangler d1 migrations apply DB --remote && wrangler deploy",
+		"deploy:dry-run": "wrangler deploy --dry-run",
 		"cf-typegen": "wrangler types",
 		"postinstall": "wrangler types",
 		"test": "bun test",
