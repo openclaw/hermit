@@ -144,6 +144,12 @@ export default class GifRepostMessageCreate extends MessageCreateListener {
 			return
 		}
 
+		await logGifRepost(
+			client,
+			`received contentLength=${data.content.length} attachments=${data.attachments?.length ?? 0} embeds=${data.embeds?.length ?? 0}`,
+			data
+		)
+
 		const gifLink = findGifLink(data.content)
 		if (!gifLink) {
 			if ((data.attachments?.length ?? 0) > 0 || (data.embeds?.length ?? 0) > 0) {
