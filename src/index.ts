@@ -128,6 +128,10 @@ declare global {
 			DISCORD_CLIENT_SECRET?: string;
 			FORWARDER_PUBLIC_KEY?: string;
 			OPENAI_API_KEY?: string;
+			GITHUB_APP_ID?: string;
+			GITHUB_APP_INSTALLATION_ID?: string;
+			GITHUB_APP_PRIVATE_KEY?: string;
+			GITHUB_APP_SLUG?: string;
 		}
 	}
 }

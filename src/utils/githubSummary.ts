@@ -4,11 +4,7 @@ import {
 	Section,
 	TextDisplay
 } from "@buape/carbon"
-
-const requestHeaders = {
-	Accept: "application/vnd.github+json",
-	"User-Agent": "hermit"
-}
+import { getGitHubHeaders } from "./githubAuth.js"
 
 const importantClawsweeperLabels = new Set([
 	"clawsweeper:current-main-repro",
@@ -202,7 +198,7 @@ export const fetchGitHubSummaryData = async (
 ): Promise<GitHubSummaryData | null> => {
 	const response = await fetch(
 		`https://api.github.com/repos/${owner}/${repo}/issues/${number}`,
-		{ headers: requestHeaders }
+		{ headers: await getGitHubHeaders() }
 	)
 	if (!response.ok) {
 		return null
