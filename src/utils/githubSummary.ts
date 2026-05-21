@@ -2,7 +2,6 @@ import {
 	Container,
 	LinkButton,
 	Section,
-	Separator,
 	TextDisplay
 } from "@buape/carbon"
 
@@ -28,7 +27,7 @@ const importantClawsweeperLabels = new Set([
 ])
 
 const githubIssueUrlRegex =
-	/https?:\/\/github\.com\/([^/\s]+)\/([^/\s]+)\/(?:issues|pull)\/(\d+)/i
+	/https?:\/\/github\.com\/([^/\s]+)\/([^/\s]+)\/(?:issues|pull)\/(\d+)/gi
 
 export type GitHubSummaryData = {
 	repoName: string
@@ -64,6 +63,42 @@ class GitHubLinkButton extends LinkButton {
 const truncateText = (text: string, limit: number) =>
 	text.length > limit ? `${text.slice(0, limit - 1).trimEnd()}…` : text
 
+const formatState = (state: string) => state.toUpperCase()
+
+const formatLabel = (label: string) => {
+	if (label.startsWith("issue-rating: ")) {
+		return `Issue rating: ${label.slice("issue-rating: ".length)}`
+	}
+	if (label.startsWith("rating: ")) {
+		return `PR rating: ${label.slice("rating: ".length)}`
+	}
+	if (label.startsWith("proof: ")) {
+		return `Proof: ${label.slice("proof: ".length)}`
+	}
+	if (label.startsWith("status: ")) {
+		return `Status: ${label.slice("status: ".length)}`
+	}
+	if (label.startsWith("size: ")) {
+		return `Size: ${label.slice("size: ".length)}`
+	}
+	if (label.startsWith("clawsweeper:")) {
+		return `ClawSweeper: ${label.slice("clawsweeper:".length).replaceAll("-", " ")}`
+	}
+	return label
+}
+
+const formatLabels = (labels: string[]) => {
+	if (labels.length === 0) {
+		return "No important ClawSweeper labels"
+	}
+
+	const shown = labels.slice(0, 8).map((label) => `- ${formatLabel(label)}`)
+	if (labels.length > shown.length) {
+		shown.push(`- +${labels.length - shown.length} more`)
+	}
+	return shown.join("\n")
+}
+
 const stripMarkdown = (text: string) =>
 	text
 		.replace(/```[\s\S]*?```/g, " ")
@@ -91,14 +126,14 @@ const openAiSummary = async (title: string, body: string | null | undefined) => 
 				input: [
 					{
 						role: "system",
-						content: "Summarize GitHub issues or pull requests in <=100 characters. No markdown."
+						content: "Summarize GitHub issues or pull requests in 1-2 concise sentences, <=220 characters. No markdown."
 					},
 					{
 						role: "user",
 						content: `Title: ${title}\n\nBody: ${stripMarkdown(body ?? "").slice(0, 4000)}`
 					}
 				],
-				max_output_tokens: 40
+				max_output_tokens: 90
 			})
 		})
 
@@ -117,7 +152,7 @@ const openAiSummary = async (title: string, body: string | null | undefined) => 
 }
 
 export const parseGitHubIssueUrl = (content: string) => {
-	const match = content.match(githubIssueUrlRegex)
+	const match = [...content.matchAll(githubIssueUrlRegex)][0]
 	if (!match) {
 		return null
 	}
@@ -177,7 +212,7 @@ export const fetchGitHubSummaryData = async (
 	const labels = issue.labels?.flatMap((label) => label.name ? [label.name] : []) ?? []
 	const title = issue.title ?? "Untitled"
 	const summaryText = (await openAiSummary(title, issue.body)) ?? stripMarkdown(title)
-	const summary = truncateText(summaryText || "No summary.", 100)
+	const summary = truncateText(summaryText || "No summary.", 220)
 
 	return {
 		repoName: `${owner}/${repo}`,
@@ -192,20 +227,18 @@ export const fetchGitHubSummaryData = async (
 }
 
 export const buildGitHubSummaryContainer = (data: GitHubSummaryData) => {
-	const labels = data.labels.length > 0 ? data.labels.join(" • ") : "No important ClawSweeper labels"
 	const type = data.isPullRequest ? "PR" : "Issue"
 	return new Container(
 		[
 			new Section(
 				[
-					new TextDisplay(`### ${data.repoName} ${type} #${data.number}`),
+					new TextDisplay(`### [${formatState(data.state)}] ${type} #${data.number}`),
+					new TextDisplay(`**${data.title}**`),
 					new TextDisplay(data.summary)
 				],
 				new GitHubLinkButton(data.url)
 			),
-			new Separator({ divider: true, spacing: "small" }),
-			new TextDisplay(`State: **${data.state}**`),
-			new TextDisplay(`Labels: ${labels}`)
+			new TextDisplay(`**Signals**\n${formatLabels(data.labels)}`)
 		],
 		{ accentColor: data.isPullRequest ? "#a371f7" : data.state === "open" ? "#3fb950" : "#f85149" }
 	)
