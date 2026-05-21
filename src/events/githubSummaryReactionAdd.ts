@@ -60,13 +60,22 @@ export default class GithubSummaryReactionAdd extends MessageReactionAddListener
 		}
 
 		const channel = await client.fetchChannel(data.channel_id)
-		if (channel && "send" in channel) {
-			await channel.send({
-				components: summaries.map(buildGitHubSummaryContainer)
-			})
-			await sendDebugLog(client, `Sent ${summaries.length} GitHub summary container(s) in <#${data.channel_id}>`)
-		} else {
+		if (!channel || !("send" in channel)) {
 			await sendDebugLog(client, `Could not fetch/send in channel ${data.channel_id}`)
+			return
 		}
+
+		let sent = 0
+		for (const summary of summaries) {
+			try {
+				await channel.send({
+					components: [buildGitHubSummaryContainer(summary)]
+				})
+				sent += 1
+			} catch (error) {
+				await sendDebugLog(client, `Failed to send GitHub summary ${summary.repoName}#${summary.number}: ${error instanceof Error ? error.message : String(error)}`)
+			}
+		}
+		await sendDebugLog(client, `Sent ${sent}/${summaries.length} GitHub summary container(s) in <#${data.channel_id}>`)
 	}
 }
