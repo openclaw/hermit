@@ -11,6 +11,7 @@ import SolvedModCommand from "./commands/solvedMod.js"
 import AutoModerationActionExecution from "./events/autoModerationActionExecution.js"
 import AutoPublishMessageCreate from "./events/autoPublishMessageCreate.js"
 import GifRepostMessageCreate from "./events/gifRepostMessageCreate.js"
+import GithubLinkSuppressMessageCreate from "./events/githubLinkSuppressMessageCreate.js"
 import GithubSummaryReactionAdd from "./events/githubSummaryReactionAdd.js"
 import Ready from "./events/ready.js"
 import ThreadCreateWelcome from "./events/threadCreateWelcome.js"
@@ -53,6 +54,7 @@ export const client = new Client(
 			new AutoModerationActionExecution(),
 			new AutoPublishMessageCreate(),
 			new GifRepostMessageCreate(),
+			new GithubLinkSuppressMessageCreate(),
 			new GithubSummaryReactionAdd(),
 			new ThreadCreateWelcome(),
 			new Ready()
