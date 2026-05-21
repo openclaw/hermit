@@ -58,7 +58,13 @@ export default class GithubSummaryReactionAdd extends MessageReactionAddListener
 			]
 				.filter(Boolean)
 				.join("\n")
-			const matches = parseGitHubIssueUrls(source).slice(0, 5)
+			const matches = parseGitHubIssueUrls(source)
+				.filter((match) => {
+					// Temporarily skip issues in reaction summaries.
+					// return true
+					return match.type === "pull"
+				})
+				.slice(0, 5)
 			if (matches.length === 0) {
 				return
 			}

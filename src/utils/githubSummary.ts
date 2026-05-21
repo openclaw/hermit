@@ -23,7 +23,7 @@ const importantClawsweeperLabels = new Set([
 ])
 
 const githubIssueUrlRegex =
-	/https?:\/\/github\.com\/([^/\s]+)\/([^/\s]+)\/(?:issues|pull)\/(\d+)/gi
+	/https?:\/\/github\.com\/([^/\s]+)\/([^/\s]+)\/(issues|pull)\/(\d+)/gi
 
 export type GitHubSummaryData = {
 	repoName: string
@@ -70,8 +70,16 @@ const accentColor = (data: GitHubSummaryData) => {
 	return data.state === "open" ? "#3fb950" : "#f85149"
 }
 
-const sameText = (left: string, right: string) =>
-	left.trim().toLowerCase() === right.trim().toLowerCase()
+const normalizeText = (text: string) =>
+	text.trim().toLowerCase().replace(/\s+/g, " ")
+
+const isDuplicateSummary = (title: string, summary: string) => {
+	const normalizedTitle = normalizeText(title)
+	const normalizedSummary = normalizeText(summary)
+	return normalizedTitle === normalizedSummary ||
+		normalizedTitle.includes(normalizedSummary) ||
+		normalizedSummary.includes(normalizedTitle)
+}
 
 const formatLabel = (label: string) => {
 	if (label.startsWith("issue-rating: ")) {
@@ -87,7 +95,10 @@ const formatLabel = (label: string) => {
 		return label.slice("status: ".length)
 	}
 	if (label.startsWith("size: ")) {
-		return label.slice("size: ".length)
+		return `size: ${label.slice("size: ".length)}`
+	}
+	if (/^P[0-3]$/.test(label)) {
+		return label
 	}
 	if (label.startsWith("clawsweeper:")) {
 		return label.slice("clawsweeper:".length).replaceAll("-", " ")
@@ -163,7 +174,8 @@ export const parseGitHubIssueUrl = (content: string) => {
 	return {
 		owner: match[1],
 		repo: match[2],
-		number: Number(match[3])
+		type: match[3],
+		number: Number(match[4])
 	}
 }
 
@@ -173,10 +185,11 @@ export const parseGitHubIssueUrls = (content: string) => {
 		.map((match) => ({
 			owner: match[1],
 			repo: match[2],
-			number: Number(match[3])
+			type: match[3],
+			number: Number(match[4])
 		}))
 		.filter((match) => {
-			const key = `${match.owner}/${match.repo}#${match.number}`.toLowerCase()
+			const key = `${match.owner}/${match.repo}/${match.type}#${match.number}`.toLowerCase()
 			if (seen.has(key)) {
 				return false
 			}
@@ -232,7 +245,7 @@ export const fetchGitHubSummaryData = async (
 
 export const buildGitHubSummaryContainer = (data: GitHubSummaryData) => {
 	const type = data.isPullRequest ? "PR" : "Issue"
-	const details = sameText(data.title, data.summary)
+	const details = isDuplicateSummary(data.title, data.summary)
 		? `_${formatLabels(data.labels)}_`
 		: `${truncateText(data.summary, 140)}\n_${formatLabels(data.labels)}_`
 
