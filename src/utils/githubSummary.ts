@@ -32,6 +32,7 @@ export type GitHubSummaryData = {
 	title: string
 	state: string
 	isPullRequest: boolean
+	merged: boolean
 	summary: string
 	labels: string[]
 }
@@ -43,7 +44,7 @@ type GitHubIssue = {
 	state?: string
 	body?: string | null
 	labels?: Array<{ name?: string }>
-	pull_request?: { url: string }
+	pull_request?: { url: string; merged_at?: string | null }
 }
 
 class GitHubLinkButton extends LinkButton {
@@ -59,40 +60,51 @@ class GitHubLinkButton extends LinkButton {
 const truncateText = (text: string, limit: number) =>
 	text.length > limit ? `${text.slice(0, limit - 1).trimEnd()}…` : text
 
-const formatState = (state: string) => state.toUpperCase()
+const formatState = (data: GitHubSummaryData) =>
+	data.merged ? "MERGED" : data.state.toUpperCase()
+
+const accentColor = (data: GitHubSummaryData) => {
+	if (data.merged) {
+		return "#a371f7"
+	}
+	return data.state === "open" ? "#3fb950" : "#f85149"
+}
+
+const sameText = (left: string, right: string) =>
+	left.trim().toLowerCase() === right.trim().toLowerCase()
 
 const formatLabel = (label: string) => {
 	if (label.startsWith("issue-rating: ")) {
-		return `Issue rating: ${label.slice("issue-rating: ".length)}`
+		return label.slice("issue-rating: ".length)
 	}
 	if (label.startsWith("rating: ")) {
-		return `PR rating: ${label.slice("rating: ".length)}`
+		return label.slice("rating: ".length)
 	}
 	if (label.startsWith("proof: ")) {
-		return `Proof: ${label.slice("proof: ".length)}`
+		return `proof: ${label.slice("proof: ".length)}`
 	}
 	if (label.startsWith("status: ")) {
-		return `Status: ${label.slice("status: ".length)}`
+		return label.slice("status: ".length)
 	}
 	if (label.startsWith("size: ")) {
-		return `Size: ${label.slice("size: ".length)}`
+		return label.slice("size: ".length)
 	}
 	if (label.startsWith("clawsweeper:")) {
-		return `ClawSweeper: ${label.slice("clawsweeper:".length).replaceAll("-", " ")}`
+		return label.slice("clawsweeper:".length).replaceAll("-", " ")
 	}
 	return label
 }
 
 const formatLabels = (labels: string[]) => {
 	if (labels.length === 0) {
-		return "No important ClawSweeper labels"
+		return "No key signals"
 	}
 
-	const shown = labels.slice(0, 8).map((label) => `- ${formatLabel(label)}`)
+	const shown = labels.slice(0, 4).map(formatLabel)
 	if (labels.length > shown.length) {
-		shown.push(`- +${labels.length - shown.length} more`)
+		shown.push(`+${labels.length - shown.length} more`)
 	}
-	return shown.join("\n")
+	return shown.join(" • ")
 }
 
 const stripMarkdown = (text: string) =>
@@ -217,6 +229,7 @@ export const fetchGitHubSummaryData = async (
 		title,
 		state: issue.state ?? "unknown",
 		isPullRequest: Boolean(issue.pull_request),
+		merged: Boolean(issue.pull_request?.merged_at),
 		summary,
 		labels: getImportantGitHubLabels(labels)
 	}
@@ -224,18 +237,21 @@ export const fetchGitHubSummaryData = async (
 
 export const buildGitHubSummaryContainer = (data: GitHubSummaryData) => {
 	const type = data.isPullRequest ? "PR" : "Issue"
+	const details = sameText(data.title, data.summary)
+		? `_${formatLabels(data.labels)}_`
+		: `${truncateText(data.summary, 140)}\n_${formatLabels(data.labels)}_`
+
 	return new Container(
 		[
 			new Section(
 				[
-					new TextDisplay(`### [${formatState(data.state)}] ${type} #${data.number}`),
-					new TextDisplay(`**${data.title}**`),
-					new TextDisplay(data.summary)
+					new TextDisplay(`### [${formatState(data)}] ${type} #${data.number}`),
+					new TextDisplay(`**${truncateText(data.title, 90)}**`),
+					new TextDisplay(details)
 				],
 				new GitHubLinkButton(data.url)
-			),
-			new TextDisplay(`**Signals**\n${formatLabels(data.labels)}`)
+			)
 		],
-		{ accentColor: data.isPullRequest ? "#a371f7" : data.state === "open" ? "#3fb950" : "#f85149" }
+		{ accentColor: accentColor(data) }
 	)
 }

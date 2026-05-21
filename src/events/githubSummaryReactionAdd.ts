@@ -9,7 +9,7 @@ import {
 	parseGitHubIssueUrls
 } from "../utils/githubSummary.js"
 
-const summaryEmojiId = "1478966151743672563"
+const summaryEmojiId = "1506891196436316261"
 const debugChannelId = "1506880591340113990"
 
 const formatError = (error: unknown) => {
@@ -63,12 +63,13 @@ export default class GithubSummaryReactionAdd extends MessageReactionAddListener
 			]
 				.filter(Boolean)
 				.join("\n")
-			const matches = parseGitHubIssueUrls(source)
+			const allMatches = parseGitHubIssueUrls(source)
+			const matches = allMatches.slice(0, 5)
 			if (matches.length === 0) {
 				await sendDebugLog(client, `No GitHub links found for reacted message ${data.channel_id}/${data.message_id}`)
 				return
 			}
-			await sendDebugLog(client, `Found ${matches.length} GitHub link(s): ${matches.map((match) => `${match.owner}/${match.repo}#${match.number}`).join(", ")}`)
+			await sendDebugLog(client, `Found ${allMatches.length} GitHub link(s), processing ${matches.length}: ${matches.map((match) => `${match.owner}/${match.repo}#${match.number}`).join(", ")}`)
 
 			const summaries = (await Promise.all(
 				matches.map(async (match) => {
@@ -94,18 +95,14 @@ export default class GithubSummaryReactionAdd extends MessageReactionAddListener
 				return
 			}
 
-			let sent = 0
-			for (const summary of summaries) {
-				try {
-					await channel.send({
-						components: [buildGitHubSummaryContainer(summary)]
-					})
-					sent += 1
-				} catch (error) {
-					await sendDebugLog(client, `Failed to send GitHub summary ${summary.repoName}#${summary.number}: ${formatError(error)}`)
-				}
+			try {
+				await channel.send({
+					components: summaries.map(buildGitHubSummaryContainer)
+				})
+				await sendDebugLog(client, `Sent ${summaries.length}/${allMatches.length} GitHub summary container(s) in <#${data.channel_id}>`)
+			} catch (error) {
+				await sendDebugLog(client, `Failed to send GitHub summaries: ${formatError(error)}`)
 			}
-			await sendDebugLog(client, `Sent ${sent}/${summaries.length} GitHub summary container(s) in <#${data.channel_id}>`)
 		} catch (error) {
 			await sendDebugLog(client, `Unhandled reaction summary error for ${data.channel_id}/${data.message_id}: ${formatError(error)}`)
 		}
