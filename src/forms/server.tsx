@@ -89,13 +89,13 @@ const actionLabel = (action: string) => {
 	return "moderation action"
 }
 
-const eligibilityError = (form: FormConfig, values: Record<string, string>) =>
+const eligibilityError = (form: FormConfig, values: Record<string, string>, username?: string) =>
 	form.requiredAction && values.action !== form.requiredAction
-		? `No active ${actionLabel(form.requiredAction)} found for this account.`
+		? `No active ${actionLabel(form.requiredAction)} found for ${username || "this account"}.`
 		: null
 
-const validatePayload = (form: FormConfig, payload: Record<string, string>, values: Record<string, string>) => {
-	const eligibility = eligibilityError(form, values)
+const validatePayload = (form: FormConfig, payload: Record<string, string>, values: Record<string, string>, username?: string) => {
+	const eligibility = eligibilityError(form, values, username)
 	if (eligibility) {
 		return eligibility
 	}
@@ -248,7 +248,7 @@ const handleFormGet = async (request: Request, form: FormConfig) => {
 	const values = Object.fromEntries(
 		Object.entries(await fetchFormContext(form, user)).map(([key, value]) => [key, String(value ?? "")])
 	)
-	const error = eligibilityError(form, values)
+	const error = eligibilityError(form, values, user.username)
 	if (error) {
 		return new Response(renderResultPage(form.title, error, false), { status: 403, headers: { "content-type": "text/html; charset=utf-8" } })
 	}
@@ -265,7 +265,7 @@ const handleFormSubmit = async (request: Request, form: FormConfig, client: Clie
 	const context = Object.fromEntries(
 		Object.entries(await fetchFormContext(form, user)).map(([key, value]) => [key, String(value ?? "")])
 	)
-	const error = validatePayload(form, collected.payload, context)
+	const error = validatePayload(form, collected.payload, context, user.username)
 	if (error) {
 		return new Response(renderPage(form.title, <FormRoute form={form} session={collected.session} user={user} values={context} error={error} />), { status: 400, headers: { "content-type": "text/html; charset=utf-8" } })
 	}
