@@ -74,6 +74,22 @@ const jsonHeaders = () => ({
 	"content-type": "application/json"
 })
 
+const discordDmInstallUrl = () => {
+	const url = new URL(`${discordApiBase}/oauth2/authorize`)
+	url.searchParams.set("integration_type", "1")
+	url.searchParams.set("state", "close")
+	url.searchParams.set("scope", "applications.commands")
+	url.searchParams.set("response_type", "token")
+	url.searchParams.set("client_id", getRuntimeEnv().DISCORD_CLIENT_ID)
+	return url.toString()
+}
+
+const discordDmInstallAction = () => ({
+	href: discordDmInstallUrl(),
+	label: "Allow Hermit to send you messages",
+	description: "Want a Discord DM when this submission is reviewed?"
+})
+
 const collectPayload = async (request: Request) => {
 	const body = await request.formData()
 	const payload: Record<string, string> = {}
@@ -291,7 +307,15 @@ const handleFormSubmit = async (request: Request, form: FormConfig, client: Clie
 		reviewChannelId: form.reviewChannelId
 	})
 	await sendReview(client, form, submission)
-	return new Response(renderResultPage("Submitted", form.successMessage), { headers: { "content-type": "text/html; charset=utf-8" } })
+	return new Response(
+		renderResultPage(
+			"Submitted",
+			form.successMessage,
+			true,
+			user.provider === "discord" ? discordDmInstallAction() : undefined
+		),
+		{ headers: { "content-type": "text/html; charset=utf-8" } }
+	)
 }
 
 const handleDevvitRedditContext = async (request: Request) => {

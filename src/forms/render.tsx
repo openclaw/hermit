@@ -15,8 +15,13 @@ const document = (title: string, children: React.ReactNode) =>
 export const renderPage = (title: string, children: React.ReactNode) =>
 	document(title, children)
 
-export const renderResultPage = (title: string, message: string, ok = true) =>
-	document(title, <ResultRoute title={title} message={message} ok={ok} />)
+export const renderResultPage = (
+	title: string,
+	message: string,
+	ok = true,
+	action?: { href: string; label: string; description?: string }
+) =>
+	document(title, <ResultRoute title={title} message={message} ok={ok} action={action} />)
 
 export const routes: RouteObject[] = [
 	{

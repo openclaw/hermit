@@ -172,6 +172,31 @@ const loadSubmission = async (id: unknown) => {
 	return { id, submission, form }
 }
 
+const notifyApplicant = async (
+	interaction: ModalInteraction,
+	submission: FormSubmission,
+	form: FormConfig,
+	status: "accepted" | "denied",
+	reason?: string | null
+) => {
+	if (submission.authProvider !== "discord" || !submission.applicantId) {
+		return
+	}
+	const user = await interaction.client.fetchUser(submission.applicantId).catch(() => null)
+	await user?.send({
+		components: [
+			new Container(
+				[
+					new TextDisplay(`### ${form.title} ${status === "accepted" ? "Accepted" : "Denied"}`),
+					new TextDisplay(reason ? `Reason: ${reason}` : "Your submission has been reviewed.")
+				],
+				{ accentColor: status === "accepted" ? "#7bdc65" : "#f85149" }
+			)
+		],
+		allowedMentions: { parse: [] }
+	}).catch(() => null)
+}
+
 const decide = async (
 	interaction: ModalInteraction,
 	id: unknown,
@@ -206,6 +231,8 @@ const decide = async (
 		decisionReason: reason || null,
 		actionResult
 	})
+
+	await notifyApplicant(interaction, loaded.submission, loaded.form, status, reason)
 
 	await interaction.update({
 		components: [
