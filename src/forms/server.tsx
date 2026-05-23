@@ -57,15 +57,17 @@ const isFormsRequest = (request: Request) => {
 
 const normalizeFormsRequest = (request: Request) => new Request(new URL(request.url), request)
 
-const getOrigin = (request: Request) => {
-	const configured = process.env.FORMS_BASE_URL?.replace(/\/$/, "")
-	if (configured) {
-		return configured
-	}
+const getRequestOrigin = (request: Request) => {
 	const url = new URL(request.url)
 	const host = request.headers.get("host")
 	return host ? `${url.protocol}//${host}` : url.origin
 }
+
+const getCanonicalOrigin = () =>
+	process.env.FORMS_BASE_URL?.replace(/\/$/, "") || "https://appeal.openclaw.ai"
+
+const getOrigin = (request: Request) =>
+	process.env.FORMS_BASE_URL?.replace(/\/$/, "") || getRequestOrigin(request)
 
 const jsonHeaders = () => ({
 	Authorization: `Bot ${getRuntimeEnv().DISCORD_BOT_TOKEN}`,
@@ -248,7 +250,7 @@ const handleFormGet = async (request: Request, form: FormConfig) => {
 	if (!user) {
 		const providers = getFormAuthProviders(form)
 		if (providers.length === 1) {
-			return Response.redirect(`${getOrigin(request)}/oauth/${providers[0]}/start?form=${encodeURIComponent(form.id)}`, 302)
+			return Response.redirect(`${getRequestOrigin(request)}/oauth/${providers[0]}/start?form=${encodeURIComponent(form.id)}`, 302)
 		}
 		return new Response(renderPage(form.title, <AuthGateRoute form={form} />), { headers: { "content-type": "text/html; charset=utf-8" } })
 	}
@@ -352,9 +354,9 @@ const startOAuth = async (request: Request, provider: FormAuthProvider) => {
 	if (isFormsDev()) {
 		const user = localUsers[provider]
 		const session = await createSession({ formId: form.id, provider: user.provider, id: user.id, username: user.username })
-		return Response.redirect(`${getOrigin(request)}/${form.id}?session=${encodeURIComponent(session)}`, 302)
+		return Response.redirect(`${getRequestOrigin(request)}/${form.id}?session=${encodeURIComponent(session)}`, 302)
 	}
-	const origin = getOrigin(request)
+	const origin = provider === "github" ? getCanonicalOrigin() : getOrigin(request)
 	const state = await createOAuthState(form.id, origin, provider)
 	if (provider === "discord") {
 		const oauthUrl = new URL(`${discordApiBase}/oauth2/authorize`)
