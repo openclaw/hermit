@@ -1,14 +1,17 @@
 import type { FormConfig, FormField } from "./src/forms/types.js"
 
-export const formSettings = {
-	reviewChannelId: "1467242758183059536",
-	shadowChannelId: "1464886408090226902",
-	discordGuildId: "1456350064065904867",
-	githubOrg: "openclaw",
-	redditSubreddit: "openclaw"
-}
+const reviewChannelId = "1467242758183059536"
+const shadowChannelId = "1464886408090226902"
+const discordGuildId = "1456350064065904867"
+const githubOrg = "openclaw"
+const redditSubreddit = "openclaw"
 
-const { reviewChannelId, shadowChannelId, discordGuildId, githubOrg, redditSubreddit } = formSettings
+/*
+
+{ACTION} = banned, muted, etc
+{UNACTION} = unbanned, unmuted, etc
+
+*/
 
 const appealFields = [
 	{
