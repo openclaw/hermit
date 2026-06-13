@@ -15,6 +15,7 @@ import {
 import BaseCommand from "./base.js"
 
 const communityStaff = "1477360613125787678"
+const openclawFoundation = "1509063061598769333"
 
 class RoleToggle extends BaseCommand {
 	name: string
@@ -102,6 +103,7 @@ class AcknowledgeButton extends Button {
 class RoleToggleWithAck extends BaseCommand {
 	name: string
 	roleId: string
+	requiredRoleId: string
 	ackMessage: string
 
 	options = [
@@ -113,10 +115,11 @@ class RoleToggleWithAck extends BaseCommand {
 		}
 	]
 
-	constructor(name: string, roleId: string, ackMessage: string) {
+	constructor(name: string, roleId: string, requiredRoleId: string, ackMessage: string) {
 		super()
 		this.name = name
 		this.roleId = roleId
+		this.requiredRoleId = requiredRoleId
 		this.ackMessage = ackMessage
 		this.description = `Toggle the ${this.name} role on someone`
 		this.contexts = [InteractionContextType.Guild]
@@ -131,7 +134,7 @@ class RoleToggleWithAck extends BaseCommand {
 		const member = interaction.member
 		const memberRoles = member.roles ?? []
 		const hasAccess = memberRoles.some(
-			(role) => role.id === communityStaff
+			(role) => role.id === this.requiredRoleId
 		)
 
 		if (!hasAccess) {
@@ -226,6 +229,7 @@ export default class RoleCommand extends CommandWithSubcommands {
 		new RoleToggleWithAck(
 			"maintainer-guest",
 			"1503268035908075590",
+			openclawFoundation,
 			"You are adding someone to **Maintainer Guest**, which grants access to privileged Fake Slack Connect channels.\n\nMake sure the person you're adding is aware that they'll be gaining access to private channels, and that they understand the responsibility that comes with that access."
 		)
 	]
