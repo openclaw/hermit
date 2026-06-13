@@ -230,7 +230,7 @@ export default class RoleCommand extends CommandWithSubcommands {
 			"maintainer-guest",
 			"1503268035908075590",
 			openclawFoundation,
-			"You are adding someone to **Maintainer Guest**, which grants access to privileged Fake Slack Connect channels.\n\nMake sure the person you're adding is aware that they'll be gaining access to private channels, and that they understand the responsibility that comes with that access."
+			"You are adding someone to **Maintainer Guest**, which grants access to maintainer channels.\n\nBy proceeding, you acknowledge that you are granting this person access to privileged channels. Make sure both you and the person you're adding are aware of the access this provides and the responsibility that comes with it."
 		)
 	]
 }
