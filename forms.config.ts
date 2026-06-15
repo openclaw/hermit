@@ -134,6 +134,57 @@ export const formConfigs = [
 		}
 	},
 	{
+		id: "clawhub-content-rights",
+		title: "ClawHub Content Rights Request",
+		description: "Report rights concerns involving content published on ClawHub.",
+		auth: null,
+		reviewChannelId: formSettings.clawhubAppealReviewChannelId,
+		reviewRoleId: formSettings.clawhubAppealReviewRoleId,
+		successMessage: "Submitted. We sent a receipt to the email address you provided.",
+		fields: [
+			{
+				id: "requesterName",
+				label: "Your name",
+				type: "text",
+				required: true
+			},
+			{
+				id: "organization",
+				label: "Organization",
+				type: "text",
+				required: true
+			},
+			{
+				id: "email",
+				label: "Email address",
+				type: "text",
+				required: true
+			},
+			{
+				id: "clawhubUrls",
+				label: "ClawHub URLs",
+				type: "textarea",
+				required: true,
+				placeholder: "One https://clawhub.ai/... URL per line"
+			},
+			{
+				id: "explanation",
+				label: "Explain the rights concern",
+				type: "textarea",
+				required: true
+			},
+			{
+				id: "attachments",
+				label: "Supporting evidence",
+				type: "file",
+				required: false,
+				accept: ".pdf,.png,.jpg,.jpeg,.webp,.txt,.md,.doc,.docx",
+				multiple: true
+			}
+		],
+		actions: { accept: [], deny: [] }
+	},
+	{
 		id: "reddit",
 		title: "Reddit Ban Appeal",
 		description: "Request a Reddit ban review.",

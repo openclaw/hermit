@@ -57,6 +57,10 @@ const titleFor = (form: FormConfig, submission: FormSubmission) => {
 	if (form.id === "clawhub") {
 		return `ClawHub Ban Appeal sent by @${applicantName(submission)}`
 	}
+	if (form.id === "clawhub-content-rights") {
+		const payload = parseSubmissionPayload(submission)
+		return `ClawHub Content Rights Request - ${payload.organization || payload.requesterName || "Unknown"}`
+	}
 	if (form.id === "reddit") {
 		return `Reddit Ban Appeal sent by @${applicantName(submission)}`
 	}
@@ -130,6 +134,20 @@ const detailComponentsFor = (form: FormConfig, submission: FormSubmission) => {
 			detailField("Links", payload.links)
 		].join("\n"))]
 	}
+	if (form.id === "clawhub-content-rights") {
+		return [
+			new Section(
+				[new TextDisplay(detailField("Case ID", payload.caseId))],
+				new FormReviewCopyButton(submission.id, "caseId", "Copy Case ID")
+			),
+			new TextDisplay([
+				detailField("Requester", payload.requesterName),
+				detailField("Organization", payload.organization),
+				detailField("Email", payload.email),
+				detailField("ClawHub URLs", payload.clawhubUrls)
+			].join("\n"))
+		]
+	}
 	if (form.id === "reddit") {
 		return [new TextDisplay([
 			detailField("Reddit user", applicantName(submission)),
@@ -165,6 +183,9 @@ const answerLinesFor = (form: FormConfig, submission: FormSubmission) => {
 			}
 			if (form.id === "clawhub") {
 				return !["scope", "links", "auditAction", "auditActorUserId", "clawhubUserId", "clawhubHandle", "date"].includes(field.id)
+			}
+			if (form.id === "clawhub-content-rights") {
+				return !["requesterName", "organization", "email", "clawhubUrls"].includes(field.id)
 			}
 			return true
 		})

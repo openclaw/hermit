@@ -37,6 +37,16 @@ export const getFormSubmission = async (id: number) => {
 	return submission ?? null
 }
 
+export const updateFormSubmissionPayload = async (id: number, payload: Record<string, string>) => {
+	await getDb()
+		.update(formSubmissions)
+		.set({
+			payload: JSON.stringify(payload),
+			updatedAt: now
+		})
+		.where(eq(formSubmissions.id, id))
+}
+
 export const markFormSubmissionSent = async (
 	id: number,
 	input: { reviewMessageId: string; reviewThreadId?: string | null }

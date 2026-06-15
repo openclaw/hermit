@@ -30,6 +30,7 @@ import {
 import { handleFormsRequest } from "./forms/server.js"
 import { registerHelperLogsRoutes } from "./server/helperLogsServer.js"
 import { runThreadLengthMonitor } from "./services/threadLengthMonitor.js"
+import { handleContentRightsApiRequest } from "./clawhubContentRights/api.js"
 
 export const client = new Client(
 	{
@@ -109,6 +110,10 @@ const handler = createHandler(client)
 export default {
 	async fetch(request: Request, env: HermitEnv, ctx: ExecutionContext) {
 		hydrateRuntimeEnv(env)
+		const contentRightsApiResponse = await handleContentRightsApiRequest(request)
+		if (contentRightsApiResponse) {
+			return contentRightsApiResponse
+		}
 		const formsResponse = await handleFormsRequest(request, client)
 		if (formsResponse) {
 			return formsResponse
@@ -152,6 +157,8 @@ declare global {
 			REDDIT_OAUTH_CLIENT_SECRET?: string;
 			DEVVIT_REDDIT_BRIDGE_SECRET?: string;
 			DEVVIT_REDDIT_ACTION_URL?: string;
+			RESEND_API_KEY?: string;
+			CLAWHUB_NOREPLY_FROM?: string;
 		}
 	}
 }

@@ -43,6 +43,12 @@
       "migrations_dir": "drizzle"
     }
   ],
+  "r2_buckets": [
+    {
+      "binding": "CLAWHUB_CASE_FILES",
+      "bucket_name": "clawhub-case-files"
+    }
+  ],
   "triggers": {
     "crons": ["0 */2 * * *"]
   }

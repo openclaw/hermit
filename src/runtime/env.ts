@@ -1,5 +1,34 @@
 type HermitEnv = Env
 
+declare global {
+	interface Env {
+		CLAWHUB_CASE_FILES: R2Bucket
+		ANSWER_OVERFLOW_API_KEY: string
+		BASE_URL: string
+		CLAWHUB_BAN_APPEALS_TOKEN: string
+		DEPLOY_SECRET: string
+		DISCORD_BOT_TOKEN: string
+		DISCORD_CLIENT_ID: string
+		DISCORD_CLIENT_SECRET: string
+		DISCORD_PUBLIC_KEY: string
+		FORMS_BASE_URL: string
+		FORWARDER_PUBLIC_KEY: string
+		GITHUB_APP_ID: string
+		GITHUB_APP_INSTALLATION_ID: string
+		GITHUB_APP_PRIVATE_KEY: string
+		GITHUB_APP_SLUG: string
+		GITHUB_OAUTH_CLIENT_ID: string
+		GITHUB_OAUTH_CLIENT_SECRET: string
+		HELPER_THREAD_WELCOME_PARENT_ID: string
+		HELPER_THREAD_WELCOME_TEMPLATE: string
+		OPENAI_API_KEY: string
+		RESEND_API_KEY: string
+		THREAD_LENGTH_CHECK_INTERVAL_HOURS: string
+		WORKER_EVENT_SECRET: string
+		WORKER_EVENT_URL: string
+	}
+}
+
 let currentEnv: HermitEnv | null = null
 
 export const setRuntimeEnv = (env: HermitEnv) => {

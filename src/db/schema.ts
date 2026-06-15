@@ -130,6 +130,68 @@ export const formSubmissions = sqliteTable(
 	]
 )
 
+export const clawhubContentRightsCases = sqliteTable(
+	"clawhub_content_rights_cases",
+	{
+		caseId: text("case_id").primaryKey(),
+		formSubmissionId: integer("form_submission_id").notNull().unique(),
+		status: text().notNull().default("submitted"),
+		requesterName: text("requester_name").notNull(),
+		organization: text().notNull(),
+		email: text().notNull(),
+		clawhubUrls: text("clawhub_urls").notNull(),
+		explanation: text().notNull(),
+		createdAt: text("created_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`),
+		updatedAt: text("updated_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`)
+	},
+	(table) => [
+		index("idx_clawhub_content_rights_cases_status").on(table.status),
+		index("idx_clawhub_content_rights_cases_email").on(table.email)
+	]
+)
+
+export const clawhubContentRightsFiles = sqliteTable(
+	"clawhub_content_rights_files",
+	{
+		id: integer().primaryKey({ autoIncrement: true }),
+		caseId: text("case_id").notNull(),
+		objectKey: text("object_key").notNull().unique(),
+		kind: text().notNull(),
+		originalName: text("original_name").notNull(),
+		contentType: text("content_type").notNull(),
+		sizeBytes: integer("size_bytes").notNull(),
+		sha256: text().notNull(),
+		createdAt: text("created_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`)
+	},
+	(table) => [
+		index("idx_clawhub_content_rights_files_case_id").on(table.caseId)
+	]
+)
+
+export const clawhubContentRightsEvents = sqliteTable(
+	"clawhub_content_rights_events",
+	{
+		id: integer().primaryKey({ autoIncrement: true }),
+		caseId: text("case_id").notNull(),
+		eventType: text("event_type").notNull(),
+		actor: text(),
+		metadata: text().notNull(),
+		createdAt: text("created_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`)
+	},
+	(table) => [
+		index("idx_clawhub_content_rights_events_case_id").on(table.caseId),
+		index("idx_clawhub_content_rights_events_event_type").on(table.eventType)
+	]
+)
+
 export const claimRequests = sqliteTable(
 	"claim_requests",
 	{
@@ -168,5 +230,11 @@ export type RedditModerationContext = typeof redditModerationContexts.$inferSele
 export type NewRedditModerationContext = typeof redditModerationContexts.$inferInsert
 export type FormSubmission = typeof formSubmissions.$inferSelect
 export type NewFormSubmission = typeof formSubmissions.$inferInsert
+export type ClawhubContentRightsCase = typeof clawhubContentRightsCases.$inferSelect
+export type NewClawhubContentRightsCase = typeof clawhubContentRightsCases.$inferInsert
+export type ClawhubContentRightsFile = typeof clawhubContentRightsFiles.$inferSelect
+export type NewClawhubContentRightsFile = typeof clawhubContentRightsFiles.$inferInsert
+export type ClawhubContentRightsEvent = typeof clawhubContentRightsEvents.$inferSelect
+export type NewClawhubContentRightsEvent = typeof clawhubContentRightsEvents.$inferInsert
 export type ClaimRequest = typeof claimRequests.$inferSelect
 export type NewClaimRequest = typeof claimRequests.$inferInsert

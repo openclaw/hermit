@@ -5,7 +5,10 @@ import { getAvailableFormConfigs, getFormAuthProviders, getFormConfig, renderFor
 import type { FormAuthProvider, FormConfig } from "./types.js"
 import {
 	createFormSubmission,
-	markFormSubmissionSent
+	getFormSubmission,
+	markFormSubmissionSent,
+	parseSubmissionPayload,
+	updateFormSubmissionPayload
 } from "./submissions.js"
 import { getRuntimeEnv } from "../runtime/env.js"
 import { fetchFormContext } from "./context.js"
@@ -23,6 +26,17 @@ import {
 	renderReactRouter,
 	renderResultPage
 } from "./render.js"
+import { storeEvidenceFile } from "../clawhubContentRights/intake.js"
+import {
+	appendContentRightsEvent,
+	createContentRightsCase,
+	recordContentRightsFile
+} from "../clawhubContentRights/cases.js"
+import {
+	ContentRightsValidationError,
+	intakeContentRightsCase
+} from "../clawhubContentRights/workflow.js"
+import { sendContentRightsReceipt } from "../clawhubContentRights/receipt.js"
 
 const discordApiBase = "https://discord.com/api/v10"
 const githubApiBase = "https://api.github.com"
@@ -145,6 +159,10 @@ const fetchFormContextValues = async (form: FormConfig, user: { id: string; user
 	)
 
 const threadNameFor = (form: FormConfig, submission: Awaited<ReturnType<typeof createFormSubmission>>) => {
+	if (form.id === "clawhub-content-rights") {
+		const payload = parseSubmissionPayload(submission)
+		return `${payload.caseId || form.title} - ${payload.organization || payload.requesterName || "Unknown"}`.slice(0, 100)
+	}
 	const provider = submission.authProvider
 		? `${submission.authProvider.charAt(0).toUpperCase()}${submission.authProvider.slice(1)}`
 		: "Unknown"
@@ -276,6 +294,11 @@ const readFormUser = async (request: Request, form: FormConfig) => {
 }
 
 const handleFormGet = async (request: Request, form: FormConfig) => {
+	if (form.auth === null) {
+		return new Response(renderPage(form.title, <FormRoute form={form} session={null} user={null} />), {
+			headers: { "content-type": "text/html; charset=utf-8" }
+		})
+	}
 	const session = new URL(request.url).searchParams.get("session")
 	const user = await readFormUser(request, form)
 	if (!user) {
@@ -297,6 +320,64 @@ const handleFormGet = async (request: Request, form: FormConfig) => {
 }
 
 const handleFormSubmit = async (request: Request, form: FormConfig, client: Client) => {
+	if (form.id === "clawhub-content-rights" && form.auth === null) {
+		try {
+			const body = await request.formData()
+			const result = await intakeContentRightsCase(body, {
+				createSubmission: (payload) => createFormSubmission({
+					formId: form.id,
+					authProvider: null,
+					applicantId: null,
+					applicantUsername: null,
+					payload,
+					reviewChannelId: form.reviewChannelId
+				}),
+				updateSubmissionPayload: updateFormSubmissionPayload,
+				createCase: createContentRightsCase,
+				storeFile: (caseId, kind, file) =>
+					storeEvidenceFile(getRuntimeEnv().CLAWHUB_CASE_FILES, caseId, kind, file),
+				recordFile: recordContentRightsFile,
+				appendEvent: appendContentRightsEvent,
+				sendReceipt: sendContentRightsReceipt
+			})
+			const submission = await getFormSubmission(result.submission.id)
+			if (!submission) {
+				throw new Error(`Could not reload content rights submission ${result.submission.id}.`)
+			}
+			await sendReview(client, form, submission)
+			await appendContentRightsEvent({
+				caseId: result.caseId,
+				eventType: "discord_review_posted",
+				metadata: { reviewChannelId: form.reviewChannelId }
+			})
+			return new Response(
+				renderResultPage(
+					"Submitted",
+					result.receiptSent
+						? form.successMessage
+						: "Submitted. We received your request, but could not send the email receipt.",
+					true
+				),
+				{ headers: { "content-type": "text/html; charset=utf-8" } }
+			)
+		} catch (error) {
+			if (error instanceof ContentRightsValidationError) {
+				return new Response(
+					renderPage(form.title, <FormRoute form={form} session={null} user={null} error={error.message} />),
+					{ status: 400, headers: { "content-type": "text/html; charset=utf-8" } }
+				)
+			}
+			console.error("Failed to submit ClawHub content rights request", error)
+			return new Response(
+				renderResultPage(
+					form.title,
+					"We could not submit this request right now. Please try again later.",
+					false
+				),
+				{ status: 503, headers: { "content-type": "text/html; charset=utf-8" } }
+			)
+		}
+	}
 	const collected = await collectPayload(request)
 	const sessionUser = isFormsDev() ? localUsers[getFormAuthProviders(form)[0] ?? "discord"] : await readSession(collected.session, form.id)
 	const user = sessionUser && formAllowsProvider(form, sessionUser.provider as FormAuthProvider) ? sessionUser : null

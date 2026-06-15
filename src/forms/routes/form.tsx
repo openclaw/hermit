@@ -45,6 +45,9 @@ const FieldInput = ({
 	if (field.type === "text") {
 		return <Input id={field.id} name={field.id} required={field.required} placeholder={field.placeholder ? renderFormText(field.placeholder, values) : undefined} />
 	}
+	if (field.type === "file") {
+		return <Input id={field.id} name={field.id} required={field.required} type="file" accept={field.accept} multiple={field.multiple} />
+	}
 	return null
 }
 
@@ -138,8 +141,8 @@ export const FormRoute = ({
 	error
 }: {
 	form: FormConfig
-	session: string
-	user: { username: string }
+	session: string | null
+	user: { username: string } | null
 	values?: Record<string, string>
 	error?: string
 }) => (
@@ -147,11 +150,11 @@ export const FormRoute = ({
 		<CardHeader>
 			{error ? <Alert>{error}</Alert> : null}
 			<h1 className="m-0 text-2xl font-semibold tracking-tight">{form.title}</h1>
-			<CardDescription>Signed in as {user.username}</CardDescription>
+			<CardDescription>{user ? `Signed in as ${user.username}` : form.description}</CardDescription>
 		</CardHeader>
 		<CardContent>
-			<form className="grid gap-4" method="post" action={`/${form.id}/submit`} data-appeal-form>
-				<input type="hidden" name="session" value={session} />
+			<form className="grid gap-4" method="post" action={`/${form.id}/submit`} encType={form.fields.some((field) => field.type === "file") ? "multipart/form-data" : undefined} data-appeal-form>
+				{session ? <input type="hidden" name="session" value={session} /> : null}
 				{form.fields.map((field) => <Field field={field} key={field.id} values={values} />)}
 				<Button className="w-fit" type="submit">Submit</Button>
 			</form>

@@ -24,6 +24,14 @@ export type FormField =
 	| {
 		id: string
 		label: string
+		type: "file"
+		required: boolean
+		accept?: string
+		multiple?: boolean
+	}
+	| {
+		id: string
+		label: string
 		type: "autofill"
 		contextKey: string
 		placeholder?: string
@@ -39,7 +47,7 @@ export type FormConfig = {
 	id: string
 	title: string
 	description: string
-	auth: FormAuthProvider | FormAuthProvider[]
+	auth: FormAuthProvider | FormAuthProvider[] | null
 	requiredAction?: Exclude<ModerationAction, "moderated">
 	reviewChannelId: string
 	reviewRoleId: string | null

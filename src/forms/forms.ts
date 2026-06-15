@@ -21,12 +21,12 @@ const isFormIntegrationAvailable = (form: FormConfig) => {
 }
 
 export const getFormAuthProviders = (form: FormConfig) => {
-	const providers = Array.isArray(form.auth) ? form.auth : [form.auth]
+	const providers = form.auth === null ? [] : Array.isArray(form.auth) ? form.auth : [form.auth]
 	return isFormIntegrationAvailable(form) ? providers.filter(isFormAuthProviderAvailable) : []
 }
 
 export const getAvailableFormConfigs = () =>
-	formConfigs.filter((form) => getFormAuthProviders(form).length > 0)
+	formConfigs.filter((form) => form.auth === null || getFormAuthProviders(form).length > 0)
 
 export const renderFormText = (text: string, values?: Record<string, string>) =>
 	text
