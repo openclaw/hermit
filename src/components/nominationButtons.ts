@@ -12,8 +12,11 @@ import { nominationConfig } from "../config/nominations.js"
 import {
 	getNomination,
 	getNominationApproverIds,
+	isNominationExpired,
 	markNominationApproved,
-	recordNominationApproval
+	markNominationExpired,
+	recordNominationApproval,
+	restoreApprovedNominationToSubmitted
 } from "../data/nominations.js"
 import type { Nomination } from "../db/schema.js"
 import { getRuntimeEnv } from "../runtime/env.js"
@@ -59,22 +62,30 @@ export const buildNominationContainer = (
 	approverIds: string[]
 ) => {
 	const approved = nomination.status === "approved"
-	const body = approved
-		? `<@${nomination.nomineeId}> welcome to the Shell Society!
+	const expired = nomination.status === "expired"
+	const body = expired
+		? nominationConfig.copy.nominationExpired
+		: approved
+			? `<@${nomination.nomineeId}> welcome to the Shell Society!
 This is a private section of the server that is high signal, low noise, for the valued members of the server to gather together without the chaotic madness that is <#1456350065223270435>.
 
 Just remember, this is not a channel to share your PRs, etc; it’s only a social channel so please treat it as such and above all else, enjoy! 🐚🦞`
-		: `<@${nomination.nomineeId}> has been nominated by <@${nomination.nominatorId}> for ${nomination.reason}.`
-
-	return new Container(
-		[
-			new TextDisplay(`### ${nominationConfig.copy.title}`),
-			new TextDisplay(body),
+			: `<@${nomination.nomineeId}> has been nominated by <@${nomination.nominatorId}> for ${nomination.reason}.`
+	const components: Container["components"] = [
+		new TextDisplay(`### ${nominationConfig.copy.title}`),
+		new TextDisplay(body)
+	]
+	if (!expired) {
+		components.push(
 			new TextDisplay(`Approvals: ${Math.min(approverIds.length, nomination.requiredApprovals)}/${nomination.requiredApprovals}`),
 			new Separator({ divider: true, spacing: "small" }),
 			new Row([new NominationApproveButton(nomination.id, approved)])
-		],
-		{ accentColor: approved ? "#3fb950" : "#f1c40f" }
+		)
+	}
+
+	return new Container(
+		components,
+		{ accentColor: expired ? "#8b949e" : approved ? "#3fb950" : "#f1c40f" }
 	)
 }
 
@@ -95,6 +106,30 @@ export class NominationApproveButton extends Button {
 	}
 
 	async run(interaction: ButtonInteraction, data: ComponentData) {
+		const replyWithExpired = async (nomination: Nomination) => {
+			const expiredNomination =
+				nomination.status === "expired"
+					? nomination
+					: await markNominationExpired(nomination.id) ?? {
+						...nomination,
+						status: "expired"
+					}
+			await interaction.message?.edit({
+				components: [buildNominationContainer(expiredNomination, [])],
+				allowedMentions: { parse: [] }
+			}).catch(() => null)
+			await interaction.reply({
+				components: [
+					buildNominationNoticeContainer(
+						nominationConfig.copy.nominationExpired,
+						"#8b949e"
+					)
+				],
+				ephemeral: true,
+				allowedMentions: { parse: [] }
+			})
+		}
+
 		const id = parseNominationId(data.id)
 		if (!id) {
 			await interaction.reply({
@@ -122,6 +157,11 @@ export class NominationApproveButton extends Button {
 				ephemeral: true,
 				allowedMentions: { parse: [] }
 			})
+			return
+		}
+
+		if (isNominationExpired(nomination)) {
+			await replyWithExpired(nomination)
 			return
 		}
 
@@ -196,9 +236,46 @@ export class NominationApproveButton extends Button {
 			return
 		}
 
-		if (!(await addTargetRole(nomination))) {
+		const approvedNomination = await markNominationApproved(nomination.id)
+		if (!approvedNomination) {
+			const latestNomination = await getNomination(nomination.id)
+			if (latestNomination && isNominationExpired(latestNomination)) {
+				await replyWithExpired(latestNomination)
+				return
+			}
+
+			await interaction.reply({
+				components: [
+					buildNominationNoticeContainer(nominationConfig.copy.alreadyComplete)
+				],
+				ephemeral: true,
+				allowedMentions: { parse: [] }
+			})
+			return
+		}
+
+		let roleAdded = false
+		try {
+			roleAdded = await addTargetRole(approvedNomination)
+		} catch (error) {
+			console.error(
+				`Failed to add role for nomination ${approvedNomination.id}:`,
+				error
+			)
+		}
+
+		if (!roleAdded) {
+			const restoredNomination =
+				await restoreApprovedNominationToSubmitted(approvedNomination.id)
+			if (restoredNomination && isNominationExpired(restoredNomination)) {
+				await replyWithExpired(restoredNomination)
+				return
+			}
+
 			await interaction.message?.edit({
-				components: [buildNominationContainer(nomination, approverIds)],
+				components: [
+					buildNominationContainer(restoredNomination ?? nomination, approverIds)
+				],
 				allowedMentions: { parse: [] }
 			}).catch(() => null)
 			await interaction.reply({
@@ -207,18 +284,6 @@ export class NominationApproveButton extends Button {
 						nominationConfig.copy.roleAddFailed,
 						"#f85149"
 					)
-				],
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
-			return
-		}
-
-		const approvedNomination = await markNominationApproved(nomination.id)
-		if (!approvedNomination) {
-			await interaction.reply({
-				components: [
-					buildNominationNoticeContainer(nominationConfig.copy.alreadyComplete)
 				],
 				ephemeral: true,
 				allowedMentions: { parse: [] }
@@ -240,8 +305,8 @@ export class NominationApproveButton extends Button {
 			ephemeral: true,
 			allowedMentions: { parse: [] }
 		})
+		}
 	}
-}
 
 export const nominationComponents = [
 	new NominationApproveButton()

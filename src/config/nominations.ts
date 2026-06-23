@@ -4,6 +4,7 @@ export const nominationConfig = {
 	approverRoleIds: ["1477360613125787678"],
 	targetRoleId: "1470356404706607227",
 	requiredApprovals: 3,
+	expirationHours: 48,
 	maxReasonLength: 500,
 	commandName: "nominate",
 	copy: {
@@ -22,6 +23,7 @@ export const nominationConfig = {
 		approvalRecorded: "Approval recorded.",
 		nominationPosted: "Nomination posted.",
 		nominationPostFailed: "Could not post the nomination. Please try again.",
+		nominationExpired: "This nomination has expired.",
 		alreadyComplete: "This nomination is already complete.",
 		roleAddFailed: "Could not add Shell Society. Check bot permissions and role order.",
 		invalidNomination: "Could not load this nomination."

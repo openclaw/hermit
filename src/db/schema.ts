@@ -229,9 +229,11 @@ export const nominations = sqliteTable(
 		nomineeId: text("nominee_id").notNull(),
 		nominatorId: text("nominator_id").notNull(),
 		reason: text().notNull().default("No reason provided."),
+		messageId: text("message_id"),
 		targetRoleId: text("target_role_id").notNull(),
 		requiredApprovals: integer("required_approvals").notNull(),
 		status: text().notNull().default("submitted"),
+		expiresAt: text("expires_at"),
 		completedAt: text("completed_at"),
 		createdAt: text("created_at")
 			.notNull()

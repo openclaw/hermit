@@ -1,8 +1,11 @@
 import {
 	ApplicationCommandOptionType,
 	ApplicationIntegrationType,
+	type APIMessage,
 	type CommandInteraction,
-	InteractionContextType
+	InteractionContextType,
+	Routes,
+	serializePayload
 } from "@buape/carbon"
 import {
 	buildNominationContainer,
@@ -13,9 +16,17 @@ import {
 	createNomination,
 	deleteNomination,
 	getActiveNominationForNominee,
-	getNominationApproverIds
+	getNominationApproverIds,
+	markExpiredSubmittedNominationForNominee,
+	setNominationMessageId
 } from "../data/nominations.js"
+import { editNominationMessageExpired } from "../services/nominationExpiry.js"
 import BaseCommand from "./base.js"
+
+const getNominationExpiresAt = () =>
+	new Date(
+		Date.now() + nominationConfig.expirationHours * 60 * 60 * 1000
+	).toISOString()
 
 export default class NominateCommand extends BaseCommand {
 	name = nominationConfig.commandName
@@ -93,6 +104,18 @@ export default class NominateCommand extends BaseCommand {
 
 		await interaction.defer({ ephemeral: true })
 
+		const expiredNomination = await markExpiredSubmittedNominationForNominee(
+			nominationConfig.guildId,
+			target.id,
+			nominationConfig.targetRoleId
+		)
+		if (expiredNomination) {
+			await editNominationMessageExpired(
+				interaction.client,
+				expiredNomination
+			).catch(() => null)
+		}
+
 		const targetMember = await interaction.guild.fetchMember(target.id).catch(() => null)
 		if (!targetMember) {
 			await this.replyWithNotice(
@@ -124,6 +147,7 @@ export default class NominateCommand extends BaseCommand {
 			nomineeId: target.id,
 			nominatorId: interaction.user.id,
 			reason,
+			expiresAt: getNominationExpiresAt(),
 			targetRoleId: nominationConfig.targetRoleId,
 			requiredApprovals: nominationConfig.requiredApprovals
 		})
@@ -133,12 +157,28 @@ export default class NominateCommand extends BaseCommand {
 		}
 		const approverIds = await getNominationApproverIds(nomination.id)
 
+		let postedMessage: APIMessage | null = null
 		try {
-			await interaction.followUp({
-				components: [buildNominationContainer(nomination, approverIds)],
-				allowedMentions: { parse: [] }
-			})
+			postedMessage = await interaction.client.rest.post(
+				Routes.webhook(
+					interaction.client.options.clientId,
+					interaction.rawData.token
+				),
+				{
+					body: serializePayload({
+						components: [buildNominationContainer(nomination, approverIds)],
+						allowedMentions: { parse: [] }
+					})
+				},
+				{ wait: "true" }
+			) as APIMessage
+			await setNominationMessageId(nomination.id, postedMessage.id)
 		} catch {
+			if (postedMessage) {
+				await interaction.client.rest.delete(
+					Routes.channelMessage(channelId, postedMessage.id)
+				).catch(() => null)
+			}
 			await deleteNomination(nomination.id).catch(() => null)
 			await this.replyWithNotice(
 				interaction,

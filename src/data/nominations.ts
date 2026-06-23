@@ -1,4 +1,5 @@
-import { and, asc, eq, sql } from "drizzle-orm"
+import { and, asc, eq, gt, lte, sql } from "drizzle-orm"
+import { nominationConfig } from "../config/nominations.js"
 import { getDb } from "../db.js"
 import {
 	nominationApprovals,
@@ -6,7 +7,7 @@ import {
 	type Nomination
 } from "../db/schema.js"
 
-export type NominationStatus = "submitted" | "approved"
+export type NominationStatus = "submitted" | "approved" | "expired"
 
 type CreateNominationInput = {
 	guildId: string
@@ -14,11 +15,30 @@ type CreateNominationInput = {
 	nomineeId: string
 	nominatorId: string
 	reason: string
+	expiresAt: string
 	targetRoleId: string
 	requiredApprovals: number
 }
 
 const now = sql`strftime('%Y-%m-%dT%H:%M:%fZ', 'now')`
+const fallbackExpirationModifier = `+${nominationConfig.expirationHours} hours`
+const expiryDeadline = sql<string>`coalesce(
+	${nominations.expiresAt},
+	strftime('%Y-%m-%dT%H:%M:%fZ', ${nominations.createdAt}, ${fallbackExpirationModifier})
+)`
+
+const getNominationExpiryTime = (nomination: Nomination) => {
+	if (nomination.expiresAt) {
+		return Date.parse(nomination.expiresAt)
+	}
+
+	const createdAtTime = Date.parse(nomination.createdAt)
+	if (Number.isNaN(createdAtTime)) {
+		return Number.POSITIVE_INFINITY
+	}
+
+	return createdAtTime + nominationConfig.expirationHours * 60 * 60 * 1000
+}
 
 export const createNomination = async (
 	input: CreateNominationInput
@@ -49,6 +69,27 @@ export const deleteNomination = async (nominationId: number): Promise<void> => {
 	await getDb().delete(nominations).where(eq(nominations.id, nominationId))
 }
 
+export const setNominationMessageId = async (
+	nominationId: number,
+	messageId: string
+): Promise<void> => {
+	await getDb()
+		.update(nominations)
+		.set({
+			messageId,
+			updatedAt: now
+		})
+		.where(eq(nominations.id, nominationId))
+}
+
+export const isNominationExpired = (
+	nomination: Nomination,
+	referenceDate = new Date()
+) =>
+	nomination.status === "expired" ||
+	(nomination.status === "submitted" &&
+		getNominationExpiryTime(nomination) <= referenceDate.getTime())
+
 export const getActiveNominationForNominee = async (
 	guildId: string,
 	nomineeId: string,
@@ -62,7 +103,8 @@ export const getActiveNominationForNominee = async (
 				eq(nominations.guildId, guildId),
 				eq(nominations.nomineeId, nomineeId),
 				eq(nominations.targetRoleId, targetRoleId),
-				eq(nominations.status, "submitted")
+				eq(nominations.status, "submitted"),
+				gt(expiryDeadline, now)
 			)
 		)
 		.limit(1)
@@ -113,7 +155,92 @@ export const markNominationApproved = async (
 		.where(
 			and(
 				eq(nominations.id, nominationId),
-				eq(nominations.status, "submitted")
+				eq(nominations.status, "submitted"),
+				gt(expiryDeadline, now)
+			)
+		)
+		.returning()
+
+	return nomination ?? null
+}
+
+export const restoreApprovedNominationToSubmitted = async (
+	nominationId: number
+): Promise<Nomination | null> => {
+	const [nomination] = await getDb()
+		.update(nominations)
+		.set({
+			status: "submitted",
+			completedAt: null,
+			updatedAt: now
+		})
+		.where(
+			and(
+				eq(nominations.id, nominationId),
+				eq(nominations.status, "approved")
+			)
+		)
+		.returning()
+
+	return nomination ?? null
+}
+
+export const listExpiredSubmittedNominations = async (
+	limit = 25
+): Promise<Nomination[]> =>
+	getDb()
+		.select()
+		.from(nominations)
+		.where(
+			and(
+				eq(nominations.status, "submitted"),
+				lte(expiryDeadline, now)
+			)
+		)
+		.orderBy(asc(expiryDeadline), asc(nominations.id))
+		.limit(limit)
+
+export const markNominationExpired = async (
+	nominationId: number
+): Promise<Nomination | null> => {
+	const [nomination] = await getDb()
+		.update(nominations)
+		.set({
+			status: "expired",
+			completedAt: now,
+			updatedAt: now
+		})
+		.where(
+			and(
+				eq(nominations.id, nominationId),
+				eq(nominations.status, "submitted"),
+				lte(expiryDeadline, now)
+			)
+		)
+		.returning()
+
+	return nomination ?? null
+}
+
+export const markExpiredSubmittedNominationForNominee = async (
+	guildId: string,
+	nomineeId: string,
+	targetRoleId: string
+): Promise<Nomination | null> => {
+	const [nomination] = await getDb()
+		.update(nominations)
+		.set({
+			status: "expired",
+			completedAt: now,
+			updatedAt: now
+		})
+		.where(
+			and(
+				eq(nominations.guildId, guildId),
+				eq(nominations.nomineeId, nomineeId),
+				eq(nominations.targetRoleId, targetRoleId),
+				eq(nominations.status, "submitted"),
+				lte(expiryDeadline, now)
 			)
 		)
 		.returning()
