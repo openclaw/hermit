@@ -1,0 +1,2 @@
+DROP INDEX `idx_nominations_guild_nominee_status`;--> statement-breakpoint
+CREATE UNIQUE INDEX `idx_nominations_submitted_unique` ON `nominations` (`guild_id`,`nominee_id`,`target_role_id`) WHERE "nominations"."status" = 'submitted';

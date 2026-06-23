@@ -4,10 +4,14 @@ import {
 	type CommandInteraction,
 	InteractionContextType
 } from "@buape/carbon"
-import { buildNominationContainer } from "../components/nominationButtons.js"
+import {
+	buildNominationContainer,
+	buildNominationNoticeContainer
+} from "../components/nominationButtons.js"
 import { nominationConfig } from "../config/nominations.js"
 import {
 	createNomination,
+	deleteNomination,
 	getActiveNominationForNominee,
 	getNominationApproverIds
 } from "../data/nominations.js"
@@ -16,6 +20,7 @@ import BaseCommand from "./base.js"
 export default class NominateCommand extends BaseCommand {
 	name = nominationConfig.commandName
 	description = "Nominate a user for Shell Society"
+	defer = false
 	contexts = [InteractionContextType.Guild]
 	integrationTypes = [ApplicationIntegrationType.GuildInstall]
 	options = [
@@ -29,18 +34,27 @@ export default class NominateCommand extends BaseCommand {
 			type: ApplicationCommandOptionType.String as const,
 			name: "reason",
 			description: "Why this user should join Shell Society",
-			required: true
+			required: true,
+			max_length: nominationConfig.maxReasonLength
 		}
 	]
+
+	private async replyWithNotice(
+		interaction: CommandInteraction,
+		body: string,
+		accentColor = "#f1c40f"
+	) {
+		await interaction.reply({
+			components: [buildNominationNoticeContainer(body, accentColor)],
+			ephemeral: true,
+			allowedMentions: { parse: [] }
+		})
+	}
 
 	async run(interaction: CommandInteraction) {
 		const channelId = interaction.rawData.channel_id ?? interaction.channel?.id
 		if (!channelId || !nominationConfig.nominationChannelIds.includes(channelId)) {
-			await interaction.reply({
-				content: nominationConfig.copy.wrongChannel,
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
+			await this.replyWithNotice(interaction, nominationConfig.copy.wrongChannel)
 			return
 		}
 
@@ -49,50 +63,48 @@ export default class NominateCommand extends BaseCommand {
 		}
 
 		const target = interaction.options.getUser("user", true)
-		const reason = interaction.options.getString("reason", true).trim()
+		let reasonOption: string | undefined
+		try {
+			reasonOption = interaction.options.getString("reason")
+		} catch {
+			await this.replyWithNotice(interaction, nominationConfig.copy.reasonTooLong)
+			return
+		}
+		const reason = reasonOption?.trim() ?? ""
 		if (reason.length === 0) {
-			await interaction.reply({
-				content: nominationConfig.copy.reasonRequired,
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
+			await this.replyWithNotice(interaction, nominationConfig.copy.reasonRequired)
+			return
+		}
+
+		if (reason.length > nominationConfig.maxReasonLength) {
+			await this.replyWithNotice(interaction, nominationConfig.copy.reasonTooLong)
 			return
 		}
 
 		if (target.id === interaction.user.id) {
-			await interaction.reply({
-				content: nominationConfig.copy.selfNomination,
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
+			await this.replyWithNotice(interaction, nominationConfig.copy.selfNomination)
 			return
 		}
 
 		if (target.bot) {
-			await interaction.reply({
-				content: nominationConfig.copy.botNomination,
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
+			await this.replyWithNotice(interaction, nominationConfig.copy.botNomination)
 			return
 		}
 
+		await interaction.defer({ ephemeral: true })
+
 		const targetMember = await interaction.guild.fetchMember(target.id).catch(() => null)
 		if (!targetMember) {
-			await interaction.reply({
-				content: "User not found in the server.",
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
+			await this.replyWithNotice(
+				interaction,
+				nominationConfig.copy.userNotFound,
+				"#f85149"
+			)
 			return
 		}
 
 		if (targetMember.roles.some((role) => role.id === nominationConfig.targetRoleId)) {
-			await interaction.reply({
-				content: nominationConfig.copy.alreadyHasRole,
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
+			await this.replyWithNotice(interaction, nominationConfig.copy.alreadyHasRole)
 			return
 		}
 
@@ -102,11 +114,7 @@ export default class NominateCommand extends BaseCommand {
 			nominationConfig.targetRoleId
 		)
 		if (existingNomination) {
-			await interaction.reply({
-				content: nominationConfig.copy.alreadyPending,
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
+			await this.replyWithNotice(interaction, nominationConfig.copy.alreadyPending)
 			return
 		}
 
@@ -119,11 +127,31 @@ export default class NominateCommand extends BaseCommand {
 			targetRoleId: nominationConfig.targetRoleId,
 			requiredApprovals: nominationConfig.requiredApprovals
 		})
+		if (!nomination) {
+			await this.replyWithNotice(interaction, nominationConfig.copy.alreadyPending)
+			return
+		}
 		const approverIds = await getNominationApproverIds(nomination.id)
 
-		await interaction.reply({
-			components: [buildNominationContainer(nomination, approverIds)],
-			allowedMentions: { parse: [] }
-		})
+		try {
+			await interaction.followUp({
+				components: [buildNominationContainer(nomination, approverIds)],
+				allowedMentions: { parse: [] }
+			})
+		} catch {
+			await deleteNomination(nomination.id).catch(() => null)
+			await this.replyWithNotice(
+				interaction,
+				nominationConfig.copy.nominationPostFailed,
+				"#f85149"
+			).catch(() => null)
+			return
+		}
+
+		await this.replyWithNotice(
+			interaction,
+			nominationConfig.copy.nominationPosted,
+			"#3fb950"
+		)
 	}
 }

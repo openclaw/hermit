@@ -22,16 +22,17 @@ const now = sql`strftime('%Y-%m-%dT%H:%M:%fZ', 'now')`
 
 export const createNomination = async (
 	input: CreateNominationInput
-): Promise<Nomination> => {
+): Promise<Nomination | null> => {
 	const [nomination] = await getDb()
 		.insert(nominations)
 		.values({
 			...input,
 			status: "submitted"
 		})
+		.onConflictDoNothing()
 		.returning()
 
-	return nomination
+	return nomination ?? null
 }
 
 export const getNomination = async (id: number): Promise<Nomination | null> => {
@@ -42,6 +43,10 @@ export const getNomination = async (id: number): Promise<Nomination | null> => {
 		.limit(1)
 
 	return nomination ?? null
+}
+
+export const deleteNomination = async (nominationId: number): Promise<void> => {
+	await getDb().delete(nominations).where(eq(nominations.id, nominationId))
 }
 
 export const getActiveNominationForNominee = async (

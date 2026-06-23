@@ -35,6 +35,11 @@ const hasApproverRole = (interaction: ButtonInteraction) =>
 		nominationConfig.approverRoleIds.includes(role.id)
 	) ?? false
 
+export const buildNominationNoticeContainer = (
+	body: string,
+	accentColor = "#f1c40f"
+) => new Container([new TextDisplay(body)], { accentColor })
+
 const addTargetRole = async (nomination: Nomination) => {
 	const roleResponse = await fetch(
 		`${discordApiBase}/guilds/${nomination.guildId}/members/${nomination.nomineeId}/roles/${nomination.targetRoleId}`,
@@ -93,7 +98,12 @@ export class NominationApproveButton extends Button {
 		const id = parseNominationId(data.id)
 		if (!id) {
 			await interaction.reply({
-				content: nominationConfig.copy.invalidNomination,
+				components: [
+					buildNominationNoticeContainer(
+						nominationConfig.copy.invalidNomination,
+						"#f85149"
+					)
+				],
 				ephemeral: true,
 				allowedMentions: { parse: [] }
 			})
@@ -103,7 +113,12 @@ export class NominationApproveButton extends Button {
 		const nomination = await getNomination(id)
 		if (!nomination) {
 			await interaction.reply({
-				content: nominationConfig.copy.invalidNomination,
+				components: [
+					buildNominationNoticeContainer(
+						nominationConfig.copy.invalidNomination,
+						"#f85149"
+					)
+				],
 				ephemeral: true,
 				allowedMentions: { parse: [] }
 			})
@@ -112,7 +127,9 @@ export class NominationApproveButton extends Button {
 
 		if (nomination.status === "approved") {
 			await interaction.reply({
-				content: nominationConfig.copy.alreadyComplete,
+				components: [
+					buildNominationNoticeContainer(nominationConfig.copy.alreadyComplete)
+				],
 				ephemeral: true,
 				allowedMentions: { parse: [] }
 			})
@@ -121,7 +138,12 @@ export class NominationApproveButton extends Button {
 
 		if (!hasApproverRole(interaction)) {
 			await interaction.reply({
-				content: nominationConfig.copy.noPermission,
+				components: [
+					buildNominationNoticeContainer(
+						nominationConfig.copy.noPermission,
+						"#f85149"
+					)
+				],
 				ephemeral: true,
 				allowedMentions: { parse: [] }
 			})
@@ -131,7 +153,12 @@ export class NominationApproveButton extends Button {
 		const approverId = interaction.user?.id ?? interaction.userId
 		if (!approverId) {
 			await interaction.reply({
-				content: nominationConfig.copy.invalidNomination,
+				components: [
+					buildNominationNoticeContainer(
+						nominationConfig.copy.invalidNomination,
+						"#f85149"
+					)
+				],
 				ephemeral: true,
 				allowedMentions: { parse: [] }
 			})
@@ -142,7 +169,9 @@ export class NominationApproveButton extends Button {
 		const approverIds = await getNominationApproverIds(nomination.id)
 		if (!recorded && approverIds.length < nomination.requiredApprovals) {
 			await interaction.reply({
-				content: nominationConfig.copy.alreadyApproved,
+				components: [
+					buildNominationNoticeContainer(nominationConfig.copy.alreadyApproved)
+				],
 				ephemeral: true,
 				allowedMentions: { parse: [] }
 			})
@@ -155,7 +184,12 @@ export class NominationApproveButton extends Button {
 				allowedMentions: { parse: [] }
 			}).catch(() => null)
 			await interaction.reply({
-				content: `${nominationConfig.copy.approvalRecorded} ${approverIds.length}/${nomination.requiredApprovals}.`,
+				components: [
+					buildNominationNoticeContainer(
+						`${nominationConfig.copy.approvalRecorded} ${approverIds.length}/${nomination.requiredApprovals}.`,
+						"#3fb950"
+					)
+				],
 				ephemeral: true,
 				allowedMentions: { parse: [] }
 			})
@@ -168,7 +202,12 @@ export class NominationApproveButton extends Button {
 				allowedMentions: { parse: [] }
 			}).catch(() => null)
 			await interaction.reply({
-				content: nominationConfig.copy.roleAddFailed,
+				components: [
+					buildNominationNoticeContainer(
+						nominationConfig.copy.roleAddFailed,
+						"#f85149"
+					)
+				],
 				ephemeral: true,
 				allowedMentions: { parse: [] }
 			})
@@ -178,7 +217,9 @@ export class NominationApproveButton extends Button {
 		const approvedNomination = await markNominationApproved(nomination.id)
 		if (!approvedNomination) {
 			await interaction.reply({
-				content: nominationConfig.copy.alreadyComplete,
+				components: [
+					buildNominationNoticeContainer(nominationConfig.copy.alreadyComplete)
+				],
 				ephemeral: true,
 				allowedMentions: { parse: [] }
 			})
@@ -190,7 +231,12 @@ export class NominationApproveButton extends Button {
 			allowedMentions: { parse: [] }
 		}).catch(() => null)
 		await interaction.reply({
-			content: nominationConfig.copy.approvalRecorded,
+			components: [
+				buildNominationNoticeContainer(
+					nominationConfig.copy.approvalRecorded,
+					"#3fb950"
+				)
+			],
 			ephemeral: true,
 			allowedMentions: { parse: [] }
 		})
