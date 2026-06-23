@@ -5,6 +5,7 @@ import ClaimCommand from "./commands/claim.js"
 import GithubCommand from "./commands/github.js"
 import MaintainerCommand from "./commands/maintainer.js"
 import HelperRootCommand from "./commands/helper.js"
+import NominateCommand from "./commands/nominate.js"
 import RoleCommand from "./commands/role.js"
 import SayRootCommand from "./commands/say.js"
 import SolvedModCommand from "./commands/solvedMod.js"
@@ -20,6 +21,7 @@ import {
 	formReviewModals
 } from "./forms/reviewButtons.js"
 import { fscRequestComponents } from "./components/fscRequestButtons.js"
+import { nominationComponents } from "./components/nominationButtons.js"
 import { whoisDeleteComponents } from "./components/whoisDeleteButton.js"
 import { hydrateRuntimeEnv, type HermitEnv } from "./runtime/env.js"
 import {
@@ -53,6 +55,7 @@ export const client = new Client(
 			new RoleCommand(),
 			new HelperRootCommand(),
 			new ClaimCommand(),
+			new NominateCommand(),
 			new MaintainerCommand(),
 			new AdminCommand()
 		],
@@ -69,6 +72,7 @@ export const client = new Client(
 			...claimReviewComponents,
 			...formReviewComponents,
 			...fscRequestComponents,
+			...nominationComponents,
 			...whoisDeleteComponents
 		],
 		modals: [...claimReviewModals, ...formReviewModals]

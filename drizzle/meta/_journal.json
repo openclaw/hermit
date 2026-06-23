@@ -29,6 +29,20 @@
       "when": 1781564580172,
       "tag": "0003_clawhub_content_rights",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1782182989552,
+      "tag": "0004_puzzling_omega_flight",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1782184143387,
+      "tag": "0005_lethal_senator_kelly",
+      "breakpoints": true
     }
   ]
 }

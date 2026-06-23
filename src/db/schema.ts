@@ -220,6 +220,48 @@ export const claimRequests = sqliteTable(
 	]
 )
 
+export const nominations = sqliteTable(
+	"nominations",
+	{
+		id: integer().primaryKey({ autoIncrement: true }),
+		guildId: text("guild_id").notNull(),
+		channelId: text("channel_id").notNull(),
+		nomineeId: text("nominee_id").notNull(),
+		nominatorId: text("nominator_id").notNull(),
+		reason: text().notNull().default("No reason provided."),
+		targetRoleId: text("target_role_id").notNull(),
+		requiredApprovals: integer("required_approvals").notNull(),
+		status: text().notNull().default("submitted"),
+		completedAt: text("completed_at"),
+		createdAt: text("created_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`),
+		updatedAt: text("updated_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`)
+	},
+	(table) => [
+		index("idx_nominations_guild_nominee_status").on(table.guildId, table.nomineeId, table.status),
+		index("idx_nominations_status").on(table.status)
+	]
+)
+
+export const nominationApprovals = sqliteTable(
+	"nomination_approvals",
+	{
+		id: integer().primaryKey({ autoIncrement: true }),
+		nominationId: integer("nomination_id").notNull(),
+		approverId: text("approver_id").notNull(),
+		createdAt: text("created_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`)
+	},
+	(table) => [
+		uniqueIndex("idx_nomination_approvals_nomination_approver").on(table.nominationId, table.approverId),
+		index("idx_nomination_approvals_nomination_id").on(table.nominationId)
+	]
+)
+
 export type KeyValue = typeof keyValue.$inferSelect
 export type NewKeyValue = typeof keyValue.$inferInsert
 export type HelperEvent = typeof helperEvents.$inferSelect
@@ -238,3 +280,7 @@ export type ClawhubContentRightsEvent = typeof clawhubContentRightsEvents.$infer
 export type NewClawhubContentRightsEvent = typeof clawhubContentRightsEvents.$inferInsert
 export type ClaimRequest = typeof claimRequests.$inferSelect
 export type NewClaimRequest = typeof claimRequests.$inferInsert
+export type Nomination = typeof nominations.$inferSelect
+export type NewNomination = typeof nominations.$inferInsert
+export type NominationApproval = typeof nominationApprovals.$inferSelect
+export type NewNominationApproval = typeof nominationApprovals.$inferInsert

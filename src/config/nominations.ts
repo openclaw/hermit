@@ -1,0 +1,24 @@
+export const nominationConfig = {
+	guildId: "1456350064065904867",
+	nominationChannelIds: ["1471742293055635536"],
+	approverRoleIds: ["1477360613125787678"],
+	targetRoleId: "1470356404706607227",
+	requiredApprovals: 2,
+	commandName: "nominate",
+	copy: {
+		title: "🐚🐚 Society nomination! 🐚🐚",
+		buttonLabel: "Approve",
+		wrongChannel: "This command can only be used in a secret channel... 🐚",
+		selfNomination: "You cannot nominate yourself.",
+		reasonRequired: "Reason required. The shell demands context.",
+		botNomination: "Bots cannot receive the shell. They know what they did.",
+		alreadyHasRole: "That user already has Shell Society.",
+		alreadyPending: "That user already has an open Shell Society nomination.",
+		noPermission: "Community Team only. Nice try though.",
+		alreadyApproved: "You already approved this one. The shell remembers.",
+		approvalRecorded: "Approval recorded.",
+		alreadyComplete: "This nomination is already complete.",
+		roleAddFailed: "Could not add Shell Society. Check bot permissions and role order.",
+		invalidNomination: "Could not load this nomination."
+	}
+}
