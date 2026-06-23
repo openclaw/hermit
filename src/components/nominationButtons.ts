@@ -305,8 +305,8 @@ export class NominationApproveButton extends Button {
 			ephemeral: true,
 			allowedMentions: { parse: [] }
 		})
-		}
 	}
+}
 
 export const nominationComponents = [
 	new NominationApproveButton()

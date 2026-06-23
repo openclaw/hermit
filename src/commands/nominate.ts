@@ -160,17 +160,13 @@ export default class NominateCommand extends BaseCommand {
 		let postedMessage: APIMessage | null = null
 		try {
 			postedMessage = await interaction.client.rest.post(
-				Routes.webhook(
-					interaction.client.options.clientId,
-					interaction.rawData.token
-				),
+				Routes.channelMessages(channelId),
 				{
 					body: serializePayload({
 						components: [buildNominationContainer(nomination, approverIds)],
 						allowedMentions: { parse: [] }
 					})
-				},
-				{ wait: "true" }
+				}
 			) as APIMessage
 			await setNominationMessageId(nomination.id, postedMessage.id)
 		} catch {
