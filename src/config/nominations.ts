@@ -3,7 +3,7 @@ export const nominationConfig = {
 	nominationChannelIds: ["1471742293055635536"],
 	approverRoleIds: ["1477360613125787678"],
 	targetRoleId: "1470356404706607227",
-	requiredApprovals: 2,
+	requiredApprovals: 3,
 	commandName: "nominate",
 	copy: {
 		title: "🐚🐚 Society nomination! 🐚🐚",

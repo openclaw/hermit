@@ -39,7 +39,7 @@ const createNomination = (database: Database) => {
 			"nominator-1",
 			"excellent shell judgment",
 			"role-1",
-			2,
+			3,
 			"submitted"
 		]
 	)
@@ -48,7 +48,7 @@ const createNomination = (database: Database) => {
 }
 
 describe("nomination migration", () => {
-	it("allows two distinct approvers for one nomination", () => {
+	it("allows three distinct approvers for one nomination", () => {
 		const database = new Database(":memory:")
 		for (const migrationPath of nominationMigrationPaths) {
 			applyMigration(database, `drizzle/${migrationPath}`)
@@ -63,6 +63,10 @@ describe("nomination migration", () => {
 			"insert into nomination_approvals (nomination_id, approver_id) values (?, ?)",
 			[nominationId, "approver-2"]
 		)
+		database.run(
+			"insert into nomination_approvals (nomination_id, approver_id) values (?, ?)",
+			[nominationId, "approver-3"]
+		)
 
 		const row = database
 			.query("select count(*) as count from nomination_approvals")
@@ -71,7 +75,7 @@ describe("nomination migration", () => {
 			.query("select reason from nominations where id = ?")
 			.get(nominationId) as { reason: string }
 
-		expect(row.count).toBe(2)
+		expect(row.count).toBe(3)
 		expect(nomination.reason).toBe("excellent shell judgment")
 	})
 
