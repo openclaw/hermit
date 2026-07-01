@@ -1,4 +1,4 @@
-import { and, asc, eq, gt, lte, sql } from "drizzle-orm"
+import { and, asc, eq, gt, lte, or, sql } from "drizzle-orm"
 import { nominationConfig } from "../config/nominations.js"
 import { getDb } from "../db.js"
 import {
@@ -7,7 +7,11 @@ import {
 	type Nomination
 } from "../db/schema.js"
 
-export type NominationStatus = "submitted" | "approved" | "expired"
+export type NominationStatus =
+	| "submitted"
+	| "granting"
+	| "approved"
+	| "expired"
 
 type CreateNominationInput = {
 	guildId: string
@@ -103,8 +107,13 @@ export const getActiveNominationForNominee = async (
 				eq(nominations.guildId, guildId),
 				eq(nominations.nomineeId, nomineeId),
 				eq(nominations.targetRoleId, targetRoleId),
-				eq(nominations.status, "submitted"),
-				gt(expiryDeadline, now)
+				or(
+					eq(nominations.status, "granting"),
+					and(
+						eq(nominations.status, "submitted"),
+						gt(expiryDeadline, now)
+					)
+				)
 			)
 		)
 		.limit(1)
@@ -155,6 +164,26 @@ export const markNominationApproved = async (
 		.where(
 			and(
 				eq(nominations.id, nominationId),
+				eq(nominations.status, "granting")
+			)
+		)
+		.returning()
+
+	return nomination ?? null
+}
+
+export const markNominationGranting = async (
+	nominationId: number
+): Promise<Nomination | null> => {
+	const [nomination] = await getDb()
+		.update(nominations)
+		.set({
+			status: "granting",
+			updatedAt: now
+		})
+		.where(
+			and(
+				eq(nominations.id, nominationId),
 				eq(nominations.status, "submitted"),
 				gt(expiryDeadline, now)
 			)
@@ -164,20 +193,26 @@ export const markNominationApproved = async (
 	return nomination ?? null
 }
 
-export const restoreApprovedNominationToSubmitted = async (
+export const listGrantingNominations = async (
+	limit = 25
+): Promise<Nomination[]> =>
+	getDb()
+		.select()
+		.from(nominations)
+		.where(eq(nominations.status, "granting"))
+		.orderBy(asc(nominations.updatedAt), asc(nominations.id))
+		.limit(limit)
+
+export const markNominationGrantPending = async (
 	nominationId: number
 ): Promise<Nomination | null> => {
 	const [nomination] = await getDb()
 		.update(nominations)
-		.set({
-			status: "submitted",
-			completedAt: null,
-			updatedAt: now
-		})
+		.set({ updatedAt: now })
 		.where(
 			and(
 				eq(nominations.id, nominationId),
-				eq(nominations.status, "approved")
+				eq(nominations.status, "granting")
 			)
 		)
 		.returning()

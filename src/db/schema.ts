@@ -243,9 +243,9 @@ export const nominations = sqliteTable(
 			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`)
 	},
 	(table) => [
-		uniqueIndex("idx_nominations_submitted_unique")
+		uniqueIndex("idx_nominations_active_unique")
 			.on(table.guildId, table.nomineeId, table.targetRoleId)
-			.where(sql`${table.status} = 'submitted'`),
+			.where(sql`${table.status} in ('submitted', 'granting')`),
 		index("idx_nominations_status").on(table.status)
 	]
 )

@@ -4,11 +4,19 @@ import { readdirSync, readFileSync } from "node:fs"
 import { nominationConfig } from "../src/config/nominations.js"
 
 const nominationMigrationPaths = readdirSync("drizzle")
-	.filter((file) => /000[4-7]_.*\.sql/.test(file))
+	.filter((file) => /000[4-8]_.*\.sql/.test(file))
 	.sort()
 
-if (nominationMigrationPaths.length !== 4) {
+if (nominationMigrationPaths.length !== 5) {
 	throw new Error("Could not find nomination migrations")
+}
+
+const nominationExpiryMigrationPath = nominationMigrationPaths.find((path) =>
+	path.startsWith("0007_")
+)
+
+if (!nominationExpiryMigrationPath) {
+	throw new Error("Could not find nomination expiry migration")
 }
 
 const applyMigration = (database: Database, path: string) => {
@@ -118,6 +126,20 @@ describe("nomination migration", () => {
 		expect(() => createNomination(database)).toThrow()
 	})
 
+	it("keeps a granting nomination active while the role grant is retried", () => {
+		const database = new Database(":memory:")
+		for (const migrationPath of nominationMigrationPaths) {
+			applyMigration(database, `drizzle/${migrationPath}`)
+		}
+		const nominationId = createNomination(database)
+		database.run("update nominations set status = ? where id = ?", [
+			"granting",
+			nominationId
+		])
+
+		expect(() => createNomination(database)).toThrow()
+	})
+
 	it("allows a new nomination after the previous nomination is approved", () => {
 		const database = new Database(":memory:")
 		for (const migrationPath of nominationMigrationPaths) {
@@ -158,7 +180,10 @@ describe("nomination migration", () => {
 
 	it("backfills expiry for nominations created before expiry columns existed", () => {
 		const database = new Database(":memory:")
-		for (const migrationPath of nominationMigrationPaths.slice(0, -1)) {
+		const expiryMigrationIndex = nominationMigrationPaths.indexOf(
+			nominationExpiryMigrationPath
+		)
+		for (const migrationPath of nominationMigrationPaths.slice(0, expiryMigrationIndex)) {
 			applyMigration(database, `drizzle/${migrationPath}`)
 		}
 		database.run(
@@ -184,7 +209,7 @@ describe("nomination migration", () => {
 			]
 		)
 
-		applyMigration(database, `drizzle/${nominationMigrationPaths.at(-1)}`)
+		applyMigration(database, `drizzle/${nominationExpiryMigrationPath}`)
 
 		const row = database
 			.query("select created_at as createdAt, expires_at as expiresAt from nominations")

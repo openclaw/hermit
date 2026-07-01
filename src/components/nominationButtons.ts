@@ -13,15 +13,12 @@ import {
 	getNomination,
 	getNominationApproverIds,
 	isNominationExpired,
-	markNominationApproved,
 	markNominationExpired,
-	recordNominationApproval,
-	restoreApprovedNominationToSubmitted
+	markNominationGranting,
+	recordNominationApproval
 } from "../data/nominations.js"
 import type { Nomination } from "../db/schema.js"
-import { getRuntimeEnv } from "../runtime/env.js"
-
-const discordApiBase = "https://discord.com/api/v10"
+import { processNominationRoleGrant } from "../services/nominationRoleGrant.js"
 
 const parseNominationId = (id: unknown) => {
 	if (typeof id === "number" && Number.isInteger(id)) {
@@ -42,20 +39,6 @@ export const buildNominationNoticeContainer = (
 	body: string,
 	accentColor = "#f1c40f"
 ) => new Container([new TextDisplay(body)], { accentColor })
-
-const addTargetRole = async (nomination: Nomination) => {
-	const roleResponse = await fetch(
-		`${discordApiBase}/guilds/${nomination.guildId}/members/${nomination.nomineeId}/roles/${nomination.targetRoleId}`,
-		{
-			method: "PUT",
-			headers: {
-				Authorization: `Bot ${getRuntimeEnv().DISCORD_BOT_TOKEN}`
-			}
-		}
-	)
-
-	return roleResponse.ok || roleResponse.status === 204
-}
 
 export const buildNominationContainer = (
 	nomination: Nomination,
@@ -130,6 +113,45 @@ export class NominationApproveButton extends Button {
 			})
 		}
 
+		const replyWithGrantResult = async (
+			grantingNomination: Nomination,
+			approverIds: string[]
+		) => {
+			const result = await processNominationRoleGrant(grantingNomination)
+			if (result.status === "pending") {
+				await interaction.message?.edit({
+					components: [buildNominationContainer(result.nomination, approverIds)],
+					allowedMentions: { parse: [] }
+				}).catch(() => null)
+				await interaction.reply({
+					components: [
+						buildNominationNoticeContainer(
+							nominationConfig.copy.roleAddFailed,
+							"#f85149"
+						)
+					],
+					ephemeral: true,
+					allowedMentions: { parse: [] }
+				})
+				return
+			}
+
+			await interaction.message?.edit({
+				components: [buildNominationContainer(result.nomination, approverIds)],
+				allowedMentions: { parse: [] }
+			}).catch(() => null)
+			await interaction.reply({
+				components: [
+					buildNominationNoticeContainer(
+						nominationConfig.copy.approvalRecorded,
+						"#3fb950"
+					)
+				],
+				ephemeral: true,
+				allowedMentions: { parse: [] }
+			})
+		}
+
 		const id = parseNominationId(data.id)
 		if (!id) {
 			await interaction.reply({
@@ -166,6 +188,11 @@ export class NominationApproveButton extends Button {
 		}
 
 		if (nomination.status === "approved") {
+			const approverIds = await getNominationApproverIds(nomination.id)
+			await interaction.message?.edit({
+				components: [buildNominationContainer(nomination, approverIds)],
+				allowedMentions: { parse: [] }
+			}).catch(() => null)
 			await interaction.reply({
 				components: [
 					buildNominationNoticeContainer(nominationConfig.copy.alreadyComplete)
@@ -205,6 +232,12 @@ export class NominationApproveButton extends Button {
 			return
 		}
 
+		if (nomination.status === "granting") {
+			const approverIds = await getNominationApproverIds(nomination.id)
+			await replyWithGrantResult(nomination, approverIds)
+			return
+		}
+
 		const recorded = await recordNominationApproval(nomination.id, approverId)
 		const approverIds = await getNominationApproverIds(nomination.id)
 		if (!recorded && approverIds.length < nomination.requiredApprovals) {
@@ -236,12 +269,26 @@ export class NominationApproveButton extends Button {
 			return
 		}
 
-		const approvedNomination = await markNominationApproved(nomination.id)
-		if (!approvedNomination) {
+		const grantingNomination = await markNominationGranting(nomination.id)
+		if (!grantingNomination) {
 			const latestNomination = await getNomination(nomination.id)
 			if (latestNomination && isNominationExpired(latestNomination)) {
 				await replyWithExpired(latestNomination)
 				return
+			}
+
+			if (latestNomination?.status === "granting") {
+				await replyWithGrantResult(latestNomination, approverIds)
+				return
+			}
+
+			if (latestNomination?.status === "approved") {
+				await interaction.message?.edit({
+					components: [
+						buildNominationContainer(latestNomination, approverIds)
+					],
+					allowedMentions: { parse: [] }
+				}).catch(() => null)
 			}
 
 			await interaction.reply({
@@ -254,57 +301,7 @@ export class NominationApproveButton extends Button {
 			return
 		}
 
-		let roleAdded = false
-		try {
-			roleAdded = await addTargetRole(approvedNomination)
-		} catch (error) {
-			console.error(
-				`Failed to add role for nomination ${approvedNomination.id}:`,
-				error
-			)
-		}
-
-		if (!roleAdded) {
-			const restoredNomination =
-				await restoreApprovedNominationToSubmitted(approvedNomination.id)
-			if (restoredNomination && isNominationExpired(restoredNomination)) {
-				await replyWithExpired(restoredNomination)
-				return
-			}
-
-			await interaction.message?.edit({
-				components: [
-					buildNominationContainer(restoredNomination ?? nomination, approverIds)
-				],
-				allowedMentions: { parse: [] }
-			}).catch(() => null)
-			await interaction.reply({
-				components: [
-					buildNominationNoticeContainer(
-						nominationConfig.copy.roleAddFailed,
-						"#f85149"
-					)
-				],
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
-			return
-		}
-
-		await interaction.message?.edit({
-			components: [buildNominationContainer(approvedNomination, approverIds)],
-			allowedMentions: { parse: [] }
-		}).catch(() => null)
-		await interaction.reply({
-			components: [
-				buildNominationNoticeContainer(
-					nominationConfig.copy.approvalRecorded,
-					"#3fb950"
-				)
-			],
-			ephemeral: true,
-			allowedMentions: { parse: [] }
-		})
+		await replyWithGrantResult(grantingNomination, approverIds)
 	}
 }
 

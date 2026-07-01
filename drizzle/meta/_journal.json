@@ -57,6 +57,13 @@
       "when": 1782243715774,
       "tag": "0007_overrated_mauler",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1782868410044,
+      "tag": "0008_aspiring_mojo",
+      "breakpoints": true
     }
   ]
 }

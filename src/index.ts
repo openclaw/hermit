@@ -31,7 +31,10 @@ import {
 } from "./server/claimServer.js"
 import { handleFormsRequest } from "./forms/server.js"
 import { registerHelperLogsRoutes } from "./server/helperLogsServer.js"
-import { runNominationExpiry } from "./services/nominationExpiry.js"
+import {
+	runNominationExpiry,
+	runNominationGrantRecovery
+} from "./services/nominationExpiry.js"
 import { runThreadLengthMonitor } from "./services/threadLengthMonitor.js"
 import { handleContentRightsApiRequest } from "./clawhubContentRights/api.js"
 
@@ -131,6 +134,7 @@ export default {
 	scheduled(controller: ScheduledController, env: HermitEnv, ctx: ExecutionContext) {
 		hydrateRuntimeEnv(env)
 		ctx.waitUntil(runNominationExpiry(client))
+		ctx.waitUntil(runNominationGrantRecovery(client))
 		if (!controller.cron || controller.cron === "0 */2 * * *") {
 			ctx.waitUntil(runThreadLengthMonitor(client))
 		}
