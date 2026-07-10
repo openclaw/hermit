@@ -88,15 +88,25 @@ describe("ClawHub content rights intake", () => {
 
 	it("normalizes one or more canonical ClawHub skill URLs", () => {
 		expect(normalizeClawhubUrls(`
+			https://clawhub.ai/anysearch-ai/skills/anysearch?ref=notice
+			https://clawhub.ai/anysearch-ai/skills/anysearch-mcp/
 			https://clawhub.ai/huangrh99/xhs-mac-mcp?ref=notice
 			https://clawhub.ai/borye/xiaohongshu-mcp/
 		`)).toEqual([
+			"https://clawhub.ai/anysearch-ai/skills/anysearch",
+			"https://clawhub.ai/anysearch-ai/skills/anysearch-mcp",
 			"https://clawhub.ai/huangrh99/xhs-mac-mcp",
 			"https://clawhub.ai/borye/xiaohongshu-mcp"
 		])
 		expect(() => normalizeClawhubUrls("https://example.com/not-clawhub")).toThrow(
 			"Every URL must identify a skill on clawhub.ai."
 		)
+		expect(() => normalizeClawhubUrls("https://clawhub.ai/anysearch-ai")).toThrow(
+			"Every URL must identify a skill on clawhub.ai."
+		)
+		expect(() =>
+			normalizeClawhubUrls("https://clawhub.ai/anysearch-ai/plugins/anysearch")
+		).toThrow("Every URL must identify a skill on clawhub.ai.")
 	})
 
 	it("bounds evidence uploads and assigns a stable case id", () => {
