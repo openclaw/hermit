@@ -4,10 +4,12 @@ export const maxEvidenceFileBytes = 20 * 1024 * 1024
 const canonicalSkillUrl = (value: string) => {
 	const url = new URL(value)
 	const segments = url.pathname.split("/").filter(Boolean)
+	const isLegacySkillRoute = segments.length === 2
+	const isCurrentSkillRoute = segments.length === 3 && segments[1] === "skills"
 	if (
 		url.protocol !== "https:" ||
 		url.hostname !== "clawhub.ai" ||
-		segments.length !== 2
+		(!isLegacySkillRoute && !isCurrentSkillRoute)
 	) {
 		throw new Error("Every URL must identify a skill on clawhub.ai.")
 	}
