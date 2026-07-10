@@ -1,6 +1,6 @@
 export const nominationConfig = {
 	guildId: "1456350064065904867",
-	nominationChannelIds: ["1471743636592001024"],
+	nominationChannelIds: ["1471742293055635536", "1471743636592001024"],
 	approverRoleIds: ["1477360613125787678"],
 	targetRoleId: "1470356404706607227",
 	requiredApprovals: 3,
