@@ -6,12 +6,9 @@ export type BetaPingsMember = {
 	removeRole: (roleId: string, reason?: string) => Promise<void>
 }
 
-export const isBetaPingsLocation = (
-	guildId: string | null | undefined,
-	channelId: string | null | undefined
-) =>
-	guildId === betaPingsConfig.guildId &&
-	channelId === betaPingsConfig.channelId
+export const isBetaPingsGuild = (
+	guildId: string | null | undefined
+) => guildId === betaPingsConfig.guildId
 
 export const toggleBetaPingsRole = async (
 	member: BetaPingsMember

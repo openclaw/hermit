@@ -2,6 +2,7 @@ import { describe, expect, it, spyOn } from "bun:test"
 import {
 	ApplicationIntegrationType,
 	type ButtonInteraction,
+	type CommandInteraction,
 	InteractionContextType,
 	Permission,
 	serializePayload
@@ -13,7 +14,7 @@ import {
 } from "../src/components/betaPingsButton.js"
 import { betaPingsConfig } from "../src/config/betaPings.js"
 import {
-	isBetaPingsLocation,
+	isBetaPingsGuild,
 	toggleBetaPingsRole,
 	type BetaPingsMember
 } from "../src/services/betaPings.js"
@@ -46,7 +47,7 @@ const makeInteraction = (options: {
 	userId?: string | undefined
 } = {}) => {
 	const guildId = options.guildId ?? betaPingsConfig.guildId
-	const channelId = options.channelId ?? betaPingsConfig.channelId
+	const channelId = options.channelId ?? "channel-1"
 	const userId = "userId" in options ? options.userId : "user-1"
 	const replies: unknown[] = []
 	const interaction = {
@@ -111,22 +112,29 @@ describe("Beta Pings post", () => {
 		expect(command.guildIds).toEqual([betaPingsConfig.guildId])
 		expect(command.permission).toBe(Permission.ManageRoles)
 	})
+
+	it("publishes in any channel in the configured guild", async () => {
+		const replies: unknown[] = []
+		const interaction = {
+			rawData: {
+				guild_id: betaPingsConfig.guildId,
+				channel_id: "another-channel"
+			},
+			reply: async (payload: unknown) => {
+				replies.push(payload)
+			}
+		} as unknown as CommandInteraction
+
+		await new BetaPingsCommand().run(interaction)
+
+		expect(payloadText(replies[0])).toContain(betaPingsConfig.copy.title)
+	})
 })
 
 describe("Beta Pings role toggle", () => {
-	it("binds the control to the configured guild and rules channel", () => {
-		expect(
-			isBetaPingsLocation(
-				betaPingsConfig.guildId,
-				betaPingsConfig.channelId
-			)
-		).toBe(true)
-		expect(
-			isBetaPingsLocation("wrong-guild", betaPingsConfig.channelId)
-		).toBe(false)
-		expect(
-			isBetaPingsLocation(betaPingsConfig.guildId, "wrong-channel")
-		).toBe(false)
+	it("binds the control to the configured guild", () => {
+		expect(isBetaPingsGuild(betaPingsConfig.guildId)).toBe(true)
+		expect(isBetaPingsGuild("wrong-guild")).toBe(false)
 	})
 
 	it("adds Beta Pings when the member does not have it", async () => {
@@ -151,7 +159,23 @@ describe("Beta Pings role toggle", () => {
 		])
 	})
 
-	it("rejects interactions outside the configured guild and channel", async () => {
+	it("allows interactions in any channel in the configured guild", async () => {
+		const { interaction, replies } = makeInteraction({
+			channelId: "another-channel"
+		})
+		const { member, added } = makeMember()
+
+		await handleBetaPingsToggle(interaction, async () => member)
+
+		expect(added).toEqual([
+			[betaPingsConfig.roleId, "Self-service Beta Pings toggle"]
+		])
+		expect(payloadText(replies[0])).toContain(
+			betaPingsConfig.copy.enabled
+		)
+	})
+
+	it("rejects interactions outside the configured guild", async () => {
 		const { interaction, replies } = makeInteraction({
 			guildId: "wrong-guild"
 		})
@@ -164,7 +188,7 @@ describe("Beta Pings role toggle", () => {
 
 		expect(fetched).toBe(false)
 		expect(payloadText(replies[0])).toContain(
-			betaPingsConfig.copy.wrongLocation
+			betaPingsConfig.copy.wrongGuild
 		)
 	})
 

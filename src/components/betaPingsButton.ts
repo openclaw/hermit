@@ -8,7 +8,7 @@ import {
 } from "@buape/carbon"
 import { betaPingsConfig } from "../config/betaPings.js"
 import {
-	isBetaPingsLocation,
+	isBetaPingsGuild,
 	toggleBetaPingsRole,
 	type BetaPingsMember
 } from "../services/betaPings.js"
@@ -27,12 +27,11 @@ export const handleBetaPingsToggle = async (
 		interaction.client.fetchMember(guildId, userId)
 ) => {
 	const guildId = interaction.rawData.guild_id
-	const channelId = interaction.rawData.channel_id
 
-	if (!isBetaPingsLocation(guildId, channelId)) {
+	if (!isBetaPingsGuild(guildId)) {
 		await interaction.reply({
 			components: [
-				noticeContainer(betaPingsConfig.copy.wrongLocation, "#f85149")
+				noticeContainer(betaPingsConfig.copy.wrongGuild, "#f85149")
 			],
 			allowedMentions: { parse: [] }
 		})
