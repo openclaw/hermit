@@ -1,6 +1,7 @@
 import { Client } from "@buape/carbon"
 import { createHandler } from "@buape/carbon/adapters/fetch"
 import AdminCommand from "./commands/admin.js"
+import BetaPingsCommand from "./commands/betaPings.js"
 import ClaimCommand from "./commands/claim.js"
 import GithubCommand from "./commands/github.js"
 import MaintainerCommand from "./commands/maintainer.js"
@@ -21,6 +22,7 @@ import {
 	formReviewModals
 } from "./forms/reviewButtons.js"
 import { fscRequestComponents } from "./components/fscRequestButtons.js"
+import { betaPingsComponents } from "./components/betaPingsButton.js"
 import { nominationComponents } from "./components/nominationButtons.js"
 import { whoisDeleteComponents } from "./components/whoisDeleteButton.js"
 import { hydrateRuntimeEnv, type HermitEnv } from "./runtime/env.js"
@@ -59,6 +61,7 @@ export const client = new Client(
 			new SolvedModCommand(),
 			new SayRootCommand(),
 			new RoleCommand(),
+			new BetaPingsCommand(),
 			new HelperRootCommand(),
 			new ClaimCommand(),
 			new NominateCommand(),
@@ -78,6 +81,7 @@ export const client = new Client(
 			...claimReviewComponents,
 			...formReviewComponents,
 			...fscRequestComponents,
+			...betaPingsComponents,
 			...nominationComponents,
 			...whoisDeleteComponents
 		],
