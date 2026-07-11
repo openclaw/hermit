@@ -9,31 +9,41 @@ import {
 	TextDisplay
 } from "@buape/carbon"
 import { nominationConfig } from "../config/nominations.js"
-import {
-	getNomination,
-	getNominationApproverIds,
-	isNominationExpired,
-	markNominationExpired,
-	markNominationGranting,
-	recordNominationApproval
+import type {
+	NominationVoteChoice,
+	NominationVoteTotals
 } from "../data/nominations.js"
 import type { Nomination } from "../db/schema.js"
-import { processNominationRoleGrant } from "../services/nominationRoleGrant.js"
 
-const parseNominationId = (id: unknown) => {
-	if (typeof id === "number" && Number.isInteger(id)) {
-		return id
+const statusCopy = (nomination: Nomination) => {
+	switch (nomination.status) {
+		case "granting":
+			return "**Status:** Role grant pending"
+		case "approved":
+			return "**Status:** Approved\nShell Society role granted."
+		case "declined":
+			return "**Status:** Declined"
+		case "expired":
+			return "**Status:** Expired"
+		default:
+			return "**Status:** Open"
 	}
-	if (typeof id === "string" && /^\d+$/.test(id)) {
-		return Number(id)
-	}
-	return null
 }
 
-const hasApproverRole = (interaction: ButtonInteraction) =>
-	interaction.member?.roles.some((role) =>
-		nominationConfig.approverRoleIds.includes(role.id)
-	) ?? false
+const statusColor = (nomination: Nomination) => {
+	switch (nomination.status) {
+		case "approved":
+			return "#3fb950"
+		case "declined":
+			return "#f85149"
+		case "expired":
+			return "#8b949e"
+		case "granting":
+			return "#58a6ff"
+		default:
+			return "#f1c40f"
+	}
+}
 
 export const buildNominationNoticeContainer = (
 	body: string,
@@ -42,43 +52,52 @@ export const buildNominationNoticeContainer = (
 
 export const buildNominationContainer = (
 	nomination: Nomination,
-	approverIds: string[]
+	totals: NominationVoteTotals
 ) => {
-	const approved = nomination.status === "approved"
-	const expired = nomination.status === "expired"
-	const body = expired
-		? nominationConfig.copy.nominationExpired
-		: approved
-			? `<@${nomination.nomineeId}> welcome to the Shell Society!
-This is a private section of the server that is high signal, low noise, for the valued members of the server to gather together without the chaotic madness that is <#1456350065223270435>.
-
-Just remember, this is not a channel to share your PRs, etc; it’s only a social channel so please treat it as such and above all else, enjoy! 🐚🦞`
-			: `<@${nomination.nomineeId}> has been nominated by <@${nomination.nominatorId}> for ${nomination.reason}.`
-	const components: Container["components"] = [
-		new TextDisplay(`### ${nominationConfig.copy.title}`),
-		new TextDisplay(body)
-	]
-	if (!expired) {
-		components.push(
-			new TextDisplay(`Approvals: ${Math.min(approverIds.length, nomination.requiredApprovals)}/${nomination.requiredApprovals}`),
-			new Separator({ divider: true, spacing: "small" }),
-			new Row([new NominationApproveButton(nomination.id, approved)])
-		)
-	}
+	const votingClosed = nomination.status !== "submitted"
 
 	return new Container(
-		components,
-		{ accentColor: expired ? "#8b949e" : approved ? "#3fb950" : "#f1c40f" }
+		[
+			new TextDisplay(`### ${nominationConfig.copy.title}`),
+			new TextDisplay(
+				`**Nominee:** <@${nomination.nomineeId}>\n**Nominator:** <@${nomination.nominatorId}>`
+			),
+			new TextDisplay(`**Reason**\n${nomination.reason}`),
+			new Separator({ divider: true, spacing: "small" }),
+			new TextDisplay(
+				`👍 Approvals: ${Math.min(totals.approvals, nomination.requiredApprovals)}/${nomination.requiredApprovals}\n👎 Declines: ${Math.min(totals.declines, nomination.requiredApprovals)}/${nomination.requiredApprovals}`
+			),
+			new TextDisplay(statusCopy(nomination)),
+			new Separator({ divider: true, spacing: "small" }),
+			new Row([
+				new NominationApproveButton(nomination.id, votingClosed),
+				new NominationDeclineButton(nomination.id, votingClosed)
+			])
+		],
+		{ accentColor: statusColor(nomination) }
 	)
 }
 
-export class NominationApproveButton extends Button {
-	customId = "nomination-approve"
-	label = nominationConfig.copy.buttonLabel
-	style = ButtonStyle.Success
+abstract class NominationVoteButton extends Button {
+	abstract choice: NominationVoteChoice
 	ephemeral = true
 	defer = true
 	disabled = false
+
+	async run(interaction: ButtonInteraction, data: ComponentData) {
+		const { handleNominationVote } = await import(
+			"../services/nominationVoting.js"
+		)
+		await handleNominationVote(interaction, data, this.choice)
+	}
+}
+
+export class NominationApproveButton extends NominationVoteButton {
+	customId = "nomination-approve"
+	label = nominationConfig.copy.approveButtonLabel
+	emoji = { name: "👍" }
+	style = ButtonStyle.Success
+	choice = "approve" as const
 
 	constructor(id?: number, disabled = false) {
 		super()
@@ -87,224 +106,25 @@ export class NominationApproveButton extends Button {
 		}
 		this.disabled = disabled
 	}
+}
 
-	async run(interaction: ButtonInteraction, data: ComponentData) {
-		const replyWithExpired = async (nomination: Nomination) => {
-			const expiredNomination =
-				nomination.status === "expired"
-					? nomination
-					: await markNominationExpired(nomination.id) ?? {
-						...nomination,
-						status: "expired"
-					}
-			await interaction.message?.edit({
-				components: [buildNominationContainer(expiredNomination, [])],
-				allowedMentions: { parse: [] }
-			}).catch(() => null)
-			await interaction.reply({
-				components: [
-					buildNominationNoticeContainer(
-						nominationConfig.copy.nominationExpired,
-						"#8b949e"
-					)
-				],
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
+export class NominationDeclineButton extends NominationVoteButton {
+	customId = "nomination-decline"
+	label = nominationConfig.copy.declineButtonLabel
+	emoji = { name: "👎" }
+	style = ButtonStyle.Danger
+	choice = "decline" as const
+
+	constructor(id?: number, disabled = false) {
+		super()
+		if (typeof id === "number") {
+			this.customId = `nomination-decline:id=${id}`
 		}
-
-		const replyWithGrantResult = async (
-			grantingNomination: Nomination,
-			approverIds: string[]
-		) => {
-			const result = await processNominationRoleGrant(grantingNomination)
-			if (result.status === "pending") {
-				await interaction.message?.edit({
-					components: [buildNominationContainer(result.nomination, approverIds)],
-					allowedMentions: { parse: [] }
-				}).catch(() => null)
-				await interaction.reply({
-					components: [
-						buildNominationNoticeContainer(
-							nominationConfig.copy.roleAddFailed,
-							"#f85149"
-						)
-					],
-					ephemeral: true,
-					allowedMentions: { parse: [] }
-				})
-				return
-			}
-
-			await interaction.message?.edit({
-				components: [buildNominationContainer(result.nomination, approverIds)],
-				allowedMentions: { parse: [] }
-			}).catch(() => null)
-			await interaction.reply({
-				components: [
-					buildNominationNoticeContainer(
-						nominationConfig.copy.approvalRecorded,
-						"#3fb950"
-					)
-				],
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
-		}
-
-		const id = parseNominationId(data.id)
-		if (!id) {
-			await interaction.reply({
-				components: [
-					buildNominationNoticeContainer(
-						nominationConfig.copy.invalidNomination,
-						"#f85149"
-					)
-				],
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
-			return
-		}
-
-		const nomination = await getNomination(id)
-		if (!nomination) {
-			await interaction.reply({
-				components: [
-					buildNominationNoticeContainer(
-						nominationConfig.copy.invalidNomination,
-						"#f85149"
-					)
-				],
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
-			return
-		}
-
-		if (isNominationExpired(nomination)) {
-			await replyWithExpired(nomination)
-			return
-		}
-
-		if (nomination.status === "approved") {
-			const approverIds = await getNominationApproverIds(nomination.id)
-			await interaction.message?.edit({
-				components: [buildNominationContainer(nomination, approverIds)],
-				allowedMentions: { parse: [] }
-			}).catch(() => null)
-			await interaction.reply({
-				components: [
-					buildNominationNoticeContainer(nominationConfig.copy.alreadyComplete)
-				],
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
-			return
-		}
-
-		if (!hasApproverRole(interaction)) {
-			await interaction.reply({
-				components: [
-					buildNominationNoticeContainer(
-						nominationConfig.copy.noPermission,
-						"#f85149"
-					)
-				],
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
-			return
-		}
-
-		const approverId = interaction.user?.id ?? interaction.userId
-		if (!approverId) {
-			await interaction.reply({
-				components: [
-					buildNominationNoticeContainer(
-						nominationConfig.copy.invalidNomination,
-						"#f85149"
-					)
-				],
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
-			return
-		}
-
-		if (nomination.status === "granting") {
-			const approverIds = await getNominationApproverIds(nomination.id)
-			await replyWithGrantResult(nomination, approverIds)
-			return
-		}
-
-		const recorded = await recordNominationApproval(nomination.id, approverId)
-		const approverIds = await getNominationApproverIds(nomination.id)
-		if (!recorded && approverIds.length < nomination.requiredApprovals) {
-			await interaction.reply({
-				components: [
-					buildNominationNoticeContainer(nominationConfig.copy.alreadyApproved)
-				],
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
-			return
-		}
-
-		if (approverIds.length < nomination.requiredApprovals) {
-			await interaction.message?.edit({
-				components: [buildNominationContainer(nomination, approverIds)],
-				allowedMentions: { parse: [] }
-			}).catch(() => null)
-			await interaction.reply({
-				components: [
-					buildNominationNoticeContainer(
-						`${nominationConfig.copy.approvalRecorded} ${approverIds.length}/${nomination.requiredApprovals}.`,
-						"#3fb950"
-					)
-				],
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
-			return
-		}
-
-		const grantingNomination = await markNominationGranting(nomination.id)
-		if (!grantingNomination) {
-			const latestNomination = await getNomination(nomination.id)
-			if (latestNomination && isNominationExpired(latestNomination)) {
-				await replyWithExpired(latestNomination)
-				return
-			}
-
-			if (latestNomination?.status === "granting") {
-				await replyWithGrantResult(latestNomination, approverIds)
-				return
-			}
-
-			if (latestNomination?.status === "approved") {
-				await interaction.message?.edit({
-					components: [
-						buildNominationContainer(latestNomination, approverIds)
-					],
-					allowedMentions: { parse: [] }
-				}).catch(() => null)
-			}
-
-			await interaction.reply({
-				components: [
-					buildNominationNoticeContainer(nominationConfig.copy.alreadyComplete)
-				],
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
-			return
-		}
-
-		await replyWithGrantResult(grantingNomination, approverIds)
+		this.disabled = disabled
 	}
 }
 
 export const nominationComponents = [
-	new NominationApproveButton()
+	new NominationApproveButton(),
+	new NominationDeclineButton()
 ]

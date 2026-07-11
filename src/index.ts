@@ -35,6 +35,7 @@ import {
 	runNominationExpiry,
 	runNominationGrantRecovery
 } from "./services/nominationExpiry.js"
+import { runNominationCardSyncRecovery } from "./services/nominationCardSync.js"
 import { runThreadLengthMonitor } from "./services/threadLengthMonitor.js"
 import { handleContentRightsApiRequest } from "./clawhubContentRights/api.js"
 import { handlePublisherAbuseDigestApiRequest } from "./clawhubPublisherAbuse/api.js"
@@ -140,6 +141,7 @@ export default {
 		hydrateRuntimeEnv(env)
 		ctx.waitUntil(runNominationExpiry(client))
 		ctx.waitUntil(runNominationGrantRecovery(client))
+		ctx.waitUntil(runNominationCardSyncRecovery(client))
 		if (!controller.cron || controller.cron === "0 */2 * * *") {
 			ctx.waitUntil(runThreadLengthMonitor(client))
 		}

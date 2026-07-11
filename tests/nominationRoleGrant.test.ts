@@ -15,8 +15,19 @@ const grantingNomination: Nomination = {
 	status: "granting",
 	expiresAt: "2099-01-01T00:00:00.000Z",
 	completedAt: null,
+	desiredCardRevision: 2,
+	syncedCardRevision: 1,
+	cardSyncStartedAt: "2026-06-30T00:00:00.000Z",
+	cardSyncFailureCount: 0,
+	grantStartedAt: "2026-06-30T00:00:00.000Z",
+	grantFailureCount: 0,
 	createdAt: "2026-06-30T00:00:00.000Z",
 	updatedAt: "2026-06-30T00:00:00.000Z"
+}
+
+const testDependencies = {
+	getNominationVoteTotals: async () => ({ approvals: 3, declines: 0 }),
+	logNominationOperation: () => {}
 }
 
 describe("processNominationRoleGrant", () => {
@@ -24,11 +35,13 @@ describe("processNominationRoleGrant", () => {
 		let markApprovedCalled = false
 		const pendingNomination = {
 			...grantingNomination,
+			grantFailureCount: 1,
 			updatedAt: "2026-06-30T00:15:00.000Z"
 		}
 
 		const result = await processNominationRoleGrant(grantingNomination, {
-			addTargetRole: async () => false,
+			...testDependencies,
+			addTargetRole: async () => ({ ok: false, status: 403 }),
 			markNominationApproved: async () => {
 				markApprovedCalled = true
 				return null
@@ -51,7 +64,8 @@ describe("processNominationRoleGrant", () => {
 		} satisfies Nomination
 
 		const result = await processNominationRoleGrant(grantingNomination, {
-			addTargetRole: async () => true,
+			...testDependencies,
+			addTargetRole: async () => ({ ok: true, status: 204 }),
 			markNominationApproved: async () => approvedNomination,
 			markNominationGrantPending: async () => null,
 			getNomination: async () => approvedNomination
@@ -70,7 +84,28 @@ describe("processNominationRoleGrant", () => {
 		} satisfies Nomination
 
 		const result = await processNominationRoleGrant(grantingNomination, {
-			addTargetRole: async () => true,
+			...testDependencies,
+			addTargetRole: async () => ({ ok: true, status: 204 }),
+			markNominationApproved: async () => null,
+			markNominationGrantPending: async () => null,
+			getNomination: async () => approvedNomination
+		})
+
+		expect(result).toEqual({
+			status: "approved",
+			nomination: approvedNomination
+		})
+	})
+
+	it("does not report pending when another retry approves after this role attempt fails", async () => {
+		const approvedNomination = {
+			...grantingNomination,
+			status: "approved"
+		} satisfies Nomination
+
+		const result = await processNominationRoleGrant(grantingNomination, {
+			...testDependencies,
+			addTargetRole: async () => ({ ok: false, status: 500 }),
 			markNominationApproved: async () => null,
 			markNominationGrantPending: async () => null,
 			getNomination: async () => approvedNomination
@@ -87,7 +122,8 @@ describe("processNominationRoleGrant", () => {
 
 		try {
 			const result = await processNominationRoleGrant(grantingNomination, {
-				addTargetRole: async () => false,
+				...testDependencies,
+				addTargetRole: async () => ({ ok: false, status: 500 }),
 				markNominationApproved: async () => null,
 				markNominationGrantPending: async () => {
 					throw new Error("database unavailable")

@@ -4,19 +4,22 @@ import { readdirSync, readFileSync } from "node:fs"
 import { nominationConfig } from "../src/config/nominations.js"
 
 const nominationMigrationPaths = readdirSync("drizzle")
-	.filter((file) => /000[4-8]_.*\.sql/.test(file))
+	.filter((file) => /000[4-9]_.*\.sql/.test(file))
 	.sort()
 
-if (nominationMigrationPaths.length !== 5) {
+if (nominationMigrationPaths.length !== 6) {
 	throw new Error("Could not find nomination migrations")
 }
 
 const nominationExpiryMigrationPath = nominationMigrationPaths.find((path) =>
 	path.startsWith("0007_")
 )
+const nominationVotingMigrationPath = nominationMigrationPaths.find((path) =>
+	path.startsWith("0009_")
+)
 
-if (!nominationExpiryMigrationPath) {
-	throw new Error("Could not find nomination expiry migration")
+if (!nominationExpiryMigrationPath || !nominationVotingMigrationPath) {
+	throw new Error("Could not find nomination expiry or voting migration")
 }
 
 const applyMigration = (database: Database, path: string) => {
@@ -60,12 +63,80 @@ const createNomination = (database: Database) => {
 
 describe("nomination migration", () => {
 	it("requires three configured approvals", () => {
-		expect(nominationConfig.nominationChannelIds).toEqual([
-			"1471742293055635536",
-			"1471743636592001024"
-		])
+		expect(nominationConfig.nominationChannelId).toBe("1471742293055635536")
+		expect(nominationConfig.reviewChannelId).toBe("1519064274561929328")
 		expect(nominationConfig.requiredApprovals).toBe(3)
 		expect(nominationConfig.maxReasonLength).toBeLessThanOrEqual(500)
+	})
+
+	it("keeps old approval inserts compatible after the voting migration", () => {
+		const database = new Database(":memory:")
+		for (const migrationPath of nominationMigrationPaths) {
+			applyMigration(database, `drizzle/${migrationPath}`)
+		}
+		const nominationId = createNomination(database)
+
+		database.run(
+			"insert into nomination_approvals (nomination_id, approver_id) values (?, ?)",
+			[nominationId, "old-code-approver"]
+		)
+
+		const vote = database
+			.query("select vote_choice as voteChoice from nomination_approvals")
+			.get() as { voteChoice: string }
+		expect(vote.voteChoice).toBe("approve")
+	})
+
+	it("migrates existing approvals to approve votes", () => {
+		const database = new Database(":memory:")
+		const votingMigrationIndex = nominationMigrationPaths.indexOf(
+			nominationVotingMigrationPath
+		)
+		for (const migrationPath of nominationMigrationPaths.slice(0, votingMigrationIndex)) {
+			applyMigration(database, `drizzle/${migrationPath}`)
+		}
+		const nominationId = createNomination(database)
+		database.run(
+			"insert into nomination_approvals (nomination_id, approver_id) values (?, ?)",
+			[nominationId, "existing-approver"]
+		)
+
+		applyMigration(database, `drizzle/${nominationVotingMigrationPath}`)
+
+		const vote = database
+			.query("select vote_choice as voteChoice from nomination_approvals")
+			.get() as { voteChoice: string }
+		expect(vote.voteChoice).toBe("approve")
+	})
+
+	it("adds online-compatible recovery defaults", () => {
+		const database = new Database(":memory:")
+		for (const migrationPath of nominationMigrationPaths) {
+			applyMigration(database, `drizzle/${migrationPath}`)
+		}
+		const nominationId = createNomination(database)
+
+		const nomination = database
+			.query(
+				`select
+					desired_card_revision as desiredCardRevision,
+					synced_card_revision as syncedCardRevision,
+					card_sync_failure_count as cardSyncFailureCount,
+					grant_failure_count as grantFailureCount
+				from nominations where id = ?`
+			)
+			.get(nominationId) as {
+				desiredCardRevision: number
+				syncedCardRevision: number
+				cardSyncFailureCount: number
+				grantFailureCount: number
+			}
+		expect(nomination).toEqual({
+			desiredCardRevision: 0,
+			syncedCardRevision: 0,
+			cardSyncFailureCount: 0,
+			grantFailureCount: 0
+		})
 	})
 
 	it("allows three distinct approvers for one nomination", () => {
@@ -171,6 +242,25 @@ describe("nomination migration", () => {
 		const nominationId = createNomination(database)
 		database.run("update nominations set status = ? where id = ?", [
 			"expired",
+			nominationId
+		])
+
+		createNomination(database)
+
+		const row = database
+			.query("select count(*) as count from nominations")
+			.get() as { count: number }
+		expect(row.count).toBe(2)
+	})
+
+	it("allows a new nomination after the previous nomination is declined", () => {
+		const database = new Database(":memory:")
+		for (const migrationPath of nominationMigrationPaths) {
+			applyMigration(database, `drizzle/${migrationPath}`)
+		}
+		const nominationId = createNomination(database)
+		database.run("update nominations set status = ? where id = ?", [
+			"declined",
 			nominationId
 		])
 

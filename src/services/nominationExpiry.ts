@@ -1,41 +1,30 @@
+import type { Client } from "@buape/carbon"
 import {
-	type Client,
-	Routes,
-	serializePayload
-} from "@buape/carbon"
-import { buildNominationContainer } from "../components/nominationButtons.js"
-import {
-	getNominationApproverIds,
 	listGrantingNominations,
 	listExpiredSubmittedNominations,
-	markNominationExpired
+	listStaleUnpublishedNominations,
+	markNominationExpired,
+	markNominationSubmissionFailed
 } from "../data/nominations.js"
 import type { Nomination } from "../db/schema.js"
+import { syncNominationReviewCard } from "./nominationCardSync.js"
 import { processNominationRoleGrant } from "./nominationRoleGrant.js"
 
 export const editNominationMessage = async (
 	client: Client,
 	nomination: Nomination
 ) => {
-	if (!nomination.messageId) {
-		return
-	}
-
-	const approverIds = await getNominationApproverIds(nomination.id)
-	await client.rest.patch(
-		Routes.channelMessage(nomination.channelId, nomination.messageId),
-		{
-			body: serializePayload({
-				components: [buildNominationContainer(nomination, approverIds)],
-				allowedMentions: { parse: [] }
-			})
-		}
-	)
+	await syncNominationReviewCard(client, nomination.id)
 }
 
 export const editNominationMessageExpired = editNominationMessage
 
 export const runNominationExpiry = async (client: Client) => {
+	const unpublishedNominations = await listStaleUnpublishedNominations()
+	for (const nomination of unpublishedNominations) {
+		await markNominationSubmissionFailed(nomination.id)
+	}
+
 	const expiredNominations = await listExpiredSubmittedNominations()
 
 	for (const nomination of expiredNominations) {
@@ -44,14 +33,7 @@ export const runNominationExpiry = async (client: Client) => {
 			continue
 		}
 
-		try {
-			await editNominationMessageExpired(client, expiredNomination)
-		} catch (error) {
-			console.error(
-				`Failed to edit expired nomination message ${expiredNomination.id}:`,
-				error
-			)
-		}
+		await syncNominationReviewCard(client, expiredNomination.id)
 	}
 }
 
@@ -60,17 +42,6 @@ export const runNominationGrantRecovery = async (client: Client) => {
 
 	for (const nomination of grantingNominations) {
 		const result = await processNominationRoleGrant(nomination)
-		if (result.status !== "approved") {
-			continue
-		}
-
-		try {
-			await editNominationMessage(client, result.nomination)
-		} catch (error) {
-			console.error(
-				`Failed to edit approved nomination message ${result.nomination.id}:`,
-				error
-			)
-		}
+		await syncNominationReviewCard(client, result.nomination.id)
 	}
 }

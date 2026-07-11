@@ -235,6 +235,12 @@ export const nominations = sqliteTable(
 		status: text().notNull().default("submitted"),
 		expiresAt: text("expires_at"),
 		completedAt: text("completed_at"),
+		desiredCardRevision: integer("desired_card_revision").notNull().default(0),
+		syncedCardRevision: integer("synced_card_revision").notNull().default(0),
+		cardSyncStartedAt: text("card_sync_started_at"),
+		cardSyncFailureCount: integer("card_sync_failure_count").notNull().default(0),
+		grantStartedAt: text("grant_started_at"),
+		grantFailureCount: integer("grant_failure_count").notNull().default(0),
 		createdAt: text("created_at")
 			.notNull()
 			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`),
@@ -246,7 +252,11 @@ export const nominations = sqliteTable(
 		uniqueIndex("idx_nominations_active_unique")
 			.on(table.guildId, table.nomineeId, table.targetRoleId)
 			.where(sql`${table.status} in ('submitted', 'granting')`),
-		index("idx_nominations_status").on(table.status)
+		index("idx_nominations_status").on(table.status),
+		index("idx_nominations_card_sync").on(
+			table.desiredCardRevision,
+			table.syncedCardRevision
+		)
 	]
 )
 
@@ -256,6 +266,8 @@ export const nominationApprovals = sqliteTable(
 		id: integer().primaryKey({ autoIncrement: true }),
 		nominationId: integer("nomination_id").notNull(),
 		approverId: text("approver_id").notNull(),
+		voteChoice: text("vote_choice").notNull().default("approve"),
+		mutationId: text("mutation_id"),
 		createdAt: text("created_at")
 			.notNull()
 			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`)

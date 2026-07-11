@@ -16,8 +16,8 @@ import {
 	createNomination,
 	deleteNomination,
 	getActiveNominationForNominee,
-	getNominationApproverIds,
 	markExpiredSubmittedNominationForNominee,
+	markNominationSubmissionFailed,
 	setNominationMessageId
 } from "../data/nominations.js"
 import { editNominationMessageExpired } from "../services/nominationExpiry.js"
@@ -64,7 +64,7 @@ export default class NominateCommand extends BaseCommand {
 
 	async run(interaction: CommandInteraction) {
 		const channelId = interaction.rawData.channel_id ?? interaction.channel?.id
-		if (!channelId || !nominationConfig.nominationChannelIds.includes(channelId)) {
+		if (channelId !== nominationConfig.nominationChannelId) {
 			await this.replyWithNotice(interaction, nominationConfig.copy.wrongChannel)
 			return
 		}
@@ -143,7 +143,7 @@ export default class NominateCommand extends BaseCommand {
 
 		const nomination = await createNomination({
 			guildId: nominationConfig.guildId,
-			channelId,
+			channelId: nominationConfig.reviewChannelId,
 			nomineeId: target.id,
 			nominatorId: interaction.user.id,
 			reason,
@@ -155,15 +155,19 @@ export default class NominateCommand extends BaseCommand {
 			await this.replyWithNotice(interaction, nominationConfig.copy.alreadyPending)
 			return
 		}
-		const approverIds = await getNominationApproverIds(nomination.id)
 
 		let postedMessage: APIMessage | null = null
 		try {
 			postedMessage = await interaction.client.rest.post(
-				Routes.channelMessages(channelId),
+				Routes.channelMessages(nominationConfig.reviewChannelId),
 				{
 					body: serializePayload({
-						components: [buildNominationContainer(nomination, approverIds)],
+						components: [
+							buildNominationContainer(nomination, {
+								approvals: 0,
+								declines: 0
+							})
+						],
 						allowedMentions: { parse: [] }
 					})
 				}
@@ -172,10 +176,15 @@ export default class NominateCommand extends BaseCommand {
 		} catch {
 			if (postedMessage) {
 				await interaction.client.rest.delete(
-					Routes.channelMessage(channelId, postedMessage.id)
+					Routes.channelMessage(
+						nominationConfig.reviewChannelId,
+						postedMessage.id
+					)
 				).catch(() => null)
 			}
-			await deleteNomination(nomination.id).catch(() => null)
+			await deleteNomination(nomination.id).catch(async () => {
+				await markNominationSubmissionFailed(nomination.id).catch(() => null)
+			})
 			await this.replyWithNotice(
 				interaction,
 				nominationConfig.copy.nominationPostFailed,
