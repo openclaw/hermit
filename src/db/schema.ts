@@ -278,6 +278,74 @@ export const nominationApprovals = sqliteTable(
 	]
 )
 
+export const slapEvents = sqliteTable(
+	"slap_events",
+	{
+		id: integer().primaryKey({ autoIncrement: true }),
+		interactionId: text("interaction_id").notNull().unique(),
+		guildId: text("guild_id").notNull(),
+		channelId: text("channel_id").notNull(),
+		messageId: text("message_id"),
+		actorId: text("actor_id").notNull(),
+		targetId: text("target_id").notNull(),
+		targetIsBot: integer("target_is_bot", { mode: "boolean" })
+			.notNull()
+			.default(false),
+		fishSlug: text("fish_slug").notNull(),
+		fishName: text("fish_name").notNull(),
+		rarity: text().notNull(),
+		outcome: text().notNull(),
+		headline: text().notNull(),
+		narrative: text().notNull(),
+		impact: integer().notNull(),
+		dignityRemaining: integer("dignity_remaining").notNull(),
+		fishCondition: text("fish_condition").notNull(),
+		imageUrl: text("image_url").notNull(),
+		counterActorId: text("counter_actor_id"),
+		counterTargetId: text("counter_target_id"),
+		counterFishSlug: text("counter_fish_slug"),
+		counterFishName: text("counter_fish_name"),
+		counterRarity: text("counter_rarity"),
+		counterOutcome: text("counter_outcome"),
+		counterHeadline: text("counter_headline"),
+		counterNarrative: text("counter_narrative"),
+		counterImpact: integer("counter_impact"),
+		counterDignityRemaining: integer("counter_dignity_remaining"),
+		counterFishCondition: text("counter_fish_condition"),
+		counterImageUrl: text("counter_image_url"),
+		counteredAt: text("countered_at"),
+		appealedById: text("appealed_by_id"),
+		appealRuling: text("appeal_ruling"),
+		appealedAt: text("appealed_at"),
+		createdAt: text("created_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`),
+		updatedAt: text("updated_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`)
+	},
+	(table) => [
+		index("idx_slap_events_actor_cooldown").on(
+			table.guildId,
+			table.actorId,
+			table.createdAt
+		),
+		index("idx_slap_events_target_cooldown").on(
+			table.guildId,
+			table.targetId,
+			table.createdAt
+		),
+		index("idx_slap_events_channel_cooldown").on(
+			table.guildId,
+			table.channelId,
+			table.createdAt
+		),
+		index("idx_slap_events_message").on(table.guildId, table.channelId, table.messageId),
+		index("idx_slap_events_outcome").on(table.outcome),
+		index("idx_slap_events_rarity").on(table.rarity)
+	]
+)
+
 export type KeyValue = typeof keyValue.$inferSelect
 export type NewKeyValue = typeof keyValue.$inferInsert
 export type HelperEvent = typeof helperEvents.$inferSelect
@@ -300,3 +368,5 @@ export type Nomination = typeof nominations.$inferSelect
 export type NewNomination = typeof nominations.$inferInsert
 export type NominationApproval = typeof nominationApprovals.$inferSelect
 export type NewNominationApproval = typeof nominationApprovals.$inferInsert
+export type SlapEvent = typeof slapEvents.$inferSelect
+export type NewSlapEvent = typeof slapEvents.$inferInsert

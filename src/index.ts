@@ -9,7 +9,7 @@ import HelperRootCommand from "./commands/helper.js"
 import NominateCommand from "./commands/nominate.js"
 import RoleCommand from "./commands/role.js"
 import SayRootCommand from "./commands/say.js"
-import SlapCommand from "./commands/slap.js"
+import SlapCommand, { FishSlapContextCommand } from "./commands/slap.js"
 import SolvedModCommand from "./commands/solvedMod.js"
 import AutoModerationActionExecution from "./events/autoModerationActionExecution.js"
 import AutoPublishMessageCreate from "./events/autoPublishMessageCreate.js"
@@ -25,6 +25,7 @@ import {
 import { fscRequestComponents } from "./components/fscRequestButtons.js"
 import { betaPingsComponents } from "./components/betaPingsButton.js"
 import { nominationComponents } from "./components/nominationButtons.js"
+import { slapComponents } from "./components/slapButtons.js"
 import { whoisDeleteComponents } from "./components/whoisDeleteButton.js"
 import { hydrateRuntimeEnv, type HermitEnv } from "./runtime/env.js"
 import {
@@ -67,6 +68,7 @@ export const client = new Client(
 			new ClaimCommand(),
 			new NominateCommand(),
 			new SlapCommand(),
+			new FishSlapContextCommand(),
 			new MaintainerCommand(),
 			new AdminCommand()
 		],
@@ -85,6 +87,7 @@ export const client = new Client(
 			...fscRequestComponents,
 			...betaPingsComponents,
 			...nominationComponents,
+			...slapComponents,
 			...whoisDeleteComponents
 		],
 		modals: [...claimReviewModals, ...formReviewModals]
