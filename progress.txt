@@ -5,7 +5,7 @@ Planning classification: Large multi-session product build
 State: Active
 Completed items: `LOB-GATE-1`, `LOB-TAX-1`, `LOB-META-1`,
 `LOB-DATA-1`
-Blocked item: `LOB-INFRA-1`
+Ready items: `LOB-DISCORD-1`, `LOB-ART-PLAN`
 Implementation started: Yes
 Last verified: July 17, 2026
 
@@ -49,12 +49,11 @@ Last verified: July 17, 2026
     sign-off.
 - Scientific anatomy approver: Peter Steinberger
 - Final artwork approver: Hannes Rudolph
-- `/lobster` schema, storage, command, and artwork generation: Not started
+- `/lobster` command and artwork generation: Not started
 
 ## Active Blockers
 
-- `LOB-INFRA-1` needs authenticated Cloudflare access to provision
-  `hermit-lobster-art-prod` and `lobster-assets.openclaw.ai`.
+- None for the next implementation wave.
 
 ## Active Constraints
 
@@ -63,6 +62,8 @@ Last verified: July 17, 2026
 - Never assign a species an action its anatomy cannot perform.
 - Production artwork generation and final output are exactly `768x512` WebP;
   no larger v1 masters are retained.
+- Artwork uses the same architecture as `/slap`: repository WebPs, immutable
+  raw GitHub revision, validated fetch, and Discord `attachment://` delivery.
 - Commands remain guild-only and restricted to Community Team, Maintainer, and
   Maintainer Guest roles.
 - Discord responses use Carbon components v2.
@@ -88,6 +89,4 @@ Last verified: July 17, 2026
 
 ## Next Action
 
-Authorize Wrangler OAuth or provide a Cloudflare API token, then execute
-`LOB-INFRA-1`. `LOB-DISCORD-1` and `LOB-ART-PLAN` remain blocked on that
-infrastructure item.
+Dispatch `LOB-DISCORD-1` and `LOB-ART-PLAN` with disjoint ownership.

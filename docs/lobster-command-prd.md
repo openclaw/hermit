@@ -55,8 +55,8 @@ Register of Marine Species snapshot rather than a hardcoded historical count.
 5. Give the named target one durable, target-only response to the encounter.
 6. Share cooldown enforcement with `/slap` so the commands cannot bypass one
    another.
-7. Store production artwork outside Git history in dedicated public object
-   storage.
+7. Store production artwork in the repository and deliver it through the same
+   immutable GitHub-to-Discord attachment path used by `/slap`.
 8. Keep command execution deterministic, durable, idempotent, and guild-only.
 9. Use Carbon components v2 for every Discord response and incident card.
 10. Make taxonomy and artwork refreshes versioned and reproducible.
@@ -73,8 +73,8 @@ Register of Marine Species snapshot rather than a hardcoded historical count.
 - Generating artwork from Discord avatars or attempting to depict real users.
 - Allowing user installs, direct messages, or use outside the configured guild.
 - Building a backoffice UI.
-- Storing the production image corpus in the Git repository.
-- Reusing the existing private ClawHub case-file bucket for public artwork.
+- Introducing a separate public object-storage architecture for lobster art.
+- Serving production artwork directly as Discord external media.
 
 ## Pinchy Execution Contract
 
@@ -108,14 +108,14 @@ owner, bounded scope, validation commands, and any disjoint file ownership.
 | `LOB-GATE-1` | `complete` | Product approval | None | Product owner | LOB-5 through LOB-9 and every Product Gate Question are confirmed, rejected, or explicitly deferred; scientific and artwork approvers are named; explicit approval to begin implementation is recorded. |
 | `LOB-TAX-1` | `complete` | Taxonomy | `LOB-GATE-1` | Taxonomy owner | A dated WoRMS source export, normalized catalog, query definition, citations, and raw and normalized checksums are committed; automated validation proves every included record satisfies the taxonomy rules. |
 | `LOB-META-1` | `complete` | Species metadata | `LOB-TAX-1` | Domain-data owner | Every catalog species has complete anatomy, habitat, action, prohibited-action, vocabulary, scene, and accessibility metadata; validators reject anatomically invalid actions. |
-| `LOB-INFRA-1` | `blocked` | Public asset storage | `LOB-GATE-1` | Infrastructure owner | A dedicated public R2 bucket and custom domain are approved and provisioned; immutable object keys are reachable; no production object uses the private ClawHub bucket. |
 | `LOB-DATA-1` | `complete` | Persistence and cooldowns | `LOB-GATE-1` | Persistence owner | Additive migrations and services persist deterministic encounters, message binding, responses, counters, and shared `/slap` cooldowns; retry, race, and idempotency tests pass. |
-| `LOB-DISCORD-1` | `blocked` | Commands and Carbon UI | `LOB-META-1`, `LOB-INFRA-1`, `LOB-DATA-1` | Discord owner | `/lobster` and `Release Lobster` are registered in `src/index.ts`, explicitly guild-install and guild-context only, restricted to the three approved roles, and render only Carbon v2 components. |
+| `LOB-DISCORD-1` | `pending` | Commands and Carbon UI | `LOB-META-1`, `LOB-DATA-1` | Discord owner | `/lobster` and `Release Lobster` are registered in `src/index.ts`, explicitly guild-install and guild-context only, restricted to the three approved roles, and render only Carbon v2 components. |
 | `LOB-RESP-1` | `blocked` | Target responses | `LOB-DATA-1`, `LOB-DISCORD-1` | Interaction owner | Target-only `Return To Sender` and `Offer Butter` transitions are atomic, idempotent, deterministic, message-bound, and covered for concurrent clicks and unauthorized users. |
-| `LOB-ART-PLAN` | `blocked` | Artwork planning | `LOB-META-1`, `LOB-INFRA-1` | Artwork pipeline owner | A deterministic manifest partitions the frozen catalog into disjoint batches of no more than 25 species, assigns at least four scenes per species, records prompt versions and quotas, and defines immutable object keys. |
-| `LOB-ART-BATCH-*` | `blocked` | Artwork production | `LOB-ART-PLAN` | One artwork-batch owner per item | Each instantiated batch covers only its assigned species; every species has at least four approved `768x512` WebP scenes; anatomy, file-size, provenance, diversity, and object-retrieval checks pass. |
+| `LOB-ART-PLAN` | `pending` | Artwork planning | `LOB-META-1` | Artwork pipeline owner | A deterministic manifest partitions the frozen catalog into disjoint batches of no more than 25 species, assigns at least four scenes per species, records prompt versions and quotas, and defines immutable repository paths. |
+| `LOB-ART-BATCH-*` | `blocked` | Artwork production | `LOB-ART-PLAN` | One artwork-batch owner per item | Each instantiated batch covers only its assigned species; every species has at least four approved `768x512` WebP scenes under `assets/lobster/scenes`; anatomy, file-size, provenance, diversity, and file-integrity checks pass. |
 | `LOB-ART-QA` | `blocked` | Artwork corpus QA | All instantiated `LOB-ART-BATCH-*` items | Independent artwork QA owner | The complete corpus passes coverage, dimensions, checksums, reachability, anatomy, diversity quotas, accessibility, and perceptual-duplicate audits with named scientific and artwork sign-off. |
-| `LOB-VERIFY-1` | `blocked` | Integration verification | `LOB-DISCORD-1`, `LOB-RESP-1`, `LOB-ART-QA` | Independent verification owner | Every requirement in Validation passes, including `bun test`, `bun run typecheck`, and `bun run deploy:dry-run`; no earlier completed item regresses. |
+| `LOB-ASSET-1` | `blocked` | Discord asset delivery | `LOB-ART-QA` | Asset delivery owner | Production URLs are pinned to the immutable artwork commit on `raw.githubusercontent.com/openclaw/hermit`; Hermit validates bounded WebP bytes and uploads them to Discord as `attachment://` media with a compact failure fallback. |
+| `LOB-VERIFY-1` | `blocked` | Integration verification | `LOB-DISCORD-1`, `LOB-RESP-1`, `LOB-ASSET-1` | Independent verification owner | Every requirement in Validation passes, including `bun test`, `bun run typecheck`, and `bun run deploy:dry-run`; no earlier completed item regresses. |
 | `LOB-RELEASE-1` | `blocked` | Production release | `LOB-VERIFY-1` | Release owner | Staging smoke tests pass for invocation, responses, cooldowns, retries, and bots; required sign-offs are recorded; the reviewed commits are pushed to `main`; Cloudflare production build and CodeQL pass. |
 
 `LOB-ART-BATCH-*` is a template, not permission to generate artwork. After
@@ -358,26 +358,22 @@ when the selected action remains legible.
   composition, and tone.
 - Perceptual near-duplicates are rejected.
 
-## Asset Storage
+## Asset Storage And Delivery
 
-Production assets use a dedicated public Cloudflare R2 bucket and a production
-custom domain.
+Production assets use the same architecture as `/slap`.
 
-Object keys are immutable and versioned:
-
-`lobster/{snapshotId}/{aphiaId}/{sceneId}-{contentHash}.webp`
-
-The repository stores:
-
-- Taxonomy snapshots.
-- Normalized catalog data.
-- Scene manifests.
-- Prompts and prompt versions.
-- Checksums.
-- Production asset URLs.
-- Audit reports.
-
-The repository does not store the full production image corpus.
+- Final WebPs live under `assets/lobster/scenes/{aphiaId}/{sceneId}.webp`.
+- The repository stores the complete production image corpus, manifests,
+  prompts, prompt versions, checksums, and audit reports.
+- Runtime URLs use
+  `https://raw.githubusercontent.com/openclaw/hermit/{artworkRevision}/...`
+  with an immutable 40-character commit SHA.
+- Hermit fetches only the trusted repository path, validates bounded WebP
+  bytes, and uploads the image to Discord as a message attachment.
+- Carbon media galleries reference `attachment://...`, never the external URL
+  directly.
+- Missing or invalid artwork omits the gallery and renders a compact
+  unavailable notice instead of leaving Discord media spinning.
 
 ## Discord Card
 
@@ -478,10 +474,11 @@ The technical slap remediation and lobster product approval gate are complete.
 Production release additionally requires:
 
 1. Approved taxonomy parent scope and snapshot.
-2. Dedicated R2 bucket and custom domain.
+2. Complete repository-hosted artwork corpus and immutable revision pin.
 3. Complete species and artwork coverage.
 4. Anatomy and diversity review sign-off.
-5. A successful upload-and-retrieval audit of at least 1,000 objects.
+5. A successful file-integrity and attachment-delivery audit of the complete
+   corpus.
 6. Discord staging smoke tests for command, counter, response, cooldown, and
    retry behavior.
 
@@ -496,7 +493,7 @@ Production release additionally requires:
 | LOB-5 | Confirmed | Each species receives four to eight production scenes |
 | LOB-6 | Confirmed | Invocation uses the same three authorized roles as `/slap` |
 | LOB-7 | Confirmed | `/slap` and `/lobster` share cooldowns |
-| LOB-8 | Confirmed | Production artwork is stored in a dedicated public R2 bucket |
+| LOB-8 | Confirmed | Production artwork uses the same repository and Discord attachment architecture as `/slap` |
 | LOB-9 | Confirmed | Target responses are `Return To Sender` and `Offer Butter` |
 
 ## Product Gate Decisions
@@ -505,8 +502,9 @@ Production release additionally requires:
 2. Final artwork approval: Hannes Rudolph.
 3. Taxonomy refresh cadence: annual after v1, with urgent correction releases
    when accepted taxonomy or anatomy errors are identified.
-4. Production bucket: `hermit-lobster-art-prod`.
-5. Production custom domain: `lobster-assets.openclaw.ai`.
+4. Production artwork path: `assets/lobster/scenes`.
+5. Production delivery: immutable raw GitHub revision fetched and re-uploaded
+   to Discord as attachments, matching `/slap`.
 6. Hermit, Rock Lobster, bots, and self-targets use the standard
    species-specific scene library in v1 rather than dedicated scene sets.
 7. `Return To Sender` reuses the original species and selects a separate
@@ -520,5 +518,3 @@ Production release additionally requires:
   `https://www.marinespecies.org/aphia.php?p=webservice`
 - Updated checklist publication record:
   `https://scholars.ntou.edu.tw/handle/123456789/16132`
-- Cloudflare R2 public bucket guidance:
-  `https://developers.cloudflare.com/r2/buckets/public-buckets/`
