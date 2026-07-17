@@ -2,12 +2,13 @@
 
 ## Status
 
-- Product status: Draft
+- Product status: Approved for implementation
 - PRD date: July 17, 2026
-- Implementation status: Blocked
-- Blocking prerequisite: Replace, validate, deploy, and approve the complete fish
-  slap artwork library
+- Implementation status: Active
+- Slap technical prerequisite: Complete on `main` at `409bd7c`
+- Product approval gate: Complete
 - Source of truth: This document
+- Durable progress state: `progress.txt`
 - Delivery rule: Do not implement `/lobster`, create its schema, provision its
   production storage, or generate its production artwork until the blocking
   prerequisite is complete
@@ -74,6 +75,58 @@ Register of Marine Species snapshot rather than a hardcoded historical count.
 - Building a backoffice UI.
 - Storing the production image corpus in the Git repository.
 - Reusing the existing private ClawHub case-file bucket for public artwork.
+
+## Pinchy Execution Contract
+
+### Planning Classification
+
+This is a large, multi-session product build. Future implementation must run
+from this PRD and `progress.txt` using dependency-aware Pinchy coordinator
+sessions. Regular implementation may not begin until `LOB-GATE-1` is complete.
+
+The depth-0 parent owns this PRD, `progress.txt`, integration decisions, and all
+Git operations. Coordinators own bounded workstreams. Depth-2 laps own one
+bounded objective and may not mutate the PRD, progress state, AGENTS files, or
+Git state.
+
+### Status Vocabulary
+
+Every execution item uses exactly one of these statuses:
+
+- `pending`: Ready when its dependencies are complete.
+- `in_progress`: Assigned to one active coordinator session.
+- `complete`: Its acceptance criteria passed independent verification.
+- `blocked`: At least one dependency or approval gate remains incomplete.
+
+Before an item becomes `in_progress`, `progress.txt` must record its coordinator
+owner, bounded scope, validation commands, and any disjoint file ownership.
+
+### Work Graph
+
+| ID | Status | Workstream | Dependencies | Ownership | Observable acceptance criteria |
+|---|---|---|---|---|---|
+| `LOB-GATE-1` | `complete` | Product approval | None | Product owner | LOB-5 through LOB-9 and every Product Gate Question are confirmed, rejected, or explicitly deferred; scientific and artwork approvers are named; explicit approval to begin implementation is recorded. |
+| `LOB-TAX-1` | `complete` | Taxonomy | `LOB-GATE-1` | Taxonomy owner | A dated WoRMS source export, normalized catalog, query definition, citations, and raw and normalized checksums are committed; automated validation proves every included record satisfies the taxonomy rules. |
+| `LOB-META-1` | `complete` | Species metadata | `LOB-TAX-1` | Domain-data owner | Every catalog species has complete anatomy, habitat, action, prohibited-action, vocabulary, scene, and accessibility metadata; validators reject anatomically invalid actions. |
+| `LOB-INFRA-1` | `blocked` | Public asset storage | `LOB-GATE-1` | Infrastructure owner | A dedicated public R2 bucket and custom domain are approved and provisioned; immutable object keys are reachable; no production object uses the private ClawHub bucket. |
+| `LOB-DATA-1` | `complete` | Persistence and cooldowns | `LOB-GATE-1` | Persistence owner | Additive migrations and services persist deterministic encounters, message binding, responses, counters, and shared `/slap` cooldowns; retry, race, and idempotency tests pass. |
+| `LOB-DISCORD-1` | `blocked` | Commands and Carbon UI | `LOB-META-1`, `LOB-INFRA-1`, `LOB-DATA-1` | Discord owner | `/lobster` and `Release Lobster` are registered in `src/index.ts`, explicitly guild-install and guild-context only, restricted to the three approved roles, and render only Carbon v2 components. |
+| `LOB-RESP-1` | `blocked` | Target responses | `LOB-DATA-1`, `LOB-DISCORD-1` | Interaction owner | Target-only `Return To Sender` and `Offer Butter` transitions are atomic, idempotent, deterministic, message-bound, and covered for concurrent clicks and unauthorized users. |
+| `LOB-ART-PLAN` | `blocked` | Artwork planning | `LOB-META-1`, `LOB-INFRA-1` | Artwork pipeline owner | A deterministic manifest partitions the frozen catalog into disjoint batches of no more than 25 species, assigns at least four scenes per species, records prompt versions and quotas, and defines immutable object keys. |
+| `LOB-ART-BATCH-*` | `blocked` | Artwork production | `LOB-ART-PLAN` | One artwork-batch owner per item | Each instantiated batch covers only its assigned species; every species has at least four approved `768x512` WebP scenes; anatomy, file-size, provenance, diversity, and object-retrieval checks pass. |
+| `LOB-ART-QA` | `blocked` | Artwork corpus QA | All instantiated `LOB-ART-BATCH-*` items | Independent artwork QA owner | The complete corpus passes coverage, dimensions, checksums, reachability, anatomy, diversity quotas, accessibility, and perceptual-duplicate audits with named scientific and artwork sign-off. |
+| `LOB-VERIFY-1` | `blocked` | Integration verification | `LOB-DISCORD-1`, `LOB-RESP-1`, `LOB-ART-QA` | Independent verification owner | Every requirement in Validation passes, including `bun test`, `bun run typecheck`, and `bun run deploy:dry-run`; no earlier completed item regresses. |
+| `LOB-RELEASE-1` | `blocked` | Production release | `LOB-VERIFY-1` | Release owner | Staging smoke tests pass for invocation, responses, cooldowns, retries, and bots; required sign-offs are recorded; the reviewed commits are pushed to `main`; Cloudflare production build and CodeQL pass. |
+
+`LOB-ART-BATCH-*` is a template, not permission to generate artwork. After
+`LOB-ART-PLAN` passes, the parent must instantiate one tracked item per batch in
+`progress.txt`, with a stable ID, exact species list, owner, dependencies,
+status, and validation evidence.
+
+Coordinator sessions should normally own two to five related items. Shared
+schemas, migrations, generated catalogs, manifests, lockfiles, and Git
+operations remain serialized. Item status advances only from actual repository
+and validation evidence, never from an unverified session report.
 
 ## Taxonomy
 
@@ -235,6 +288,8 @@ rendered pinching a person.
 - Format: WebP.
 - Dimensions: exactly `768x512`.
 - Aspect ratio: `3:2`.
+- Generation and final production output both use `768x512`; v1 does not
+  generate or retain larger master renders.
 - Color profile: sRGB.
 - Metadata: stripped except required provenance metadata.
 - Target average file size: 75 KB or less.
@@ -406,15 +461,19 @@ Automated validation must prove:
 
 ## Release Gates
 
-Implementation may begin only after:
+### Slap Prerequisite
 
-1. All 327 slap scenes have been regenerated and replaced.
-2. Every slap scene is exactly `768x512`.
-3. The slap diversity and file-size audits pass.
-4. The replacement slap corpus is visually reviewed.
-5. The slap cache-busting change is deployed.
-6. Cloudflare's configured production build and CodeQL pass.
-7. The user approves the remediated slap experience.
+| Gate | Status | Evidence |
+|---|---|---|
+| All 327 slap scenes regenerated and replaced | Complete | Artwork commit `da5edf3` |
+| Every slap scene is exactly `768x512` | Complete | `tests/slapAssets.test.ts` and `assets/slap/scenes.manifest.json` |
+| Diversity and file-size audits pass | Complete | 327 unique final hashes; 24,257,250 total bytes; 70,084 to 82,760 bytes per scene |
+| Replacement corpus visually reviewed and corrected | Complete | Review-driven correction metadata is preserved in the generation manifest |
+| Cache-busting revision deployed | Complete | URLs are pinned to immutable artwork commit `da5edf3` by commit `d164432` |
+| Configured Cloudflare production build and CodeQL pass | Complete | Checks passed for `d164432` on July 17, 2026 |
+| User approves the remediated slap experience and lobster execution | Complete | Explicit implementation approval recorded July 17, 2026 |
+
+The technical slap remediation and lobster product approval gate are complete.
 
 Production release additionally requires:
 
@@ -434,23 +493,26 @@ Production release additionally requires:
 | LOB-2 | Confirmed | Every accepted extant marine species in the six approved families is represented |
 | LOB-3 | Confirmed | Artwork is species-specific rather than a universal outcome matrix |
 | LOB-4 | Confirmed | Slap artwork remediation blocks lobster implementation |
-| LOB-5 | Proposed | Each species receives four to eight production scenes |
-| LOB-6 | Proposed | Invocation uses the same three authorized roles as `/slap` |
-| LOB-7 | Proposed | `/slap` and `/lobster` share cooldowns |
-| LOB-8 | Proposed | Production artwork is stored in a dedicated public R2 bucket |
-| LOB-9 | Proposed | Target responses are `Return To Sender` and `Offer Butter` |
+| LOB-5 | Confirmed | Each species receives four to eight production scenes |
+| LOB-6 | Confirmed | Invocation uses the same three authorized roles as `/slap` |
+| LOB-7 | Confirmed | `/slap` and `/lobster` share cooldowns |
+| LOB-8 | Confirmed | Production artwork is stored in a dedicated public R2 bucket |
+| LOB-9 | Confirmed | Target responses are `Return To Sender` and `Offer Butter` |
 
-## Open Questions
+## Product Gate Decisions
 
-1. Who owns scientific anatomy review and final art approval?
-2. What snapshot refresh cadence should be used after v1?
-3. What bucket and custom-domain names should be provisioned?
-4. Should Hermit, Rock Lobster, bots, and self-targets receive dedicated
-   species-specific scenes in v1?
-5. Should `Return To Sender` select a second species or reuse the original
-   species?
-6. Should rare species receive equal selection probability or a separately
-   approved rarity model after v1?
+1. Scientific anatomy approval: Peter Steinberger.
+2. Final artwork approval: Hannes Rudolph.
+3. Taxonomy refresh cadence: annual after v1, with urgent correction releases
+   when accepted taxonomy or anatomy errors are identified.
+4. Production bucket: `hermit-lobster-art-prod`.
+5. Production custom domain: `lobster-assets.openclaw.ai`.
+6. Hermit, Rock Lobster, bots, and self-targets use the standard
+   species-specific scene library in v1 rather than dedicated scene sets.
+7. `Return To Sender` reuses the original species and selects a separate
+   approved response asset.
+8. Every species has equal selection probability in v1. Any rarity model is a
+   separately approved post-v1 change.
 
 ## References
 

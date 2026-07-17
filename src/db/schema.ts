@@ -346,6 +346,105 @@ export const slapEvents = sqliteTable(
 	]
 )
 
+export const actionCooldownEvents = sqliteTable(
+	"action_cooldown_events",
+	{
+		id: integer().primaryKey({ autoIncrement: true }),
+		interactionId: text("interaction_id").notNull().unique(),
+		actionKind: text("action_kind").notNull(),
+		guildId: text("guild_id").notNull(),
+		channelId: text("channel_id").notNull(),
+		actorId: text("actor_id").notNull(),
+		targetId: text("target_id").notNull(),
+		actorExpiresAt: text("actor_expires_at").notNull(),
+		targetExpiresAt: text("target_expires_at").notNull(),
+		channelExpiresAt: text("channel_expires_at").notNull(),
+		createdAt: text("created_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`)
+	},
+	(table) => [
+		index("idx_action_cooldowns_actor").on(
+			table.guildId,
+			table.actorId,
+			table.actorExpiresAt
+		),
+		index("idx_action_cooldowns_target").on(
+			table.guildId,
+			table.targetId,
+			table.targetExpiresAt
+		),
+		index("idx_action_cooldowns_channel").on(
+			table.guildId,
+			table.channelId,
+			table.channelExpiresAt
+		)
+	]
+)
+
+export const lobsterEncounters = sqliteTable(
+	"lobster_encounters",
+	{
+		id: integer().primaryKey({ autoIncrement: true }),
+		interactionId: text("interaction_id").notNull().unique(),
+		cooldownEventId: integer("cooldown_event_id").notNull().unique(),
+		guildId: text("guild_id").notNull(),
+		channelId: text("channel_id").notNull(),
+		messageId: text("message_id"),
+		actorId: text("actor_id").notNull(),
+		targetId: text("target_id").notNull(),
+		targetIsBot: integer("target_is_bot", { mode: "boolean" })
+			.notNull()
+			.default(false),
+		taxonomySnapshotId: text("taxonomy_snapshot_id").notNull(),
+		speciesAphiaId: integer("species_aphia_id").notNull(),
+		speciesAcceptedName: text("species_accepted_name").notNull(),
+		speciesDisplayName: text("species_display_name").notNull(),
+		speciesFamily: text("species_family").notNull(),
+		sceneId: text("scene_id").notNull(),
+		assetUrl: text("asset_url").notNull(),
+		assetChecksum: text("asset_checksum").notNull(),
+		headline: text().notNull(),
+		narrative: text().notNull(),
+		metricsJson: text("metrics_json").notNull(),
+		accessibilityDescription: text("accessibility_description").notNull(),
+		publicationStatus: text("publication_status").notNull().default("pending"),
+		publicationFailure: text("publication_failure"),
+		publicationFailedAt: text("publication_failed_at"),
+		messageBoundAt: text("message_bound_at"),
+		responseStatus: text("response_status").notNull().default("pending"),
+		responseType: text("response_type"),
+		responseActorId: text("response_actor_id"),
+		respondedAt: text("responded_at"),
+		responseResultJson: text("response_result_json"),
+		counterActorId: text("counter_actor_id"),
+		counterTargetId: text("counter_target_id"),
+		counterSceneId: text("counter_scene_id"),
+		counterAssetUrl: text("counter_asset_url"),
+		counterAssetChecksum: text("counter_asset_checksum"),
+		counterHeadline: text("counter_headline"),
+		counterNarrative: text("counter_narrative"),
+		counterMetricsJson: text("counter_metrics_json"),
+		counterAccessibilityDescription: text("counter_accessibility_description"),
+		createdAt: text("created_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`),
+		updatedAt: text("updated_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`)
+	},
+	(table) => [
+		index("idx_lobster_encounters_message").on(
+			table.guildId,
+			table.channelId,
+			table.messageId
+		),
+		index("idx_lobster_encounters_species").on(table.speciesAphiaId),
+		index("idx_lobster_encounters_publication").on(table.publicationStatus),
+		index("idx_lobster_encounters_response").on(table.responseStatus)
+	]
+)
+
 export type KeyValue = typeof keyValue.$inferSelect
 export type NewKeyValue = typeof keyValue.$inferInsert
 export type HelperEvent = typeof helperEvents.$inferSelect
@@ -370,3 +469,7 @@ export type NominationApproval = typeof nominationApprovals.$inferSelect
 export type NewNominationApproval = typeof nominationApprovals.$inferInsert
 export type SlapEvent = typeof slapEvents.$inferSelect
 export type NewSlapEvent = typeof slapEvents.$inferInsert
+export type ActionCooldownEvent = typeof actionCooldownEvents.$inferSelect
+export type NewActionCooldownEvent = typeof actionCooldownEvents.$inferInsert
+export type LobsterEncounter = typeof lobsterEncounters.$inferSelect
+export type NewLobsterEncounter = typeof lobsterEncounters.$inferInsert

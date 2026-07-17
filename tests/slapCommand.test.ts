@@ -81,19 +81,26 @@ afterAll(() => {
 	setSlapImageFetcherForTesting(null)
 })
 
-const slapMigrationPath = readdirSync("drizzle")
-	.find((file) => file.startsWith("0010_") && file.endsWith(".sql"))
+const slapMigrationPaths = readdirSync("drizzle")
+	.filter(
+		(file) =>
+			(file.startsWith("0010_") || file.startsWith("0011_")) &&
+			file.endsWith(".sql")
+	)
+	.sort()
 
-if (!slapMigrationPath) {
-	throw new Error("Could not find slap events migration")
+if (slapMigrationPaths.length !== 2) {
+	throw new Error("Could not find slap and shared cooldown migrations")
 }
 
 const applySlapMigration = (database: Database) => {
-	const migration = readFileSync(`drizzle/${slapMigrationPath}`, "utf8")
-	for (const statement of migration.split("--> statement-breakpoint")) {
-		const trimmed = statement.trim()
-		if (trimmed.length > 0) {
-			database.run(trimmed)
+	for (const migrationPath of slapMigrationPaths) {
+		const migration = readFileSync(`drizzle/${migrationPath}`, "utf8")
+		for (const statement of migration.split("--> statement-breakpoint")) {
+			const trimmed = statement.trim()
+			if (trimmed.length > 0) {
+				database.run(trimmed)
+			}
 		}
 	}
 }

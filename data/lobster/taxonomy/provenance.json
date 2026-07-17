@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "snapshot": {
+    "id": "worms-2026-07-17T060825613Z",
+    "retrievedAtUtc": "2026-07-17T06:08:25.613Z",
+    "accessedDate": "2026-07-17"
+  },
+  "familyScope": [
+    {
+      "family": "Nephropidae",
+      "AphiaID": 106741,
+      "speciesCount": 60
+    },
+    {
+      "family": "Enoplometopidae",
+      "AphiaID": 106740,
+      "speciesCount": 11
+    },
+    {
+      "family": "Glypheidae",
+      "AphiaID": 382823,
+      "speciesCount": 2
+    },
+    {
+      "family": "Palinuridae",
+      "AphiaID": 106794,
+      "speciesCount": 61
+    },
+    {
+      "family": "Scyllaridae",
+      "AphiaID": 106795,
+      "speciesCount": 92
+    },
+    {
+      "family": "Polychelidae",
+      "AphiaID": 106793,
+      "speciesCount": 38
+    }
+  ],
+  "source": {
+    "provider": "World Register of Marine Species (WoRMS)",
+    "citation": "WoRMS Editorial Board (2026). World Register of Marine Species. Available from https://www.marinespecies.org at VLIZ. Accessed 2026-07-17. doi:10.14284/170.",
+    "apiSpecification": {
+      "path": "data/lobster/taxonomy/source/openapi.yaml",
+      "sha256": "efa1a36c019efff199fe93c9b48393a527c5c8cb7106e9e26baeeb3d44879536"
+    },
+    "endpoints": {
+      "familyNameResolution": "GET /AphiaRecordsByName/{scientificname}?like=false&marine_only=false&offset=1",
+      "familyIdentityConfirmation": "GET /AphiaRecordByAphiaID/{AphiaID}",
+      "recursiveEnumeration": "GET /AphiaChildrenByAphiaID/{AphiaID}?marine_only=false&extant_only=false&offset={1,51,...}"
+    },
+    "selection": "rank=Species; status=accepted; isMarine=1; isExtinct=0; exact approved family",
+    "rawArchive": {
+      "path": "data/lobster/taxonomy/source/worms-official-raw-responses.tar",
+      "sha256": "dc4935582175008791c1639bc9d05f8aab2f81743501e98413e10562c777ebb9",
+      "memberCount": 2022,
+      "embeddedPrimaryManifestSha256": "75c8ba30cfa7300831189cf4cc73cb576e88f312357051acb0ae93aacb38e302"
+    },
+    "manifest": {
+      "path": "data/lobster/taxonomy/source/manifest.json",
+      "sha256": "55e4d8a2fa9984f4f8ee117552c1f4b6d3bbcced1762140409da20ce452bc326",
+      "pathMode": "archive-relative",
+      "archiveRoot": "raw",
+      "matchesEmbeddedPrimaryAfterPathNormalization": true,
+      "requestCount": 1294,
+      "responseRecordOccurrences": 1335,
+      "selectedRecordCount": 264,
+      "selectedRecordsMatch": true
+    },
+    "selectedRecords": {
+      "path": "data/lobster/taxonomy/source/selected-all-families.json",
+      "sha256": "b53a025dac9d5baf00538dab0d656f3b69e330899db01488dd4393309a66e439"
+    },
+    "selectionSummary": {
+      "path": "data/lobster/taxonomy/source/selection-summary.json",
+      "sha256": "7f2cfb253c58c13ba12c845d755c00c42ef14ad35b40b6d39c5aa44aadcee54f"
+    },
+    "filteredValidationTraversal": {
+      "archiveRoot": "raw-filtered",
+      "requestCount": 714,
+      "responseRecordOccurrences": 748,
+      "selectedRecordCount": 264,
+      "selectedRecordsMatch": true,
+      "manifestArchiveMember": "manifest-filtered.json",
+      "manifestSha256": "119b75499f7156f8828f057963ac97b2990f3856f397b89342dd601fcf47daba",
+      "archivedPathMode": "retrieval-native paths validated after mapping to raw-filtered/ archive members"
+    },
+    "familyEvidence": [
+      {
+        "family": "Nephropidae",
+        "AphiaID": 106741,
+        "nameResolution": {
+          "path": "data/lobster/taxonomy/source/families/family-name-Nephropidae.json",
+          "sha256": "1a97fb9fe91bd5013cf4eaefd8bc9212cb055ccb9b31300ecfb6108329dbde4c",
+          "url": "https://www.marinespecies.org/rest/AphiaRecordsByName/Nephropidae?like=false&marine_only=false&offset=1"
+        },
+        "identityConfirmation": {
+          "path": "data/lobster/taxonomy/source/families/family-record-Nephropidae-106741.json",
+          "sha256": "88f088690b6eb64a5c5c607c375845e8e044e7efcf4091305aff7bfb93d71a37",
+          "url": "https://www.marinespecies.org/rest/AphiaRecordByAphiaID/106741"
+        }
+      },
+      {
+        "family": "Enoplometopidae",
+        "AphiaID": 106740,
+        "nameResolution": {
+          "path": "data/lobster/taxonomy/source/families/family-name-Enoplometopidae.json",
+          "sha256": "f1c7a61d238553bf70342f3464cf047d466d9d130b73a72317d5296f261651ff",
+          "url": "https://www.marinespecies.org/rest/AphiaRecordsByName/Enoplometopidae?like=false&marine_only=false&offset=1"
+        },
+        "identityConfirmation": {
+          "path": "data/lobster/taxonomy/source/families/family-record-Enoplometopidae-106740.json",
+          "sha256": "4b6e528722daa675dd7b54a705c693951d06ae153d670e0b61d89a99e00a8422",
+          "url": "https://www.marinespecies.org/rest/AphiaRecordByAphiaID/106740"
+        }
+      },
+      {
+        "family": "Glypheidae",
+        "AphiaID": 382823,
+        "nameResolution": {
+          "path": "data/lobster/taxonomy/source/families/family-name-Glypheidae.json",
+          "sha256": "81e0be6d2b2d87cc8f47f2e732c52377ddfe60088e27e71afdd8bd089c3ae53e",
+          "url": "https://www.marinespecies.org/rest/AphiaRecordsByName/Glypheidae?like=false&marine_only=false&offset=1"
+        },
+        "identityConfirmation": {
+          "path": "data/lobster/taxonomy/source/families/family-record-Glypheidae-382823.json",
+          "sha256": "39ef2ce59ee545c855ad8292747f82e900d33abc9476126075e5c073e6f73720",
+          "url": "https://www.marinespecies.org/rest/AphiaRecordByAphiaID/382823"
+        }
+      },
+      {
+        "family": "Palinuridae",
+        "AphiaID": 106794,
+        "nameResolution": {
+          "path": "data/lobster/taxonomy/source/families/family-name-Palinuridae.json",
+          "sha256": "86e24b81ce46fd6f82fc2779f4464430fda89f3d0dd4bd45138b780274d7ffab",
+          "url": "https://www.marinespecies.org/rest/AphiaRecordsByName/Palinuridae?like=false&marine_only=false&offset=1"
+        },
+        "identityConfirmation": {
+          "path": "data/lobster/taxonomy/source/families/family-record-Palinuridae-106794.json",
+          "sha256": "534993b87fbcfdc1904a158dab6f0e63942762fa858397b88622efa41fa85575",
+          "url": "https://www.marinespecies.org/rest/AphiaRecordByAphiaID/106794"
+        }
+      },
+      {
+        "family": "Scyllaridae",
+        "AphiaID": 106795,
+        "nameResolution": {
+          "path": "data/lobster/taxonomy/source/families/family-name-Scyllaridae.json",
+          "sha256": "fed480d61c2c2394c8965dcefcd33593fa3bf69b8488baa43fa1c928e87fd6a6",
+          "url": "https://www.marinespecies.org/rest/AphiaRecordsByName/Scyllaridae?like=false&marine_only=false&offset=1"
+        },
+        "identityConfirmation": {
+          "path": "data/lobster/taxonomy/source/families/family-record-Scyllaridae-106795.json",
+          "sha256": "b3a22d999f96663d9d357a8ec3d9e32c717e58719213edbbf8915726df2f153f",
+          "url": "https://www.marinespecies.org/rest/AphiaRecordByAphiaID/106795"
+        }
+      },
+      {
+        "family": "Polychelidae",
+        "AphiaID": 106793,
+        "nameResolution": {
+          "path": "data/lobster/taxonomy/source/families/family-name-Polychelidae.json",
+          "sha256": "39800c1b21b35e353ed43656479514dbbce3e53b0e62fba088650507b1171fcb",
+          "url": "https://www.marinespecies.org/rest/AphiaRecordsByName/Polychelidae?like=false&marine_only=false&offset=1"
+        },
+        "identityConfirmation": {
+          "path": "data/lobster/taxonomy/source/families/family-record-Polychelidae-106793.json",
+          "sha256": "951eb9f98a18c773ec17a1316d90392887a4930adb5f7ad1a8fa256a1415a44d",
+          "url": "https://www.marinespecies.org/rest/AphiaRecordByAphiaID/106793"
+        }
+      }
+    ]
+  },
+  "normalized": {
+    "path": "data/lobster/taxonomy/lobster-species.json",
+    "recordCount": 264,
+    "sha256": "304e62d2180e380ddd9f7d8f5fbce351edd77605ea79a5e4c7a9042fd4e70152"
+  }
+}

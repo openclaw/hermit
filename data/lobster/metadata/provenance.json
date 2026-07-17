@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "taxonomy": {
+    "snapshotId": "worms-2026-07-17T060825613Z",
+    "path": "data/lobster/taxonomy/lobster-species.json",
+    "sha256": "304e62d2180e380ddd9f7d8f5fbce351edd77605ea79a5e4c7a9042fd4e70152",
+    "recordCount": 264
+  },
+  "sourceConfig": {
+    "path": "data/lobster/metadata/source/metadata-config.json",
+    "sha256": "0fa9c456472c4c946553e7cf6136eecb20733476065b3423cedfe49b2f8f7f1b",
+    "policySha256": "9448931b0100094149fdfbc72891cd76afa7467bdc4f4e29c90ed8a081aac932"
+  },
+  "evidencePolicy": {
+    "unknownCapabilityFailsClosed": true,
+    "capabilityEvidenceRequiresExactClaimBinding": true,
+    "displayNameFallback": "scientificName"
+  },
+  "scientificAnatomyApproval": {
+    "designatedApprover": "Peter Steinberger",
+    "status": "designated-not-reviewed",
+    "statement": "Peter Steinberger is the designated scientific anatomy approver. This source configuration does not claim that he reviewed or approved the generated dataset."
+  },
+  "generated": {
+    "path": "data/lobster/metadata/lobster-metadata.json",
+    "sha256": "a3d398731673682115622a6673f1e3f330db795d188c378d342fdd8d6edc554d",
+    "recordCount": 264,
+    "sceneCount": 1056,
+    "sceneIdPattern": "lob-v1-a{AphiaID}-s01..s04",
+    "output": {
+      "format": "webp",
+      "width": 768,
+      "height": 512,
+      "aspectRatio": "3:2",
+      "largerMasterRetained": false
+    }
+  },
+  "quotaReport": {
+    "totalScenes": 1056,
+    "mediumMax": {
+      "id": "cel-animation-frame",
+      "count": 66,
+      "share": 0.0625
+    },
+    "environmentFamilyMax": {
+      "id": "arena-sport",
+      "count": 88,
+      "share": 0.08333333333333333
+    },
+    "officeBoardroomOrHearing": {
+      "count": 30,
+      "share": 0.028409090909090908
+    },
+    "castPatternMax": {
+      "id": "men-diverse-duo",
+      "count": 44,
+      "share": 0.041666666666666664
+    },
+    "humanScenes": 880,
+    "prominentAdultWomanHumanScenes": {
+      "count": 792,
+      "share": 0.9
+    },
+    "nonPhotorealistic": {
+      "count": 528,
+      "share": 0.5
+    },
+    "noConventionalModernWorkplace": {
+      "count": 821,
+      "share": 0.7774621212121212
+    }
+  }
+}

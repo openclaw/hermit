@@ -4,17 +4,21 @@ import {
 	isNull,
 	or
 } from "drizzle-orm"
-import { slapConfig } from "../config/slap.js"
 import { getPrimaryDb } from "../db.js"
 import {
 	slapEvents,
 	type SlapEvent
 } from "../db/schema.js"
 import type { SlapResult } from "../services/slapEngine.js"
+import {
+	actionCooldownExpiries,
+	readActionCooldowns,
+	type ActionCooldownKind
+} from "./actionCooldowns.js"
 
 export type SlapDatabase = ReturnType<typeof getPrimaryDb>
 
-export type SlapCooldownKind = "actor" | "target" | "channel"
+export type SlapCooldownKind = ActionCooldownKind
 
 export type CreateSlapEventResult =
 	| { kind: "created" | "existing"; event: SlapEvent }
@@ -35,24 +39,6 @@ type CreateSlapEventInput = {
 	targetIsBot: boolean
 	result: SlapResult
 }
-
-const cooldownThreshold = (referenceDate: Date, seconds: number) =>
-	new Date(referenceDate.getTime() - seconds * 1000).toISOString()
-
-const remainingCooldownSeconds = (
-	createdAt: string,
-	cooldownSeconds: number,
-	referenceDate: Date
-) =>
-	Math.max(
-		1,
-		Math.ceil(
-			(new Date(createdAt).getTime() +
-				cooldownSeconds * 1000 -
-				referenceDate.getTime()) /
-				1000
-		)
-	)
 
 export const getSlapEvent = async (
 	id: number,
@@ -86,18 +72,11 @@ export const createSlapEvent = async (
 	database: SlapDatabase = getPrimaryDb()
 ): Promise<CreateSlapEventResult> => {
 	const timestamp = referenceDate.toISOString()
-	const actorThreshold = cooldownThreshold(
-		referenceDate,
-		slapConfig.cooldowns.actorSeconds
-	)
-	const targetThreshold = cooldownThreshold(
-		referenceDate,
-		slapConfig.cooldowns.targetSeconds
-	)
-	const channelThreshold = cooldownThreshold(
-		referenceDate,
-		slapConfig.cooldowns.channelSeconds
-	)
+	const {
+		actorExpiresAt,
+		targetExpiresAt,
+		channelExpiresAt
+	} = actionCooldownExpiries(referenceDate)
 	const client = database.$client
 	const results = await client.batch<Record<string, unknown>>([
 		client
@@ -105,6 +84,85 @@ export const createSlapEvent = async (
 				"select id from slap_events where interaction_id = ? limit 1"
 			)
 			.bind(input.interactionId),
+		client
+			.prepare(
+				`delete from action_cooldown_events
+					where interaction_id = ?
+						and action_kind = 'slap'
+						and actor_expires_at <= ?
+						and target_expires_at <= ?
+						and channel_expires_at <= ?
+						and not exists (
+							select 1
+							from slap_events
+							where interaction_id = action_cooldown_events.interaction_id
+						)
+						and not exists (
+							select 1
+							from lobster_encounters
+							where cooldown_event_id = action_cooldown_events.id
+						)`
+			)
+			.bind(input.interactionId, timestamp, timestamp, timestamp),
+		client
+			.prepare(
+				`insert into action_cooldown_events (
+						interaction_id,
+						action_kind,
+						guild_id,
+						channel_id,
+						actor_id,
+						target_id,
+						actor_expires_at,
+						target_expires_at,
+						channel_expires_at,
+						created_at
+					)
+					select ?, 'slap', ?, ?, ?, ?, ?, ?, ?, ?
+					where not exists (
+						select 1
+						from action_cooldown_events
+						where guild_id = ?
+							and actor_id = ?
+							and actor_expires_at > ?
+					)
+						and not exists (
+							select 1
+							from action_cooldown_events
+							where guild_id = ?
+								and target_id = ?
+								and target_expires_at > ?
+						)
+						and not exists (
+							select 1
+							from action_cooldown_events
+							where guild_id = ?
+								and channel_id = ?
+								and channel_expires_at > ?
+						)
+					on conflict(interaction_id) do nothing
+					returning id`
+			)
+			.bind(
+				input.interactionId,
+				input.guildId,
+				input.channelId,
+				input.actorId,
+				input.targetId,
+				actorExpiresAt,
+				targetExpiresAt,
+				channelExpiresAt,
+				timestamp,
+				input.guildId,
+				input.actorId,
+				timestamp,
+				input.guildId,
+				input.targetId,
+				timestamp,
+				input.guildId,
+				input.channelId,
+				timestamp
+			),
 		client
 			.prepare(
 				`insert into slap_events (
@@ -128,26 +186,20 @@ export const createSlapEvent = async (
 						updated_at
 					)
 					select ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
-					where not exists (
+					where changes() = 1
+						and exists (
 						select 1
-						from slap_events
-						where guild_id = ?
+						from action_cooldown_events
+						where interaction_id = ?
+							and action_kind = 'slap'
+							and guild_id = ?
+							and channel_id = ?
 							and actor_id = ?
-							and created_at > ?
-					)
-						and not exists (
-							select 1
-							from slap_events
-							where guild_id = ?
-								and target_id = ?
-								and created_at > ?
-						)
-						and not exists (
-							select 1
-							from slap_events
-							where guild_id = ?
-								and channel_id = ?
-								and created_at > ?
+							and target_id = ?
+							and actor_expires_at = ?
+							and target_expires_at = ?
+							and channel_expires_at = ?
+							and created_at = ?
 						)
 					on conflict(interaction_id) do nothing
 					returning id`
@@ -171,53 +223,53 @@ export const createSlapEvent = async (
 				input.result.imageUrl,
 				timestamp,
 				timestamp,
-				input.guildId,
-				input.actorId,
-				actorThreshold,
-				input.guildId,
-				input.targetId,
-				targetThreshold,
+				input.interactionId,
 				input.guildId,
 				input.channelId,
-				channelThreshold
+				input.actorId,
+				input.targetId,
+				actorExpiresAt,
+				targetExpiresAt,
+				channelExpiresAt,
+				timestamp
 			),
 		client
 			.prepare(
-				`select created_at
-					from slap_events
+				`select actor_expires_at
+					from action_cooldown_events
 					where guild_id = ?
 						and actor_id = ?
-						and created_at > ?
-					order by created_at desc
+						and actor_expires_at > ?
+					order by actor_expires_at desc
 					limit 1`
 			)
-			.bind(input.guildId, input.actorId, actorThreshold),
+			.bind(input.guildId, input.actorId, timestamp),
 		client
 			.prepare(
-				`select created_at
-					from slap_events
+				`select target_expires_at
+					from action_cooldown_events
 					where guild_id = ?
 						and target_id = ?
-						and created_at > ?
-					order by created_at desc
+						and target_expires_at > ?
+					order by target_expires_at desc
 					limit 1`
 			)
-			.bind(input.guildId, input.targetId, targetThreshold),
+			.bind(input.guildId, input.targetId, timestamp),
 		client
 			.prepare(
-				`select created_at
-					from slap_events
+				`select channel_expires_at
+					from action_cooldown_events
 					where guild_id = ?
 						and channel_id = ?
-						and created_at > ?
-					order by created_at desc
+						and channel_expires_at > ?
+					order by channel_expires_at desc
 					limit 1`
 			)
-			.bind(input.guildId, input.channelId, channelThreshold)
+			.bind(input.guildId, input.channelId, timestamp)
 	])
 
 	const existingId = results[0]?.results[0]?.id
-	const createdId = results[1]?.results[0]?.id
+	const createdId = results[3]?.results[0]?.id
 	const eventId = Number(existingId ?? createdId)
 	if (Number.isInteger(eventId) && eventId > 0) {
 		const event = await getSlapEvent(eventId, database)
@@ -238,36 +290,11 @@ export const createSlapEvent = async (
 		return { kind: "existing", event: concurrentEvent }
 	}
 
-	const cooldownRows = [
-		{
-			kind: "actor" as const,
-			row: results[2]?.results[0],
-			seconds: slapConfig.cooldowns.actorSeconds
-		},
-		{
-			kind: "target" as const,
-			row: results[3]?.results[0],
-			seconds: slapConfig.cooldowns.targetSeconds
-		},
-		{
-			kind: "channel" as const,
-			row: results[4]?.results[0],
-			seconds: slapConfig.cooldowns.channelSeconds
-		}
-	]
-	const cooldowns = cooldownRows.flatMap(({ kind, row, seconds }) => {
-		const createdAt = row?.created_at
-		return typeof createdAt === "string"
-			? [{
-				kind,
-				remainingSeconds: remainingCooldownSeconds(
-					createdAt,
-					seconds,
-					referenceDate
-				)
-			}]
-			: []
-	})
+	const cooldowns = readActionCooldowns([
+		{ kind: "actor", expiresAt: results[4]?.results[0]?.actor_expires_at },
+		{ kind: "target", expiresAt: results[5]?.results[0]?.target_expires_at },
+		{ kind: "channel", expiresAt: results[6]?.results[0]?.channel_expires_at }
+	], referenceDate)
 
 	if (cooldowns.length === 0) {
 		throw new Error("Slap event was neither created nor blocked by a cooldown")

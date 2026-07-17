@@ -1,0 +1,1847 @@
+---
+openapi: 3.0.0
+info:
+    title: WoRMS REST webservice
+    description: The definitions and operations are listed below. Click on an operation name to view it&#039;s details, and test it.
+    version: 1.0.0
+servers:
+    -   url: https://www.marinespecies.org/rest
+paths:
+    /AphiaChildrenByAphiaID/{ID}:
+        get:
+            tags:
+                - Taxonomic data
+            summary: "Get the direct children (max. 50) for a given AphiaID"
+            description: "Get the direct children (max. 50) for a given AphiaID"
+            operationId: AphiaChildrenByAphiaID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The AphiaID to search for"
+                    required: true
+                    schema:
+                        type: integer
+                -   name: marine_only
+                    in: query
+                    description: "Limit to marine taxa"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+                -   name: extant_only
+                    in: query
+                    description: "Limit to extant taxa"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+                -   name: offset
+                    in: query
+                    description: "Starting recordnumber, when retrieving next chunk of (50) records. Default=1"
+                    required: false
+                    schema:
+                        type: integer
+                        default: 1
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                        application/xml:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                                xml:
+                                    name: AphiaRecords
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaClassificationByAphiaID/{ID}:
+        get:
+            tags:
+                - Taxonomic data
+            summary:  "Get the complete classification for one taxon. This also includes any sub or super ranks."
+            description: "Get the complete classification for one taxon. This also includes any sub or super ranks."
+            operationId: AphiaClassificationByAphiaID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The AphiaID to search for"
+                    required: true
+                    schema:
+                        type: integer
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/Classification"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/Classification"
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaDistributionsByAphiaID/{ID}:
+        get:
+            tags:
+                - Distributions
+            summary: "Get all distributions for a given AphiaID"
+            description: "Get all distributions for a given AphiaID"
+            operationId: AphiaDistributionsByAphiaID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The AphiaID to search for"
+                    required: true
+                    schema:
+                        type: integer
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: Distributions
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/Distribution"
+                        application/xml:
+                            schema:
+                                title: Distributions
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/Distribution"
+                                xml:
+                                    name: Distributions
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaExternalIDByAphiaID/{ID}:
+        get:
+            tags:
+                - External Identifiers
+            summary: "Get any external identifier(s) for a given AphiaID"
+            description: "Get any external identifier(s) for a given AphiaID"
+            operationId: AphiaExternalIDByAphiaID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The AphiaID to search for"
+                    required: true
+                    schema:
+                        type: integer
+                -   name: type
+                    in: query
+                    description: "Type of external identifier to return. The type should be one of the following values:<br/> <ul> <li><u>algaebase</u>: Algaebase species ID</li> <li><u>bold</u>: Barcode of Life Database (BOLD) TaxID</li> <li><u>dyntaxa</u>: Dyntaxa ID</li> <li><u>fishbase</u>: FishBase species ID</li> <li><u>iucn</u>: IUCN Red List Identifier</li> <li><u>lsid</u>: Life Science Identifier</li> <li><u>ncbi</u>: NCBI Taxonomy ID (Genbank)</li> <li><u>tsn</u>: ITIS Taxonomic Serial Number</li> <li><u>gisd</u>: Global Invasive Species Database</li> </ul>"
+                    required: false
+                    schema:
+                        type: string
+                        default: tsn
+                        enum:
+                            - algaebase
+                            - bold
+                            - dyntaxa
+                            - fishbase
+                            - iucn
+                            - lsid
+                            - ncbi
+                            - tsn
+                            - gisd
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: Results
+                                type: array
+                                items:
+                                    type: string
+                        application/xml:
+                            schema:
+                                title: Results
+                                type: array
+                                items:
+                                    type: string
+                                    xml:
+                                        name: Result
+                                xml:
+                                    name: Results
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaIDByName/{ScientificName}:
+        get:
+            tags:
+                - Taxonomic data
+            summary: "Get the AphiaID for a given name."
+            description: "Get the AphiaID for a given name. Output: NULL when no match is found; -999 when multiple matches are found; an integer (AphiaID) when one exact match was found"
+            operationId: AphiaIDByName
+            parameters:
+                -   name: ScientificName
+                    in: path
+                    description: "Name to search for"
+                    required: true
+                    schema:
+                        type: string
+                -   name: marine_only
+                    in: query
+                    description: "Limit to marine taxa"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+                -   name: extant_only
+                    in: query
+                    description: "Limit to extant taxa"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                type: integer
+                '204':
+                    description: Nothing found
+                '206':
+                    description: No content due to multiple results
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaNameByAphiaID/{ID}:
+        get:
+            tags:
+                - Taxonomic data
+            summary: "Get the name for a given AphiaID"
+            description: "Get the name for a given AphiaID"
+            operationId: AphiaNameByAphiaID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The AphiaID to search for"
+                    required: true
+                    schema:
+                        type: integer
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaRecordByAphiaID/{ID}:
+        get:
+            tags:
+                - Taxonomic data
+            summary: "Get the complete AphiaRecord for a given AphiaID"
+            description: "Get the complete AphiaRecord for a given AphiaID"
+            operationId: AphiaRecordByAphiaID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The AphiaID to search for"
+                    required: true
+                    schema:
+                        type: integer
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/AphiaRecord"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/AphiaRecord"
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaRecordsByAphiaIDs:
+        get:
+            tags:
+                - Taxonomic data
+            summary: "Get an AphiaRecord for multiple AphiaIDs in one go (max: 50)"
+            description: "Get an AphiaRecord for multiple AphiaIDs in one go (max: 50)"
+            operationId: AphiaRecordsByAphiaIDs
+            parameters:
+                -   name: aphiaids[]
+                    in: query
+                    description: "The AphiaID&#039;s to search for"
+                    required: true
+                    explode: true
+                    schema:
+                        type: array
+                        items:
+                            type: integer
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                        application/xml:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                                xml:
+                                    name: AphiaRecords
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaRecordByExternalID/{ID}:
+        get:
+            tags:
+                - External Identifiers
+            summary: "Get the Aphia Record for a given external identifier"
+            description: "Get the Aphia Record for a given external identifier"
+            operationId: AphiaRecordByExternalID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The external identifier to search for"
+                    required: true
+                    schema:
+                        type: string
+                -   name: type
+                    in: query
+                    description: "Type of external identifier to search for. The type should be one of the following values:<br/> <ul> <li><u>algaebase</u>: Algaebase species ID</li> <li><u>bold</u>: Barcode of Life Database (BOLD) TaxID</li> <li><u>dyntaxa</u>: Dyntaxa ID</li> <li><u>fishbase</u>: FishBase species ID</li> <li><u>iucn</u>: IUCN Red List Identifier</li> <li><u>lsid</u>: Life Science Identifier</li> <li><u>ncbi</u>: NCBI Taxonomy ID (Genbank)</li> <li><u>tsn</u>: ITIS Taxonomic Serial Number</li> <li><u>gisd</u>: Global Invasive Species Database</li> </ul>"
+                    required: false
+                    schema:
+                        type: string
+                        default: tsn
+                        enum:
+                            - algaebase
+                            - bold
+                            - dyntaxa
+                            - fishbase
+                            - iucn
+                            - lsid
+                            - ncbi
+                            - tsn
+                            - gisd
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/AphiaRecord"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/AphiaRecord"
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaRecordsByDate:
+        get:
+            tags:
+                - Taxonomic data
+            summary: "Lists all AphiaRecords (taxa) that have their last edit action (modified or added) during the specified period"
+            description: "Lists all AphiaRecords (taxa) that have their last edit action (modified or added) during the specified period"
+            operationId: AphiaRecordsByDate
+            parameters:
+                -   name: startdate
+                    in: query
+                    description: "ISO 8601 formatted start date(time). Default=today(). i.e. 2026-07-17T07:59:16+02:00"
+                    required: true
+                    schema:
+                        type: string
+                        format: date-time
+                -   name: enddate
+                    in: query
+                    description: "ISO 8601 formatted end date(time). Default=today(). i.e. 2026-07-17T07:59:16+02:00"
+                    required: false
+                    schema:
+                        type: string
+                        format: date-time
+                -   name: marine_only
+                    in: query
+                    description: "Limit to marine taxa"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+                -   name: extant_only
+                    in: query
+                    description: "Limit to extant taxa"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+                -   name: offset
+                    in: query
+                    description: "Starting recordnumber, when retrieving next chunk of (50) records. Default=1"
+                    required: false
+                    schema:
+                        type: integer
+                        default: 1
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                        application/xml:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                                xml:
+                                    name: AphiaRecords
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaRecordsByMatchNames:
+        get:
+            tags:
+                - Taxonomic data
+            summary: "Try to find AphiaRecords using the TAXAMATCH fuzzy matching algorithm by Tony Rees"
+            description: "For each given scientific name (may include authority), try to find one or more AphiaRecords, using the TAXAMATCH fuzzy matching algorithm by Tony Rees.<br/>This allows you to (fuzzy) match multiple names in one call. Limited to 50 names at once for performance reasons"
+            operationId: AphiaRecordsByMatchNames
+            parameters:
+                -   name: scientificnames[]
+                    in: query
+                    description: "Names to search for"
+                    required: true
+                    explode: true
+                    schema:
+                        type: array
+                        items:
+                            type: string
+                -   name: authorships[]
+                    in: query
+                    description: "The authorities of the given names"
+                    explode: true
+                    schema:
+                        type: array
+                        items:
+                            type: string
+                -   name: marine_only
+                    in: query
+                    description: "Limit to marine taxa"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+                -   name: extant_only
+                    in: query
+                    description: "Limit to extant taxa"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+                -   name: match_authority
+                    in: query
+                    description: "Use the authority in the matching process"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: AphiaRecordsArray
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecordsArray"
+                        application/xml:
+                            schema:
+                                title: AphiaRecordsArray
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecordsArray"
+                                xml:
+                                    name: AphiaRecordsArray
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaRecordsByName/{ScientificName}:
+        get:
+            tags:
+                - Taxonomic data
+            summary: "Get one or more matching (max. 50) AphiaRecords for a given name"
+            description: "Get one or more matching (max. 50) AphiaRecords for a given name"
+            operationId: AphiaRecordsByName
+            parameters:
+                -   name: ScientificName
+                    in: path
+                    description: "Name to search for"
+                    required: true
+                    schema:
+                        type: string
+                -   name: like
+                    in: query
+                    description: "Add a &#039;%&#039;-sign added after the ScientificName (SQL LIKE function). Default=true"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: 'true'
+                -   name: marine_only
+                    in: query
+                    description: "Limit to marine taxa"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+                -   name: extant_only
+                    in: query
+                    description: "Limit to extant taxa"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+                -   name: offset
+                    in: query
+                    description: "Starting recordnumber, when retrieving next chunk of (50) records. Default=1"
+                    required: false
+                    schema:
+                        type: integer
+                        default: 1
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                        application/xml:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                                xml:
+                                    name: AphiaRecords
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaRecordsByNames:
+        get:
+            tags:
+                - Taxonomic data
+            summary: "For each given scientific name, try to find one or more AphiaRecords"
+            description: "For each given scientific name, try to find one or more AphiaRecords. This allows you to match multiple names in one call. Limited to 500 names at once for performance reasons."
+            operationId: AphiaRecordsByNames
+            parameters:
+                -   name: scientificnames[]
+                    in: query
+                    description: "Names to search for"
+                    required: true
+                    explode: true
+                    schema:
+                        type: array
+                        items:
+                            type: string
+                -   name: like
+                    in: query
+                    description: "Add a &#039;%&#039;-sign after the ScientificName (SQL LIKE function). Default=false"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: 'false'
+                -   name: marine_only
+                    in: query
+                    description: "Limit to marine taxa"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+                -   name: extant_only
+                    in: query
+                    description: "Limit to extant taxa"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: AphiaRecordsArray
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecordsArray"
+                        application/xml:
+                            schema:
+                                title: AphiaRecordsArray
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecordsArray"
+                                xml:
+                                    name: AphiaRecordsArray
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaRecordsByVernacular/{Vernacular}:
+        get:
+            tags:
+                - Vernaculars
+            summary: "Get one or more Aphia Records (max. 50) for a given vernacular"
+            description: "Get one or more Aphia Records (max. 50) for a given vernacular"
+            operationId: AphiaRecordsByVernacular
+            parameters:
+                -   name: Vernacular
+                    in: path
+                    description: "The vernacular to find records for"
+                    required: true
+                    schema:
+                        type: string
+                -   name: like
+                    in: query
+                    description: "Add a &#039;%&#039;-sign before and after the input (SQL LIKE &#039;%vernacular%&#039; function). Default=false"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: 'false'
+                -   name: offset
+                    in: query
+                    description: "Starting recordnumber, when retrieving next chunk of (50) records. Default=1"
+                    required: false
+                    schema:
+                        type: integer
+                        default: '1'
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                        application/xml:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                                xml:
+                                    name: AphiaRecords
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaSynonymsByAphiaID/{ID}:
+        get:
+            tags:
+                - Taxonomic data
+            summary: "Get all synonyms for a given AphiaID"
+            description: "Get all synonyms for a given AphiaID"
+            operationId: AphiaSynonymsByAphiaID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The AphiaID to search for"
+                    required: true
+                    schema:
+                        type: integer
+                -   name: offset
+                    in: query
+                    description: "Starting recordnumber, when retrieving next chunk of (50) records. Default=1"
+                    required: false
+                    schema:
+                        type: integer
+                        default: 1
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                        application/xml:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                                xml:
+                                    name: AphiaRecords
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaVernacularsByAphiaID/{ID}:
+        get:
+            tags:
+                - Vernaculars
+            summary: "Get all vernaculars for a given AphiaID"
+            description: "Get all vernaculars for a given AphiaID"
+            operationId: AphiaVernacularsByAphiaID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The AphiaID to search for"
+                    required: true
+                    schema:
+                        type: integer
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: Vernaculars
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/Vernacular"
+                        application/xml:
+                            schema:
+                                title: Vernaculars
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/Vernacular"
+                                xml:
+                                    name: Vernaculars
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaSourcesByAphiaID/{ID}:
+        get:
+            tags:
+                - Sources
+            summary: "Get one or more sources/references including links, for one AphiaID"
+            description: "Get one or more sources/references including links, for one AphiaID"
+            operationId: AphiaSourcesByAphiaID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The AphiaID to search for"
+                    required: true
+                    schema:
+                        type: integer
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: Sources
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/Source"
+                        application/xml:
+                            schema:
+                                title: Sources
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/Source"
+                                xml:
+                                    name: Sources
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaTaxonRanksByID/{ID}:
+        get:
+            tags:
+                - Taxonomic data
+            summary: "Get taxonomic ranks by their identifier"
+            description: "Get taxonomic ranks by their identifier"
+            operationId: AphiaTaxonRanksByID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "A taxonomic rank identifier. Default=-1"
+                    required: true
+                    schema:
+                        type: integer
+                        default: "-1"
+                -   name: AphiaID
+                    in: query
+                    description: "The AphiaID of the kingdom"
+                    required: false
+                    schema:
+                        type: integer
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: AphiaRanks
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRank"
+                        application/xml:
+                            schema:
+                                title: AphiaRanks
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRank"
+                                xml:
+                                    name: AphiaRanks
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaTaxonRanksByName/{taxonRank}:
+        get:
+            tags:
+                - Taxonomic data
+            summary: "Get taxonomic ranks by their name"
+            description: "Get taxonomic ranks by their name"
+            operationId: AphiaTaxonRanksByName
+            parameters:
+                -   name: taxonRank
+                    in: path
+                    description: "A taxonomic rank. Default=empty"
+                    required: true
+                    schema:
+                        type: string
+                        default: ""
+                -   name: AphiaID
+                    in: query
+                    description: "The AphiaID of the kingdom"
+                    required: false
+                    schema:
+                        type: integer
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: AphiaRanks
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRank"
+                        application/xml:
+                            schema:
+                                title: AphiaRanks
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRank"
+                                xml:
+                                    name: AphiaRanks
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    /AphiaRecordsByTaxonRankID/{ID}:
+        get:
+            tags:
+                - Taxonomic data
+            summary: "Get the AphiaRecords for a given taxonRankID (max 50)"
+            description: "Get the AphiaRecords for a given taxonRankID (max 50)"
+            operationId: AphiaRecordsByTaxonRankID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "A taxonomic rank identifier"
+                    required: true
+                    schema:
+                        type: integer
+                -   name: belongsTo
+                    in: query
+                    description: "Limit the results to descendants of the given AphiaID"
+                    required: false
+                    schema:
+                        type: integer
+                -   name: offset
+                    in: query
+                    description: "Starting recordnumber, when retrieving next chunk of (50) records. Default=1"
+                    required: false
+                    schema:
+                        type: integer
+                        default: 1
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                        application/xml:
+                            schema:
+                                title: AphiaRecords
+                                type: array
+                                items:
+                                    "$ref": "#/components/schemas/AphiaRecord"
+                                xml:
+                                    name: AphiaRecord
+                                    wrapped: true
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    '/AphiaRecordFullByAphiaID/{ID}':
+        get:
+            tags:
+                - Taxonomic data
+            summary: "Get the complete AphiaFullRecord for a given AphiaID"
+            description: "Returns the linked open data implementation of an AphiaRecord for a given AphiaID. There are multiple formats available that can be chosen with the Accept header. The default format is JSON-LD but RDF, Turtle and N-triples are also supported."
+            operationId: AphiaFullRecordByAphiaID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The AphiaID to search for"
+                    required: true
+                    schema:
+                        type: integer
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/ld+json: { }
+                        application/rdf+xml: { }
+                        text/turtle: { }
+                        application/n-triples: { }
+                '204':
+                    description: Nothing found
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+    '/AphiaAttributeKeysByID/{ID}':
+        get:
+            tags:
+                - Attributes
+            summary: "Get attribute definitions"
+            description: "Get attribute definitions. To refer to root items specify ID = &#039;0&#039;"
+            operationId: AphiaAttributeKeysByID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The attribute definition id to search for"
+                    required: true
+                    schema:
+                        type: integer
+                        default: '0'
+
+                -   name: include_children
+                    in: query
+                    description: "Include the tree of children. Default=true"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: 'true'
+            responses:
+                '200':
+                    description: 'Successful operation'
+                    content:
+                        application/json:
+                            schema:
+                                title: AttributeKeys
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/AttributeKey'
+                        application/xml:
+                            schema:
+                                title: AttributeKeys
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/AttributeKey'
+                                xml:
+                                    name: AttributeKeys
+                                    wrapped: true
+                '204':
+                    description: 'Nothing found'
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    '/AphiaAttributeValuesByCategoryID/{ID}':
+        get:
+            tags:
+                - Attributes
+            summary: "Get list values that are grouped by an CateogryID"
+            description: "Get list values that are grouped by an CateogryID"
+            operationId: AphiaAttributeValuesByCategoryID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The CateogryID to search for"
+                    required: true
+                    schema:
+                        type: integer
+                        default: '0'
+            responses:
+                '200':
+                    description: 'Successful operation'
+                    content:
+                        application/json:
+                            schema:
+                                title: AttributeValues
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/AttributeValue'
+                        application/xml:
+                            schema:
+                                title: AttributeValues
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/AttributeValue'
+                                xml:
+                                    name: AttributeValues
+                                    wrapped: true
+                '204':
+                    description: 'Nothing found'
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    '/AphiaIDsByAttributeKeyID/{ID}':
+        get:
+            tags:
+                - Attributes
+            summary: "Get a list of AphiaID's (max 50) with attribute tree for a given attribute definition ID"
+            description: "Get a list of AphiaID&#039;s (max 50) with attribute tree for a given attribute definition ID"
+            operationId: AphiaIDsByAttributeKeyID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The attribute definition id to search for"
+                    required: true
+                    schema:
+                        type: integer
+
+                -   name: offset
+                    in: query
+                    description: "Starting recordnumber, when retrieving next chunk of (50) records. Default=1"
+                    required: false
+                    schema:
+                        type: integer
+                        default: 1
+            responses:
+                '200':
+                    description: 'Successful operation'
+                    content:
+                        application/json:
+                            schema:
+                                title: AphiaAttributeSets
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/AphiaAttributeSet'
+                        application/xml:
+                            schema:
+                                title: AphiaAttributeSets
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/AphiaAttributeSet'
+                                xml:
+                                    name: AphiaAttributeSets
+                                    wrapped: true
+                '204':
+                    description: 'Nothing found'
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+    '/AphiaAttributesByAphiaID/{ID}':
+        get:
+            tags:
+                - Attributes
+            summary: "Get a list of attributes for a given AphiaID"
+            description: "Get a list of attributes for a given AphiaID"
+            operationId: AphiaAttributesByAphiaID
+            parameters:
+                -   name: ID
+                    in: path
+                    description: "The AphiaID to search for"
+                    required: true
+                    schema:
+                        type: integer
+
+                -   name: include_inherited
+                    in: query
+                    description: "Include attributes inherited from the taxon its parent(s). Default=false"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: 'false'
+            responses:
+                '200':
+                    description: 'Successful operation'
+                    content:
+                        application/json:
+                            schema:
+                                title: Attributes
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Attribute'
+                        application/xml:
+                            schema:
+                                title: Attributes
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Attribute'
+                                xml:
+                                    name: Attributes
+                                    wrapped: true
+                '204':
+                    description: 'Nothing found'
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+
+    '/AjaxAphiaRecordsByNamePart/{NamePart}':
+        get:
+            tags:
+                - 'Ajax calls'
+            summary: "Get taxa suggestion for a given prefix of a taxon name."
+            description: "Get taxa suggestion for a given prefix of a taxon name."
+            operationId: AjaxAphiaRecordsByNamePart
+            parameters:
+                -   name: NamePart
+                    in: path
+                    description: "The prefix to use to search for taxa."
+                    required: true
+                    schema:
+                        type: string
+
+                -   name: rank_min
+                    in: query
+                    description: "The minimum rank of the returned suggestion. Default: 10"
+                    required: false
+                    schema:
+                        type: integer
+                        default: 10
+
+                -   name: rank_max
+                    in: query
+                    description: "The maximum rank of the returned suggestion. Default: 280"
+                    required: false
+                    schema:
+                        type: integer
+                        default: 280
+
+                -   name: max_matches
+                    in: query
+                    description: "The maximum number of suggestion to return. Default: 20, Max: 50"
+                    required: false
+                    schema:
+                        type: integer
+                        default: 20
+
+                -   name: 'excluded_ids[]'
+                    in: query
+                    description: "AphiaID&#039;s to exclude from the resultset"
+                    required: false
+                    explode: true
+                    schema:
+                        type: array
+                        items:
+                            type: integer
+
+                -   name: combine_vernaculars
+                    in: query
+                    description: "When true the name can also match vernaculars"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: 'false'
+
+                -   name: marine_only
+                    in: query
+                    description: "Defines if we search for marine taxa only"
+                    required: false
+                    schema:
+                        type: boolean
+                        default: true
+
+                -   name: fossil_id
+                    in: query
+                    description: "Determines the search behavior for fossil taxa (same as for normal search)."
+                    required: false
+                    schema:
+                        type: integer
+                        default: 0
+                -   name: 'languages[]'
+                    in: query
+                    description: "List of ISO 639-3 language codes to filter search results. Example: &#039;eng&#039;, &#039;nld&#039;, &#039;fra&#039;, &#039;deu&#039;"
+                    required: false
+                    explode: true
+                    schema:
+                        type: array
+                        items:
+                            type: string
+            responses:
+                '200':
+                    description: 'Successful operation'
+                '204':
+                    description: 'Nothing found'
+                '400':
+                    description: Bad or missing properties
+                    content:
+                        application/json:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+                        application/xml:
+                            schema:
+                                "$ref": "#/components/schemas/BadRequestError"
+
+
+components:
+    schemas:
+        AphiaRecord:
+            properties:
+                AphiaID:
+                    description: "Unique and persistent identifier within WoRMS. Primary key in the database --"
+                    type: integer
+                    default: 127160
+                url:
+                    description: "HTTP URL to the AphiaRecord"
+                    type: string
+                scientificname:
+                    description: "The full scientific name without authorship"
+                    type: string
+                authority:
+                    description: "The authorship information for the scientificname formatted according to the conventions of the applicable nomenclaturalCode"
+                    type: string
+                taxonRankID:
+                    description: "The taxonomic rank identifier of the most specific name in the scientificname"
+                    type: integer
+                rank:
+                    description: "The taxonomic rank of the most specific name in the scientificname"
+                    type: string
+                status:
+                    description: "The status of the use of the scientificname (usually a taxonomic opinion). Additional technical statuses are (1) <u>quarantined</u>: hidden from public interface after decision from an editor and (2) <u>deleted</u>: AphiaID should NOT be used anymore, please replace it by the valid_AphiaID"
+                    type: string
+                unacceptreason:
+                    description: "The reason why a scientificname is unaccepted"
+                    type: string
+                valid_AphiaID:
+                    description: "The AphiaID (for the scientificname) of the currently accepted taxon. NULL if there is no currently accepted taxon."
+                    type: boolean
+                valid_name:
+                    description: "The scientificname of the currently accepted taxon"
+                    type: string
+                valid_authority:
+                    description: "The authorship information for the scientificname of the currently accepted taxon"
+                    type: string
+                parentNameUsageID:
+                    description: "The AphiaID (for the scientificname) of the direct, most proximate higher-rank parent taxon (in a classification)"
+                    type: integer
+                originalNameUsageID:
+                    description: "The AphiaID (for the scientificname) of the original name"
+                    type: integer
+                kingdom:
+                    description: "The full scientific name of the kingdom in which the taxon is classified"
+                    type: string
+                phylum:
+                    description: "The full scientific name of the phylum or division in which the taxon is classified"
+                    type: string
+                class:
+                    description: "The full scientific name of the class in which the taxon is classified"
+                    type: string
+                order:
+                    description: "The full scientific name of the order in which the taxon is classified"
+                    type: string
+                family:
+                    description: "The full scientific name of the family in which the taxon is classified"
+                    type: string
+                genus:
+                    description: "The full scientific name of the genus in which the taxon is classified"
+                    type: string
+                citation:
+                    description: "A bibliographic reference for the resource as a statement indicating how this record should be cited (attributed) when used"
+                    type: string
+                lsid:
+                    description: "LifeScience Identifier. Persistent GUID for an AphiaID"
+                    type: string
+                isMarine:
+                    description: "A boolean flag indicating whether the taxon is a marine organism, i.e. can be found in/above sea water. Possible values: 0/1/NULL"
+                    type: boolean
+                isBrackish:
+                    description: "A boolean flag indicating whether the taxon occurs in brackish habitats. Possible values: 0/1/NULL"
+                    type: boolean
+                isFreshwater:
+                    description: "A boolean flag indicating whether the taxon occurs in freshwater habitats, i.e. can be found in/above rivers or lakes. Possible values: 0/1/NULL"
+                    type: boolean
+                isTerrestrial:
+                    description: "A boolean flag indicating the taxon is a terrestrial organism, i.e. occurs on land as opposed to the sea. Possible values: 0/1/NULL"
+                    type: boolean
+                isExtinct:
+                    description: "A flag indicating an extinct organism. Possible values: 0/1/NULL"
+                    type: boolean
+                match_type:
+                    description: "Type of match. Possible values: exact/exact_subgenus/exact_replaced/like/phonetic/near_1/near_2/near_3/match_quarantine/match_deleted. See <a href='https://www.marinespecies.org/tutorial_taxonmatch.php' target='_blank'>here</a> (bottom) for a full explanation of the types of matches."
+                    type: string
+                modified:
+                    description: "The most recent date-time in GMT on which the resource was changed"
+                    type: string
+            type: object
+            xml:
+                name: AphiaRecord
+                wrapped: false
+        AphiaRecordsArray:
+            title: AphiaRecords
+            type: array
+            items:
+                "$ref": "#/components/schemas/AphiaRecord"
+        Classification:
+            title: Classification
+            properties:
+                AphiaID:
+                    type: integer
+                    default: 126132
+                rank:
+                    type: string
+                scientificname:
+                    type: string
+                child:
+                    nullable: true
+                    allOf:
+                        -   $ref: '#/components/schemas/Classification'
+            type: object
+            xml:
+                name: Classification
+                wrapped: false
+        Distribution:
+            title: Distribution
+            properties:
+                locality:
+                    type: string
+                    description: "The specific description of the place"
+                locationID:
+                    type: string
+                    description: "An identifier for the locality. Using the Marine Regions Geographic IDentifier (MRGID), see <a href='https://www.marineregions.org/mrgid.php' target='_blank'>https://www.marineregions.org/mrgid.php</a>"
+                higherGeography:
+                    type: string
+                    description: "A geographic name less specific than the information captured in the locality term. Possible values: an IHO Sea Area or Nation, derived from the MarineRegions <a href='https://www.marineregions.org/gazetteer.php' target='_blank'>gazetteer</a>"
+                higherGeographyID:
+                    type: string
+                    description: "An identifier for the geographic region within which the locality occurred, using MRGID"
+                recordStatus:
+                    type: string
+                    description: "The status of the distribution record. Possible values are 'valid' ,'doubtful' or 'inaccurate'. See <a href='https://www.marinespecies.org/aphia.php?p=manual#topic8b' target=_blank>here</a> for explanation of the statuses"
+                typeStatus:
+                    type: string
+                    description: "The type status of the distribution. Possible values: &#039;holotype&#039; or empty."
+                establishmentMeans:
+                    type: string
+                    description: "The process by which the biological individual(s) represented in the Occurrence became established at the location. Possible values: values listed as Origin <a href='https://www.marinespecies.org/introduced/terminology.php#:~:text=Origin,Origin%20unknown' target=_blank>in WRiMS</a>"
+                    nullable: true
+                invasiveness:
+                    type: string
+                    description: "The invasiveness of the species. Possible values: values listed as Invasiveness <a href='https://www.marinespecies.org/introduced/terminology.php#:~:text=Invasiveness,or%20hull%20fouling%3B' target=_blank>in WRiMS</a>"
+                    nullable: true
+                occurrence:
+                    type: string
+                    description: "The occurence status. Possible values: values listed as Occurrence <a href='https://www.marinespecies.org/introduced/terminology.php#:~:text=Occurrence,Sometimes%20present' target=_blank>in WRiMS</a>"
+                    nullable: true
+                decimalLatitude:
+                    type: number
+                    description: "The geographic latitude (in decimal degrees, WGS84)"
+                decimalLongitude:
+                    type: number
+                    description: "The geographic longitude (in decimal degrees, WGS84)"
+                qualityStatus:
+                    type: string
+                    description: "Quality status of the record. Possible values: 'checked', 'trusted' or 'unreviewed'. See <a href='https://www.marinespecies.org/aphia.php?p=manual#topic22' target='_blank'>here</a>"
+            type: object
+            xml:
+                name: Distribution
+                wrapped: false
+        Vernacular:
+            title: Vernacular
+            properties:
+                vernacular:
+                    type: string
+                language_code:
+                    type: string
+                language:
+                    type: string
+            type: object
+            xml:
+                name: Vernacular
+                wrapped: false
+        Source:
+            title: Source
+            properties:
+                source_id:
+                    description: "Unique identifier for the source within WoRMS"
+                    type: integer
+                    default: 1
+                use:
+                    description: "Usage of the source for this taxon. See <a href='https://www.marinespecies.org/aphia.php?p=manual#topic6' target='_blank'>here</a> for all values"
+                    type: string
+                reference:
+                    description: "Full citation string"
+                    type: string
+                page:
+                    description: "Page(s) where the taxon is mentioned"
+                    type: string
+                url:
+                    description: "Direct link to the source record"
+                    type: string
+                link:
+                    description: "External link (i.e. journal, data system, etc..)"
+                    type: string
+                fulltext:
+                    description: "Full text link (PDF)"
+                    type: string
+                doi:
+                    description: "Digital Object Identifier"
+                    type: string
+            type: object
+            xml:
+                name: Source
+                wrapped: false
+        AphiaRank:
+            title: AphiaRank
+            properties:
+                taxonRankID:
+                    description: "A taxonomic rank identifier"
+                    type: integer
+                    example: "220"
+                taxonRank:
+                    description: "A taxonomic rank name"
+                    type: string
+                    example: species
+                AphiaID:
+                    description: "The AphiaID of the kingdom"
+                    type: integer
+                    example: "2"
+                kingdom:
+                    description: "The name of a taxonomic kingdom the rank is used in"
+                    type: string
+                    example: Animalia
+            type: object
+            xml:
+                name: AphiaRank
+                wrapped: false
+        AttributeKey:
+            title: AttributeKey
+            properties:
+                measurementTypeID:
+                    description: "An internal identifier for the measurementType"
+                    type: integer
+                    example: '4'
+                measurementType:
+                    description: "The nature of the measurement, fact, characteristic, or assertion <a href='https://www.marinespecies.org/traits/wiki' target='_blank'>https://www.marinespecies.org/traits/wiki</a>"
+                    type: string
+                    example: 'Functional group'
+                input_id:
+                    description: "The data type that is expected as value for this attribute definition"
+                    type: integer
+                    example: '1'
+                CategoryID:
+                    description: "The category identifier to list possible attribute values for this attribute definition"
+                    type: integer
+                    example: '7'
+                children:
+                    description: "The possible child attribute keys that help to describe to current attribute"
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AttributeKey'
+                    xml:
+                        name: children
+                        wrapped: true
+            type: object
+            xml:
+                name: AttributeKey
+                wrapped: false
+
+        AttributeKeyWithValues:
+            title: AttributeKeyWithValues
+            properties:
+                measurementTypeID:
+                    description: "An internal identifier for the measurementType"
+                    type: integer
+                    example: '4'
+                measurementType:
+                    description: "The nature of the measurement, fact, characteristic, or assertion <a href='https://www.marinespecies.org/traits/wiki' target='_blank'>https://www.marinespecies.org/traits/wiki</a>"
+                    type: string
+                    example: 'Functional group'
+                possibleAttributeValues:
+                    description: "The category definition that list possible attribute values for this attribute definition"
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AttributeValue'
+                    xml:
+                        name: possibleAttributeValues
+                        wrapped: true
+                children:
+                    description: "The possible child attribute keys that help to describe to current attribute"
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AttributeKeyWithValues'
+                    xml:
+                        name: children
+                        wrapped: true
+            type: object
+            xml:
+                name: AttributeKeyWithValues
+                wrapped: false
+        AttributeValue:
+            title: AttributeValue
+            properties:
+                measurementValueID:
+                    description: "An identifier for facts stored in the column measurementValue"
+                    type: integer
+                    example: '185'
+                measurementValue:
+                    description: "The value of the measurement, fact, characteristic, or assertion"
+                    type: string
+                    example: macrobenthos
+                measurementValueCode:
+                    description: "Additional info/code that helps to the describe/define the measurementValue"
+                    type: string
+                    example: ''
+                children:
+                    description: "Child measurementValues that are more specific"
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AttributeValue'
+                    xml:
+                        name: children
+                        wrapped: true
+            type: object
+            xml:
+                name: AttributeValue
+                wrapped: false
+        Attribute:
+            title: Attribute
+            properties:
+                AphiaID:
+                    description: "Unique and persistent identifier within WoRMS"
+                    type: integer
+                    example: '127160'
+                measurementTypeID:
+                    description: "The corresponding AttributeKey its measurementTypeID"
+                    type: integer
+                    example: '15'
+                measurementType:
+                    description: "The corresponding AttributeKey its measurementType"
+                    type: string
+                    example: 'Body size'
+                measurementValue:
+                    description: "The value of the measurement, fact, characteristic, or assertion"
+                    type: string
+                    example: '70'
+                source_id:
+                    description: "The identifier for the AphiaSource for this attribute"
+                    type: integer
+                    example: '232308'
+                reference:
+                    description: "The AphiaSource reference for this attribute"
+                    type: string
+                    example: ''
+                qualitystatus:
+                    description: "Quality status of the record. Possible values: 'checked', 'trusted' or 'unreviewed'. See <a href='https://www.marinespecies.org/aphia.php?p=manual#topic22' target='_blank'>here</a>"
+                    type: string
+                    example: checked
+                CategoryID:
+                    description: "The category identifier to list possible attribute values for this attribute definition"
+                    type: integer
+                    example: ''
+                AphiaID_Inherited:
+                    description: "The AphiaID from where this attribute is inherited"
+                    type: integer
+                    example: '126132'
+                children:
+                    description: "The possible child attributes that help to describe to current attribute"
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Attribute'
+                    xml:
+                        name: children
+                        wrapped: true
+            type: object
+            xml:
+                name: Attribute
+                wrapped: false
+        AphiaAttributeSet:
+            title: AphiaAttributeSet
+            properties:
+                AphiaID:
+                    description: "Unique and persistent identifier within WoRMS. Primary key in the database"
+                    type: integer
+                    example: '127160'
+                Attributes:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Attribute'
+                    xml:
+                        name: Attributes
+                        wrapped: true
+            type: object
+            xml:
+                name: AphiaAttributeSet
+                wrapped: false
+        BadRequestError:
+            title: BadRequestError
+            type: object
+            xml:
+                name: "response"
+            properties:
+                code:
+                    type: integer
+                    example: 400
+                success:
+                    type: boolean
+                    example: false
+                errors:
+                    type: array
+                    xml:
+                        name: "errors"
+                        wrapped: true
+                    items:
+                        xml:
+                            name: "error"
+                        type: object
+                        properties:
+                            type:
+                                type: string
+                                example: 'validation_error'
+                            message:
+                                type: string
+                                example: 'parameter is required'

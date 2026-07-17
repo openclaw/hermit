@@ -1,0 +1,93 @@
+# Lobster Encounters Progress
+
+Active PRD: `docs/lobster-command-prd.md`
+Planning classification: Large multi-session product build
+State: Active
+Completed items: `LOB-GATE-1`, `LOB-TAX-1`, `LOB-META-1`,
+`LOB-DATA-1`
+Blocked item: `LOB-INFRA-1`
+Implementation started: Yes
+Last verified: July 17, 2026
+
+## Verified Baseline
+
+- Slap artwork commit: `da5edf3065a5440241f80fa4d07be4cb72384151`
+- Slap delivery commit: `409bd7c4ea0e2e5230d0ce5d4bfbb7a2472532d3`
+- Scene matrix: 327 unique WebP assets at exactly `768x512`
+- Scene manifest: 327 unique prompt, source, and final hashes
+- Asset size range: 70,084 to 82,760 bytes
+- Slap focused tests: 17 passed, 0 failed
+- Full repository tests at delivery: 131 passed, 0 failed
+- Typecheck and deploy dry-run: Passed
+- Cloudflare production build and CodeQL for `d164432`: Passed
+- `LOB-GATE-1`: Complete
+- `LOB-DATA-1`: Complete
+  - Shared actor, target, and channel cooldown ledger.
+  - Deterministic lobster encounter persistence and message binding.
+  - Atomic target response and counter-event persistence.
+  - 145 tests passed; typecheck and deploy dry-run passed.
+- `LOB-TAX-1`: Complete
+  - Frozen WoRMS snapshot: `worms-2026-07-17T060825613Z`.
+  - 264 accepted extant marine species across the six approved families.
+  - Raw archive checksum:
+    `dc4935582175008791c1639bc9d05f8aab2f81743501e98413e10562c777ebb9`.
+  - Normalized checksum:
+    `304e62d2180e380ddd9f7d8f5fbce351edd77605ea79a5e4c7a9042fd4e70152`.
+  - 15 focused tests and typecheck passed.
+- `LOB-META-1`: Complete
+  - 264 metadata records and 1,056 deterministic scene plans.
+  - Every production scene is exactly `768x512` WebP with no larger retained
+    v1 master.
+  - Evidence-backed actions include pinch for 71 species, antenna strike for
+    61 species, and tail escape for 121 species.
+  - Unsupported anatomy remains prohibited.
+  - Dataset checksum:
+    `a3d398731673682115622a6673f1e3f330db795d188c378d342fdd8d6edc554d`.
+  - 23 focused tests, 183 full-suite tests, deterministic rebuild, quotas, and
+    typecheck passed.
+  - Peter Steinberger is designated but has not yet completed human scientific
+    sign-off.
+- Scientific anatomy approver: Peter Steinberger
+- Final artwork approver: Hannes Rudolph
+- `/lobster` schema, storage, command, and artwork generation: Not started
+
+## Active Blockers
+
+- `LOB-INFRA-1` needs authenticated Cloudflare access to provision
+  `hermit-lobster-art-prod` and `lobster-assets.openclaw.ai`.
+
+## Active Constraints
+
+- Keep the command named `/lobster`; pinching is one species-dependent action.
+- Include every accepted extant marine species in the approved six families.
+- Never assign a species an action its anatomy cannot perform.
+- Production artwork generation and final output are exactly `768x512` WebP;
+  no larger v1 masters are retained.
+- Commands remain guild-only and restricted to Community Team, Maintainer, and
+  Maintainer Guest roles.
+- Discord responses use Carbon components v2.
+- Do not implement or generate production assets before `LOB-GATE-1` completes.
+- The Pinchy parent owns this file, the PRD, integration state, and Git operations.
+
+## Pinchy Accounting
+
+- Parent waves dispatched: 3
+- Coordinator sessions spawned/completed: 4/4
+- Final-verification reserve: 2 sessions
+- Workflow active-thread cap: 6
+- Planning lap agents spawned/completed: 4/4
+- Persistence lap agents spawned/completed: 4/4
+- Taxonomy lap agents spawned/completed: 3/3
+- Metadata lap agents spawned/completed: 8/8
+- Parent bounded observation extensions: 1
+- Liveness interventions: 8 deliberate coordinator-owned resumes
+
+## Active Coordinator Ownership
+
+- None.
+
+## Next Action
+
+Authorize Wrangler OAuth or provide a Cloudflare API token, then execute
+`LOB-INFRA-1`. `LOB-DISCORD-1` and `LOB-ART-PLAN` remain blocked on that
+infrastructure item.

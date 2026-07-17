@@ -1,0 +1,543 @@
+{
+  "schemaVersion": 1,
+  "taxonomy": {
+    "snapshotId": "worms-2026-07-17T060825613Z",
+    "normalizedPath": "data/lobster/taxonomy/lobster-species.json",
+    "normalizedSha256": "304e62d2180e380ddd9f7d8f5fbce351edd77605ea79a5e4c7a9042fd4e70152",
+    "datasetCitation": {
+      "id": "worms-dataset",
+      "title": "World Register of Marine Species",
+      "authors": "WoRMS Editorial Board",
+      "provider": "Flanders Marine Institute",
+      "publicationYear": 2026,
+      "url": "https://www.marinespecies.org",
+      "citation": "WoRMS Editorial Board (2026). World Register of Marine Species. Available from https://www.marinespecies.org at VLIZ. Accessed 2026-07-17. doi:10.14284/170.",
+      "supportedClaims": [
+        "dataset taxonomy provenance"
+      ]
+    }
+  },
+  "scientificAnatomyApproval": {
+    "designatedApprover": "Peter Steinberger",
+    "status": "designated-not-reviewed",
+    "statement": "Peter Steinberger is the designated scientific anatomy approver. This source configuration does not claim that he reviewed or approved the generated dataset."
+  },
+  "evidencePolicy": {
+    "unknownCapabilityFailsClosed": true,
+    "capabilityEvidenceRequiresExactClaimBinding": true,
+    "displayNameFallback": "scientificName"
+  },
+  "citationRegistry": [
+    {
+      "id": "fao-holthuis-1991",
+      "scope": "family-anatomy",
+      "title": "Marine Lobsters of the World: An Annotated and Illustrated Catalogue of Species of Interest to Fisheries Known to Date",
+      "authors": "L. B. Holthuis",
+      "provider": "Food and Agriculture Organization of the United Nations",
+      "publicationYear": 1991,
+      "url": "https://www.fao.org/4/t0411e/t0411e00.htm",
+      "citation": "Holthuis, L. B. (1991). Marine Lobsters of the World. FAO Species Catalogue, Volume 13, FAO Fisheries Synopsis No. 125.",
+      "supportedClaims": [
+        "Nephropidae clawed-lobster family body plan",
+        "Nephropidae chelate walking-leg morphology",
+        "Nephropidae family diagnosis has enlarged first-pereiopod chelae",
+        "Palinuridae spiny-lobster family body plan and enlarged antennae",
+        "Palinuridae family diagnosis lacks large true first-leg chelae",
+        "Scyllaridae slipper-lobster family body plan and flattened plate-like antennae",
+        "Scyllaridae family diagnosis lacks large true first-leg chelae"
+      ]
+    },
+    {
+      "id": "ahyong-2009-polychelidae",
+      "scope": "family-anatomy",
+      "title": "The Polychelidan Lobsters: Phylogeny and Systematics (Polychelida: Polychelidae)",
+      "authors": "Shane T. Ahyong",
+      "provider": "CRC Press",
+      "publicationYear": 2009,
+      "url": "https://doi.org/10.1201/9781420092592-c19",
+      "citation": "Ahyong, S. T. (2009). The Polychelidan Lobsters: Phylogeny and Systematics (Polychelida: Polychelidae). In Decapod Crustacean Phylogenetics.",
+      "supportedClaims": [
+        "Polychelidae deep-sea polychelid family body plan",
+        "Polychelidae dorsoventrally flattened body",
+        "Polychelidae chelate first four pereopod pairs"
+      ]
+    },
+    {
+      "id": "karasawa-2013-lobster-diagnoses",
+      "scope": "family-anatomy",
+      "title": "Phylogeny and systematics of extant and extinct lobsters",
+      "authors": "Hiroaki Karasawa; Carrie E. Schweitzer; Rodney M. Feldmann",
+      "provider": "Journal of Crustacean Biology",
+      "publicationYear": 2013,
+      "url": "https://doi.org/10.1163/1937240X-00002111",
+      "citation": "Karasawa, H., Schweitzer, C. E., & Feldmann, R. M. (2013). Phylogeny and systematics of extant and extinct lobsters. Journal of Crustacean Biology, 33(1), 78-123.",
+      "supportedClaims": [
+        "Enoplometopidae reef-lobster family body plan",
+        "Enoplometopidae family diagnosis has large first-pair true chelae",
+        "Glypheidae glypheoid-lobster family body plan",
+        "Glypheidae family diagnosis has strongly subchelate rather than large true-chelate first legs"
+      ]
+    },
+    {
+      "id": "barshaw-2003-tail-escape",
+      "scope": "family-behavior",
+      "title": "Offense versus defense: responses of three morphological types of lobsters to predation",
+      "authors": "D. E. Barshaw; K. L. Lavalli; E. Spanier",
+      "provider": "Marine Ecology Progress Series",
+      "publicationYear": 2003,
+      "url": "https://doi.org/10.3354/meps256171",
+      "citation": "Barshaw, D. E., Lavalli, K. L., & Spanier, E. (2003). Offense versus defense: responses of three morphological types of lobsters to predation. Marine Ecology Progress Series, 256, 171-182.",
+      "supportedClaims": [
+        "Clawed-lobster morphological type uses rapid tail-flip escape responses under predator threat"
+      ]
+    },
+    {
+      "id": "patek-oakley-2003-palinurid-defense",
+      "scope": "family-behavior",
+      "title": "Comparative tests of evolutionary trade-offs in a palinurid lobster acoustic system",
+      "authors": "S. N. Patek; T. H. Oakley",
+      "provider": "Evolution",
+      "publicationYear": 2003,
+      "url": "https://doi.org/10.1111/j.0014-3820.2003.tb00387.x",
+      "citation": "Patek, S. N., & Oakley, T. H. (2003). Comparative tests of evolutionary trade-offs in a palinurid lobster acoustic system. Evolution, 57(9), 2082-2100.",
+      "supportedClaims": [
+        "Palinuridae comparative family study identifies antennae as predator-defense structures and tests antennal force production"
+      ]
+    },
+    {
+      "id": "briones-fourzan-2006-spiny-escape",
+      "scope": "family-behavior",
+      "title": "Defense mechanisms and antipredator behavior in two sympatric species of spiny lobsters, Panulirus argus and P. guttatus",
+      "authors": "P. Briones-Fourzan; M. Perez-Ortiz; E. Lozano-Alvarez",
+      "provider": "Marine Biology",
+      "publicationYear": 2006,
+      "url": "https://doi.org/10.1007/s00227-005-0191-2",
+      "citation": "Briones-Fourzan, P., Perez-Ortiz, M., & Lozano-Alvarez, E. (2006). Defense mechanisms and antipredator behavior in two sympatric species of spiny lobsters, Panulirus argus and P. guttatus. Marine Biology, 149, 227-239.",
+      "supportedClaims": [
+        "Escape-response parameters studied in Panulirus argus and Panulirus guttatus are described as common to most spiny lobsters"
+      ]
+    },
+    {
+      "id": "buscaino-2011-spiny-defense",
+      "scope": "species-behavior",
+      "title": "Defensive strategies of European spiny lobster Palinurus elephas during predator attack",
+      "authors": "G. Buscaino; F. Filiciotto; M. Gristina; G. Buffa; A. Bellante; V. Maccarrone; B. Patti; S. Mazzola",
+      "provider": "Marine Ecology Progress Series",
+      "publicationYear": 2011,
+      "url": "https://doi.org/10.3354/meps08957",
+      "citation": "Buscaino, G., Filiciotto, F., Gristina, M., Buffa, G., Bellante, A., Maccarrone, V., Patti, B., & Mazzola, S. (2011). Defensive strategies of European spiny lobster Palinurus elephas during predator attack. Marine Ecology Progress Series, 423, 143-154.",
+      "supportedClaims": [
+        "Palinurus elephas uses antennae to strike during predator attack",
+        "Palinurus elephas uses tail-flip escape during predator attack"
+      ]
+    }
+  ],
+  "capabilityClaimBindings": [
+    { "family": "Nephropidae", "capability": "largeGraspingClaws", "value": true, "citationId": "fao-holthuis-1991", "claim": "Nephropidae family diagnosis has enlarged first-pereiopod chelae" },
+    { "family": "Nephropidae", "capability": "tailEscapeBehavior", "value": true, "citationId": "barshaw-2003-tail-escape", "claim": "Clawed-lobster morphological type uses rapid tail-flip escape responses under predator threat" },
+    { "family": "Enoplometopidae", "capability": "largeGraspingClaws", "value": true, "citationId": "karasawa-2013-lobster-diagnoses", "claim": "Enoplometopidae family diagnosis has large first-pair true chelae" },
+    { "family": "Palinuridae", "capability": "largeGraspingClaws", "value": false, "citationId": "fao-holthuis-1991", "claim": "Palinuridae family diagnosis lacks large true first-leg chelae" },
+    { "family": "Palinuridae", "capability": "prominentAntennae", "value": true, "citationId": "fao-holthuis-1991", "claim": "Palinuridae spiny-lobster family body plan and enlarged antennae" },
+    { "family": "Palinuridae", "capability": "antennaStrikingBehavior", "value": true, "citationId": "patek-oakley-2003-palinurid-defense", "claim": "Palinuridae comparative family study identifies antennae as predator-defense structures and tests antennal force production" },
+    { "family": "Palinuridae", "capability": "antennaStrikingBehavior", "value": true, "citationId": "buscaino-2011-spiny-defense", "claim": "Palinurus elephas uses antennae to strike during predator attack" },
+    { "family": "Palinuridae", "capability": "tailEscapeBehavior", "value": true, "citationId": "briones-fourzan-2006-spiny-escape", "claim": "Escape-response parameters studied in Panulirus argus and Panulirus guttatus are described as common to most spiny lobsters" },
+    { "family": "Palinuridae", "capability": "tailEscapeBehavior", "value": true, "citationId": "buscaino-2011-spiny-defense", "claim": "Palinurus elephas uses tail-flip escape during predator attack" },
+    { "family": "Scyllaridae", "capability": "largeGraspingClaws", "value": false, "citationId": "fao-holthuis-1991", "claim": "Scyllaridae family diagnosis lacks large true first-leg chelae" },
+    { "family": "Scyllaridae", "capability": "flattenedPlateAntennae", "value": true, "citationId": "fao-holthuis-1991", "claim": "Scyllaridae slipper-lobster family body plan and flattened plate-like antennae" },
+    { "family": "Polychelidae", "capability": "multipleChelatePereopods", "value": true, "citationId": "ahyong-2009-polychelidae", "claim": "Polychelidae chelate first four pereopod pairs" },
+    { "family": "Glypheidae", "capability": "largeGraspingClaws", "value": false, "citationId": "karasawa-2013-lobster-diagnoses", "claim": "Glypheidae family diagnosis has strongly subchelate rather than large true-chelate first legs" },
+    { "family": "Glypheidae", "capability": "subchelateFirstLegs", "value": true, "citationId": "karasawa-2013-lobster-diagnoses", "claim": "Glypheidae family diagnosis has strongly subchelate rather than large true-chelate first legs" }
+  ],
+  "familyEvidenceProfiles": [
+    {
+      "family": "Nephropidae",
+      "broadBodyPlan": "clawed-lobster body plan",
+      "anatomyFacts": [
+        "The first three pairs of walking legs are chelate in the family-level diagnosis.",
+        "The first walking-leg chelae are much larger than the following chelae in the family-level diagnosis."
+      ],
+      "citationIds": [
+        "fao-holthuis-1991",
+        "barshaw-2003-tail-escape"
+      ],
+      "bodyPlanCitationIds": ["fao-holthuis-1991"],
+      "capabilityEvidence": [
+        { "capability": "largeGraspingClaws", "value": true, "evidenceScope": "Family-wide Nephropidae diagnosis supports enlarged first-leg chelae.", "citationIds": ["fao-holthuis-1991"], "supportedClaims": ["Nephropidae family diagnosis has enlarged first-pereiopod chelae"] },
+        { "capability": "prominentAntennae", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "antennaStrikingBehavior", "value": "unknown", "evidenceScope": "No committed family-wide behavioral evidence enables antenna striking.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "tailEscapeBehavior", "value": true, "evidenceScope": "Clawed-lobster body-plan behavior evidence supports rapid tail-flip escape under predator threat.", "citationIds": ["barshaw-2003-tail-escape"], "supportedClaims": ["Clawed-lobster morphological type uses rapid tail-flip escape responses under predator threat"] },
+        { "capability": "flattenedPlateAntennae", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "multipleChelatePereopods", "value": "unknown", "evidenceScope": "Chelate morphology is recorded, but this separate staged capability is not enabled.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "subchelateFirstLegs", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "forcefulBodyContact", "value": "unknown", "evidenceScope": "No committed family-wide evidence supports forceful body contact.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "ambushBehavior", "value": "unknown", "evidenceScope": "No committed family-wide evidence supports ambush behavior.", "citationIds": [], "supportedClaims": [] }
+      ],
+      "sceneActions": ["pinch", "tail-escape", "large-chela-stand-off", "refusal"]
+    },
+    {
+      "family": "Enoplometopidae",
+      "broadBodyPlan": "reef-lobster body plan",
+      "anatomyFacts": [
+        "The first pair of walking legs bears large true chelae in the family diagnosis."
+      ],
+      "citationIds": [
+        "karasawa-2013-lobster-diagnoses"
+      ],
+      "bodyPlanCitationIds": ["karasawa-2013-lobster-diagnoses"],
+      "capabilityEvidence": [
+        { "capability": "largeGraspingClaws", "value": true, "evidenceScope": "Family-wide Enoplometopidae diagnosis supports large first-pair true chelae.", "citationIds": ["karasawa-2013-lobster-diagnoses"], "supportedClaims": ["Enoplometopidae family diagnosis has large first-pair true chelae"] },
+        { "capability": "prominentAntennae", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "antennaStrikingBehavior", "value": "unknown", "evidenceScope": "No committed family-wide behavioral evidence enables antenna striking.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "tailEscapeBehavior", "value": "unknown", "evidenceScope": "No committed family-wide behavioral evidence enables tail escape.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "flattenedPlateAntennae", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "multipleChelatePereopods", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this separate staged capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "subchelateFirstLegs", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "forcefulBodyContact", "value": "unknown", "evidenceScope": "No committed family-wide evidence supports forceful body contact.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "ambushBehavior", "value": "unknown", "evidenceScope": "No committed family-wide evidence supports ambush behavior.", "citationIds": [], "supportedClaims": [] }
+      ],
+      "sceneActions": ["pinch", "large-chela-stand-off", "refusal", "ceremonial-display"]
+    },
+    {
+      "family": "Palinuridae",
+      "broadBodyPlan": "spiny-lobster body plan",
+      "anatomyFacts": [
+        "The family-level body plan has enlarged, robust antennae.",
+        "The family profile does not support a general large-grasping-chela assumption."
+      ],
+      "citationIds": [
+        "fao-holthuis-1991",
+        "patek-oakley-2003-palinurid-defense",
+        "briones-fourzan-2006-spiny-escape",
+        "buscaino-2011-spiny-defense"
+      ],
+      "bodyPlanCitationIds": ["fao-holthuis-1991"],
+      "capabilityEvidence": [
+        { "capability": "largeGraspingClaws", "value": false, "evidenceScope": "Palinuridae family diagnosis lacks large true first-leg chelae.", "citationIds": ["fao-holthuis-1991"], "supportedClaims": ["Palinuridae family diagnosis lacks large true first-leg chelae"] },
+        { "capability": "prominentAntennae", "value": true, "evidenceScope": "Family-wide spiny-lobster morphology supports enlarged robust antennae.", "citationIds": ["fao-holthuis-1991"], "supportedClaims": ["Palinuridae spiny-lobster family body plan and enlarged antennae"] },
+        { "capability": "antennaStrikingBehavior", "value": true, "evidenceScope": "Family/body-plan default combines a comparative Palinuridae study of antennae as predator-defense force structures with direct antenna-strike observation in Palinurus elephas; it is not a species-specific determination for every record.", "citationIds": ["patek-oakley-2003-palinurid-defense", "buscaino-2011-spiny-defense"], "supportedClaims": ["Palinuridae comparative family study identifies antennae as predator-defense structures and tests antennal force production", "Palinurus elephas uses antennae to strike during predator attack"] },
+        { "capability": "tailEscapeBehavior", "value": true, "evidenceScope": "Family/body-plan default combines published escape-response parameters described as common to most spiny lobsters with direct tail-flip observation in Palinurus elephas; it is not a species-specific determination for every record.", "citationIds": ["briones-fourzan-2006-spiny-escape", "buscaino-2011-spiny-defense"], "supportedClaims": ["Escape-response parameters studied in Panulirus argus and Panulirus guttatus are described as common to most spiny lobsters", "Palinurus elephas uses tail-flip escape during predator attack"] },
+        { "capability": "flattenedPlateAntennae", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "multipleChelatePereopods", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "subchelateFirstLegs", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "forcefulBodyContact", "value": "unknown", "evidenceScope": "No committed family-wide evidence supports forceful body contact.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "ambushBehavior", "value": "unknown", "evidenceScope": "No committed family-wide evidence supports ambush behavior.", "citationIds": [], "supportedClaims": [] }
+      ],
+      "sceneActions": ["antenna-strike", "tail-escape", "antenna-stand-off", "refusal"]
+    },
+    {
+      "family": "Scyllaridae",
+      "broadBodyPlan": "slipper-lobster body plan",
+      "anatomyFacts": [
+        "The body is dorsoventrally flattened in the family-level diagnosis.",
+        "The second antennae are strongly flattened into plate-like structures."
+      ],
+      "citationIds": [
+        "fao-holthuis-1991"
+      ],
+      "bodyPlanCitationIds": ["fao-holthuis-1991"],
+      "capabilityEvidence": [
+        { "capability": "largeGraspingClaws", "value": false, "evidenceScope": "Scyllaridae family diagnosis lacks large true first-leg chelae.", "citationIds": ["fao-holthuis-1991"], "supportedClaims": ["Scyllaridae family diagnosis lacks large true first-leg chelae"] },
+        { "capability": "prominentAntennae", "value": "unknown", "evidenceScope": "The antennae are plate-like rather than enabled as a separate prominent-antenna capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "antennaStrikingBehavior", "value": "unknown", "evidenceScope": "Flattened plate-like second antennae do not establish a family-wide strike behavior; the action remains prohibited.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "tailEscapeBehavior", "value": "unknown", "evidenceScope": "Family defensive behavior is heterogeneous; no family-wide tail-escape default is enabled.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "flattenedPlateAntennae", "value": true, "evidenceScope": "Family-wide Scyllaridae diagnosis supports flattened plate-like second antennae.", "citationIds": ["fao-holthuis-1991"], "supportedClaims": ["Scyllaridae slipper-lobster family body plan and flattened plate-like antennae"] },
+        { "capability": "multipleChelatePereopods", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "subchelateFirstLegs", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "forcefulBodyContact", "value": "unknown", "evidenceScope": "No committed family-wide evidence supports forceful body contact.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "ambushBehavior", "value": "unknown", "evidenceScope": "No committed family-wide evidence supports ambush behavior.", "citationIds": [], "supportedClaims": [] }
+      ],
+      "sceneActions": ["antenna-plate-refusal", "refusal", "ceremonial-display", "editorial-observe"]
+    },
+    {
+      "family": "Polychelidae",
+      "broadBodyPlan": "deep-sea polychelid lobster body plan",
+      "anatomyFacts": [
+        "The body is dorsoventrally flattened in the family-level diagnosis.",
+        "The first four pereopod pairs are chelate in the family-level diagnosis."
+      ],
+      "citationIds": [
+        "ahyong-2009-polychelidae"
+      ],
+      "bodyPlanCitationIds": ["ahyong-2009-polychelidae"],
+      "capabilityEvidence": [
+        { "capability": "largeGraspingClaws", "value": "unknown", "evidenceScope": "Multi-chelate morphology does not establish large grasping first chelae.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "prominentAntennae", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "antennaStrikingBehavior", "value": "unknown", "evidenceScope": "No committed family-wide behavioral evidence enables antenna striking.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "tailEscapeBehavior", "value": "unknown", "evidenceScope": "No committed family-wide behavioral evidence enables tail escape.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "flattenedPlateAntennae", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "multipleChelatePereopods", "value": true, "evidenceScope": "Family-wide Polychelidae diagnosis supports chelate first four pereopod pairs for staged non-contact display.", "citationIds": ["ahyong-2009-polychelidae"], "supportedClaims": ["Polychelidae chelate first four pereopod pairs"] },
+        { "capability": "subchelateFirstLegs", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "forcefulBodyContact", "value": "unknown", "evidenceScope": "No committed family-wide evidence supports forceful body contact.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "ambushBehavior", "value": "unknown", "evidenceScope": "No committed family-wide evidence supports ambush behavior.", "citationIds": [], "supportedClaims": [] }
+      ],
+      "sceneActions": ["multi-chela-stand-off", "refusal", "ceremonial-display", "editorial-observe"]
+    },
+    {
+      "family": "Glypheidae",
+      "broadBodyPlan": "glypheoid-lobster body plan",
+      "anatomyFacts": [
+        "The first walking legs are strongly subchelate rather than large true chelae in the family diagnosis."
+      ],
+      "citationIds": [
+        "karasawa-2013-lobster-diagnoses"
+      ],
+      "bodyPlanCitationIds": ["karasawa-2013-lobster-diagnoses"],
+      "capabilityEvidence": [
+        { "capability": "largeGraspingClaws", "value": false, "evidenceScope": "Strongly subchelate first legs do not support the large true-chela pinch action.", "citationIds": ["karasawa-2013-lobster-diagnoses"], "supportedClaims": ["Glypheidae family diagnosis has strongly subchelate rather than large true-chelate first legs"] },
+        { "capability": "prominentAntennae", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "antennaStrikingBehavior", "value": "unknown", "evidenceScope": "No committed family-wide behavioral evidence enables antenna striking.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "tailEscapeBehavior", "value": "unknown", "evidenceScope": "No committed family-wide behavioral evidence enables tail escape.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "flattenedPlateAntennae", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "multipleChelatePereopods", "value": "unknown", "evidenceScope": "No committed family-wide evidence enables this capability.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "subchelateFirstLegs", "value": true, "evidenceScope": "Family-wide Glypheidae diagnosis supports strongly subchelate first legs for staged non-contact display.", "citationIds": ["karasawa-2013-lobster-diagnoses"], "supportedClaims": ["Glypheidae family diagnosis has strongly subchelate rather than large true-chelate first legs"] },
+        { "capability": "forcefulBodyContact", "value": "unknown", "evidenceScope": "No committed family-wide evidence supports forceful body contact.", "citationIds": [], "supportedClaims": [] },
+        { "capability": "ambushBehavior", "value": "unknown", "evidenceScope": "No committed family-wide evidence supports ambush behavior.", "citationIds": [], "supportedClaims": [] }
+      ],
+      "sceneActions": ["subchelate-stand-off", "refusal", "ceremonial-display", "editorial-observe"]
+    }
+  ],
+  "actions": {
+    "fallback": [
+      "refusal",
+      "ceremonial-display",
+      "editorial-observe",
+      "editorial-pose"
+    ],
+    "morphology": [
+      "large-chela-stand-off",
+      "antenna-stand-off",
+      "antenna-plate-refusal",
+      "multi-chela-stand-off",
+      "subchelate-stand-off"
+    ],
+    "physical": [
+      "pinch",
+      "antenna-strike",
+      "tail-escape",
+      "body-check",
+      "ambush"
+    ]
+  },
+  "scenes": {
+    "mediums": [
+      { "id": "documentary-photo", "kind": "photorealistic" },
+      { "id": "cinematic-photo", "kind": "photorealistic" },
+      { "id": "fashion-editorial-photo", "kind": "photorealistic" },
+      { "id": "sports-broadcast-photo", "kind": "photorealistic" },
+      { "id": "film-noir-photo", "kind": "photorealistic" },
+      { "id": "miniature-diorama-photo", "kind": "photorealistic" },
+      { "id": "underwater-macro-photo", "kind": "photorealistic" },
+      { "id": "museum-archive-photo", "kind": "photorealistic" },
+      { "id": "gouache-illustration", "kind": "non-photorealistic" },
+      { "id": "watercolor-illustration", "kind": "non-photorealistic" },
+      { "id": "oil-painting-tableau", "kind": "non-photorealistic" },
+      { "id": "inked-comic-panel", "kind": "non-photorealistic" },
+      { "id": "cel-animation-frame", "kind": "non-photorealistic" },
+      { "id": "pulp-adventure-illustration", "kind": "non-photorealistic" },
+      { "id": "surreal-collage", "kind": "non-photorealistic" },
+      { "id": "vintage-scientific-plate", "kind": "non-photorealistic" }
+    ],
+    "environments": [
+      { "id": "rocky-seafloor", "family": "natural-habitat", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "kelp-forest", "family": "natural-habitat", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "mangrove-channel", "family": "natural-habitat", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "coral-reef", "family": "reef-coast", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "tide-pool", "family": "reef-coast", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "polar-shore", "family": "reef-coast", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "storm-deck", "family": "vessel-port", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "sailing-ship", "family": "vessel-port", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "working-harbor", "family": "vessel-port", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "tram-platform", "family": "street-transit", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": true },
+      { "id": "rainy-street", "family": "street-transit", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "railway-concourse", "family": "street-transit", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": true },
+      { "id": "harbor-market", "family": "market-festival", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "lantern-festival", "family": "market-festival", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "carnival-midway", "family": "market-festival", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "open-air-theater", "family": "theater-museum", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "natural-history-museum", "family": "theater-museum", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": true },
+      { "id": "opera-backstage", "family": "theater-museum", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": true },
+      { "id": "arena-floor", "family": "arena-sport", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "stadium-tunnel", "family": "arena-sport", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": true },
+      { "id": "regatta-finish", "family": "arena-sport", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "castle-courtyard", "family": "castle-mythic", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "mythic-grotto", "family": "castle-mythic", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "ancient-amphitheater", "family": "castle-mythic", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "deserted-laboratory", "family": "laboratory-expedition", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "mountain-observatory", "family": "laboratory-expedition", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "field-expedition-camp", "family": "laboratory-expedition", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "submersible-bay", "family": "deep-sea-vehicle", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": true },
+      { "id": "deep-sea-plain", "family": "deep-sea-vehicle", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "hydrothermal-ridge", "family": "deep-sea-vehicle", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "retro-spaceport", "family": "fictional-surreal", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "alien-ocean", "family": "fictional-surreal", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "clockwork-city", "family": "fictional-surreal", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false },
+      { "id": "civic-hearing-room", "family": "civic-cultural", "isOfficeBoardroomOrHearing": true, "hasConventionalModernWorkplace": true },
+      { "id": "public-library-hall", "family": "civic-cultural", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": true },
+      { "id": "city-plaza", "family": "civic-cultural", "isOfficeBoardroomOrHearing": false, "hasConventionalModernWorkplace": false }
+    ],
+    "eras": [
+      { "id": "prehistoric-imagined" },
+      { "id": "classical-antiquity" },
+      { "id": "medieval" },
+      { "id": "renaissance" },
+      { "id": "age-of-sail" },
+      { "id": "victorian" },
+      { "id": "early-1900s" },
+      { "id": "1920s" },
+      { "id": "1940s" },
+      { "id": "1960s" },
+      { "id": "1980s" },
+      { "id": "1990s" },
+      { "id": "contemporary" },
+      { "id": "near-future" },
+      { "id": "far-future" },
+      { "id": "timeless-natural" },
+      { "id": "mythic-timeless" },
+      { "id": "alternate-history" }
+    ],
+    "cameraPositions": [
+      { "id": "eye-level" },
+      { "id": "low-angle" },
+      { "id": "high-angle" },
+      { "id": "overhead" },
+      { "id": "ground-level" },
+      { "id": "waterline" },
+      { "id": "three-quarter-front" },
+      { "id": "three-quarter-rear" },
+      { "id": "profile" },
+      { "id": "head-on" },
+      { "id": "distant-observer" },
+      { "id": "shoulder-height" },
+      { "id": "submersible-window" },
+      { "id": "stage-wing" },
+      { "id": "crowd-level" },
+      { "id": "macro-proximity" }
+    ],
+    "lensLanguages": [
+      { "id": "14mm-ultrawide" },
+      { "id": "20mm-wide" },
+      { "id": "24mm-environmental" },
+      { "id": "28mm-reportage" },
+      { "id": "35mm-documentary" },
+      { "id": "40mm-natural" },
+      { "id": "50mm-standard" },
+      { "id": "58mm-vintage" },
+      { "id": "70mm-compressed" },
+      { "id": "85mm-portrait" },
+      { "id": "100mm-macro" },
+      { "id": "105mm-detail" },
+      { "id": "135mm-telephoto" },
+      { "id": "200mm-long-lens" },
+      { "id": "tilt-shift" },
+      { "id": "split-diopter" }
+    ],
+    "compositions": [
+      { "id": "centered-portrait" },
+      { "id": "wide-establishing" },
+      { "id": "low-angle-focal" },
+      { "id": "overhead-tableau" },
+      { "id": "diagonal-motion" },
+      { "id": "symmetrical-stage" },
+      { "id": "foreground-reveal" },
+      { "id": "layered-depth" },
+      { "id": "silhouette-profile" },
+      { "id": "close-detail" },
+      { "id": "panoramic-procession" },
+      { "id": "off-center-editorial" },
+      { "id": "frame-within-frame" },
+      { "id": "circular-grouping" },
+      { "id": "split-depth" },
+      { "id": "monumental-scale" }
+    ],
+    "lighting": [
+      { "id": "soft-overcast" },
+      { "id": "hard-midday" },
+      { "id": "golden-hour" },
+      { "id": "blue-hour" },
+      { "id": "moonlit" },
+      { "id": "bioluminescent" },
+      { "id": "museum-gallery" },
+      { "id": "theatrical-spotlight" },
+      { "id": "neon-night" },
+      { "id": "lantern-lit" },
+      { "id": "underwater-caustics" },
+      { "id": "submersible-beam" },
+      { "id": "window-side" },
+      { "id": "high-key-studio" },
+      { "id": "low-key-noir" },
+      { "id": "storm-flash" }
+    ],
+    "palettes": [
+      { "id": "ocean-blue-coral-red" },
+      { "id": "kelp-green-silver" },
+      { "id": "charcoal-amber" },
+      { "id": "cyan-magenta" },
+      { "id": "ivory-ink" },
+      { "id": "vermilion-teal" },
+      { "id": "navy-gold" },
+      { "id": "moss-lilac" },
+      { "id": "black-white-crimson" },
+      { "id": "copper-turquoise" },
+      { "id": "slate-yellow" },
+      { "id": "ultramarine-orange" },
+      { "id": "seafoam-burgundy" },
+      { "id": "graphite-pastel" },
+      { "id": "indigo-lime" },
+      { "id": "natural-spectrum" }
+    ],
+    "tones": [
+      { "id": "wry" },
+      { "id": "majestic" },
+      { "id": "curious" },
+      { "id": "suspenseful" },
+      { "id": "serene" },
+      { "id": "celebratory" },
+      { "id": "mysterious" },
+      { "id": "playful" },
+      { "id": "solemn" },
+      { "id": "adventurous" },
+      { "id": "dreamlike" },
+      { "id": "dramatic" },
+      { "id": "observational" },
+      { "id": "romantic" },
+      { "id": "eerie" },
+      { "id": "triumphant" }
+    ],
+    "castPatterns": [
+      { "id": "woman-scientist-solo", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "dark", "ageBand": "middle-aged", "bodyType": "average", "wardrobe": "field-science gear", "role": "marine scientist", "prominence": "prominent" }] },
+      { "id": "woman-sailor-solo", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "light", "ageBand": "young-adult", "bodyType": "athletic", "wardrobe": "weatherproof sailing gear", "role": "sailor", "prominence": "prominent" }] },
+      { "id": "women-diverse-duo", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "medium", "ageBand": "young-adult", "bodyType": "slender", "wardrobe": "expedition clothing", "role": "ecologist", "prominence": "prominent" }, { "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "dark", "ageBand": "older-adult", "bodyType": "broad", "wardrobe": "expedition clothing", "role": "navigator", "prominence": "supporting" }] },
+      { "id": "woman-and-man-researchers", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "light", "ageBand": "middle-aged", "bodyType": "plus-size", "wardrobe": "research coveralls", "role": "principal investigator", "prominence": "prominent" }, { "adultStatus": "adult", "genderPresentation": "man", "skinToneGroup": "medium", "ageBand": "young-adult", "bodyType": "average", "wardrobe": "research coveralls", "role": "research technician", "prominence": "supporting" }] },
+      { "id": "older-woman-curator", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "medium", "ageBand": "older-adult", "bodyType": "petite", "wardrobe": "museum professional attire", "role": "curator", "prominence": "prominent" }] },
+      { "id": "woman-athlete-solo", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "dark", "ageBand": "young-adult", "bodyType": "muscular", "wardrobe": "competition kit", "role": "athlete", "prominence": "prominent" }] },
+      { "id": "woman-captain-and-crew", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "light", "ageBand": "middle-aged", "bodyType": "tall", "wardrobe": "captain's foul-weather gear", "role": "captain", "prominence": "prominent" }, { "adultStatus": "adult", "genderPresentation": "nonbinary", "skinToneGroup": "varied", "ageBand": "mixed-adult", "bodyType": "varied", "wardrobe": "deck crew gear", "role": "crew", "prominence": "supporting" }] },
+      { "id": "women-festival-group", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "varied", "ageBand": "mixed-adult", "bodyType": "varied", "wardrobe": "festival clothing", "role": "festival participants", "prominence": "prominent" }] },
+      { "id": "woman-knight-solo", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "dark", "ageBand": "middle-aged", "bodyType": "muscular", "wardrobe": "ceremonial armor", "role": "knight", "prominence": "prominent" }] },
+      { "id": "woman-mechanic-solo", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "medium", "ageBand": "young-adult", "bodyType": "stocky", "wardrobe": "mechanic coveralls", "role": "submersible mechanic", "prominence": "prominent" }] },
+      { "id": "woman-photographer-solo", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "light", "ageBand": "older-adult", "bodyType": "average", "wardrobe": "documentary fieldwear", "role": "photographer", "prominence": "prominent" }] },
+      { "id": "woman-musician-and-crowd", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "dark", "ageBand": "young-adult", "bodyType": "slender", "wardrobe": "stage costume", "role": "musician", "prominence": "prominent" }, { "adultStatus": "adult", "genderPresentation": "nonbinary", "skinToneGroup": "varied", "ageBand": "mixed-adult", "bodyType": "varied", "wardrobe": "audience clothing", "role": "audience", "prominence": "supporting" }] },
+      { "id": "woman-explorer-solo", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "medium", "ageBand": "middle-aged", "bodyType": "athletic", "wardrobe": "polar expedition gear", "role": "explorer", "prominence": "prominent" }] },
+      { "id": "women-multigenerational-group", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "varied", "ageBand": "mixed-adult", "bodyType": "varied", "wardrobe": "community event clothing", "role": "community members", "prominence": "prominent" }] },
+      { "id": "woman-transit-worker-solo", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "light", "ageBand": "middle-aged", "bodyType": "plus-size", "wardrobe": "transit uniform", "role": "transit worker", "prominence": "prominent" }] },
+      { "id": "woman-artist-solo", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "dark", "ageBand": "older-adult", "bodyType": "petite", "wardrobe": "paint-marked studio clothes", "role": "visual artist", "prominence": "prominent" }] },
+      { "id": "woman-diver-and-team", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "medium", "ageBand": "young-adult", "bodyType": "athletic", "wardrobe": "commercial dive suit", "role": "lead diver", "prominence": "prominent" }, { "adultStatus": "adult", "genderPresentation": "man", "skinToneGroup": "varied", "ageBand": "mixed-adult", "bodyType": "varied", "wardrobe": "dive support gear", "role": "dive team", "prominence": "supporting" }] },
+      { "id": "woman-astronomer-solo", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "woman", "skinToneGroup": "light", "ageBand": "middle-aged", "bodyType": "average", "wardrobe": "observatory workwear", "role": "astronomer", "prominence": "prominent" }] },
+      { "id": "men-diverse-duo", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "man", "skinToneGroup": "dark", "ageBand": "young-adult", "bodyType": "slender", "wardrobe": "harbor workwear", "role": "dockworker", "prominence": "prominent" }, { "adultStatus": "adult", "genderPresentation": "man", "skinToneGroup": "light", "ageBand": "middle-aged", "bodyType": "broad", "wardrobe": "harbor workwear", "role": "harbormaster", "prominence": "supporting" }] },
+      { "id": "older-man-historian", "kind": "human", "adults": [{ "adultStatus": "adult", "genderPresentation": "man", "skinToneGroup": "medium", "ageBand": "older-adult", "bodyType": "average", "wardrobe": "archival professional attire", "role": "historian", "prominence": "prominent" }] },
+      { "id": "no-humans-natural-habitat", "kind": "no-human", "adults": [] },
+      { "id": "no-humans-robot-observers", "kind": "robot", "adults": [] },
+      { "id": "no-humans-fantasy-creatures", "kind": "fantasy", "adults": [] },
+      { "id": "no-humans-object-tableau", "kind": "no-human", "adults": [] }
+    ],
+    "promptVersion": "lob-v1",
+    "humanReviewStatus": "not-reviewed",
+    "automatedReviewStatus": "validated"
+  },
+  "output": {
+    "format": "webp",
+    "width": 768,
+    "height": 512,
+    "aspectRatio": "3:2",
+    "largerMasterRetained": false
+  }
+}
