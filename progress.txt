@@ -14,6 +14,7 @@ Last verified: July 17, 2026
 
 - Slap artwork commit: `da5edf3065a5440241f80fa4d07be4cb72384151`
 - Slap delivery commit: `409bd7c4ea0e2e5230d0ce5d4bfbb7a2472532d3`
+- Lobster artwork commit: `d1ffbe7080fca127286f19e494a22b4ac89cba43`
 - Scene matrix: 327 unique WebP assets at exactly `768x512`
 - Scene manifest: 327 unique prompt, source, and final hashes
 - Asset size range: 70,084 to 82,760 bytes
@@ -88,8 +89,7 @@ Last verified: July 17, 2026
 
 - Peter Steinberger has not completed scientific anatomy approval.
 - Hannes Rudolph has not completed final artwork approval.
-- The artwork corpus must be committed before `lobsterArtworkRevision` can be
-  pinned to its immutable commit SHA.
+- The reviewed commits have not been pushed to `main`.
 
 ## Active Constraints
 
@@ -145,6 +145,5 @@ The exact species objects and scene IDs are authoritative in
 
 ## Next Action
 
-Commit the complete corpus, pin that immutable artwork commit in
-`lobsterArtworkRevision`, rerun the final repository gate, and obtain the two
-named human approvals before release.
+Obtain the two named human approvals, then push the reviewed commits to `main`
+and verify the Cloudflare build and production command registration.
