@@ -22,10 +22,10 @@ import {
 	getAppealRuling
 } from "./slapEngine.js"
 
-export const hasCommunityTeamRole = (roleIds: string[]) =>
+export const hasSlapRole = (roleIds: string[]) =>
 	roleIds.some((roleId) =>
-		slapConfig.communityTeamRoleIds.some(
-			(communityTeamRoleId) => communityTeamRoleId === roleId
+		slapConfig.authorizedRoleIds.some(
+			(authorizedRoleId) => authorizedRoleId === roleId
 		)
 	)
 
@@ -112,12 +112,12 @@ const handleSlapBackInternal = async (
 		)
 		return
 	}
-	if (!hasCommunityTeamRole(
+	if (!hasSlapRole(
 		interaction.member?.roles.map((role) => role.id) ?? []
 	)) {
 		await replyWithNotice(
 			interaction,
-			"Counter-slaps require active Community Team credentials.",
+			"Counter-slaps require an active Community Team or Maintainer role.",
 			"#f85149"
 		)
 		return

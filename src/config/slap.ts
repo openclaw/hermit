@@ -33,7 +33,11 @@ export const slapSceneUrl = (
 
 export const slapConfig = {
 	guildId: nominationConfig.guildId,
-	communityTeamRoleIds: nominationConfig.approverRoleIds,
+	authorizedRoleIds: [
+		"1477360613125787678",
+		"1457214688806047756",
+		"1503268035908075590"
+	],
 	hermitUserId: "1457407575476801641",
 	rockLobsterUserId: "1518358333101310183",
 	cooldowns: {

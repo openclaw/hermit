@@ -44,7 +44,8 @@ import {
 } from "../src/services/slapEngine.js"
 import {
 	handleSlapAppeal,
-	handleSlapBack
+	handleSlapBack,
+	hasSlapRole
 } from "../src/services/slapInteractions.js"
 import { SqliteD1Database } from "./helpers/sqliteD1.js"
 
@@ -432,7 +433,7 @@ describe("slap Carbon incident card", () => {
 })
 
 describe("/slap and Fish Slap", () => {
-	it("register both entry points as guild-only Community Team commands", () => {
+	it("register both entry points as guild-only staff commands", () => {
 		const slash = new SlapCommand()
 		const context = new FishSlapContextCommand()
 
@@ -448,7 +449,19 @@ describe("/slap and Fish Slap", () => {
 		expect(context.type).toBe(ApplicationCommandType.User)
 	})
 
-	it("rejects users outside the Community Team before touching D1", async () => {
+	it("authorizes Community Team and both Maintainer roles", () => {
+		expect(slapConfig.authorizedRoleIds).toEqual([
+			"1477360613125787678",
+			"1457214688806047756",
+			"1503268035908075590"
+		])
+		for (const roleId of slapConfig.authorizedRoleIds) {
+			expect(hasSlapRole([roleId])).toBe(true)
+		}
+		expect(hasSlapRole(["unrelated-role"])).toBe(false)
+	})
+
+	it("rejects users outside the authorized roles before touching D1", async () => {
 		const replies: unknown[] = []
 		const interaction = {
 			rawData: {
@@ -456,7 +469,7 @@ describe("/slap and Fish Slap", () => {
 				guild_id: slapConfig.guildId,
 				channel_id: "channel-1"
 			},
-			member: { roles: [] },
+			member: { roles: [{ id: "unrelated-role" }] },
 			user: { id: "actor-1" },
 			userId: "actor-1",
 			options: {
@@ -469,11 +482,13 @@ describe("/slap and Fish Slap", () => {
 
 		await new SlapCommand().run(interaction)
 
-		expect(payloadText(replies[0])).toContain("Community Team only")
+		expect(payloadText(replies[0])).toContain(
+			"Community Team or Maintainer roles only"
+		)
 		expect(replies[0]).toEqual(expect.objectContaining({ ephemeral: true }))
 	})
 
-	it("persists and publishes the canonical incident card", async () => {
+	it("allows Maintainers to publish the canonical incident card", async () => {
 		const { owner } = testDatabase()
 		try {
 			const replies: unknown[] = []
@@ -485,7 +500,7 @@ describe("/slap and Fish Slap", () => {
 					channel_id: "channel-command"
 				},
 				member: {
-					roles: slapConfig.communityTeamRoleIds.map((id) => ({ id }))
+					roles: [{ id: slapConfig.authorizedRoleIds[1] }]
 				},
 				user: { id: "actor-command" },
 				userId: "actor-command",
@@ -521,7 +536,7 @@ describe("/slap and Fish Slap", () => {
 })
 
 describe("slap buttons", () => {
-	it("restricts slap-back to the target and Community Team, then updates once", async () => {
+	it("restricts slap-back to an authorized target, then updates once", async () => {
 		const { owner, database } = testDatabase()
 		try {
 			const creation = await createEvent()
@@ -564,15 +579,15 @@ describe("slap buttons", () => {
 				"Only the named target"
 			)
 
-			const noRole = makeInteraction(event!.targetId, [])
+			const noRole = makeInteraction(event!.targetId, ["unrelated-role"])
 			await handleSlapBack(noRole.interaction, { id: event!.id })
 			expect(payloadText(noRole.replies[0])).toContain(
-				"Community Team credentials"
+				"Community Team or Maintainer role"
 			)
 
 			const target = makeInteraction(
 				event!.targetId,
-				[slapConfig.communityTeamRoleIds[0]]
+				[slapConfig.authorizedRoleIds[2]]
 			)
 			await handleSlapBack(target.interaction, { id: event!.id })
 			expect(target.updates).toHaveLength(1)

@@ -19,7 +19,7 @@ import {
 	generateSlapResult,
 	type SlapSubject
 } from "../services/slapEngine.js"
-import { hasCommunityTeamRole } from "../services/slapInteractions.js"
+import { hasSlapRole } from "../services/slapInteractions.js"
 import BaseCommand from "./base.js"
 
 type SlapTarget = SlapSubject
@@ -52,12 +52,12 @@ abstract class BaseSlapCommand extends BaseCommand {
 		interaction: CommandInteraction,
 		target: SlapTarget | null
 	) {
-		if (!hasCommunityTeamRole(
+		if (!hasSlapRole(
 			interaction.member?.roles.map((role) => role.id) ?? []
 		)) {
 			await this.replyWithNotice(
 				interaction,
-				"Community Team only. The fish cage remains locked.",
+				"Community Team or Maintainer roles only. The fish cage remains locked.",
 				"#f85149"
 			)
 			return
