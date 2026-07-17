@@ -4,8 +4,9 @@ Active PRD: `docs/lobster-command-prd.md`
 Planning classification: Large multi-session product build
 State: Active
 Completed items: `LOB-GATE-1`, `LOB-TAX-1`, `LOB-META-1`,
-`LOB-DATA-1`
-Ready items: `LOB-DISCORD-1`, `LOB-ART-PLAN`
+`LOB-DATA-1`, `LOB-DISCORD-1`, `LOB-RESP-1`, `LOB-ART-PLAN`,
+`LOB-ART-BATCH-*`
+Active artwork batches: None
 Implementation started: Yes
 Last verified: July 17, 2026
 
@@ -47,13 +48,48 @@ Last verified: July 17, 2026
     typecheck passed.
   - Peter Steinberger is designated but has not yet completed human scientific
     sign-off.
+- `LOB-ART-PLAN`: Complete
+  - 1,056 scenes in 11 disjoint batches of at most 25 species.
+  - Final paths use `assets/lobster/scenes/{aphiaId}/{sceneId}.webp`.
+  - Manifest checksum:
+    `06e4d4820c0dfae9ee3350fd5d6d27be1c88053886a8482932e1cf75ac5e780b`.
+  - 14 focused tests, deterministic rebuild, typecheck, and adversarial review
+    passed.
+- `LOB-DISCORD-1` and `LOB-RESP-1`: Complete
+  - `/lobster` and `Release Lobster` are guild-only and use the exact three
+    `/slap` authorization roles.
+  - Runtime artwork delivery matches `/slap`: immutable repository URL,
+    validated WebP fetch, Discord upload, and Carbon `attachment://` gallery.
+  - `Return To Sender` and `Offer Butter` are target-only, durable, atomic,
+    deterministic, and message-bound.
+  - 216 tests, typecheck, deploy dry-run, and `git diff --check` passed.
+- `LOB-ART-BATCH-*`: Complete
+  - 1,056 production WebPs cover all 264 species with four scenes each.
+  - Every asset is exactly `768x512`; corpus average is 74,087.91 bytes and
+    every file is below 120 KiB.
+  - Strict automated QA reports zero missing assets, extras, exact duplicates,
+    perceptual near-duplicates, or unresolved generation failures.
+  - Independent targeted review passed all 68 pinch-action remediations and all
+    17 Polychelidae morphology remediations.
+  - Historical generation evidence distinguishes 51 superseded generated
+    attempts from 17 superseded provider failures.
+  - An over-broad remediation launch replaced 116 unrelated scenes in batches
+    006 through 008 before it was stopped. Those assets could not be restored,
+    but the complete resulting corpus passed strict structural, provenance,
+    size, and duplicate QA.
 - Scientific anatomy approver: Peter Steinberger
 - Final artwork approver: Hannes Rudolph
-- `/lobster` command and artwork generation: Not started
+- `/lobster` command: Implemented and independently verified
+- Lobster artwork generation: Complete
+- Automated artwork QA: Complete
+- Human scientific and final-art review: Pending
 
 ## Active Blockers
 
-- None for the next implementation wave.
+- Peter Steinberger has not completed scientific anatomy approval.
+- Hannes Rudolph has not completed final artwork approval.
+- The artwork corpus must be committed before `lobsterArtworkRevision` can be
+  pinned to its immutable commit SHA.
 
 ## Active Constraints
 
@@ -72,16 +108,36 @@ Last verified: July 17, 2026
 
 ## Pinchy Accounting
 
-- Parent waves dispatched: 3
-- Coordinator sessions spawned/completed: 4/4
+- Parent waves dispatched: 4
+- Coordinator sessions spawned/completed: 7/6
 - Final-verification reserve: 2 sessions
-- Workflow active-thread cap: 6
+- Workflow active-thread cap: 12 for artwork production
 - Planning lap agents spawned/completed: 4/4
 - Persistence lap agents spawned/completed: 4/4
 - Taxonomy lap agents spawned/completed: 3/3
 - Metadata lap agents spawned/completed: 8/8
+- Artwork-plan lap agents spawned/completed: 2/2
 - Parent bounded observation extensions: 1
-- Liveness interventions: 8 deliberate coordinator-owned resumes
+- Liveness interventions: 12 deliberate coordinator-owned resumes
+
+## Artwork Batch Inventory
+
+The exact species objects and scene IDs are authoritative in
+`data/lobster/artwork/batches.json`.
+
+| Batch | Status | Species count | AphiaIDs |
+|---|---|---:|---|
+| `lob-art-v1-b001` | `complete` | 25 | 107253, 107254, 107255, 107696, 107699, 107700, 107701, 107702, 107703, 107704, 107705, 107706, 107707, 107708, 107709, 107710, 107712, 156134, 158377, 210067, 210068, 210070, 210074, 210086, 210088 |
+| `lob-art-v1-b002` | `complete` | 25 | 210089, 210351, 210352, 210353, 210354, 210355, 210356, 210358, 210359, 210361, 210362, 210364, 210643, 210644, 220230, 220231, 220233, 220234, 225681, 238403, 241290, 241293, 241294, 241295, 241296 |
+| `lob-art-v1-b003` | `complete` | 25 | 241297, 241308, 241309, 241310, 246160, 246172, 246173, 246203, 246223, 246318, 246322, 246323, 246431, 246440, 246455, 246458, 293250, 382831, 382832, 382833, 382834, 382839, 382840, 382841, 382842 |
+| `lob-art-v1-b004` | `complete` | 25 | 382843, 382844, 382845, 382846, 382847, 382848, 382849, 382850, 382851, 382852, 382853, 382854, 382855, 382856, 382857, 382858, 382859, 382860, 382861, 382862, 382863, 382864, 382865, 382866, 382867 |
+| `lob-art-v1-b005` | `complete` | 25 | 382868, 382870, 382871, 382872, 382873, 382874, 382875, 382876, 382878, 382879, 382880, 382881, 382882, 382883, 382884, 382885, 382886, 382888, 382889, 382890, 382891, 382892, 382893, 382894, 382895 |
+| `lob-art-v1-b006` | `complete` | 25 | 382896, 382897, 382898, 382899, 382900, 382901, 382902, 382903, 382904, 382905, 382906, 382907, 382908, 382909, 382910, 382911, 382912, 382913, 382914, 382915, 382916, 382917, 382918, 382919, 382920 |
+| `lob-art-v1-b007` | `complete` | 25 | 382921, 382922, 382923, 382924, 382925, 382926, 382927, 382928, 382929, 382930, 382931, 382932, 382933, 382934, 382935, 382936, 382937, 382938, 382939, 382940, 382941, 382942, 382943, 382944, 382945 |
+| `lob-art-v1-b008` | `complete` | 25 | 382946, 382947, 382948, 382949, 382950, 382951, 382952, 382953, 382954, 382955, 382956, 382957, 382958, 382959, 382960, 382961, 382962, 382963, 382964, 382965, 382966, 382967, 382968, 382969, 382970 |
+| `lob-art-v1-b009` | `complete` | 25 | 382971, 382972, 382973, 382974, 382975, 382976, 382977, 382978, 382979, 382980, 382981, 382983, 382984, 382988, 382989, 382990, 382991, 382992, 382993, 382994, 382995, 382996, 382997, 382998, 382999 |
+| `lob-art-v1-b010` | `complete` | 25 | 383000, 383001, 383002, 383003, 383004, 383030, 383037, 383039, 383043, 383045, 383077, 531112, 712209, 762291, 762292, 762293, 762294, 762295, 762296, 762297, 762300, 762301, 762302, 762303, 1059431 |
+| `lob-art-v1-b011` | `complete` | 14 | 1059699, 1434135, 1469105, 1473939, 1609822, 1611043, 1611044, 1653867, 1727490, 1727493, 1727494, 1727495, 1765544, 1877745 |
 
 ## Active Coordinator Ownership
 
@@ -89,4 +145,6 @@ Last verified: July 17, 2026
 
 ## Next Action
 
-Dispatch `LOB-DISCORD-1` and `LOB-ART-PLAN` with disjoint ownership.
+Commit the complete corpus, pin that immutable artwork commit in
+`lobsterArtworkRevision`, rerun the final repository gate, and obtain the two
+named human approvals before release.

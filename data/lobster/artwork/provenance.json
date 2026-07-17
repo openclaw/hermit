@@ -1,0 +1,512 @@
+{
+  "schemaVersion": 1,
+  "planId": "LOB-ART-PLAN-v1",
+  "generator": {
+    "path": "scripts/build-lobster-art-plan.ts",
+    "mode": "deterministic-offline",
+    "networkRequired": false
+  },
+  "inputs": {
+    "taxonomy": {
+      "path": "data/lobster/taxonomy/lobster-species.json",
+      "sha256": "304e62d2180e380ddd9f7d8f5fbce351edd77605ea79a5e4c7a9042fd4e70152"
+    },
+    "metadata": {
+      "path": "data/lobster/metadata/lobster-metadata.json",
+      "sha256": "a3d398731673682115622a6673f1e3f330db795d188c378d342fdd8d6edc554d"
+    },
+    "combinedSha256": "129df494d36e8204c27bdc0b3682aac25925a066fad926e1e7ea20ffb60df6ab"
+  },
+  "outputs": {
+    "manifest": {
+      "path": "data/lobster/artwork/manifest.json",
+      "sha256": "2247e1243c4979122d9ab9ceafd843a5af9b2554e417ef93b7ff7db26c2ba4dc",
+      "speciesCount": 264,
+      "sceneCount": 1056
+    },
+    "batches": {
+      "path": "data/lobster/artwork/batches.json",
+      "sha256": "2ade237ef464485d9366c37ad33a5ce88310acadb5e68d5f250b6677ec6ff629",
+      "batchCount": 11,
+      "maximumSpeciesPerBatch": 25
+    },
+    "remediation": {
+      "path": "data/lobster/artwork/remediation.json",
+      "sha256": "a9bfcbeb962f804b322b67f503eda48768a4f2c8b615d97bb16f33953e8a431d",
+      "sceneCount": 85
+    },
+    "generationResults": {
+      "path": "data/lobster/artwork/generation-results.json",
+      "sha256": "23c8518c038d3762968ef57b03b2b0e29f37a9bc2ff2ebc8776e4e4da71dccc3",
+      "sceneCount": 1056
+    }
+  },
+  "prompts": {
+    "version": "lob-art-v1",
+    "count": 1056,
+    "aggregateSha256": "2dfe779022ba3506712fddb0fd2ca1cd5f0e4ecade866303a4729fb9b7de8e68"
+  },
+  "quotaReport": {
+    "totalScenes": 1056,
+    "mediumMaxShare": 0.0625,
+    "environmentFamilyMaxShare": 0.08333333333333333,
+    "officeHearingShare": 0.028409090909090908,
+    "castPatternMaxShare": 0.041666666666666664,
+    "humanScenes": 880,
+    "prominentAdultWomanHumanShare": 0.9,
+    "nonPhotorealisticShare": 0.5
+  },
+  "approvals": {
+    "scientificAnatomy": {
+      "approver": "Peter Steinberger",
+      "status": "designated-not-reviewed"
+    },
+    "finalArt": {
+      "approver": "Hannes Rudolph",
+      "status": "designated-not-reviewed"
+    }
+  },
+  "production": {
+    "id": "LOB-ASSET-1",
+    "finalizer": {
+      "path": "scripts/finalize-lobster-art.ts",
+      "helperPath": "scripts/lib/lobster-art-finalization.ts"
+    },
+    "generation": {
+      "model": "gpt-image-2",
+      "generatorPath": "/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py",
+      "requestedSize": "1536x1024",
+      "quality": "medium",
+      "sourceOutput": {
+        "format": "webp",
+        "compression": 100
+      },
+      "earliestGeneratedAt": "2026-07-17T17:31:20.137Z",
+      "latestGeneratedAt": "2026-07-17T21:42:46.227Z"
+    },
+    "finalConstraints": {
+      "format": "webp",
+      "width": 768,
+      "height": 512,
+      "colorSpace": "sRGB",
+      "compression": {
+        "codec": "cwebp",
+        "targetBytes": 75000,
+        "maximumBytes": 122880
+      },
+      "largerMasterRetained": false
+    },
+    "corpus": {
+      "status": "complete",
+      "automatedReviewStatus": "passed",
+      "assetCount": 1056,
+      "totalBytes": 78236830,
+      "averageBytes": 74087.9071969697,
+      "maximumBytes": 114358,
+      "aggregateAssetSha256": "82d5fe3247dbf8e5276457f1dcb64a80231474885f437f1842b3b224d36d7650",
+      "inventorySha256": "3fe8fbae430e25d801c0e97d31cfd4dbe35719cef9d1931d0bdcc73c83a17aa0"
+    },
+    "strictQa": {
+      "path": "data/lobster/artwork/qa-report.json",
+      "sha256": "768c7019051497ad4a98c3841bc79213dd9a33d13b94e0f939c6bf39ae672b87",
+      "generatedAt": "2026-07-17T21:50:39.094Z",
+      "status": "passed",
+      "missingAssets": 0,
+      "extraFiles": 0,
+      "exactDuplicatePairs": 0,
+      "nearDuplicatePairs": 0
+    },
+    "generationHistory": {
+      "resultsPath": "data/lobster/artwork/generation-results.json",
+      "resultsSha256": "23c8518c038d3762968ef57b03b2b0e29f37a9bc2ff2ebc8776e4e4da71dccc3",
+      "generatedRecordCount": 1056,
+      "skippedObservationCount": 85,
+      "supersededGeneratedCount": 51,
+      "supersededGenerated": [
+        {
+          "sceneId": "lob-v1-a107254-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a107254-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a107700-s02",
+          "classification": "superseded",
+          "error": "lob-v1-a107700-s02 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a107700-s04",
+          "classification": "superseded",
+          "error": "lob-v1-a107700-s04 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a107700-s04",
+          "classification": "superseded",
+          "error": "lob-v1-a107700-s04 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a107701-s02",
+          "classification": "superseded",
+          "error": "lob-v1-a107701-s02 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a107701-s02",
+          "classification": "superseded",
+          "error": "lob-v1-a107701-s02 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a107701-s03",
+          "classification": "superseded",
+          "error": "lob-v1-a107701-s03 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a107701-s04",
+          "classification": "superseded",
+          "error": "lob-v1-a107701-s04 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a107702-s02",
+          "classification": "superseded",
+          "error": "lob-v1-a107702-s02 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a107702-s03",
+          "classification": "superseded",
+          "error": "lob-v1-a107702-s03 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a107702-s03",
+          "classification": "superseded",
+          "error": "lob-v1-a107702-s03 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a107702-s04",
+          "classification": "superseded",
+          "error": "lob-v1-a107702-s04 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a107702-s04",
+          "classification": "superseded",
+          "error": "lob-v1-a107702-s04 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a1434135-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a1434135-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a156134-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a156134-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a1727495-s02",
+          "classification": "superseded",
+          "error": "lob-v1-a1727495-s02 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a1727495-s02",
+          "classification": "superseded",
+          "error": "lob-v1-a1727495-s02 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a220230-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a220230-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a220231-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a220231-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a241290-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a241290-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a241295-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a241295-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a241296-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a241296-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a246172-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a246172-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a246203-s02",
+          "classification": "superseded",
+          "error": "lob-v1-a246203-s02 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a246431-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a246431-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a246431-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a246431-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a246431-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a246431-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a246431-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a246431-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a293250-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a293250-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382831-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382831-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382833-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382833-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382834-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382834-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382841-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382841-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382844-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382844-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382846-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382846-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382856-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382856-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382858-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382858-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382859-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382859-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382860-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382860-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382861-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382861-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382863-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382863-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382866-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382866-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382867-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382867-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382873-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382873-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382875-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382875-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382994-s04",
+          "classification": "superseded",
+          "error": "lob-v1-a382994-s04 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a382999-s04",
+          "classification": "superseded",
+          "error": "lob-v1-a382999-s04 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a383043-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a383043-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a383077-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a383077-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a531112-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a531112-s01 remediation binding is invalid"
+        },
+        {
+          "sceneId": "lob-v1-a762302-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a762302-s01 remediation binding is invalid"
+        }
+      ],
+      "supersededFailureCount": 17,
+      "supersededFailures": [
+        {
+          "sceneId": "lob-v1-a241297-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a241297-s01: generate lob-v1-a241297-s01, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a241297-s02",
+          "classification": "superseded",
+          "error": "lob-v1-a241297-s02: generate lob-v1-a241297-s02, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a241297-s03",
+          "classification": "superseded",
+          "error": "lob-v1-a241297-s03: generate lob-v1-a241297-s03, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a241297-s04",
+          "classification": "superseded",
+          "error": "lob-v1-a241297-s04: generate lob-v1-a241297-s04, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a382843-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382843-s01: generate lob-v1-a382843-s01, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a382843-s02",
+          "classification": "superseded",
+          "error": "lob-v1-a382843-s02: generate lob-v1-a382843-s02, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a382843-s03",
+          "classification": "superseded",
+          "error": "lob-v1-a382843-s03: generate lob-v1-a382843-s03, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a382843-s04",
+          "classification": "superseded",
+          "error": "lob-v1-a382843-s04: generate lob-v1-a382843-s04, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a382844-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382844-s01: generate lob-v1-a382844-s01, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a382868-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382868-s01: generate lob-v1-a382868-s01, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a382868-s02",
+          "classification": "superseded",
+          "error": "lob-v1-a382868-s02: generate lob-v1-a382868-s02, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a382868-s03",
+          "classification": "superseded",
+          "error": "lob-v1-a382868-s03: generate lob-v1-a382868-s03, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a382868-s04",
+          "classification": "superseded",
+          "error": "lob-v1-a382868-s04: generate lob-v1-a382868-s04, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a382921-s01",
+          "classification": "superseded",
+          "error": "lob-v1-a382921-s01: generate lob-v1-a382921-s01, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a382921-s02",
+          "classification": "superseded",
+          "error": "lob-v1-a382921-s02: generate lob-v1-a382921-s02, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a382921-s03",
+          "classification": "superseded",
+          "error": "lob-v1-a382921-s03: generate lob-v1-a382921-s03, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        },
+        {
+          "sceneId": "lob-v1-a382921-s04",
+          "classification": "superseded",
+          "error": "lob-v1-a382921-s04: generate lob-v1-a382921-s04, attempt 3 failed (1): OPENAI_API_KEY is set.\nCalling Image API (generation). This can take up to a couple of minutes.\nTraceback (most recent call last):\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 995, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 990, in main\n    args.func(args)\n  File \"/Users/hrudolph/.codex/skills/.system/imagegen/scripts/image_gen.py\", line 752, in _generate\n    result = client.images.generate(**payload)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Images.generate() got an unexpected keyword argument 'output_format'"
+        }
+      ],
+      "unresolvedFailureCount": 0,
+      "unresolvedFailures": []
+    },
+    "remediation": {
+      "path": "data/lobster/artwork/remediation.json",
+      "sha256": "a9bfcbeb962f804b322b67f503eda48768a4f2c8b615d97bb16f33953e8a431d",
+      "status": "pending-regeneration",
+      "pinchSceneCount": 68,
+      "polychelidaeSceneCount": 17,
+      "totalSceneCount": 85
+    },
+    "humanReview": {
+      "scientificAnatomy": {
+        "approver": "Peter Steinberger",
+        "status": "not-reviewed"
+      },
+      "finalArt": {
+        "approver": "Hannes Rudolph",
+        "status": "not-reviewed"
+      }
+    },
+    "deliveryContract": {
+      "sequence": [
+        "repository assets",
+        "immutable raw GitHub",
+        "validated Discord attachments"
+      ],
+      "repositoryAssetRoot": "assets/lobster/scenes",
+      "rawGitHubRevision": "full immutable commit SHA",
+      "discordAttachmentValidation": [
+        "http-ok",
+        "bounded-bytes",
+        "riff-webp",
+        "exact-768x512"
+      ],
+      "externalMediaInMessage": false,
+      "r2": {
+        "used": false,
+        "role": "none"
+      }
+    }
+  }
+}

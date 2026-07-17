@@ -1,0 +1,784 @@
+{
+  "schemaVersion": 1,
+  "groups": [
+    {
+      "id": "pinch-action-clarity",
+      "version": "1.0.0",
+      "sha256": "1990693415f0492a4c37477de42951d1d96a21d06b794572351b589df3f4778b",
+      "entries": [
+        {
+          "sceneId": "lob-v1-a107253-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a107254-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a107255-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a156134-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a210067-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a210068-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a220230-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a220231-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a241290-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a241293-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a241294-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a241295-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a241296-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a246160-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a246172-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a246173-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a246318-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a293250-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382831-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382832-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382833-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382834-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382841-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382842-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382843-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382844-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382845-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382846-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382847-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382848-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382849-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382850-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382852-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382853-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382854-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382855-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382856-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382857-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382858-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382859-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382860-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382861-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382862-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382863-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382864-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382865-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382866-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382867-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382868-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382870-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382871-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382872-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382873-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382874-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a382875-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a382876-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a383037-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a383043-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a383045-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a383077-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a531112-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a712209-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a762302-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a1434135-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review remediation requirement: compose the action as a close foreground side view of one enlarged chela fully SHUT around a separate thick folded fabric bundle, never a body part. The upper and lower pincer tips must visibly touch or overlap at the center of frame, with fabric squeezed flat at that exact contact point and bulging on both sides. Keep the closed contact point completely unobstructed and unmistakable. Do not show an open claw, any gap between tips, an arm or hand inside the claw, near-contact, draping, holding, resting, or posing. No gore or injury.",
+          "version": "1.1.0",
+          "sha256": "3806c46a917f78a6e84d0c905ee0bf8f44e622e036480bc7e7f62442160f3095"
+        },
+        {
+          "sceneId": "lob-v1-a1473939-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a1609822-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a1653867-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        },
+        {
+          "sceneId": "lob-v1-a1877745-s01",
+          "id": "pinch-action-clarity",
+          "reason": "Independent visual audit found that the planned pinch action is not unmistakably executed.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: show an unmistakable action moment with the documented enlarged chela visibly CLOSED, both claw tips contacting and compressing a harmless non-injurious object or a thick outer garment. Explicitly prohibit an open-claw display, near-contact, mere handling or posing, gore, or injury.",
+          "version": "1.0.0",
+          "sha256": "97b2b95366fa05f9643d8918e637f631e1cf84c7404ed70e3d9b4ba15a2ee9e8"
+        }
+      ]
+    },
+    {
+      "id": "polychelidae-morphology",
+      "version": "1.0.0",
+      "sha256": "c9482773d5c6a86d50202fab71f2d15387cdeb83b4e313659f42d8e0158e753b",
+      "entries": [
+        {
+          "sceneId": "lob-v1-a107699-s04",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: depict a dorsoventrally flattened polychelid form with the first FOUR walking-leg pairs visibly chelate, with no single oversized dominant claw pair; do not use a crab-like or slipper-lobster silhouette, and keep the original planned action unchanged.",
+          "version": "1.0.0",
+          "sha256": "cb0b12c27870863479eadb1e0cd52dc60d5f715e840d4f23d92100ec5c66271a"
+        },
+        {
+          "sceneId": "lob-v1-a107700-s01",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: depict a dorsoventrally flattened polychelid form with the first FOUR walking-leg pairs visibly chelate, with no single oversized dominant claw pair; do not use a crab-like or slipper-lobster silhouette, and keep the original planned action unchanged.",
+          "version": "1.0.0",
+          "sha256": "cb0b12c27870863479eadb1e0cd52dc60d5f715e840d4f23d92100ec5c66271a"
+        },
+        {
+          "sceneId": "lob-v1-a107700-s02",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review scientific morphology requirement: show the entire animal in a clear dorsal or high three-quarter scientific-reference view. The body must be elongated and dorsoventrally flattened, with the abdomen visibly longer and narrower than the carapace. Show five mirrored pairs of walking legs; the first four walking-leg pairs on BOTH left and right sides must visibly end in small, similarly sized chelae. No dominant crusher claws, no broad crab body, no slipper-lobster silhouette, and no ordinary clawed-lobster body plan. Preserve the documented scene action while keeping all required anatomy unobstructed.",
+          "version": "1.1.0",
+          "sha256": "b835780427fad9f47822ce9b500380af988ac9ca216768ccb32948c5ca868d41"
+        },
+        {
+          "sceneId": "lob-v1-a107700-s03",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: depict a dorsoventrally flattened polychelid form with the first FOUR walking-leg pairs visibly chelate, with no single oversized dominant claw pair; do not use a crab-like or slipper-lobster silhouette, and keep the original planned action unchanged.",
+          "version": "1.0.0",
+          "sha256": "cb0b12c27870863479eadb1e0cd52dc60d5f715e840d4f23d92100ec5c66271a"
+        },
+        {
+          "sceneId": "lob-v1-a107700-s04",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action. A second independent visual review rejected the first remediation result. A third independent visual review rejected the second morphology result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Third-review scientific morphology requirement: render a single Polychelidae animal as a label-free orthographic DORSAL field-guide plate, centered and fully visible from antenna tips through tail fan. Enforce exact bilateral symmetry and show exactly ten unobstructed walking legs as five matched left-right pairs spread away from the body. Show exactly eight small, similarly sized pincers total: one clearly formed chela at the end of every leg in walking-leg pairs 1, 2, 3, and 4 on BOTH sides. The fifth walking-leg pair must be plain and non-chelate. The abdomen must be long, narrow, segmented, and visibly longer than the flattened carapace. Absolutely no oversized front claws, dominant crusher pair, broad crab body, slipper-lobster form, hidden far-side legs, overlapping appendages, missing legs, asymmetric legs, or malformed claws. Preserve the documented action using surrounding props or posture without obscuring any anatomy.",
+          "version": "1.2.0",
+          "sha256": "9c20f24ff0e3b40d72983f8cffbfd8b91617c197f48e8fdb8faecdc205f7faf5"
+        },
+        {
+          "sceneId": "lob-v1-a107701-s02",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action. A second independent visual review rejected the first remediation result. A third independent visual review rejected the second morphology result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Third-review scientific morphology requirement: render a single Polychelidae animal as a label-free orthographic DORSAL field-guide plate, centered and fully visible from antenna tips through tail fan. Enforce exact bilateral symmetry and show exactly ten unobstructed walking legs as five matched left-right pairs spread away from the body. Show exactly eight small, similarly sized pincers total: one clearly formed chela at the end of every leg in walking-leg pairs 1, 2, 3, and 4 on BOTH sides. The fifth walking-leg pair must be plain and non-chelate. The abdomen must be long, narrow, segmented, and visibly longer than the flattened carapace. Absolutely no oversized front claws, dominant crusher pair, broad crab body, slipper-lobster form, hidden far-side legs, overlapping appendages, missing legs, asymmetric legs, or malformed claws. Preserve the documented action using surrounding props or posture without obscuring any anatomy.",
+          "version": "1.2.0",
+          "sha256": "9c20f24ff0e3b40d72983f8cffbfd8b91617c197f48e8fdb8faecdc205f7faf5"
+        },
+        {
+          "sceneId": "lob-v1-a107701-s03",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review scientific morphology requirement: show the entire animal in a clear dorsal or high three-quarter scientific-reference view. The body must be elongated and dorsoventrally flattened, with the abdomen visibly longer and narrower than the carapace. Show five mirrored pairs of walking legs; the first four walking-leg pairs on BOTH left and right sides must visibly end in small, similarly sized chelae. No dominant crusher claws, no broad crab body, no slipper-lobster silhouette, and no ordinary clawed-lobster body plan. Preserve the documented scene action while keeping all required anatomy unobstructed.",
+          "version": "1.1.0",
+          "sha256": "b835780427fad9f47822ce9b500380af988ac9ca216768ccb32948c5ca868d41"
+        },
+        {
+          "sceneId": "lob-v1-a107701-s04",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review scientific morphology requirement: show the entire animal in a clear dorsal or high three-quarter scientific-reference view. The body must be elongated and dorsoventrally flattened, with the abdomen visibly longer and narrower than the carapace. Show five mirrored pairs of walking legs; the first four walking-leg pairs on BOTH left and right sides must visibly end in small, similarly sized chelae. No dominant crusher claws, no broad crab body, no slipper-lobster silhouette, and no ordinary clawed-lobster body plan. Preserve the documented scene action while keeping all required anatomy unobstructed.",
+          "version": "1.1.0",
+          "sha256": "b835780427fad9f47822ce9b500380af988ac9ca216768ccb32948c5ca868d41"
+        },
+        {
+          "sceneId": "lob-v1-a107702-s02",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review scientific morphology requirement: show the entire animal in a clear dorsal or high three-quarter scientific-reference view. The body must be elongated and dorsoventrally flattened, with the abdomen visibly longer and narrower than the carapace. Show five mirrored pairs of walking legs; the first four walking-leg pairs on BOTH left and right sides must visibly end in small, similarly sized chelae. No dominant crusher claws, no broad crab body, no slipper-lobster silhouette, and no ordinary clawed-lobster body plan. Preserve the documented scene action while keeping all required anatomy unobstructed.",
+          "version": "1.1.0",
+          "sha256": "b835780427fad9f47822ce9b500380af988ac9ca216768ccb32948c5ca868d41"
+        },
+        {
+          "sceneId": "lob-v1-a107702-s03",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action. A second independent visual review rejected the first remediation result. A third independent visual review rejected the second morphology result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Third-review scientific morphology requirement: render a single Polychelidae animal as a label-free orthographic DORSAL field-guide plate, centered and fully visible from antenna tips through tail fan. Enforce exact bilateral symmetry and show exactly ten unobstructed walking legs as five matched left-right pairs spread away from the body. Show exactly eight small, similarly sized pincers total: one clearly formed chela at the end of every leg in walking-leg pairs 1, 2, 3, and 4 on BOTH sides. The fifth walking-leg pair must be plain and non-chelate. The abdomen must be long, narrow, segmented, and visibly longer than the flattened carapace. Absolutely no oversized front claws, dominant crusher pair, broad crab body, slipper-lobster form, hidden far-side legs, overlapping appendages, missing legs, asymmetric legs, or malformed claws. Preserve the documented action using surrounding props or posture without obscuring any anatomy.",
+          "version": "1.2.0",
+          "sha256": "9c20f24ff0e3b40d72983f8cffbfd8b91617c197f48e8fdb8faecdc205f7faf5"
+        },
+        {
+          "sceneId": "lob-v1-a107702-s04",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action. A second independent visual review rejected the first remediation result. A third independent visual review rejected the second morphology result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Third-review scientific morphology requirement: render a single Polychelidae animal as a label-free orthographic DORSAL field-guide plate, centered and fully visible from antenna tips through tail fan. Enforce exact bilateral symmetry and show exactly ten unobstructed walking legs as five matched left-right pairs spread away from the body. Show exactly eight small, similarly sized pincers total: one clearly formed chela at the end of every leg in walking-leg pairs 1, 2, 3, and 4 on BOTH sides. The fifth walking-leg pair must be plain and non-chelate. The abdomen must be long, narrow, segmented, and visibly longer than the flattened carapace. Absolutely no oversized front claws, dominant crusher pair, broad crab body, slipper-lobster form, hidden far-side legs, overlapping appendages, missing legs, asymmetric legs, or malformed claws. Preserve the documented action using surrounding props or posture without obscuring any anatomy.",
+          "version": "1.2.0",
+          "sha256": "9c20f24ff0e3b40d72983f8cffbfd8b91617c197f48e8fdb8faecdc205f7faf5"
+        },
+        {
+          "sceneId": "lob-v1-a225681-s04",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Remediation requirement: depict a dorsoventrally flattened polychelid form with the first FOUR walking-leg pairs visibly chelate, with no single oversized dominant claw pair; do not use a crab-like or slipper-lobster silhouette, and keep the original planned action unchanged.",
+          "version": "1.0.0",
+          "sha256": "cb0b12c27870863479eadb1e0cd52dc60d5f715e840d4f23d92100ec5c66271a"
+        },
+        {
+          "sceneId": "lob-v1-a246203-s02",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review scientific morphology requirement: show the entire animal in a clear dorsal or high three-quarter scientific-reference view. The body must be elongated and dorsoventrally flattened, with the abdomen visibly longer and narrower than the carapace. Show five mirrored pairs of walking legs; the first four walking-leg pairs on BOTH left and right sides must visibly end in small, similarly sized chelae. No dominant crusher claws, no broad crab body, no slipper-lobster silhouette, and no ordinary clawed-lobster body plan. Preserve the documented scene action while keeping all required anatomy unobstructed.",
+          "version": "1.1.0",
+          "sha256": "b835780427fad9f47822ce9b500380af988ac9ca216768ccb32948c5ca868d41"
+        },
+        {
+          "sceneId": "lob-v1-a246431-s01",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action. A second independent visual review rejected the first remediation result. A third independent visual review rejected the second morphology result. A fourth independent visual review found an extra sixth walking-leg pair. A fifth independent visual review found six pairs because the front claws were treated as separate appendages.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Fifth-review scientific morphology requirement: override the visual style for this scene with a simplified top-down natural-history illustration using clean separated shapes and a plain contrasting seabed. Draw exactly FIVE appendage rows per side and no others. Row 1 is the front pincer-bearing walking-leg pair; the front claws are NOT separate appendages. Rows 1, 2, 3, and 4 each end in one small pincer on the left and one small pincer on the right, for exactly EIGHT small equal pincers total. Row 5 is the only plain non-pincer walking-leg pair. After row 5, draw only the segmented abdomen and tail fan: no additional legs, claws, or limb-like shapes. Keep antennae as two very thin forward lines that cannot be mistaken for legs. The result must show exactly ten walking legs total, strict bilateral symmetry, a long narrow abdomen longer than the flattened carapace, no oversized claws, and no crab or slipper-lobster silhouette. Preserve the documented action using background props only, without touching or obscuring the animal.",
+          "version": "1.4.0",
+          "sha256": "fc5065c90c24204a5288fb46f785f960cd960f7a389e08942cad6859c3f83231"
+        },
+        {
+          "sceneId": "lob-v1-a382994-s04",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review scientific morphology requirement: show the entire animal in a clear dorsal or high three-quarter scientific-reference view. The body must be elongated and dorsoventrally flattened, with the abdomen visibly longer and narrower than the carapace. Show five mirrored pairs of walking legs; the first four walking-leg pairs on BOTH left and right sides must visibly end in small, similarly sized chelae. No dominant crusher claws, no broad crab body, no slipper-lobster silhouette, and no ordinary clawed-lobster body plan. Preserve the documented scene action while keeping all required anatomy unobstructed.",
+          "version": "1.1.0",
+          "sha256": "b835780427fad9f47822ce9b500380af988ac9ca216768ccb32948c5ca868d41"
+        },
+        {
+          "sceneId": "lob-v1-a382999-s04",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action. A second independent visual review rejected the first remediation result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Second-review scientific morphology requirement: show the entire animal in a clear dorsal or high three-quarter scientific-reference view. The body must be elongated and dorsoventrally flattened, with the abdomen visibly longer and narrower than the carapace. Show five mirrored pairs of walking legs; the first four walking-leg pairs on BOTH left and right sides must visibly end in small, similarly sized chelae. No dominant crusher claws, no broad crab body, no slipper-lobster silhouette, and no ordinary clawed-lobster body plan. Preserve the documented scene action while keeping all required anatomy unobstructed.",
+          "version": "1.1.0",
+          "sha256": "b835780427fad9f47822ce9b500380af988ac9ca216768ccb32948c5ca868d41"
+        },
+        {
+          "sceneId": "lob-v1-a1727495-s02",
+          "id": "polychelidae-morphology",
+          "reason": "Independent visual audit found that Polychelidae morphology needs correction while preserving the planned action. A second independent visual review rejected the first remediation result. A third independent visual review rejected the second morphology result.",
+          "auditStatus": "pending-regeneration",
+          "promptSuffix": "Third-review scientific morphology requirement: render a single Polychelidae animal as a label-free orthographic DORSAL field-guide plate, centered and fully visible from antenna tips through tail fan. Enforce exact bilateral symmetry and show exactly ten unobstructed walking legs as five matched left-right pairs spread away from the body. Show exactly eight small, similarly sized pincers total: one clearly formed chela at the end of every leg in walking-leg pairs 1, 2, 3, and 4 on BOTH sides. The fifth walking-leg pair must be plain and non-chelate. The abdomen must be long, narrow, segmented, and visibly longer than the flattened carapace. Absolutely no oversized front claws, dominant crusher pair, broad crab body, slipper-lobster form, hidden far-side legs, overlapping appendages, missing legs, asymmetric legs, or malformed claws. Preserve the documented action using surrounding props or posture without obscuring any anatomy.",
+          "version": "1.2.0",
+          "sha256": "9c20f24ff0e3b40d72983f8cffbfd8b91617c197f48e8fdb8faecdc205f7faf5"
+        }
+      ]
+    }
+  ]
+}

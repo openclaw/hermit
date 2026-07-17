@@ -1,0 +1,3088 @@
+{
+  "schemaVersion": 1,
+  "planId": "LOB-ART-PLAN-v1",
+  "batchSizeLimit": 25,
+  "manifestSha256": "2247e1243c4979122d9ab9ceafd843a5af9b2554e417ef93b7ff7db26c2ba4dc",
+  "batches": [
+    {
+      "id": "lob-art-v1-b001",
+      "index": 1,
+      "speciesCount": 25,
+      "sceneCount": 100,
+      "species": [
+        {
+          "AphiaID": 107253,
+          "scientificName": "Homarus gammarus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a107253-s01",
+            "lob-v1-a107253-s02",
+            "lob-v1-a107253-s03",
+            "lob-v1-a107253-s04"
+          ]
+        },
+        {
+          "AphiaID": 107254,
+          "scientificName": "Nephrops norvegicus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a107254-s01",
+            "lob-v1-a107254-s02",
+            "lob-v1-a107254-s03",
+            "lob-v1-a107254-s04"
+          ]
+        },
+        {
+          "AphiaID": 107255,
+          "scientificName": "Nephropsis atlantica",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a107255-s01",
+            "lob-v1-a107255-s02",
+            "lob-v1-a107255-s03",
+            "lob-v1-a107255-s04"
+          ]
+        },
+        {
+          "AphiaID": 107696,
+          "scientificName": "Polycheles typhlops",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a107696-s01",
+            "lob-v1-a107696-s02",
+            "lob-v1-a107696-s03",
+            "lob-v1-a107696-s04"
+          ]
+        },
+        {
+          "AphiaID": 107699,
+          "scientificName": "Stereomastis nana",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a107699-s01",
+            "lob-v1-a107699-s02",
+            "lob-v1-a107699-s03",
+            "lob-v1-a107699-s04"
+          ]
+        },
+        {
+          "AphiaID": 107700,
+          "scientificName": "Stereomastis sculpta",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a107700-s01",
+            "lob-v1-a107700-s02",
+            "lob-v1-a107700-s03",
+            "lob-v1-a107700-s04"
+          ]
+        },
+        {
+          "AphiaID": 107701,
+          "scientificName": "Willemoesia forceps",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a107701-s01",
+            "lob-v1-a107701-s02",
+            "lob-v1-a107701-s03",
+            "lob-v1-a107701-s04"
+          ]
+        },
+        {
+          "AphiaID": 107702,
+          "scientificName": "Willemoesia leptodactyla",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a107702-s01",
+            "lob-v1-a107702-s02",
+            "lob-v1-a107702-s03",
+            "lob-v1-a107702-s04"
+          ]
+        },
+        {
+          "AphiaID": 107703,
+          "scientificName": "Palinurus elephas",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a107703-s01",
+            "lob-v1-a107703-s02",
+            "lob-v1-a107703-s03",
+            "lob-v1-a107703-s04"
+          ]
+        },
+        {
+          "AphiaID": 107704,
+          "scientificName": "Palinurus mauritanicus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a107704-s01",
+            "lob-v1-a107704-s02",
+            "lob-v1-a107704-s03",
+            "lob-v1-a107704-s04"
+          ]
+        },
+        {
+          "AphiaID": 107705,
+          "scientificName": "Panulirus echinatus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a107705-s01",
+            "lob-v1-a107705-s02",
+            "lob-v1-a107705-s03",
+            "lob-v1-a107705-s04"
+          ]
+        },
+        {
+          "AphiaID": 107706,
+          "scientificName": "Panulirus ornatus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a107706-s01",
+            "lob-v1-a107706-s02",
+            "lob-v1-a107706-s03",
+            "lob-v1-a107706-s04"
+          ]
+        },
+        {
+          "AphiaID": 107707,
+          "scientificName": "Panulirus regius",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a107707-s01",
+            "lob-v1-a107707-s02",
+            "lob-v1-a107707-s03",
+            "lob-v1-a107707-s04"
+          ]
+        },
+        {
+          "AphiaID": 107708,
+          "scientificName": "Scyllarides latus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a107708-s01",
+            "lob-v1-a107708-s02",
+            "lob-v1-a107708-s03",
+            "lob-v1-a107708-s04"
+          ]
+        },
+        {
+          "AphiaID": 107709,
+          "scientificName": "Scyllarus arctus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a107709-s01",
+            "lob-v1-a107709-s02",
+            "lob-v1-a107709-s03",
+            "lob-v1-a107709-s04"
+          ]
+        },
+        {
+          "AphiaID": 107710,
+          "scientificName": "Scyllarus caparti",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a107710-s01",
+            "lob-v1-a107710-s02",
+            "lob-v1-a107710-s03",
+            "lob-v1-a107710-s04"
+          ]
+        },
+        {
+          "AphiaID": 107712,
+          "scientificName": "Scyllarus pygmaeus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a107712-s01",
+            "lob-v1-a107712-s02",
+            "lob-v1-a107712-s03",
+            "lob-v1-a107712-s04"
+          ]
+        },
+        {
+          "AphiaID": 156134,
+          "scientificName": "Homarus americanus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a156134-s01",
+            "lob-v1-a156134-s02",
+            "lob-v1-a156134-s03",
+            "lob-v1-a156134-s04"
+          ]
+        },
+        {
+          "AphiaID": 158377,
+          "scientificName": "Scyllarus depressus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a158377-s01",
+            "lob-v1-a158377-s02",
+            "lob-v1-a158377-s03",
+            "lob-v1-a158377-s04"
+          ]
+        },
+        {
+          "AphiaID": 210067,
+          "scientificName": "Enoplometopus pictus",
+          "family": "Enoplometopidae",
+          "sceneIds": [
+            "lob-v1-a210067-s01",
+            "lob-v1-a210067-s02",
+            "lob-v1-a210067-s03",
+            "lob-v1-a210067-s04"
+          ]
+        },
+        {
+          "AphiaID": 210068,
+          "scientificName": "Enoplometopus occidentalis",
+          "family": "Enoplometopidae",
+          "sceneIds": [
+            "lob-v1-a210068-s01",
+            "lob-v1-a210068-s02",
+            "lob-v1-a210068-s03",
+            "lob-v1-a210068-s04"
+          ]
+        },
+        {
+          "AphiaID": 210070,
+          "scientificName": "Palinurus delagoae",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a210070-s01",
+            "lob-v1-a210070-s02",
+            "lob-v1-a210070-s03",
+            "lob-v1-a210070-s04"
+          ]
+        },
+        {
+          "AphiaID": 210074,
+          "scientificName": "Palinurus gilchristi",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a210074-s01",
+            "lob-v1-a210074-s02",
+            "lob-v1-a210074-s03",
+            "lob-v1-a210074-s04"
+          ]
+        },
+        {
+          "AphiaID": 210086,
+          "scientificName": "Scyllarides elisabethae",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a210086-s01",
+            "lob-v1-a210086-s02",
+            "lob-v1-a210086-s03",
+            "lob-v1-a210086-s04"
+          ]
+        },
+        {
+          "AphiaID": 210088,
+          "scientificName": "Scyllarides tridacnophaga",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a210088-s01",
+            "lob-v1-a210088-s02",
+            "lob-v1-a210088-s03",
+            "lob-v1-a210088-s04"
+          ]
+        }
+      ],
+      "production": {
+        "status": "complete",
+        "automatedReviewStatus": "passed",
+        "sceneCount": 100,
+        "totalBytes": 7458340,
+        "aggregateAssetSha256": "c089099333dd58e9124cfc44b6c5876f162dda4b79c4a8a6bd4f06bfc8e8f215",
+        "inventorySha256": "a0bd91fc069ca5699215429a2f6126cefb718ee9e16a193b850d8256821bbaf9"
+      }
+    },
+    {
+      "id": "lob-art-v1-b002",
+      "index": 2,
+      "speciesCount": 25,
+      "sceneCount": 100,
+      "species": [
+        {
+          "AphiaID": 210089,
+          "scientificName": "Scyllarides squammosus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a210089-s01",
+            "lob-v1-a210089-s02",
+            "lob-v1-a210089-s03",
+            "lob-v1-a210089-s04"
+          ]
+        },
+        {
+          "AphiaID": 210351,
+          "scientificName": "Palinustus waguensis",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a210351-s01",
+            "lob-v1-a210351-s02",
+            "lob-v1-a210351-s03",
+            "lob-v1-a210351-s04"
+          ]
+        },
+        {
+          "AphiaID": 210352,
+          "scientificName": "Palinustus unicornutus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a210352-s01",
+            "lob-v1-a210352-s02",
+            "lob-v1-a210352-s03",
+            "lob-v1-a210352-s04"
+          ]
+        },
+        {
+          "AphiaID": 210353,
+          "scientificName": "Palinustus mossambicus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a210353-s01",
+            "lob-v1-a210353-s02",
+            "lob-v1-a210353-s03",
+            "lob-v1-a210353-s04"
+          ]
+        },
+        {
+          "AphiaID": 210354,
+          "scientificName": "Panulirus longipes",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a210354-s01",
+            "lob-v1-a210354-s02",
+            "lob-v1-a210354-s03",
+            "lob-v1-a210354-s04"
+          ]
+        },
+        {
+          "AphiaID": 210355,
+          "scientificName": "Panulirus homarus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a210355-s01",
+            "lob-v1-a210355-s02",
+            "lob-v1-a210355-s03",
+            "lob-v1-a210355-s04"
+          ]
+        },
+        {
+          "AphiaID": 210356,
+          "scientificName": "Panulirus japonicus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a210356-s01",
+            "lob-v1-a210356-s02",
+            "lob-v1-a210356-s03",
+            "lob-v1-a210356-s04"
+          ]
+        },
+        {
+          "AphiaID": 210358,
+          "scientificName": "Panulirus penicillatus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a210358-s01",
+            "lob-v1-a210358-s02",
+            "lob-v1-a210358-s03",
+            "lob-v1-a210358-s04"
+          ]
+        },
+        {
+          "AphiaID": 210359,
+          "scientificName": "Panulirus versicolor",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a210359-s01",
+            "lob-v1-a210359-s02",
+            "lob-v1-a210359-s03",
+            "lob-v1-a210359-s04"
+          ]
+        },
+        {
+          "AphiaID": 210361,
+          "scientificName": "Ibacus novemdentatus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a210361-s01",
+            "lob-v1-a210361-s02",
+            "lob-v1-a210361-s03",
+            "lob-v1-a210361-s04"
+          ]
+        },
+        {
+          "AphiaID": 210362,
+          "scientificName": "Thenus orientalis",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a210362-s01",
+            "lob-v1-a210362-s02",
+            "lob-v1-a210362-s03",
+            "lob-v1-a210362-s04"
+          ]
+        },
+        {
+          "AphiaID": 210364,
+          "scientificName": "Parribacus antarcticus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a210364-s01",
+            "lob-v1-a210364-s02",
+            "lob-v1-a210364-s03",
+            "lob-v1-a210364-s04"
+          ]
+        },
+        {
+          "AphiaID": 210643,
+          "scientificName": "Linuparus trigonus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a210643-s01",
+            "lob-v1-a210643-s02",
+            "lob-v1-a210643-s03",
+            "lob-v1-a210643-s04"
+          ]
+        },
+        {
+          "AphiaID": 210644,
+          "scientificName": "Linuparus somniosus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a210644-s01",
+            "lob-v1-a210644-s02",
+            "lob-v1-a210644-s03",
+            "lob-v1-a210644-s04"
+          ]
+        },
+        {
+          "AphiaID": 220230,
+          "scientificName": "Metanephrops andamanicus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a220230-s01",
+            "lob-v1-a220230-s02",
+            "lob-v1-a220230-s03",
+            "lob-v1-a220230-s04"
+          ]
+        },
+        {
+          "AphiaID": 220231,
+          "scientificName": "Nephropsis stewarti",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a220231-s01",
+            "lob-v1-a220231-s02",
+            "lob-v1-a220231-s03",
+            "lob-v1-a220231-s04"
+          ]
+        },
+        {
+          "AphiaID": 220233,
+          "scientificName": "Puerulus carinatus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a220233-s01",
+            "lob-v1-a220233-s02",
+            "lob-v1-a220233-s03",
+            "lob-v1-a220233-s04"
+          ]
+        },
+        {
+          "AphiaID": 220234,
+          "scientificName": "Puerulus sewelli",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a220234-s01",
+            "lob-v1-a220234-s02",
+            "lob-v1-a220234-s03",
+            "lob-v1-a220234-s04"
+          ]
+        },
+        {
+          "AphiaID": 225681,
+          "scientificName": "Cardus crucifer",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a225681-s01",
+            "lob-v1-a225681-s02",
+            "lob-v1-a225681-s03",
+            "lob-v1-a225681-s04"
+          ]
+        },
+        {
+          "AphiaID": 238403,
+          "scientificName": "Pentacheles validus",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a238403-s01",
+            "lob-v1-a238403-s02",
+            "lob-v1-a238403-s03",
+            "lob-v1-a238403-s04"
+          ]
+        },
+        {
+          "AphiaID": 241290,
+          "scientificName": "Metanephrops mozambicus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a241290-s01",
+            "lob-v1-a241290-s02",
+            "lob-v1-a241290-s03",
+            "lob-v1-a241290-s04"
+          ]
+        },
+        {
+          "AphiaID": 241293,
+          "scientificName": "Nephropsis acanthura",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a241293-s01",
+            "lob-v1-a241293-s02",
+            "lob-v1-a241293-s03",
+            "lob-v1-a241293-s04"
+          ]
+        },
+        {
+          "AphiaID": 241294,
+          "scientificName": "Nephropsis carpenteri",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a241294-s01",
+            "lob-v1-a241294-s02",
+            "lob-v1-a241294-s03",
+            "lob-v1-a241294-s04"
+          ]
+        },
+        {
+          "AphiaID": 241295,
+          "scientificName": "Nephropsis malhaensis",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a241295-s01",
+            "lob-v1-a241295-s02",
+            "lob-v1-a241295-s03",
+            "lob-v1-a241295-s04"
+          ]
+        },
+        {
+          "AphiaID": 241296,
+          "scientificName": "Nephropsis suhmi",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a241296-s01",
+            "lob-v1-a241296-s02",
+            "lob-v1-a241296-s03",
+            "lob-v1-a241296-s04"
+          ]
+        }
+      ],
+      "production": {
+        "status": "complete",
+        "automatedReviewStatus": "passed",
+        "sceneCount": 100,
+        "totalBytes": 7398582,
+        "aggregateAssetSha256": "6579705dffdb9b689c1dfab3a0367584bb71b543f5c44ffadeafd4b3d20da221",
+        "inventorySha256": "5cd11d2bab803c6d6e05db6727eee2b05d589ab6f97c2932d25c758ce11f7cfc"
+      }
+    },
+    {
+      "id": "lob-art-v1-b003",
+      "index": 3,
+      "speciesCount": 25,
+      "sceneCount": 100,
+      "species": [
+        {
+          "AphiaID": 241297,
+          "scientificName": "Palinurus charlestoni",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a241297-s01",
+            "lob-v1-a241297-s02",
+            "lob-v1-a241297-s03",
+            "lob-v1-a241297-s04"
+          ]
+        },
+        {
+          "AphiaID": 241308,
+          "scientificName": "Puerulus angulatus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a241308-s01",
+            "lob-v1-a241308-s02",
+            "lob-v1-a241308-s03",
+            "lob-v1-a241308-s04"
+          ]
+        },
+        {
+          "AphiaID": 241309,
+          "scientificName": "Scyllarides herklotsii",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a241309-s01",
+            "lob-v1-a241309-s02",
+            "lob-v1-a241309-s03",
+            "lob-v1-a241309-s04"
+          ]
+        },
+        {
+          "AphiaID": 241310,
+          "scientificName": "Scyllarus paradoxus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a241310-s01",
+            "lob-v1-a241310-s02",
+            "lob-v1-a241310-s03",
+            "lob-v1-a241310-s04"
+          ]
+        },
+        {
+          "AphiaID": 246160,
+          "scientificName": "Acanthacaris tenuimana",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a246160-s01",
+            "lob-v1-a246160-s02",
+            "lob-v1-a246160-s03",
+            "lob-v1-a246160-s04"
+          ]
+        },
+        {
+          "AphiaID": 246172,
+          "scientificName": "Nephropsis ensirostris",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a246172-s01",
+            "lob-v1-a246172-s02",
+            "lob-v1-a246172-s03",
+            "lob-v1-a246172-s04"
+          ]
+        },
+        {
+          "AphiaID": 246173,
+          "scientificName": "Nephropsis sulcata",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a246173-s01",
+            "lob-v1-a246173-s02",
+            "lob-v1-a246173-s03",
+            "lob-v1-a246173-s04"
+          ]
+        },
+        {
+          "AphiaID": 246203,
+          "scientificName": "Willemoesia pacifica",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a246203-s01",
+            "lob-v1-a246203-s02",
+            "lob-v1-a246203-s03",
+            "lob-v1-a246203-s04"
+          ]
+        },
+        {
+          "AphiaID": 246223,
+          "scientificName": "Arctides regalis",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a246223-s01",
+            "lob-v1-a246223-s02",
+            "lob-v1-a246223-s03",
+            "lob-v1-a246223-s04"
+          ]
+        },
+        {
+          "AphiaID": 246318,
+          "scientificName": "Homarinus capensis",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a246318-s01",
+            "lob-v1-a246318-s02",
+            "lob-v1-a246318-s03",
+            "lob-v1-a246318-s04"
+          ]
+        },
+        {
+          "AphiaID": 246322,
+          "scientificName": "Jasus lalandii",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a246322-s01",
+            "lob-v1-a246322-s02",
+            "lob-v1-a246322-s03",
+            "lob-v1-a246322-s04"
+          ]
+        },
+        {
+          "AphiaID": 246323,
+          "scientificName": "Jasus paulensis",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a246323-s01",
+            "lob-v1-a246323-s02",
+            "lob-v1-a246323-s03",
+            "lob-v1-a246323-s04"
+          ]
+        },
+        {
+          "AphiaID": 246431,
+          "scientificName": "Polycheles perarmatus",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a246431-s01",
+            "lob-v1-a246431-s02",
+            "lob-v1-a246431-s03",
+            "lob-v1-a246431-s04"
+          ]
+        },
+        {
+          "AphiaID": 246440,
+          "scientificName": "Projasus parkeri",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a246440-s01",
+            "lob-v1-a246440-s02",
+            "lob-v1-a246440-s03",
+            "lob-v1-a246440-s04"
+          ]
+        },
+        {
+          "AphiaID": 246455,
+          "scientificName": "Scyllarides delfosi",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a246455-s01",
+            "lob-v1-a246455-s02",
+            "lob-v1-a246455-s03",
+            "lob-v1-a246455-s04"
+          ]
+        },
+        {
+          "AphiaID": 246458,
+          "scientificName": "Petrarctus rugosus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a246458-s01",
+            "lob-v1-a246458-s02",
+            "lob-v1-a246458-s03",
+            "lob-v1-a246458-s04"
+          ]
+        },
+        {
+          "AphiaID": 293250,
+          "scientificName": "Acanthacaris caeca",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a293250-s01",
+            "lob-v1-a293250-s02",
+            "lob-v1-a293250-s03",
+            "lob-v1-a293250-s04"
+          ]
+        },
+        {
+          "AphiaID": 382831,
+          "scientificName": "Enoplometopus chacei",
+          "family": "Enoplometopidae",
+          "sceneIds": [
+            "lob-v1-a382831-s01",
+            "lob-v1-a382831-s02",
+            "lob-v1-a382831-s03",
+            "lob-v1-a382831-s04"
+          ]
+        },
+        {
+          "AphiaID": 382832,
+          "scientificName": "Enoplometopus crosnieri",
+          "family": "Enoplometopidae",
+          "sceneIds": [
+            "lob-v1-a382832-s01",
+            "lob-v1-a382832-s02",
+            "lob-v1-a382832-s03",
+            "lob-v1-a382832-s04"
+          ]
+        },
+        {
+          "AphiaID": 382833,
+          "scientificName": "Enoplometopus daumi",
+          "family": "Enoplometopidae",
+          "sceneIds": [
+            "lob-v1-a382833-s01",
+            "lob-v1-a382833-s02",
+            "lob-v1-a382833-s03",
+            "lob-v1-a382833-s04"
+          ]
+        },
+        {
+          "AphiaID": 382834,
+          "scientificName": "Enoplometopus debelius",
+          "family": "Enoplometopidae",
+          "sceneIds": [
+            "lob-v1-a382834-s01",
+            "lob-v1-a382834-s02",
+            "lob-v1-a382834-s03",
+            "lob-v1-a382834-s04"
+          ]
+        },
+        {
+          "AphiaID": 382839,
+          "scientificName": "Laurentaeglyphea neocaledonica",
+          "family": "Glypheidae",
+          "sceneIds": [
+            "lob-v1-a382839-s01",
+            "lob-v1-a382839-s02",
+            "lob-v1-a382839-s03",
+            "lob-v1-a382839-s04"
+          ]
+        },
+        {
+          "AphiaID": 382840,
+          "scientificName": "Neoglyphea inopinata",
+          "family": "Glypheidae",
+          "sceneIds": [
+            "lob-v1-a382840-s01",
+            "lob-v1-a382840-s02",
+            "lob-v1-a382840-s03",
+            "lob-v1-a382840-s04"
+          ]
+        },
+        {
+          "AphiaID": 382841,
+          "scientificName": "Eunephrops bairdii",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382841-s01",
+            "lob-v1-a382841-s02",
+            "lob-v1-a382841-s03",
+            "lob-v1-a382841-s04"
+          ]
+        },
+        {
+          "AphiaID": 382842,
+          "scientificName": "Eunephrops cadenasi",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382842-s01",
+            "lob-v1-a382842-s02",
+            "lob-v1-a382842-s03",
+            "lob-v1-a382842-s04"
+          ]
+        }
+      ],
+      "production": {
+        "status": "complete",
+        "automatedReviewStatus": "passed",
+        "sceneCount": 100,
+        "totalBytes": 7396232,
+        "aggregateAssetSha256": "a5cfe46b8446c6d3c026492284ae6aa3d6383dccda71602b80a82bae4136e481",
+        "inventorySha256": "06028d6c145f86d7d2ee79fbbe091a93034f656f0e8d4bccdbcadecf4c09d901"
+      }
+    },
+    {
+      "id": "lob-art-v1-b004",
+      "index": 4,
+      "speciesCount": 25,
+      "sceneCount": 100,
+      "species": [
+        {
+          "AphiaID": 382843,
+          "scientificName": "Eunephrops manningi",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382843-s01",
+            "lob-v1-a382843-s02",
+            "lob-v1-a382843-s03",
+            "lob-v1-a382843-s04"
+          ]
+        },
+        {
+          "AphiaID": 382844,
+          "scientificName": "Eunephrops luckhursti",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382844-s01",
+            "lob-v1-a382844-s02",
+            "lob-v1-a382844-s03",
+            "lob-v1-a382844-s04"
+          ]
+        },
+        {
+          "AphiaID": 382845,
+          "scientificName": "Metanephrops arafurensis",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382845-s01",
+            "lob-v1-a382845-s02",
+            "lob-v1-a382845-s03",
+            "lob-v1-a382845-s04"
+          ]
+        },
+        {
+          "AphiaID": 382846,
+          "scientificName": "Metanephrops armatus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382846-s01",
+            "lob-v1-a382846-s02",
+            "lob-v1-a382846-s03",
+            "lob-v1-a382846-s04"
+          ]
+        },
+        {
+          "AphiaID": 382847,
+          "scientificName": "Metanephrops australiensis",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382847-s01",
+            "lob-v1-a382847-s02",
+            "lob-v1-a382847-s03",
+            "lob-v1-a382847-s04"
+          ]
+        },
+        {
+          "AphiaID": 382848,
+          "scientificName": "Metanephrops binghami",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382848-s01",
+            "lob-v1-a382848-s02",
+            "lob-v1-a382848-s03",
+            "lob-v1-a382848-s04"
+          ]
+        },
+        {
+          "AphiaID": 382849,
+          "scientificName": "Metanephrops boschmai",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382849-s01",
+            "lob-v1-a382849-s02",
+            "lob-v1-a382849-s03",
+            "lob-v1-a382849-s04"
+          ]
+        },
+        {
+          "AphiaID": 382850,
+          "scientificName": "Metanephrops challengeri",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382850-s01",
+            "lob-v1-a382850-s02",
+            "lob-v1-a382850-s03",
+            "lob-v1-a382850-s04"
+          ]
+        },
+        {
+          "AphiaID": 382851,
+          "scientificName": "Metanephrops formosanus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382851-s01",
+            "lob-v1-a382851-s02",
+            "lob-v1-a382851-s03",
+            "lob-v1-a382851-s04"
+          ]
+        },
+        {
+          "AphiaID": 382852,
+          "scientificName": "Metanephrops japonicus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382852-s01",
+            "lob-v1-a382852-s02",
+            "lob-v1-a382852-s03",
+            "lob-v1-a382852-s04"
+          ]
+        },
+        {
+          "AphiaID": 382853,
+          "scientificName": "Metanephrops neptunus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382853-s01",
+            "lob-v1-a382853-s02",
+            "lob-v1-a382853-s03",
+            "lob-v1-a382853-s04"
+          ]
+        },
+        {
+          "AphiaID": 382854,
+          "scientificName": "Metanephrops rubellus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382854-s01",
+            "lob-v1-a382854-s02",
+            "lob-v1-a382854-s03",
+            "lob-v1-a382854-s04"
+          ]
+        },
+        {
+          "AphiaID": 382855,
+          "scientificName": "Metanephrops sagamiensis",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382855-s01",
+            "lob-v1-a382855-s02",
+            "lob-v1-a382855-s03",
+            "lob-v1-a382855-s04"
+          ]
+        },
+        {
+          "AphiaID": 382856,
+          "scientificName": "Metanephrops sibogae",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382856-s01",
+            "lob-v1-a382856-s02",
+            "lob-v1-a382856-s03",
+            "lob-v1-a382856-s04"
+          ]
+        },
+        {
+          "AphiaID": 382857,
+          "scientificName": "Metanephrops sinensis",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382857-s01",
+            "lob-v1-a382857-s02",
+            "lob-v1-a382857-s03",
+            "lob-v1-a382857-s04"
+          ]
+        },
+        {
+          "AphiaID": 382858,
+          "scientificName": "Metanephrops taiwanicus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382858-s01",
+            "lob-v1-a382858-s02",
+            "lob-v1-a382858-s03",
+            "lob-v1-a382858-s04"
+          ]
+        },
+        {
+          "AphiaID": 382859,
+          "scientificName": "Metanephrops thomsoni",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382859-s01",
+            "lob-v1-a382859-s02",
+            "lob-v1-a382859-s03",
+            "lob-v1-a382859-s04"
+          ]
+        },
+        {
+          "AphiaID": 382860,
+          "scientificName": "Metanephrops velutinus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382860-s01",
+            "lob-v1-a382860-s02",
+            "lob-v1-a382860-s03",
+            "lob-v1-a382860-s04"
+          ]
+        },
+        {
+          "AphiaID": 382861,
+          "scientificName": "Nephropides caribaeus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382861-s01",
+            "lob-v1-a382861-s02",
+            "lob-v1-a382861-s03",
+            "lob-v1-a382861-s04"
+          ]
+        },
+        {
+          "AphiaID": 382862,
+          "scientificName": "Nephropsis aculeata",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382862-s01",
+            "lob-v1-a382862-s02",
+            "lob-v1-a382862-s03",
+            "lob-v1-a382862-s04"
+          ]
+        },
+        {
+          "AphiaID": 382863,
+          "scientificName": "Nephropsis agassizii",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382863-s01",
+            "lob-v1-a382863-s02",
+            "lob-v1-a382863-s03",
+            "lob-v1-a382863-s04"
+          ]
+        },
+        {
+          "AphiaID": 382864,
+          "scientificName": "Nephropsis holthuisi",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382864-s01",
+            "lob-v1-a382864-s02",
+            "lob-v1-a382864-s03",
+            "lob-v1-a382864-s04"
+          ]
+        },
+        {
+          "AphiaID": 382865,
+          "scientificName": "Nephropsis neglecta",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382865-s01",
+            "lob-v1-a382865-s02",
+            "lob-v1-a382865-s03",
+            "lob-v1-a382865-s04"
+          ]
+        },
+        {
+          "AphiaID": 382866,
+          "scientificName": "Nephropsis occidentalis",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382866-s01",
+            "lob-v1-a382866-s02",
+            "lob-v1-a382866-s03",
+            "lob-v1-a382866-s04"
+          ]
+        },
+        {
+          "AphiaID": 382867,
+          "scientificName": "Nephropsis rosea",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382867-s01",
+            "lob-v1-a382867-s02",
+            "lob-v1-a382867-s03",
+            "lob-v1-a382867-s04"
+          ]
+        }
+      ],
+      "production": {
+        "status": "complete",
+        "automatedReviewStatus": "passed",
+        "sceneCount": 100,
+        "totalBytes": 7399492,
+        "aggregateAssetSha256": "3e007f7f2bef9f912190604857c042c29bae1d1388932786416a89e3381263a2",
+        "inventorySha256": "19e223d19453270b876d2c281b826411e5fd3187a3fc858a4c7497dfd2d7d172"
+      }
+    },
+    {
+      "id": "lob-art-v1-b005",
+      "index": 5,
+      "speciesCount": 25,
+      "sceneCount": 100,
+      "species": [
+        {
+          "AphiaID": 382868,
+          "scientificName": "Nephropsis serrata",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382868-s01",
+            "lob-v1-a382868-s02",
+            "lob-v1-a382868-s03",
+            "lob-v1-a382868-s04"
+          ]
+        },
+        {
+          "AphiaID": 382870,
+          "scientificName": "Thaumastocheles japonicus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382870-s01",
+            "lob-v1-a382870-s02",
+            "lob-v1-a382870-s03",
+            "lob-v1-a382870-s04"
+          ]
+        },
+        {
+          "AphiaID": 382871,
+          "scientificName": "Thaumastocheles zaleucus",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382871-s01",
+            "lob-v1-a382871-s02",
+            "lob-v1-a382871-s03",
+            "lob-v1-a382871-s04"
+          ]
+        },
+        {
+          "AphiaID": 382872,
+          "scientificName": "Thaumastochelopsis brucei",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382872-s01",
+            "lob-v1-a382872-s02",
+            "lob-v1-a382872-s03",
+            "lob-v1-a382872-s04"
+          ]
+        },
+        {
+          "AphiaID": 382873,
+          "scientificName": "Thaumastochelopsis wardi",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382873-s01",
+            "lob-v1-a382873-s02",
+            "lob-v1-a382873-s03",
+            "lob-v1-a382873-s04"
+          ]
+        },
+        {
+          "AphiaID": 382874,
+          "scientificName": "Thymopides grobovi",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382874-s01",
+            "lob-v1-a382874-s02",
+            "lob-v1-a382874-s03",
+            "lob-v1-a382874-s04"
+          ]
+        },
+        {
+          "AphiaID": 382875,
+          "scientificName": "Thymopides laurentae",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382875-s01",
+            "lob-v1-a382875-s02",
+            "lob-v1-a382875-s03",
+            "lob-v1-a382875-s04"
+          ]
+        },
+        {
+          "AphiaID": 382876,
+          "scientificName": "Thymops birsteini",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a382876-s01",
+            "lob-v1-a382876-s02",
+            "lob-v1-a382876-s03",
+            "lob-v1-a382876-s04"
+          ]
+        },
+        {
+          "AphiaID": 382878,
+          "scientificName": "Jasus caveorum",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382878-s01",
+            "lob-v1-a382878-s02",
+            "lob-v1-a382878-s03",
+            "lob-v1-a382878-s04"
+          ]
+        },
+        {
+          "AphiaID": 382879,
+          "scientificName": "Jasus edwardsii",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382879-s01",
+            "lob-v1-a382879-s02",
+            "lob-v1-a382879-s03",
+            "lob-v1-a382879-s04"
+          ]
+        },
+        {
+          "AphiaID": 382880,
+          "scientificName": "Jasus frontalis",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382880-s01",
+            "lob-v1-a382880-s02",
+            "lob-v1-a382880-s03",
+            "lob-v1-a382880-s04"
+          ]
+        },
+        {
+          "AphiaID": 382881,
+          "scientificName": "Justitia longimana",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382881-s01",
+            "lob-v1-a382881-s02",
+            "lob-v1-a382881-s03",
+            "lob-v1-a382881-s04"
+          ]
+        },
+        {
+          "AphiaID": 382882,
+          "scientificName": "Linuparus sordidus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382882-s01",
+            "lob-v1-a382882-s02",
+            "lob-v1-a382882-s03",
+            "lob-v1-a382882-s04"
+          ]
+        },
+        {
+          "AphiaID": 382883,
+          "scientificName": "Nupalirus chani",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382883-s01",
+            "lob-v1-a382883-s02",
+            "lob-v1-a382883-s03",
+            "lob-v1-a382883-s04"
+          ]
+        },
+        {
+          "AphiaID": 382884,
+          "scientificName": "Nupalirus japonicus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382884-s01",
+            "lob-v1-a382884-s02",
+            "lob-v1-a382884-s03",
+            "lob-v1-a382884-s04"
+          ]
+        },
+        {
+          "AphiaID": 382885,
+          "scientificName": "Nupalirus vericeli",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382885-s01",
+            "lob-v1-a382885-s02",
+            "lob-v1-a382885-s03",
+            "lob-v1-a382885-s04"
+          ]
+        },
+        {
+          "AphiaID": 382886,
+          "scientificName": "Palibythus magnificus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382886-s01",
+            "lob-v1-a382886-s02",
+            "lob-v1-a382886-s03",
+            "lob-v1-a382886-s04"
+          ]
+        },
+        {
+          "AphiaID": 382888,
+          "scientificName": "Palinurus barbarae",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382888-s01",
+            "lob-v1-a382888-s02",
+            "lob-v1-a382888-s03",
+            "lob-v1-a382888-s04"
+          ]
+        },
+        {
+          "AphiaID": 382889,
+          "scientificName": "Palinustus truncatus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382889-s01",
+            "lob-v1-a382889-s02",
+            "lob-v1-a382889-s03",
+            "lob-v1-a382889-s04"
+          ]
+        },
+        {
+          "AphiaID": 382890,
+          "scientificName": "Palinustus holthuisi",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382890-s01",
+            "lob-v1-a382890-s02",
+            "lob-v1-a382890-s03",
+            "lob-v1-a382890-s04"
+          ]
+        },
+        {
+          "AphiaID": 382891,
+          "scientificName": "Panulirus argus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382891-s01",
+            "lob-v1-a382891-s02",
+            "lob-v1-a382891-s03",
+            "lob-v1-a382891-s04"
+          ]
+        },
+        {
+          "AphiaID": 382892,
+          "scientificName": "Panulirus brunneiflagellum",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382892-s01",
+            "lob-v1-a382892-s02",
+            "lob-v1-a382892-s03",
+            "lob-v1-a382892-s04"
+          ]
+        },
+        {
+          "AphiaID": 382893,
+          "scientificName": "Panulirus cygnus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382893-s01",
+            "lob-v1-a382893-s02",
+            "lob-v1-a382893-s03",
+            "lob-v1-a382893-s04"
+          ]
+        },
+        {
+          "AphiaID": 382894,
+          "scientificName": "Panulirus femoristriga",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382894-s01",
+            "lob-v1-a382894-s02",
+            "lob-v1-a382894-s03",
+            "lob-v1-a382894-s04"
+          ]
+        },
+        {
+          "AphiaID": 382895,
+          "scientificName": "Panulirus gracilis",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382895-s01",
+            "lob-v1-a382895-s02",
+            "lob-v1-a382895-s03",
+            "lob-v1-a382895-s04"
+          ]
+        }
+      ],
+      "production": {
+        "status": "complete",
+        "automatedReviewStatus": "passed",
+        "sceneCount": 100,
+        "totalBytes": 7407800,
+        "aggregateAssetSha256": "5ab9cb0ee68f1e901d54d413ac59bb15ac6a33546a5a151db53b4e5a80f2feda",
+        "inventorySha256": "63f543e7096eda329f0b54d562cea93ee49600680bacdbf63d485db59a5790df"
+      }
+    },
+    {
+      "id": "lob-art-v1-b006",
+      "index": 6,
+      "speciesCount": 25,
+      "sceneCount": 100,
+      "species": [
+        {
+          "AphiaID": 382896,
+          "scientificName": "Panulirus guttatus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382896-s01",
+            "lob-v1-a382896-s02",
+            "lob-v1-a382896-s03",
+            "lob-v1-a382896-s04"
+          ]
+        },
+        {
+          "AphiaID": 382897,
+          "scientificName": "Panulirus inflatus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382897-s01",
+            "lob-v1-a382897-s02",
+            "lob-v1-a382897-s03",
+            "lob-v1-a382897-s04"
+          ]
+        },
+        {
+          "AphiaID": 382898,
+          "scientificName": "Panulirus interruptus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382898-s01",
+            "lob-v1-a382898-s02",
+            "lob-v1-a382898-s03",
+            "lob-v1-a382898-s04"
+          ]
+        },
+        {
+          "AphiaID": 382899,
+          "scientificName": "Panulirus laevicauda",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382899-s01",
+            "lob-v1-a382899-s02",
+            "lob-v1-a382899-s03",
+            "lob-v1-a382899-s04"
+          ]
+        },
+        {
+          "AphiaID": 382900,
+          "scientificName": "Panulirus marginatus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382900-s01",
+            "lob-v1-a382900-s02",
+            "lob-v1-a382900-s03",
+            "lob-v1-a382900-s04"
+          ]
+        },
+        {
+          "AphiaID": 382901,
+          "scientificName": "Panulirus pascuensis",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382901-s01",
+            "lob-v1-a382901-s02",
+            "lob-v1-a382901-s03",
+            "lob-v1-a382901-s04"
+          ]
+        },
+        {
+          "AphiaID": 382902,
+          "scientificName": "Panulirus polyphagus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382902-s01",
+            "lob-v1-a382902-s02",
+            "lob-v1-a382902-s03",
+            "lob-v1-a382902-s04"
+          ]
+        },
+        {
+          "AphiaID": 382903,
+          "scientificName": "Panulirus stimpsoni",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382903-s01",
+            "lob-v1-a382903-s02",
+            "lob-v1-a382903-s03",
+            "lob-v1-a382903-s04"
+          ]
+        },
+        {
+          "AphiaID": 382904,
+          "scientificName": "Projasus bahamondei",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382904-s01",
+            "lob-v1-a382904-s02",
+            "lob-v1-a382904-s03",
+            "lob-v1-a382904-s04"
+          ]
+        },
+        {
+          "AphiaID": 382905,
+          "scientificName": "Puerulus velutinus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382905-s01",
+            "lob-v1-a382905-s02",
+            "lob-v1-a382905-s03",
+            "lob-v1-a382905-s04"
+          ]
+        },
+        {
+          "AphiaID": 382906,
+          "scientificName": "Sagmariasus verreauxi",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a382906-s01",
+            "lob-v1-a382906-s02",
+            "lob-v1-a382906-s03",
+            "lob-v1-a382906-s04"
+          ]
+        },
+        {
+          "AphiaID": 382907,
+          "scientificName": "Arctides antipodarum",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382907-s01",
+            "lob-v1-a382907-s02",
+            "lob-v1-a382907-s03",
+            "lob-v1-a382907-s04"
+          ]
+        },
+        {
+          "AphiaID": 382908,
+          "scientificName": "Arctides guineensis",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382908-s01",
+            "lob-v1-a382908-s02",
+            "lob-v1-a382908-s03",
+            "lob-v1-a382908-s04"
+          ]
+        },
+        {
+          "AphiaID": 382909,
+          "scientificName": "Scyllarides aequinoctialis",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382909-s01",
+            "lob-v1-a382909-s02",
+            "lob-v1-a382909-s03",
+            "lob-v1-a382909-s04"
+          ]
+        },
+        {
+          "AphiaID": 382910,
+          "scientificName": "Scyllarides astori",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382910-s01",
+            "lob-v1-a382910-s02",
+            "lob-v1-a382910-s03",
+            "lob-v1-a382910-s04"
+          ]
+        },
+        {
+          "AphiaID": 382911,
+          "scientificName": "Scyllarides brasiliensis",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382911-s01",
+            "lob-v1-a382911-s02",
+            "lob-v1-a382911-s03",
+            "lob-v1-a382911-s04"
+          ]
+        },
+        {
+          "AphiaID": 382912,
+          "scientificName": "Scyllarides deceptor",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382912-s01",
+            "lob-v1-a382912-s02",
+            "lob-v1-a382912-s03",
+            "lob-v1-a382912-s04"
+          ]
+        },
+        {
+          "AphiaID": 382913,
+          "scientificName": "Scyllarides haanii",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382913-s01",
+            "lob-v1-a382913-s02",
+            "lob-v1-a382913-s03",
+            "lob-v1-a382913-s04"
+          ]
+        },
+        {
+          "AphiaID": 382914,
+          "scientificName": "Scyllarides nodifer",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382914-s01",
+            "lob-v1-a382914-s02",
+            "lob-v1-a382914-s03",
+            "lob-v1-a382914-s04"
+          ]
+        },
+        {
+          "AphiaID": 382915,
+          "scientificName": "Scyllarides obtusus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382915-s01",
+            "lob-v1-a382915-s02",
+            "lob-v1-a382915-s03",
+            "lob-v1-a382915-s04"
+          ]
+        },
+        {
+          "AphiaID": 382916,
+          "scientificName": "Scyllarides roggeveeni",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382916-s01",
+            "lob-v1-a382916-s02",
+            "lob-v1-a382916-s03",
+            "lob-v1-a382916-s04"
+          ]
+        },
+        {
+          "AphiaID": 382917,
+          "scientificName": "Evibacus princeps",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382917-s01",
+            "lob-v1-a382917-s02",
+            "lob-v1-a382917-s03",
+            "lob-v1-a382917-s04"
+          ]
+        },
+        {
+          "AphiaID": 382918,
+          "scientificName": "Ibacus alticrenatus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382918-s01",
+            "lob-v1-a382918-s02",
+            "lob-v1-a382918-s03",
+            "lob-v1-a382918-s04"
+          ]
+        },
+        {
+          "AphiaID": 382919,
+          "scientificName": "Ibacus brevipes",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382919-s01",
+            "lob-v1-a382919-s02",
+            "lob-v1-a382919-s03",
+            "lob-v1-a382919-s04"
+          ]
+        },
+        {
+          "AphiaID": 382920,
+          "scientificName": "Ibacus brucei",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382920-s01",
+            "lob-v1-a382920-s02",
+            "lob-v1-a382920-s03",
+            "lob-v1-a382920-s04"
+          ]
+        }
+      ],
+      "production": {
+        "status": "complete",
+        "automatedReviewStatus": "passed",
+        "sceneCount": 100,
+        "totalBytes": 7405276,
+        "aggregateAssetSha256": "50c911fc2be8ae7ab64789a668b9da9e7e3db5a38358cd497df6204ff32960a9",
+        "inventorySha256": "f086ca738ba6e9a1465a341f4501e64a05dd05c27467c9256ab638d8aedc7d9c"
+      }
+    },
+    {
+      "id": "lob-art-v1-b007",
+      "index": 7,
+      "speciesCount": 25,
+      "sceneCount": 100,
+      "species": [
+        {
+          "AphiaID": 382921,
+          "scientificName": "Ibacus chacei",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382921-s01",
+            "lob-v1-a382921-s02",
+            "lob-v1-a382921-s03",
+            "lob-v1-a382921-s04"
+          ]
+        },
+        {
+          "AphiaID": 382922,
+          "scientificName": "Ibacus ciliatus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382922-s01",
+            "lob-v1-a382922-s02",
+            "lob-v1-a382922-s03",
+            "lob-v1-a382922-s04"
+          ]
+        },
+        {
+          "AphiaID": 382923,
+          "scientificName": "Ibacus peronii",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382923-s01",
+            "lob-v1-a382923-s02",
+            "lob-v1-a382923-s03",
+            "lob-v1-a382923-s04"
+          ]
+        },
+        {
+          "AphiaID": 382924,
+          "scientificName": "Ibacus pubescens",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382924-s01",
+            "lob-v1-a382924-s02",
+            "lob-v1-a382924-s03",
+            "lob-v1-a382924-s04"
+          ]
+        },
+        {
+          "AphiaID": 382925,
+          "scientificName": "Parribacus caledonicus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382925-s01",
+            "lob-v1-a382925-s02",
+            "lob-v1-a382925-s03",
+            "lob-v1-a382925-s04"
+          ]
+        },
+        {
+          "AphiaID": 382926,
+          "scientificName": "Parribacus holthuisi",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382926-s01",
+            "lob-v1-a382926-s02",
+            "lob-v1-a382926-s03",
+            "lob-v1-a382926-s04"
+          ]
+        },
+        {
+          "AphiaID": 382927,
+          "scientificName": "Parribacus japonicus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382927-s01",
+            "lob-v1-a382927-s02",
+            "lob-v1-a382927-s03",
+            "lob-v1-a382927-s04"
+          ]
+        },
+        {
+          "AphiaID": 382928,
+          "scientificName": "Parribacus perlatus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382928-s01",
+            "lob-v1-a382928-s02",
+            "lob-v1-a382928-s03",
+            "lob-v1-a382928-s04"
+          ]
+        },
+        {
+          "AphiaID": 382929,
+          "scientificName": "Parribacus scarlatinus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382929-s01",
+            "lob-v1-a382929-s02",
+            "lob-v1-a382929-s03",
+            "lob-v1-a382929-s04"
+          ]
+        },
+        {
+          "AphiaID": 382930,
+          "scientificName": "Acantharctus delfini",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382930-s01",
+            "lob-v1-a382930-s02",
+            "lob-v1-a382930-s03",
+            "lob-v1-a382930-s04"
+          ]
+        },
+        {
+          "AphiaID": 382931,
+          "scientificName": "Acantharctus ornatus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382931-s01",
+            "lob-v1-a382931-s02",
+            "lob-v1-a382931-s03",
+            "lob-v1-a382931-s04"
+          ]
+        },
+        {
+          "AphiaID": 382932,
+          "scientificName": "Acantharctus posteli",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382932-s01",
+            "lob-v1-a382932-s02",
+            "lob-v1-a382932-s03",
+            "lob-v1-a382932-s04"
+          ]
+        },
+        {
+          "AphiaID": 382933,
+          "scientificName": "Antarctus mawsoni",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382933-s01",
+            "lob-v1-a382933-s02",
+            "lob-v1-a382933-s03",
+            "lob-v1-a382933-s04"
+          ]
+        },
+        {
+          "AphiaID": 382934,
+          "scientificName": "Bathyarctus chani",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382934-s01",
+            "lob-v1-a382934-s02",
+            "lob-v1-a382934-s03",
+            "lob-v1-a382934-s04"
+          ]
+        },
+        {
+          "AphiaID": 382935,
+          "scientificName": "Bathyarctus faxoni",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382935-s01",
+            "lob-v1-a382935-s02",
+            "lob-v1-a382935-s03",
+            "lob-v1-a382935-s04"
+          ]
+        },
+        {
+          "AphiaID": 382936,
+          "scientificName": "Bathyarctus formosanus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382936-s01",
+            "lob-v1-a382936-s02",
+            "lob-v1-a382936-s03",
+            "lob-v1-a382936-s04"
+          ]
+        },
+        {
+          "AphiaID": 382937,
+          "scientificName": "Bathyarctus ramosae",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382937-s01",
+            "lob-v1-a382937-s02",
+            "lob-v1-a382937-s03",
+            "lob-v1-a382937-s04"
+          ]
+        },
+        {
+          "AphiaID": 382938,
+          "scientificName": "Bathyarctus rubens",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382938-s01",
+            "lob-v1-a382938-s02",
+            "lob-v1-a382938-s03",
+            "lob-v1-a382938-s04"
+          ]
+        },
+        {
+          "AphiaID": 382939,
+          "scientificName": "Bathyarctus steatopygus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382939-s01",
+            "lob-v1-a382939-s02",
+            "lob-v1-a382939-s03",
+            "lob-v1-a382939-s04"
+          ]
+        },
+        {
+          "AphiaID": 382940,
+          "scientificName": "Biarctus dubius",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382940-s01",
+            "lob-v1-a382940-s02",
+            "lob-v1-a382940-s03",
+            "lob-v1-a382940-s04"
+          ]
+        },
+        {
+          "AphiaID": 382941,
+          "scientificName": "Biarctus pumilus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382941-s01",
+            "lob-v1-a382941-s02",
+            "lob-v1-a382941-s03",
+            "lob-v1-a382941-s04"
+          ]
+        },
+        {
+          "AphiaID": 382942,
+          "scientificName": "Biarctus sordidus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382942-s01",
+            "lob-v1-a382942-s02",
+            "lob-v1-a382942-s03",
+            "lob-v1-a382942-s04"
+          ]
+        },
+        {
+          "AphiaID": 382943,
+          "scientificName": "Biarctus vitiensis",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382943-s01",
+            "lob-v1-a382943-s02",
+            "lob-v1-a382943-s03",
+            "lob-v1-a382943-s04"
+          ]
+        },
+        {
+          "AphiaID": 382944,
+          "scientificName": "Chelarctus aureus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382944-s01",
+            "lob-v1-a382944-s02",
+            "lob-v1-a382944-s03",
+            "lob-v1-a382944-s04"
+          ]
+        },
+        {
+          "AphiaID": 382945,
+          "scientificName": "Chelarctus crosnieri",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382945-s01",
+            "lob-v1-a382945-s02",
+            "lob-v1-a382945-s03",
+            "lob-v1-a382945-s04"
+          ]
+        }
+      ],
+      "production": {
+        "status": "complete",
+        "automatedReviewStatus": "passed",
+        "sceneCount": 100,
+        "totalBytes": 7403442,
+        "aggregateAssetSha256": "dc42486e89adf058d61e4ce896783dcbe9586c5c8ee411ccf181291b1a40c05d",
+        "inventorySha256": "0066e99ff3a819a0bf205b50c9d02c770b610aa0ba81903cb94bf1ecf2200334"
+      }
+    },
+    {
+      "id": "lob-art-v1-b008",
+      "index": 8,
+      "speciesCount": 25,
+      "sceneCount": 100,
+      "species": [
+        {
+          "AphiaID": 382946,
+          "scientificName": "Chelarctus cultrifer",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382946-s01",
+            "lob-v1-a382946-s02",
+            "lob-v1-a382946-s03",
+            "lob-v1-a382946-s04"
+          ]
+        },
+        {
+          "AphiaID": 382947,
+          "scientificName": "Crenarctus bicuspidatus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382947-s01",
+            "lob-v1-a382947-s02",
+            "lob-v1-a382947-s03",
+            "lob-v1-a382947-s04"
+          ]
+        },
+        {
+          "AphiaID": 382948,
+          "scientificName": "Crenarctus crenatus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382948-s01",
+            "lob-v1-a382948-s02",
+            "lob-v1-a382948-s03",
+            "lob-v1-a382948-s04"
+          ]
+        },
+        {
+          "AphiaID": 382949,
+          "scientificName": "Eduarctus aesopius",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382949-s01",
+            "lob-v1-a382949-s02",
+            "lob-v1-a382949-s03",
+            "lob-v1-a382949-s04"
+          ]
+        },
+        {
+          "AphiaID": 382950,
+          "scientificName": "Eduarctus lewinsohni",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382950-s01",
+            "lob-v1-a382950-s02",
+            "lob-v1-a382950-s03",
+            "lob-v1-a382950-s04"
+          ]
+        },
+        {
+          "AphiaID": 382951,
+          "scientificName": "Eduarctus marginatus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382951-s01",
+            "lob-v1-a382951-s02",
+            "lob-v1-a382951-s03",
+            "lob-v1-a382951-s04"
+          ]
+        },
+        {
+          "AphiaID": 382952,
+          "scientificName": "Eduarctus martensii",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382952-s01",
+            "lob-v1-a382952-s02",
+            "lob-v1-a382952-s03",
+            "lob-v1-a382952-s04"
+          ]
+        },
+        {
+          "AphiaID": 382953,
+          "scientificName": "Eduarctus modestus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382953-s01",
+            "lob-v1-a382953-s02",
+            "lob-v1-a382953-s03",
+            "lob-v1-a382953-s04"
+          ]
+        },
+        {
+          "AphiaID": 382954,
+          "scientificName": "Eduarctus perspicillatus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382954-s01",
+            "lob-v1-a382954-s02",
+            "lob-v1-a382954-s03",
+            "lob-v1-a382954-s04"
+          ]
+        },
+        {
+          "AphiaID": 382955,
+          "scientificName": "Eduarctus pyrrhonotus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382955-s01",
+            "lob-v1-a382955-s02",
+            "lob-v1-a382955-s03",
+            "lob-v1-a382955-s04"
+          ]
+        },
+        {
+          "AphiaID": 382956,
+          "scientificName": "Eduarctus reticulatus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382956-s01",
+            "lob-v1-a382956-s02",
+            "lob-v1-a382956-s03",
+            "lob-v1-a382956-s04"
+          ]
+        },
+        {
+          "AphiaID": 382957,
+          "scientificName": "Galearctus aurora",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382957-s01",
+            "lob-v1-a382957-s02",
+            "lob-v1-a382957-s03",
+            "lob-v1-a382957-s04"
+          ]
+        },
+        {
+          "AphiaID": 382958,
+          "scientificName": "Galearctus kitanoviriosus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382958-s01",
+            "lob-v1-a382958-s02",
+            "lob-v1-a382958-s03",
+            "lob-v1-a382958-s04"
+          ]
+        },
+        {
+          "AphiaID": 382959,
+          "scientificName": "Galearctus rapanus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382959-s01",
+            "lob-v1-a382959-s02",
+            "lob-v1-a382959-s03",
+            "lob-v1-a382959-s04"
+          ]
+        },
+        {
+          "AphiaID": 382960,
+          "scientificName": "Galearctus timidus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382960-s01",
+            "lob-v1-a382960-s02",
+            "lob-v1-a382960-s03",
+            "lob-v1-a382960-s04"
+          ]
+        },
+        {
+          "AphiaID": 382961,
+          "scientificName": "Galearctus umbilicatus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382961-s01",
+            "lob-v1-a382961-s02",
+            "lob-v1-a382961-s03",
+            "lob-v1-a382961-s04"
+          ]
+        },
+        {
+          "AphiaID": 382962,
+          "scientificName": "Gibbularctus gibberosus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382962-s01",
+            "lob-v1-a382962-s02",
+            "lob-v1-a382962-s03",
+            "lob-v1-a382962-s04"
+          ]
+        },
+        {
+          "AphiaID": 382963,
+          "scientificName": "Petrarctus brevicornis",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382963-s01",
+            "lob-v1-a382963-s02",
+            "lob-v1-a382963-s03",
+            "lob-v1-a382963-s04"
+          ]
+        },
+        {
+          "AphiaID": 382964,
+          "scientificName": "Petrarctus demani",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382964-s01",
+            "lob-v1-a382964-s02",
+            "lob-v1-a382964-s03",
+            "lob-v1-a382964-s04"
+          ]
+        },
+        {
+          "AphiaID": 382965,
+          "scientificName": "Petrarctus holthuisi",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382965-s01",
+            "lob-v1-a382965-s02",
+            "lob-v1-a382965-s03",
+            "lob-v1-a382965-s04"
+          ]
+        },
+        {
+          "AphiaID": 382966,
+          "scientificName": "Petrarctus veliger",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382966-s01",
+            "lob-v1-a382966-s02",
+            "lob-v1-a382966-s03",
+            "lob-v1-a382966-s04"
+          ]
+        },
+        {
+          "AphiaID": 382967,
+          "scientificName": "Remiarctus bertholdii",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382967-s01",
+            "lob-v1-a382967-s02",
+            "lob-v1-a382967-s03",
+            "lob-v1-a382967-s04"
+          ]
+        },
+        {
+          "AphiaID": 382968,
+          "scientificName": "Scyllarus americanus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382968-s01",
+            "lob-v1-a382968-s02",
+            "lob-v1-a382968-s03",
+            "lob-v1-a382968-s04"
+          ]
+        },
+        {
+          "AphiaID": 382969,
+          "scientificName": "Scyllarus chacei",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382969-s01",
+            "lob-v1-a382969-s02",
+            "lob-v1-a382969-s03",
+            "lob-v1-a382969-s04"
+          ]
+        },
+        {
+          "AphiaID": 382970,
+          "scientificName": "Scyllarus planorbis",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382970-s01",
+            "lob-v1-a382970-s02",
+            "lob-v1-a382970-s03",
+            "lob-v1-a382970-s04"
+          ]
+        }
+      ],
+      "production": {
+        "status": "complete",
+        "automatedReviewStatus": "passed",
+        "sceneCount": 100,
+        "totalBytes": 7405800,
+        "aggregateAssetSha256": "d322fb590a1731c8850f0dff4b8d406463c269eda581277200bbe4cb70aed3d0",
+        "inventorySha256": "e13552558cf1910b6f5bb251d5711c23d6c9ab5b9f228e250341b56ec00a3235"
+      }
+    },
+    {
+      "id": "lob-art-v1-b009",
+      "index": 9,
+      "speciesCount": 25,
+      "sceneCount": 100,
+      "species": [
+        {
+          "AphiaID": 382971,
+          "scientificName": "Scyllarus subarctus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382971-s01",
+            "lob-v1-a382971-s02",
+            "lob-v1-a382971-s03",
+            "lob-v1-a382971-s04"
+          ]
+        },
+        {
+          "AphiaID": 382972,
+          "scientificName": "Thenus australiensis",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382972-s01",
+            "lob-v1-a382972-s02",
+            "lob-v1-a382972-s03",
+            "lob-v1-a382972-s04"
+          ]
+        },
+        {
+          "AphiaID": 382973,
+          "scientificName": "Thenus indicus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382973-s01",
+            "lob-v1-a382973-s02",
+            "lob-v1-a382973-s03",
+            "lob-v1-a382973-s04"
+          ]
+        },
+        {
+          "AphiaID": 382974,
+          "scientificName": "Thenus parindicus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382974-s01",
+            "lob-v1-a382974-s02",
+            "lob-v1-a382974-s03",
+            "lob-v1-a382974-s04"
+          ]
+        },
+        {
+          "AphiaID": 382975,
+          "scientificName": "Thenus unimaculatus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a382975-s01",
+            "lob-v1-a382975-s02",
+            "lob-v1-a382975-s03",
+            "lob-v1-a382975-s04"
+          ]
+        },
+        {
+          "AphiaID": 382976,
+          "scientificName": "Homeryon armarium",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382976-s01",
+            "lob-v1-a382976-s02",
+            "lob-v1-a382976-s03",
+            "lob-v1-a382976-s04"
+          ]
+        },
+        {
+          "AphiaID": 382977,
+          "scientificName": "Homeryon asper",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382977-s01",
+            "lob-v1-a382977-s02",
+            "lob-v1-a382977-s03",
+            "lob-v1-a382977-s04"
+          ]
+        },
+        {
+          "AphiaID": 382978,
+          "scientificName": "Pentacheles gibbus",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382978-s01",
+            "lob-v1-a382978-s02",
+            "lob-v1-a382978-s03",
+            "lob-v1-a382978-s04"
+          ]
+        },
+        {
+          "AphiaID": 382979,
+          "scientificName": "Pentacheles laevis",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382979-s01",
+            "lob-v1-a382979-s02",
+            "lob-v1-a382979-s03",
+            "lob-v1-a382979-s04"
+          ]
+        },
+        {
+          "AphiaID": 382980,
+          "scientificName": "Pentacheles obscurus",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382980-s01",
+            "lob-v1-a382980-s02",
+            "lob-v1-a382980-s03",
+            "lob-v1-a382980-s04"
+          ]
+        },
+        {
+          "AphiaID": 382981,
+          "scientificName": "Pentacheles snyderi",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382981-s01",
+            "lob-v1-a382981-s02",
+            "lob-v1-a382981-s03",
+            "lob-v1-a382981-s04"
+          ]
+        },
+        {
+          "AphiaID": 382983,
+          "scientificName": "Polycheles baccatus",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382983-s01",
+            "lob-v1-a382983-s02",
+            "lob-v1-a382983-s03",
+            "lob-v1-a382983-s04"
+          ]
+        },
+        {
+          "AphiaID": 382984,
+          "scientificName": "Polycheles coccifer",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382984-s01",
+            "lob-v1-a382984-s02",
+            "lob-v1-a382984-s03",
+            "lob-v1-a382984-s04"
+          ]
+        },
+        {
+          "AphiaID": 382988,
+          "scientificName": "Polycheles tanneri",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382988-s01",
+            "lob-v1-a382988-s02",
+            "lob-v1-a382988-s03",
+            "lob-v1-a382988-s04"
+          ]
+        },
+        {
+          "AphiaID": 382989,
+          "scientificName": "Stereomastis aculeata",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382989-s01",
+            "lob-v1-a382989-s02",
+            "lob-v1-a382989-s03",
+            "lob-v1-a382989-s04"
+          ]
+        },
+        {
+          "AphiaID": 382990,
+          "scientificName": "Stereomastis alis",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382990-s01",
+            "lob-v1-a382990-s02",
+            "lob-v1-a382990-s03",
+            "lob-v1-a382990-s04"
+          ]
+        },
+        {
+          "AphiaID": 382991,
+          "scientificName": "Stereomastis auriculata",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382991-s01",
+            "lob-v1-a382991-s02",
+            "lob-v1-a382991-s03",
+            "lob-v1-a382991-s04"
+          ]
+        },
+        {
+          "AphiaID": 382992,
+          "scientificName": "Stereomastis cerata",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382992-s01",
+            "lob-v1-a382992-s02",
+            "lob-v1-a382992-s03",
+            "lob-v1-a382992-s04"
+          ]
+        },
+        {
+          "AphiaID": 382993,
+          "scientificName": "Stereomastis evexa",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382993-s01",
+            "lob-v1-a382993-s02",
+            "lob-v1-a382993-s03",
+            "lob-v1-a382993-s04"
+          ]
+        },
+        {
+          "AphiaID": 382994,
+          "scientificName": "Stereomastis galil",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382994-s01",
+            "lob-v1-a382994-s02",
+            "lob-v1-a382994-s03",
+            "lob-v1-a382994-s04"
+          ]
+        },
+        {
+          "AphiaID": 382995,
+          "scientificName": "Stereomastis helleri",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382995-s01",
+            "lob-v1-a382995-s02",
+            "lob-v1-a382995-s03",
+            "lob-v1-a382995-s04"
+          ]
+        },
+        {
+          "AphiaID": 382996,
+          "scientificName": "Stereomastis pacifica",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382996-s01",
+            "lob-v1-a382996-s02",
+            "lob-v1-a382996-s03",
+            "lob-v1-a382996-s04"
+          ]
+        },
+        {
+          "AphiaID": 382997,
+          "scientificName": "Stereomastis panglao",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382997-s01",
+            "lob-v1-a382997-s02",
+            "lob-v1-a382997-s03",
+            "lob-v1-a382997-s04"
+          ]
+        },
+        {
+          "AphiaID": 382998,
+          "scientificName": "Stereomastis phosphorus",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382998-s01",
+            "lob-v1-a382998-s02",
+            "lob-v1-a382998-s03",
+            "lob-v1-a382998-s04"
+          ]
+        },
+        {
+          "AphiaID": 382999,
+          "scientificName": "Stereomastis polita",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a382999-s01",
+            "lob-v1-a382999-s02",
+            "lob-v1-a382999-s03",
+            "lob-v1-a382999-s04"
+          ]
+        }
+      ],
+      "production": {
+        "status": "complete",
+        "automatedReviewStatus": "passed",
+        "sceneCount": 100,
+        "totalBytes": 7402252,
+        "aggregateAssetSha256": "a0a96d06687e795c6f28d54e1fce7dc83795731b78466c2b24ff5eb4ba6ed95f",
+        "inventorySha256": "31fecd4df8d2ed544ca01504d565fa66aefb9c7c3649b4917192dcfa67b7e6b9"
+      }
+    },
+    {
+      "id": "lob-art-v1-b010",
+      "index": 10,
+      "speciesCount": 25,
+      "sceneCount": 100,
+      "species": [
+        {
+          "AphiaID": 383000,
+          "scientificName": "Stereomastis suhmi",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a383000-s01",
+            "lob-v1-a383000-s02",
+            "lob-v1-a383000-s03",
+            "lob-v1-a383000-s04"
+          ]
+        },
+        {
+          "AphiaID": 383001,
+          "scientificName": "Stereomastis surda",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a383001-s01",
+            "lob-v1-a383001-s02",
+            "lob-v1-a383001-s03",
+            "lob-v1-a383001-s04"
+          ]
+        },
+        {
+          "AphiaID": 383002,
+          "scientificName": "Stereomastis talismani",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a383002-s01",
+            "lob-v1-a383002-s02",
+            "lob-v1-a383002-s03",
+            "lob-v1-a383002-s04"
+          ]
+        },
+        {
+          "AphiaID": 383003,
+          "scientificName": "Stereomastis trispinosa",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a383003-s01",
+            "lob-v1-a383003-s02",
+            "lob-v1-a383003-s03",
+            "lob-v1-a383003-s04"
+          ]
+        },
+        {
+          "AphiaID": 383004,
+          "scientificName": "Willemoesia inornata",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a383004-s01",
+            "lob-v1-a383004-s02",
+            "lob-v1-a383004-s03",
+            "lob-v1-a383004-s04"
+          ]
+        },
+        {
+          "AphiaID": 383030,
+          "scientificName": "Scammarctus batei",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a383030-s01",
+            "lob-v1-a383030-s02",
+            "lob-v1-a383030-s03",
+            "lob-v1-a383030-s04"
+          ]
+        },
+        {
+          "AphiaID": 383037,
+          "scientificName": "Hoplometopus antillensis",
+          "family": "Enoplometopidae",
+          "sceneIds": [
+            "lob-v1-a383037-s01",
+            "lob-v1-a383037-s02",
+            "lob-v1-a383037-s03",
+            "lob-v1-a383037-s04"
+          ]
+        },
+        {
+          "AphiaID": 383039,
+          "scientificName": "Hoplometopus callistus",
+          "family": "Enoplometopidae",
+          "sceneIds": [
+            "lob-v1-a383039-s01",
+            "lob-v1-a383039-s02",
+            "lob-v1-a383039-s03",
+            "lob-v1-a383039-s04"
+          ]
+        },
+        {
+          "AphiaID": 383043,
+          "scientificName": "Hoplometopus gracilipes",
+          "family": "Enoplometopidae",
+          "sceneIds": [
+            "lob-v1-a383043-s01",
+            "lob-v1-a383043-s02",
+            "lob-v1-a383043-s03",
+            "lob-v1-a383043-s04"
+          ]
+        },
+        {
+          "AphiaID": 383045,
+          "scientificName": "Hoplometopus holthuisi",
+          "family": "Enoplometopidae",
+          "sceneIds": [
+            "lob-v1-a383045-s01",
+            "lob-v1-a383045-s02",
+            "lob-v1-a383045-s03",
+            "lob-v1-a383045-s04"
+          ]
+        },
+        {
+          "AphiaID": 383077,
+          "scientificName": "Nephropsis grandis",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a383077-s01",
+            "lob-v1-a383077-s02",
+            "lob-v1-a383077-s03",
+            "lob-v1-a383077-s04"
+          ]
+        },
+        {
+          "AphiaID": 531112,
+          "scientificName": "Dinochelus ausubeli",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a531112-s01",
+            "lob-v1-a531112-s02",
+            "lob-v1-a531112-s03",
+            "lob-v1-a531112-s04"
+          ]
+        },
+        {
+          "AphiaID": 712209,
+          "scientificName": "Thymops takedai",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a712209-s01",
+            "lob-v1-a712209-s02",
+            "lob-v1-a712209-s03",
+            "lob-v1-a712209-s04"
+          ]
+        },
+        {
+          "AphiaID": 762291,
+          "scientificName": "Linuparus meridionalis",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a762291-s01",
+            "lob-v1-a762291-s02",
+            "lob-v1-a762291-s03",
+            "lob-v1-a762291-s04"
+          ]
+        },
+        {
+          "AphiaID": 762292,
+          "scientificName": "Puerulus gibbosus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a762292-s01",
+            "lob-v1-a762292-s02",
+            "lob-v1-a762292-s03",
+            "lob-v1-a762292-s04"
+          ]
+        },
+        {
+          "AphiaID": 762293,
+          "scientificName": "Puerulus mesodontus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a762293-s01",
+            "lob-v1-a762293-s02",
+            "lob-v1-a762293-s03",
+            "lob-v1-a762293-s04"
+          ]
+        },
+        {
+          "AphiaID": 762294,
+          "scientificName": "Puerulus quadridentis",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a762294-s01",
+            "lob-v1-a762294-s02",
+            "lob-v1-a762294-s03",
+            "lob-v1-a762294-s04"
+          ]
+        },
+        {
+          "AphiaID": 762295,
+          "scientificName": "Puerulus richeri",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a762295-s01",
+            "lob-v1-a762295-s02",
+            "lob-v1-a762295-s03",
+            "lob-v1-a762295-s04"
+          ]
+        },
+        {
+          "AphiaID": 762296,
+          "scientificName": "Puerulus sericus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a762296-s01",
+            "lob-v1-a762296-s02",
+            "lob-v1-a762296-s03",
+            "lob-v1-a762296-s04"
+          ]
+        },
+        {
+          "AphiaID": 762297,
+          "scientificName": "Chelarctus virgosus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a762297-s01",
+            "lob-v1-a762297-s02",
+            "lob-v1-a762297-s03",
+            "lob-v1-a762297-s04"
+          ]
+        },
+        {
+          "AphiaID": 762300,
+          "scientificName": "Galearctus lipkei",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a762300-s01",
+            "lob-v1-a762300-s02",
+            "lob-v1-a762300-s03",
+            "lob-v1-a762300-s04"
+          ]
+        },
+        {
+          "AphiaID": 762301,
+          "scientificName": "Galearctus avulsus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a762301-s01",
+            "lob-v1-a762301-s02",
+            "lob-v1-a762301-s03",
+            "lob-v1-a762301-s04"
+          ]
+        },
+        {
+          "AphiaID": 762302,
+          "scientificName": "Thaumastocheles bipristis",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a762302-s01",
+            "lob-v1-a762302-s02",
+            "lob-v1-a762302-s03",
+            "lob-v1-a762302-s04"
+          ]
+        },
+        {
+          "AphiaID": 762303,
+          "scientificName": "Thaumastocheles massonktenos",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a762303-s01",
+            "lob-v1-a762303-s02",
+            "lob-v1-a762303-s03",
+            "lob-v1-a762303-s04"
+          ]
+        },
+        {
+          "AphiaID": 1059431,
+          "scientificName": "Petrarctus jeppiaari",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a1059431-s01",
+            "lob-v1-a1059431-s02",
+            "lob-v1-a1059431-s03",
+            "lob-v1-a1059431-s04"
+          ]
+        }
+      ],
+      "production": {
+        "status": "complete",
+        "automatedReviewStatus": "passed",
+        "sceneCount": 100,
+        "totalBytes": 7407594,
+        "aggregateAssetSha256": "a193d3c25f6b9e8dc609010a05167fd0ceea5457053891ebbd79496da367285d",
+        "inventorySha256": "391b4cdd82461ba3daefedec1dbd4fb5b279f5a7390d443294cf51d5462a1383"
+      }
+    },
+    {
+      "id": "lob-art-v1-b011",
+      "index": 11,
+      "speciesCount": 14,
+      "sceneCount": 56,
+      "species": [
+        {
+          "AphiaID": 1059699,
+          "scientificName": "Panulirus meripurpuratus",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a1059699-s01",
+            "lob-v1-a1059699-s02",
+            "lob-v1-a1059699-s03",
+            "lob-v1-a1059699-s04"
+          ]
+        },
+        {
+          "AphiaID": 1434135,
+          "scientificName": "Nephropsis rahayuae",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a1434135-s01",
+            "lob-v1-a1434135-s02",
+            "lob-v1-a1434135-s03",
+            "lob-v1-a1434135-s04"
+          ]
+        },
+        {
+          "AphiaID": 1469105,
+          "scientificName": "Galearctus yuanshi",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a1469105-s01",
+            "lob-v1-a1469105-s02",
+            "lob-v1-a1469105-s03",
+            "lob-v1-a1469105-s04"
+          ]
+        },
+        {
+          "AphiaID": 1473939,
+          "scientificName": "Nephropsis pygmaea",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a1473939-s01",
+            "lob-v1-a1473939-s02",
+            "lob-v1-a1473939-s03",
+            "lob-v1-a1473939-s04"
+          ]
+        },
+        {
+          "AphiaID": 1609822,
+          "scientificName": "Hoplometopus macrodontus",
+          "family": "Enoplometopidae",
+          "sceneIds": [
+            "lob-v1-a1609822-s01",
+            "lob-v1-a1609822-s02",
+            "lob-v1-a1609822-s03",
+            "lob-v1-a1609822-s04"
+          ]
+        },
+        {
+          "AphiaID": 1611043,
+          "scientificName": "Phyllamphion elegans",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a1611043-s01",
+            "lob-v1-a1611043-s02",
+            "lob-v1-a1611043-s03",
+            "lob-v1-a1611043-s04"
+          ]
+        },
+        {
+          "AphiaID": 1611044,
+          "scientificName": "Phyllamphion gundlachi",
+          "family": "Palinuridae",
+          "sceneIds": [
+            "lob-v1-a1611044-s01",
+            "lob-v1-a1611044-s02",
+            "lob-v1-a1611044-s03",
+            "lob-v1-a1611044-s04"
+          ]
+        },
+        {
+          "AphiaID": 1653867,
+          "scientificName": "Thymops nilenta",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a1653867-s01",
+            "lob-v1-a1653867-s02",
+            "lob-v1-a1653867-s03",
+            "lob-v1-a1653867-s04"
+          ]
+        },
+        {
+          "AphiaID": 1727490,
+          "scientificName": "Dianecheles martini",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a1727490-s01",
+            "lob-v1-a1727490-s02",
+            "lob-v1-a1727490-s03",
+            "lob-v1-a1727490-s04"
+          ]
+        },
+        {
+          "AphiaID": 1727493,
+          "scientificName": "Neopolycheles enthrix",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a1727493-s01",
+            "lob-v1-a1727493-s02",
+            "lob-v1-a1727493-s03",
+            "lob-v1-a1727493-s04"
+          ]
+        },
+        {
+          "AphiaID": 1727494,
+          "scientificName": "Neopolycheles amemiyai",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a1727494-s01",
+            "lob-v1-a1727494-s02",
+            "lob-v1-a1727494-s03",
+            "lob-v1-a1727494-s04"
+          ]
+        },
+        {
+          "AphiaID": 1727495,
+          "scientificName": "Neopolycheles kermadecensis",
+          "family": "Polychelidae",
+          "sceneIds": [
+            "lob-v1-a1727495-s01",
+            "lob-v1-a1727495-s02",
+            "lob-v1-a1727495-s03",
+            "lob-v1-a1727495-s04"
+          ]
+        },
+        {
+          "AphiaID": 1765544,
+          "scientificName": "Bathyarctus andamanicus",
+          "family": "Scyllaridae",
+          "sceneIds": [
+            "lob-v1-a1765544-s01",
+            "lob-v1-a1765544-s02",
+            "lob-v1-a1765544-s03",
+            "lob-v1-a1765544-s04"
+          ]
+        },
+        {
+          "AphiaID": 1877745,
+          "scientificName": "Nephropsis perexigua",
+          "family": "Nephropidae",
+          "sceneIds": [
+            "lob-v1-a1877745-s01",
+            "lob-v1-a1877745-s02",
+            "lob-v1-a1877745-s03",
+            "lob-v1-a1877745-s04"
+          ]
+        }
+      ],
+      "production": {
+        "status": "complete",
+        "automatedReviewStatus": "passed",
+        "sceneCount": 56,
+        "totalBytes": 4152020,
+        "aggregateAssetSha256": "0557b4978766c6c9f8e3a54a1ab03d3e7b7673aa8efad782b33f9a52e68d2ddf",
+        "inventorySha256": "48af14af33cb12b48c8fdf808044877e97ecab90f409d794dd076351edc8a536"
+      }
+    }
+  ]
+}

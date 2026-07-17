@@ -9,6 +9,9 @@ import HelperRootCommand from "./commands/helper.js"
 import NominateCommand from "./commands/nominate.js"
 import RoleCommand from "./commands/role.js"
 import SayRootCommand from "./commands/say.js"
+import LobsterCommand, {
+	ReleaseLobsterContextCommand
+} from "./commands/lobster.js"
 import SlapCommand, { FishSlapContextCommand } from "./commands/slap.js"
 import SolvedModCommand from "./commands/solvedMod.js"
 import AutoModerationActionExecution from "./events/autoModerationActionExecution.js"
@@ -25,6 +28,7 @@ import {
 import { fscRequestComponents } from "./components/fscRequestButtons.js"
 import { betaPingsComponents } from "./components/betaPingsButton.js"
 import { nominationComponents } from "./components/nominationButtons.js"
+import { lobsterComponents } from "./components/lobsterButtons.js"
 import { slapComponents } from "./components/slapButtons.js"
 import { whoisDeleteComponents } from "./components/whoisDeleteButton.js"
 import { hydrateRuntimeEnv, type HermitEnv } from "./runtime/env.js"
@@ -67,6 +71,8 @@ export const client = new Client(
 			new HelperRootCommand(),
 			new ClaimCommand(),
 			new NominateCommand(),
+			new LobsterCommand(),
+			new ReleaseLobsterContextCommand(),
 			new SlapCommand(),
 			new FishSlapContextCommand(),
 			new MaintainerCommand(),
@@ -87,6 +93,7 @@ export const client = new Client(
 			...fscRequestComponents,
 			...betaPingsComponents,
 			...nominationComponents,
+			...lobsterComponents,
 			...slapComponents,
 			...whoisDeleteComponents
 		],
