@@ -643,6 +643,7 @@ describe("/lobster and Release Lobster", () => {
 		globalThis.fetch = async () => Response.json([])
 		try {
 			const { client } = await import("../src/index.js")
+			expect(client.options.autoDeploy).toBe(false)
 			expect(
 				client.commands.filter((command) =>
 					["lobster", "Release Lobster"].includes(command.name)
@@ -657,7 +658,6 @@ describe("/lobster and Release Lobster", () => {
 			expect(
 				client.componentHandler.hasComponentWithKey("lobster-butter")
 			).toBe(true)
-			await new Promise((resolve) => setTimeout(resolve, 20))
 		} finally {
 			globalThis.fetch = previousFetch
 			for (const [key, value] of Object.entries(previousEnv)) {
