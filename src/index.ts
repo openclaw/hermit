@@ -32,6 +32,7 @@ import { lobsterComponents } from "./components/lobsterButtons.js"
 import { slapComponents } from "./components/slapButtons.js"
 import { whoisDeleteComponents } from "./components/whoisDeleteButton.js"
 import { hydrateRuntimeEnv, type HermitEnv } from "./runtime/env.js"
+import { createCommandDeploymentTracker } from "./runtime/commandDeployment.js"
 import {
 	claimReviewComponents,
 	claimReviewModals,
@@ -58,7 +59,7 @@ export const client = new Client(
 			: process.env.DISCORD_PUBLIC_KEY,
 		token: process.env.DISCORD_BOT_TOKEN,
 		requestOptions: { queueRequests: false },
-		autoDeploy: true,
+		autoDeploy: false,
 		devGuilds: process.env.DISCORD_DEV_GUILDS?.split(",")
 	},
 	{
@@ -132,10 +133,14 @@ if (eventsRoute) {
 }
 
 const handler = createHandler(client)
+const trackCommandDeployment = createCommandDeploymentTracker(() =>
+	client.deployCommands()
+)
 
 export default {
 	async fetch(request: Request, env: HermitEnv, ctx: ExecutionContext) {
 		hydrateRuntimeEnv(env)
+		trackCommandDeployment(ctx)
 		const contentRightsApiResponse = await handleContentRightsApiRequest(request)
 		if (contentRightsApiResponse) {
 			return contentRightsApiResponse
@@ -155,6 +160,7 @@ export default {
 	},
 	scheduled(controller: ScheduledController, env: HermitEnv, ctx: ExecutionContext) {
 		hydrateRuntimeEnv(env)
+		trackCommandDeployment(ctx)
 		ctx.waitUntil(runNominationExpiry(client))
 		ctx.waitUntil(runNominationGrantRecovery(client))
 		ctx.waitUntil(runNominationCardSyncRecovery(client))
