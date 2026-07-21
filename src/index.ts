@@ -48,6 +48,7 @@ import { runNominationCardSyncRecovery } from "./services/nominationCardSync.js"
 import { runThreadLengthMonitor } from "./services/threadLengthMonitor.js"
 import { handleContentRightsApiRequest } from "./clawhubContentRights/api.js"
 import { handlePublisherAbuseDigestApiRequest } from "./clawhubPublisherAbuse/api.js"
+import { handleLobsterDossierRequest } from "./lobsterDossiers/server.js"
 
 export const client = new Client(
 	{
@@ -141,6 +142,10 @@ export default {
 	async fetch(request: Request, env: HermitEnv, ctx: ExecutionContext) {
 		hydrateRuntimeEnv(env)
 		trackCommandDeployment(ctx)
+		const lobsterDossierResponse = handleLobsterDossierRequest(request)
+		if (lobsterDossierResponse) {
+			return lobsterDossierResponse
+		}
 		const contentRightsApiResponse = await handleContentRightsApiRequest(request)
 		if (contentRightsApiResponse) {
 			return contentRightsApiResponse
