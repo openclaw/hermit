@@ -39,6 +39,17 @@ type PublisherAbuseDigest = {
 	topSignals: PublisherAbuseSignal[]
 }
 
+type PublisherAbuseScanFailure = {
+	kind: "publisher_abuse_signal_scan_failed"
+	runId: string
+	failureCount: number
+	errorMessage: string
+	failedAt: number
+	dashboardUrl: string
+}
+
+type PublisherAbuseNotification = PublisherAbuseDigest | PublisherAbuseScanFailure
+
 type PublisherAbuseDiscordMessage = {
 	components: Container[]
 	allowedMentions: NonNullable<MessagePayloadObject["allowedMentions"]>
@@ -247,6 +258,40 @@ const parseDigest = (value: unknown, trustedOrigins: ReadonlySet<string>): Publi
 	}
 }
 
+const parseScanFailure = (
+	value: unknown,
+	trustedOrigins: ReadonlySet<string>
+): PublisherAbuseScanFailure | null => {
+	const record = readRecord(value)
+	if (!record || record.kind !== "publisher_abuse_signal_scan_failed") {
+		return null
+	}
+
+	const runId = requiredString(record.runId)
+	const failureCount = nonNegativeInteger(record.failureCount)
+	const errorMessage = requiredString(record.errorMessage)
+	const failedAt = nonNegativeInteger(record.failedAt)
+	const dashboardUrl = validUrl(record.dashboardUrl, trustedOrigins)
+	if (!runId || failureCount === null || failureCount === 0 || !errorMessage || failedAt === null || !dashboardUrl) {
+		return null
+	}
+
+	return {
+		kind: "publisher_abuse_signal_scan_failed",
+		runId,
+		failureCount,
+		errorMessage,
+		failedAt,
+		dashboardUrl
+	}
+}
+
+const parseNotification = (
+	value: unknown,
+	trustedOrigins: ReadonlySet<string>
+): PublisherAbuseNotification | null =>
+	parseDigest(value, trustedOrigins) ?? parseScanFailure(value, trustedOrigins)
+
 const isSendableChannel = (channel: unknown): channel is SendableChannel => {
 	const record = readRecord(channel)
 	return typeof record?.send === "function"
@@ -325,6 +370,20 @@ export const buildPublisherAbuseDigestContainer = (digest: PublisherAbuseDigest)
 		{ accentColor: "#f2c94c" }
 	)
 
+export const buildPublisherAbuseScanFailureContainer = (failure: PublisherAbuseScanFailure) =>
+	new Container(
+		[
+			new TextDisplay(`<@&${formSettings.clawhubAppealReviewRoleId}>`),
+			new TextDisplay("### ClawHub signal scan stopped"),
+			new TextDisplay(
+				`Stopped after ${failure.failureCount.toLocaleString()} failed attempts.\n[Open ClawHub abuse signals](${markdownUrl(failure.dashboardUrl)})`
+			),
+			new Separator({ divider: true, spacing: "small" }),
+			new TextDisplay(`**Run:** ${markdownText(failure.runId)}\n**Error:** ${markdownText(failure.errorMessage)}`)
+		],
+		{ accentColor: "#ef4444" }
+	)
+
 export const handlePublisherAbuseDigestApi = async (
 	request: Request,
 	dependencies: PublisherAbuseDigestApiDependencies
@@ -348,9 +407,9 @@ export const handlePublisherAbuseDigestApi = async (
 	}
 
 	const trustedOrigins = trustedOriginSet(dependencies.trustedOrigins ?? [defaultClawHubSiteUrl])
-	const digest = parseDigest(body, trustedOrigins)
-	if (!digest) {
-		return jsonResponse({ error: "Invalid publisher abuse digest payload" }, 400)
+	const notification = parseNotification(body, trustedOrigins)
+	if (!notification) {
+		return jsonResponse({ error: "Invalid publisher abuse notification payload" }, 400)
 	}
 
 	const channel = await dependencies.fetchChannel(formSettings.clawhubAppealReviewChannelId)
@@ -359,18 +418,28 @@ export const handlePublisherAbuseDigestApi = async (
 	}
 
 	await channel.send({
-		components: [buildPublisherAbuseDigestContainer(digest)],
+		components: [
+			notification.kind === "publisher_abuse_signals_changed"
+				? buildPublisherAbuseDigestContainer(notification)
+				: buildPublisherAbuseScanFailureContainer(notification)
+		],
 		allowedMentions: {
 			roles: [formSettings.clawhubAppealReviewRoleId],
 			users: []
 		}
 	})
 
-	return jsonResponse({
-		ok: true,
-		delivered: true,
-		changedCount: digest.changedCount
-	})
+	return notification.kind === "publisher_abuse_signals_changed"
+		? jsonResponse({
+			ok: true,
+			delivered: true,
+			changedCount: notification.changedCount
+		})
+		: jsonResponse({
+			ok: true,
+			delivered: true,
+			kind: notification.kind
+		})
 }
 
 export const handlePublisherAbuseDigestApiRequest = (
