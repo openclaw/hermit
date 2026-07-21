@@ -53,6 +53,15 @@ const validPayload = {
 	]
 }
 
+const validScanFailurePayload = {
+	kind: "publisher_abuse_signal_scan_failed",
+	runId: "publisherAbuseScoreRuns:failed-run",
+	failureCount: 5,
+	errorMessage: "Query exceeded the document read limit.",
+	failedAt: 1716000000000,
+	dashboardUrl: "https://clawhub.ai/management?view=abuse&tab=signals"
+}
+
 const dependencies = (options: { trustedOrigins?: string[] } = {}) => {
 	const sends: unknown[] = []
 	const fetchedChannels: string[] = []
@@ -149,6 +158,43 @@ describe("ClawHub publisher abuse digest API", () => {
 		expect(text).toContain("Seen 4x")
 		expect(text).toContain("[Skill](<https://clawhub.ai/local-owner/skills/local-skill>)")
 		expect(text).toContain("[Publisher](<https://clawhub.ai/local-owner>)")
+	})
+
+	it("sends a terminal signal scan failure alert to the ClawHub review channel", async () => {
+		const deps = dependencies()
+		const response = await handlePublisherAbuseDigestApi(
+			new Request("https://forms.openclaw.ai/api/clawhub-publisher-abuse/signals/digest", {
+				method: "POST",
+				headers: {
+					Authorization: "Bearer secret",
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(validScanFailurePayload)
+			}),
+			deps.value
+		)
+
+		expect(response.status).toBe(200)
+		expect(await response.json()).toEqual({
+			ok: true,
+			delivered: true,
+			kind: "publisher_abuse_signal_scan_failed"
+		})
+		expect(deps.fetchedChannels).toEqual(["1498032057337647295"])
+		expect(deps.sends).toHaveLength(1)
+
+		const send = deps.sends[0] as { components?: unknown[]; allowedMentions?: unknown }
+		const text = (send.components ?? []).flatMap(collectText).join("\n")
+		expect(send.allowedMentions).toEqual({
+			roles: ["1509967254870298794"],
+			users: []
+		})
+		expect(text).toContain("<@&1509967254870298794>")
+		expect(text).toContain("ClawHub signal scan stopped")
+		expect(text).toContain("Stopped after 5 failed attempts")
+		expect(text).toContain("Query exceeded the document read limit.")
+		expect(text).toContain("publisherAbuseScoreRuns:failed-run")
+		expect(text).toContain("[Open ClawHub abuse signals](<https://clawhub.ai/management?view=abuse&tab=signals>)")
 	})
 
 	it("escapes digest text before rendering Discord markdown", async () => {
