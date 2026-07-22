@@ -1,19 +1,28 @@
 import { nominationConfig } from "./nominations.js"
 
 export const lobsterArtworkRevision =
-	"d1ffbe7080fca127286f19e494a22b4ac89cba43"
+	"03fe3c5f1de149f6cae9121bb0094287b22cbfe5"
 
 export const lobsterScenePath = (aphiaId: number, sceneId: string) =>
 	`assets/lobster/scenes/${aphiaId}/${sceneId}.webp`
 
+export const lobsterAssetUrl = (assetPath: string) =>
+	`https://raw.githubusercontent.com/openclaw/hermit/${lobsterArtworkRevision}/assets/${assetPath}`
+
 export const lobsterSceneUrl = (aphiaId: number, sceneId: string) =>
-	`https://raw.githubusercontent.com/openclaw/hermit/${lobsterArtworkRevision}/${lobsterScenePath(
-		aphiaId,
-		sceneId
-	)}`
+	lobsterAssetUrl(`lobster/scenes/${aphiaId}/${sceneId}.webp`)
 
 export const lobsterSceneChecksum = (aphiaId: number, sceneId: string) =>
 	`pending-artwork:${aphiaId}:${sceneId}`
+
+export const lobsterPrimaryUrl = (relativeOutputPath: string) =>
+	lobsterAssetUrl(relativeOutputPath)
+
+export const lobsterPrimaryChecksum = (aphiaId: number, sceneId: string) =>
+	`pending-primary-artwork:${aphiaId}:${sceneId}`
+
+export const lobsterDossierUrl = (aphiaId: number) =>
+	`https://hermit-discord.openclaw.ai/lobsters/${aphiaId}`
 
 export const lobsterConfig = {
 	guildId: nominationConfig.guildId,

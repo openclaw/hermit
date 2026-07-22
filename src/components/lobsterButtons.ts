@@ -4,16 +4,18 @@ import {
 	ButtonStyle,
 	type ComponentData,
 	Container,
+	LinkButton,
 	MediaGallery,
 	Row,
 	Separator,
 	TextDisplay
 } from "@buape/carbon"
-import { lobsterConfig } from "../config/lobster.js"
+import { lobsterConfig, lobsterDossierUrl } from "../config/lobster.js"
 import type { LobsterEncounter } from "../db/schema.js"
 import {
 	formatLobsterEncounterId,
 	type LobsterButterResult,
+	type LegacyLobsterMetrics,
 	type LobsterMetrics
 } from "../services/lobsterEngine.js"
 
@@ -33,10 +35,17 @@ const parseJson = <T>(value: string | null): T | null => {
 	}
 }
 
+const isV2Metrics = (
+	metrics: LobsterMetrics | LegacyLobsterMetrics
+): metrics is LobsterMetrics => "version" in metrics && metrics.version === 2
+
 const metricsText = (metricsJson: string | null) => {
-	const metrics = parseJson<LobsterMetrics>(metricsJson)
+	const metrics = parseJson<LobsterMetrics | LegacyLobsterMetrics>(metricsJson)
 	if (!metrics) {
 		return "**Encounter metrics:** unavailable"
+	}
+	if (isV2Metrics(metrics)) {
+		return `**MENACE:** ${metrics.menace}%\n**SHELL SHOCK:** ${metrics.shellShock}%\n**DIGNITY REMAINING:** ${metrics.dignityRemaining}%\n**ESCAPE CHANCE:** ${metrics.escapeChance}%\n\n**WHY THIS WAS SCIENTIFICALLY ALLOWED**\n${metrics.nerdNote}`
 	}
 	return `**Action:** ${metrics.action.replaceAll("-", " ")}\n**Resolve:** ${metrics.resolve}%\n**Approach distance:** ${metrics.approachDistanceCm} cm\n**Procedural drag:** ${metrics.proceduralDrag}%`
 }
@@ -55,7 +64,7 @@ export const buildLobsterEncounterContainer = (
 		media.imageUrl === undefined ? encounter.assetUrl : media.imageUrl
 	const components: NonNullable<ConstructorParameters<typeof Container>[0]> = [
 		new TextDisplay(
-			`## Lobster Encounter ${encounterId}\n**${encounter.speciesDisplayName}**\n*${encounter.speciesAcceptedName}* · ${encounter.speciesFamily} · AphiaID ${encounter.speciesAphiaId}`
+			`## <@${encounter.targetId}> GOT LOBSTERED\n### ${encounter.headline} · ${encounter.speciesDisplayName}\n-# Deployed by <@${encounter.actorId}> · Encounter ${encounterId}`
 		)
 	]
 
@@ -76,7 +85,7 @@ export const buildLobsterEncounterContainer = (
 
 	components.push(
 		new TextDisplay(
-			`### ${encounter.headline}\n${encounter.narrative}\n\n${metricsText(
+			`${encounter.narrative}\n\n${metricsText(
 				encounter.metricsJson
 			)}`
 		)
@@ -136,7 +145,7 @@ export const buildLobsterEncounterContainer = (
 	components.push(
 		new Separator({ divider: true, spacing: "small" }),
 		new TextDisplay(
-			`-# Taxonomy snapshot: ${encounter.taxonomySnapshotId} · Status: ${
+			`${closed ? "" : `**<@${encounter.targetId}>: choose your response. Only you can press these buttons.**\n`}-# *${encounter.speciesAcceptedName}* · ${encounter.speciesFamily} · AphiaID ${encounter.speciesAphiaId}\n-# Taxonomy snapshot: ${encounter.taxonomySnapshotId} · Status: ${
 				encounter.targetIsBot
 					? "target is a bot; responses disabled"
 					: closed
@@ -146,7 +155,8 @@ export const buildLobsterEncounterContainer = (
 		),
 		new Row([
 			new LobsterReturnButton(encounter.id, closed),
-			new LobsterButterButton(encounter.id, closed)
+			new LobsterButterButton(encounter.id, closed),
+			new LobsterDossierButton(encounter.speciesAphiaId)
 		])
 	)
 
@@ -157,7 +167,7 @@ export const buildLobsterEncounterContainer = (
 
 export class LobsterReturnButton extends Button {
 	customId = "lobster-return"
-	label = "Return To Sender"
+	label = "Lobster Them Back"
 	style = ButtonStyle.Danger
 	defer = false
 	ephemeral = false
@@ -181,7 +191,7 @@ export class LobsterReturnButton extends Button {
 
 export class LobsterButterButton extends Button {
 	customId = "lobster-butter"
-	label = "Offer Butter"
+	label = "Bribe With Butter"
 	style = ButtonStyle.Secondary
 	defer = false
 	ephemeral = false
@@ -200,6 +210,16 @@ export class LobsterButterButton extends Button {
 			"../services/lobsterInteractions.js"
 		)
 		await handleLobsterButter(interaction, data)
+	}
+}
+
+export class LobsterDossierButton extends LinkButton {
+	label = "Open Lobster Dossier"
+	url: string
+
+	constructor(aphiaId: number) {
+		super()
+		this.url = lobsterDossierUrl(aphiaId)
 	}
 }
 

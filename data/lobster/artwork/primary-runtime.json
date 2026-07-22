@@ -1,0 +1,3966 @@
+{
+  "schemaVersion": 1,
+  "planId": "LOB-PRIMARY-ART-v2",
+  "entries": [
+    {
+      "AphiaID": 107253,
+      "action": "pinch",
+      "sceneId": "lob-v2-a107253-primary",
+      "relativeOutputPath": "lobster/primary/107253/lob-v2-a107253-primary.webp",
+      "altText": "Homarus gammarus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a documentary-photo scene at seaside-boardwalk; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107254,
+      "action": "pinch",
+      "sceneId": "lob-v2-a107254-primary",
+      "relativeOutputPath": "lobster/primary/107254/lob-v2-a107254-primary.webp",
+      "altText": "Nephrops norvegicus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a cinematic-photo scene at rooftop-garden; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107255,
+      "action": "pinch",
+      "sceneId": "lob-v2-a107255-primary",
+      "relativeOutputPath": "lobster/primary/107255/lob-v2-a107255-primary.webp",
+      "altText": "Nephropsis atlantica clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a pulp-adventure-illustration scene at courthouse-steps; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107696,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a107696-primary",
+      "relativeOutputPath": "lobster/primary/107696/lob-v2-a107696-primary.webp",
+      "altText": "Polycheles typhlops confronts the target with the documented multiple chelate walking legs in a theatrical-production-photo scene at town-square-parade; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107699,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a107699-primary",
+      "relativeOutputPath": "lobster/primary/107699/lob-v2-a107699-primary.webp",
+      "altText": "Stereomastis nana confronts the target with the documented multiple chelate walking legs in a inked-comic-panel scene at railway-concourse; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107700,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a107700-primary",
+      "relativeOutputPath": "lobster/primary/107700/lob-v2-a107700-primary.webp",
+      "altText": "Stereomastis sculpta confronts the target with the documented multiple chelate walking legs in a sports-broadcast-photo scene at winter-festival; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107701,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a107701-primary",
+      "relativeOutputPath": "lobster/primary/107701/lob-v2-a107701-primary.webp",
+      "altText": "Willemoesia forceps confronts the target with the documented multiple chelate walking legs in a watercolor-illustration scene at lighthouse-landing; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107702,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a107702-primary",
+      "relativeOutputPath": "lobster/primary/107702/lob-v2-a107702-primary.webp",
+      "altText": "Willemoesia leptodactyla confronts the target with the documented multiple chelate walking legs in a oil-painting-tableau scene at castle-courtyard; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107703,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a107703-primary",
+      "relativeOutputPath": "lobster/primary/107703/lob-v2-a107703-primary.webp",
+      "altText": "Palinurus elephas strikes toward the target with an enlarged antenna and knocks their hat sideways in a woodblock-print scene at observatory-deck; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107704,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a107704-primary",
+      "relativeOutputPath": "lobster/primary/107704/lob-v2-a107704-primary.webp",
+      "altText": "Palinurus mauritanicus strikes toward the target with an enlarged antenna and knocks their hat sideways in a museum-archive-photo scene at archaeological-dig; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107705,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a107705-primary",
+      "relativeOutputPath": "lobster/primary/107705/lob-v2-a107705-primary.webp",
+      "altText": "Panulirus echinatus strikes toward the target with an enlarged antenna and knocks their hat sideways in a risograph-poster scene at community-theater-stage; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107706,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a107706-primary",
+      "relativeOutputPath": "lobster/primary/107706/lob-v2-a107706-primary.webp",
+      "altText": "Panulirus ornatus strikes toward the target with an enlarged antenna and knocks their hat sideways in a stop-motion-clay scene at sculpture-park; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107707,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a107707-primary",
+      "relativeOutputPath": "lobster/primary/107707/lob-v2-a107707-primary.webp",
+      "altText": "Panulirus regius strikes toward the target with an enlarged antenna and knocks their hat sideways in a gouache-illustration scene at botanical-conservatory; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107708,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a107708-primary",
+      "relativeOutputPath": "lobster/primary/107708/lob-v2-a107708-primary.webp",
+      "altText": "Scyllarides latus flatly blocks the target with plate-like second antennae in a fashion-editorial-photo scene at tram-platform; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107709,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a107709-primary",
+      "relativeOutputPath": "lobster/primary/107709/lob-v2-a107709-primary.webp",
+      "altText": "Scyllarus arctus flatly blocks the target with plate-like second antennae in a cel-animation-frame scene at ferry-terminal; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107710,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a107710-primary",
+      "relativeOutputPath": "lobster/primary/107710/lob-v2-a107710-primary.webp",
+      "altText": "Scyllarus caparti flatly blocks the target with plate-like second antennae in a miniature-diorama-photo scene at concert-backstage; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 107712,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a107712-primary",
+      "relativeOutputPath": "lobster/primary/107712/lob-v2-a107712-primary.webp",
+      "altText": "Scyllarus pygmaeus flatly blocks the target with plate-like second antennae in a paper-cut-collage scene at museum-loading-bay; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 156134,
+      "action": "pinch",
+      "sceneId": "lob-v2-a156134-primary",
+      "relativeOutputPath": "lobster/primary/156134/lob-v2-a156134-primary.webp",
+      "altText": "Homarus americanus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a street-reportage-photo scene at public-library-steps; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 158377,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a158377-primary",
+      "relativeOutputPath": "lobster/primary/158377/lob-v2-a158377-primary.webp",
+      "altText": "Scyllarus depressus flatly blocks the target with plate-like second antennae in a documentary-photo scene at regatta-finish; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210067,
+      "action": "pinch",
+      "sceneId": "lob-v2-a210067-primary",
+      "relativeOutputPath": "lobster/primary/210067/lob-v2-a210067-primary.webp",
+      "altText": "Enoplometopus pictus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a cinematic-photo scene at night-market; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210068,
+      "action": "pinch",
+      "sceneId": "lob-v2-a210068-primary",
+      "relativeOutputPath": "lobster/primary/210068/lob-v2-a210068-primary.webp",
+      "altText": "Enoplometopus occidentalis clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a pulp-adventure-illustration scene at carnival-midway; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210070,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a210070-primary",
+      "relativeOutputPath": "lobster/primary/210070/lob-v2-a210070-primary.webp",
+      "altText": "Palinurus delagoae strikes toward the target with an enlarged antenna and knocks their hat sideways in a theatrical-production-photo scene at harbor-market; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210074,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a210074-primary",
+      "relativeOutputPath": "lobster/primary/210074/lob-v2-a210074-primary.webp",
+      "altText": "Palinurus gilchristi strikes toward the target with an enlarged antenna and knocks their hat sideways in a inked-comic-panel scene at seaside-boardwalk; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210086,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a210086-primary",
+      "relativeOutputPath": "lobster/primary/210086/lob-v2-a210086-primary.webp",
+      "altText": "Scyllarides elisabethae flatly blocks the target with plate-like second antennae in a sports-broadcast-photo scene at rooftop-garden; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210088,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a210088-primary",
+      "relativeOutputPath": "lobster/primary/210088/lob-v2-a210088-primary.webp",
+      "altText": "Scyllarides tridacnophaga flatly blocks the target with plate-like second antennae in a watercolor-illustration scene at courthouse-steps; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210089,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a210089-primary",
+      "relativeOutputPath": "lobster/primary/210089/lob-v2-a210089-primary.webp",
+      "altText": "Scyllarides squammosus flatly blocks the target with plate-like second antennae in a oil-painting-tableau scene at town-square-parade; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210351,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a210351-primary",
+      "relativeOutputPath": "lobster/primary/210351/lob-v2-a210351-primary.webp",
+      "altText": "Palinustus waguensis strikes toward the target with an enlarged antenna and knocks their hat sideways in a woodblock-print scene at railway-concourse; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210352,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a210352-primary",
+      "relativeOutputPath": "lobster/primary/210352/lob-v2-a210352-primary.webp",
+      "altText": "Palinustus unicornutus strikes toward the target with an enlarged antenna and knocks their hat sideways in a museum-archive-photo scene at winter-festival; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210353,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a210353-primary",
+      "relativeOutputPath": "lobster/primary/210353/lob-v2-a210353-primary.webp",
+      "altText": "Palinustus mossambicus strikes toward the target with an enlarged antenna and knocks their hat sideways in a risograph-poster scene at lighthouse-landing; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210354,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a210354-primary",
+      "relativeOutputPath": "lobster/primary/210354/lob-v2-a210354-primary.webp",
+      "altText": "Panulirus longipes strikes toward the target with an enlarged antenna and knocks their hat sideways in a stop-motion-clay scene at castle-courtyard; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210355,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a210355-primary",
+      "relativeOutputPath": "lobster/primary/210355/lob-v2-a210355-primary.webp",
+      "altText": "Panulirus homarus strikes toward the target with an enlarged antenna and knocks their hat sideways in a gouache-illustration scene at observatory-deck; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210356,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a210356-primary",
+      "relativeOutputPath": "lobster/primary/210356/lob-v2-a210356-primary.webp",
+      "altText": "Panulirus japonicus strikes toward the target with an enlarged antenna and knocks their hat sideways in a fashion-editorial-photo scene at archaeological-dig; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210358,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a210358-primary",
+      "relativeOutputPath": "lobster/primary/210358/lob-v2-a210358-primary.webp",
+      "altText": "Panulirus penicillatus strikes toward the target with an enlarged antenna and knocks their hat sideways in a cel-animation-frame scene at community-theater-stage; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210359,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a210359-primary",
+      "relativeOutputPath": "lobster/primary/210359/lob-v2-a210359-primary.webp",
+      "altText": "Panulirus versicolor strikes toward the target with an enlarged antenna and knocks their hat sideways in a miniature-diorama-photo scene at sculpture-park; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210361,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a210361-primary",
+      "relativeOutputPath": "lobster/primary/210361/lob-v2-a210361-primary.webp",
+      "altText": "Ibacus novemdentatus flatly blocks the target with plate-like second antennae in a paper-cut-collage scene at botanical-conservatory; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210362,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a210362-primary",
+      "relativeOutputPath": "lobster/primary/210362/lob-v2-a210362-primary.webp",
+      "altText": "Thenus orientalis flatly blocks the target with plate-like second antennae in a street-reportage-photo scene at tram-platform; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210364,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a210364-primary",
+      "relativeOutputPath": "lobster/primary/210364/lob-v2-a210364-primary.webp",
+      "altText": "Parribacus antarcticus flatly blocks the target with plate-like second antennae in a documentary-photo scene at ferry-terminal; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210643,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a210643-primary",
+      "relativeOutputPath": "lobster/primary/210643/lob-v2-a210643-primary.webp",
+      "altText": "Linuparus trigonus strikes toward the target with an enlarged antenna and knocks their hat sideways in a cinematic-photo scene at concert-backstage; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 210644,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a210644-primary",
+      "relativeOutputPath": "lobster/primary/210644/lob-v2-a210644-primary.webp",
+      "altText": "Linuparus somniosus strikes toward the target with an enlarged antenna and knocks their hat sideways in a pulp-adventure-illustration scene at museum-loading-bay; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 220230,
+      "action": "pinch",
+      "sceneId": "lob-v2-a220230-primary",
+      "relativeOutputPath": "lobster/primary/220230/lob-v2-a220230-primary.webp",
+      "altText": "Metanephrops andamanicus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a theatrical-production-photo scene at public-library-steps; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 220231,
+      "action": "pinch",
+      "sceneId": "lob-v2-a220231-primary",
+      "relativeOutputPath": "lobster/primary/220231/lob-v2-a220231-primary.webp",
+      "altText": "Nephropsis stewarti clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a inked-comic-panel scene at regatta-finish; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 220233,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a220233-primary",
+      "relativeOutputPath": "lobster/primary/220233/lob-v2-a220233-primary.webp",
+      "altText": "Puerulus carinatus strikes toward the target with an enlarged antenna and knocks their hat sideways in a sports-broadcast-photo scene at night-market; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 220234,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a220234-primary",
+      "relativeOutputPath": "lobster/primary/220234/lob-v2-a220234-primary.webp",
+      "altText": "Puerulus sewelli strikes toward the target with an enlarged antenna and knocks their hat sideways in a watercolor-illustration scene at carnival-midway; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 225681,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a225681-primary",
+      "relativeOutputPath": "lobster/primary/225681/lob-v2-a225681-primary.webp",
+      "altText": "Cardus crucifer confronts the target with the documented multiple chelate walking legs in a oil-painting-tableau scene at harbor-market; the target starts counting claws and visibly gives up halfway.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 238403,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a238403-primary",
+      "relativeOutputPath": "lobster/primary/238403/lob-v2-a238403-primary.webp",
+      "altText": "Pentacheles validus confronts the target with the documented multiple chelate walking legs in a woodblock-print scene at seaside-boardwalk; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 241290,
+      "action": "pinch",
+      "sceneId": "lob-v2-a241290-primary",
+      "relativeOutputPath": "lobster/primary/241290/lob-v2-a241290-primary.webp",
+      "altText": "Metanephrops mozambicus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a museum-archive-photo scene at rooftop-garden; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 241293,
+      "action": "pinch",
+      "sceneId": "lob-v2-a241293-primary",
+      "relativeOutputPath": "lobster/primary/241293/lob-v2-a241293-primary.webp",
+      "altText": "Nephropsis acanthura clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a risograph-poster scene at courthouse-steps; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 241294,
+      "action": "pinch",
+      "sceneId": "lob-v2-a241294-primary",
+      "relativeOutputPath": "lobster/primary/241294/lob-v2-a241294-primary.webp",
+      "altText": "Nephropsis carpenteri clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a stop-motion-clay scene at town-square-parade; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 241295,
+      "action": "pinch",
+      "sceneId": "lob-v2-a241295-primary",
+      "relativeOutputPath": "lobster/primary/241295/lob-v2-a241295-primary.webp",
+      "altText": "Nephropsis malhaensis clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a gouache-illustration scene at railway-concourse; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 241296,
+      "action": "pinch",
+      "sceneId": "lob-v2-a241296-primary",
+      "relativeOutputPath": "lobster/primary/241296/lob-v2-a241296-primary.webp",
+      "altText": "Nephropsis suhmi clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a fashion-editorial-photo scene at winter-festival; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 241297,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a241297-primary",
+      "relativeOutputPath": "lobster/primary/241297/lob-v2-a241297-primary.webp",
+      "altText": "Palinurus charlestoni strikes toward the target with an enlarged antenna and knocks their hat sideways in a cel-animation-frame scene at lighthouse-landing; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 241308,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a241308-primary",
+      "relativeOutputPath": "lobster/primary/241308/lob-v2-a241308-primary.webp",
+      "altText": "Puerulus angulatus strikes toward the target with an enlarged antenna and knocks their hat sideways in a miniature-diorama-photo scene at castle-courtyard; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 241309,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a241309-primary",
+      "relativeOutputPath": "lobster/primary/241309/lob-v2-a241309-primary.webp",
+      "altText": "Scyllarides herklotsii flatly blocks the target with plate-like second antennae in a paper-cut-collage scene at observatory-deck; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 241310,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a241310-primary",
+      "relativeOutputPath": "lobster/primary/241310/lob-v2-a241310-primary.webp",
+      "altText": "Scyllarus paradoxus flatly blocks the target with plate-like second antennae in a street-reportage-photo scene at archaeological-dig; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 246160,
+      "action": "pinch",
+      "sceneId": "lob-v2-a246160-primary",
+      "relativeOutputPath": "lobster/primary/246160/lob-v2-a246160-primary.webp",
+      "altText": "Acanthacaris tenuimana clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a documentary-photo scene at community-theater-stage; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 246172,
+      "action": "pinch",
+      "sceneId": "lob-v2-a246172-primary",
+      "relativeOutputPath": "lobster/primary/246172/lob-v2-a246172-primary.webp",
+      "altText": "Nephropsis ensirostris clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a cinematic-photo scene at sculpture-park; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 246173,
+      "action": "pinch",
+      "sceneId": "lob-v2-a246173-primary",
+      "relativeOutputPath": "lobster/primary/246173/lob-v2-a246173-primary.webp",
+      "altText": "Nephropsis sulcata clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a pulp-adventure-illustration scene at botanical-conservatory; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 246203,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a246203-primary",
+      "relativeOutputPath": "lobster/primary/246203/lob-v2-a246203-primary.webp",
+      "altText": "Willemoesia pacifica confronts the target with the documented multiple chelate walking legs in a theatrical-production-photo scene at tram-platform; the target starts counting claws and visibly gives up halfway.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 246223,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a246223-primary",
+      "relativeOutputPath": "lobster/primary/246223/lob-v2-a246223-primary.webp",
+      "altText": "Arctides regalis flatly blocks the target with plate-like second antennae in a inked-comic-panel scene at ferry-terminal; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 246318,
+      "action": "pinch",
+      "sceneId": "lob-v2-a246318-primary",
+      "relativeOutputPath": "lobster/primary/246318/lob-v2-a246318-primary.webp",
+      "altText": "Homarinus capensis clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a sports-broadcast-photo scene at concert-backstage; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 246322,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a246322-primary",
+      "relativeOutputPath": "lobster/primary/246322/lob-v2-a246322-primary.webp",
+      "altText": "Jasus lalandii strikes toward the target with an enlarged antenna and knocks their hat sideways in a watercolor-illustration scene at museum-loading-bay; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 246323,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a246323-primary",
+      "relativeOutputPath": "lobster/primary/246323/lob-v2-a246323-primary.webp",
+      "altText": "Jasus paulensis strikes toward the target with an enlarged antenna and knocks their hat sideways in a oil-painting-tableau scene at public-library-steps; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 246431,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a246431-primary",
+      "relativeOutputPath": "lobster/primary/246431/lob-v2-a246431-primary.webp",
+      "altText": "Polycheles perarmatus confronts the target with the documented multiple chelate walking legs in a woodblock-print scene at regatta-finish; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 246440,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a246440-primary",
+      "relativeOutputPath": "lobster/primary/246440/lob-v2-a246440-primary.webp",
+      "altText": "Projasus parkeri strikes toward the target with an enlarged antenna and knocks their hat sideways in a museum-archive-photo scene at night-market; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 246455,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a246455-primary",
+      "relativeOutputPath": "lobster/primary/246455/lob-v2-a246455-primary.webp",
+      "altText": "Scyllarides delfosi flatly blocks the target with plate-like second antennae in a risograph-poster scene at carnival-midway; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 246458,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a246458-primary",
+      "relativeOutputPath": "lobster/primary/246458/lob-v2-a246458-primary.webp",
+      "altText": "Petrarctus rugosus flatly blocks the target with plate-like second antennae in a stop-motion-clay scene at harbor-market; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 293250,
+      "action": "pinch",
+      "sceneId": "lob-v2-a293250-primary",
+      "relativeOutputPath": "lobster/primary/293250/lob-v2-a293250-primary.webp",
+      "altText": "Acanthacaris caeca clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a gouache-illustration scene at seaside-boardwalk; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382831,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382831-primary",
+      "relativeOutputPath": "lobster/primary/382831/lob-v2-a382831-primary.webp",
+      "altText": "Enoplometopus chacei clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a fashion-editorial-photo scene at rooftop-garden; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382832,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382832-primary",
+      "relativeOutputPath": "lobster/primary/382832/lob-v2-a382832-primary.webp",
+      "altText": "Enoplometopus crosnieri clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a cel-animation-frame scene at courthouse-steps; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382833,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382833-primary",
+      "relativeOutputPath": "lobster/primary/382833/lob-v2-a382833-primary.webp",
+      "altText": "Enoplometopus daumi clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a miniature-diorama-photo scene at town-square-parade; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382834,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382834-primary",
+      "relativeOutputPath": "lobster/primary/382834/lob-v2-a382834-primary.webp",
+      "altText": "Enoplometopus debelius clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a paper-cut-collage scene at railway-concourse; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382839,
+      "action": "subchelate-stand-off",
+      "sceneId": "lob-v2-a382839-primary",
+      "relativeOutputPath": "lobster/primary/382839/lob-v2-a382839-primary.webp",
+      "altText": "Laurentaeglyphea neocaledonica technically corners the target with the documented subchelate first legs in a street-reportage-photo scene at winter-festival; the target consults a pocket ruler and regrets becoming technical.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382840,
+      "action": "subchelate-stand-off",
+      "sceneId": "lob-v2-a382840-primary",
+      "relativeOutputPath": "lobster/primary/382840/lob-v2-a382840-primary.webp",
+      "altText": "Neoglyphea inopinata technically corners the target with the documented subchelate first legs in a documentary-photo scene at lighthouse-landing; the target consults a pocket ruler and regrets becoming technical.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382841,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382841-primary",
+      "relativeOutputPath": "lobster/primary/382841/lob-v2-a382841-primary.webp",
+      "altText": "Eunephrops bairdii clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a cinematic-photo scene at castle-courtyard; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382842,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382842-primary",
+      "relativeOutputPath": "lobster/primary/382842/lob-v2-a382842-primary.webp",
+      "altText": "Eunephrops cadenasi clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a pulp-adventure-illustration scene at observatory-deck; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382843,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382843-primary",
+      "relativeOutputPath": "lobster/primary/382843/lob-v2-a382843-primary.webp",
+      "altText": "Eunephrops manningi clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a theatrical-production-photo scene at archaeological-dig; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382844,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382844-primary",
+      "relativeOutputPath": "lobster/primary/382844/lob-v2-a382844-primary.webp",
+      "altText": "Eunephrops luckhursti clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a inked-comic-panel scene at community-theater-stage; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382845,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382845-primary",
+      "relativeOutputPath": "lobster/primary/382845/lob-v2-a382845-primary.webp",
+      "altText": "Metanephrops arafurensis clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a sports-broadcast-photo scene at sculpture-park; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382846,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382846-primary",
+      "relativeOutputPath": "lobster/primary/382846/lob-v2-a382846-primary.webp",
+      "altText": "Metanephrops armatus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a watercolor-illustration scene at botanical-conservatory; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382847,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382847-primary",
+      "relativeOutputPath": "lobster/primary/382847/lob-v2-a382847-primary.webp",
+      "altText": "Metanephrops australiensis clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a oil-painting-tableau scene at tram-platform; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382848,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382848-primary",
+      "relativeOutputPath": "lobster/primary/382848/lob-v2-a382848-primary.webp",
+      "altText": "Metanephrops binghami clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a woodblock-print scene at ferry-terminal; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382849,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382849-primary",
+      "relativeOutputPath": "lobster/primary/382849/lob-v2-a382849-primary.webp",
+      "altText": "Metanephrops boschmai clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a museum-archive-photo scene at concert-backstage; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382850,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382850-primary",
+      "relativeOutputPath": "lobster/primary/382850/lob-v2-a382850-primary.webp",
+      "altText": "Metanephrops challengeri clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a risograph-poster scene at museum-loading-bay; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382851,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382851-primary",
+      "relativeOutputPath": "lobster/primary/382851/lob-v2-a382851-primary.webp",
+      "altText": "Metanephrops formosanus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a stop-motion-clay scene at public-library-steps; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382852,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382852-primary",
+      "relativeOutputPath": "lobster/primary/382852/lob-v2-a382852-primary.webp",
+      "altText": "Metanephrops japonicus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a gouache-illustration scene at regatta-finish; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382853,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382853-primary",
+      "relativeOutputPath": "lobster/primary/382853/lob-v2-a382853-primary.webp",
+      "altText": "Metanephrops neptunus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a fashion-editorial-photo scene at night-market; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382854,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382854-primary",
+      "relativeOutputPath": "lobster/primary/382854/lob-v2-a382854-primary.webp",
+      "altText": "Metanephrops rubellus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a cel-animation-frame scene at carnival-midway; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382855,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382855-primary",
+      "relativeOutputPath": "lobster/primary/382855/lob-v2-a382855-primary.webp",
+      "altText": "Metanephrops sagamiensis clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a miniature-diorama-photo scene at harbor-market; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382856,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382856-primary",
+      "relativeOutputPath": "lobster/primary/382856/lob-v2-a382856-primary.webp",
+      "altText": "Metanephrops sibogae clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a paper-cut-collage scene at seaside-boardwalk; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382857,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382857-primary",
+      "relativeOutputPath": "lobster/primary/382857/lob-v2-a382857-primary.webp",
+      "altText": "Metanephrops sinensis clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a street-reportage-photo scene at rooftop-garden; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382858,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382858-primary",
+      "relativeOutputPath": "lobster/primary/382858/lob-v2-a382858-primary.webp",
+      "altText": "Metanephrops taiwanicus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a documentary-photo scene at courthouse-steps; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382859,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382859-primary",
+      "relativeOutputPath": "lobster/primary/382859/lob-v2-a382859-primary.webp",
+      "altText": "Metanephrops thomsoni clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a cinematic-photo scene at town-square-parade; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382860,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382860-primary",
+      "relativeOutputPath": "lobster/primary/382860/lob-v2-a382860-primary.webp",
+      "altText": "Metanephrops velutinus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a pulp-adventure-illustration scene at railway-concourse; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382861,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382861-primary",
+      "relativeOutputPath": "lobster/primary/382861/lob-v2-a382861-primary.webp",
+      "altText": "Nephropides caribaeus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a theatrical-production-photo scene at winter-festival; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382862,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382862-primary",
+      "relativeOutputPath": "lobster/primary/382862/lob-v2-a382862-primary.webp",
+      "altText": "Nephropsis aculeata clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a inked-comic-panel scene at lighthouse-landing; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382863,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382863-primary",
+      "relativeOutputPath": "lobster/primary/382863/lob-v2-a382863-primary.webp",
+      "altText": "Nephropsis agassizii clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a sports-broadcast-photo scene at castle-courtyard; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382864,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382864-primary",
+      "relativeOutputPath": "lobster/primary/382864/lob-v2-a382864-primary.webp",
+      "altText": "Nephropsis holthuisi clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a watercolor-illustration scene at observatory-deck; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382865,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382865-primary",
+      "relativeOutputPath": "lobster/primary/382865/lob-v2-a382865-primary.webp",
+      "altText": "Nephropsis neglecta clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a oil-painting-tableau scene at archaeological-dig; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382866,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382866-primary",
+      "relativeOutputPath": "lobster/primary/382866/lob-v2-a382866-primary.webp",
+      "altText": "Nephropsis occidentalis clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a woodblock-print scene at community-theater-stage; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382867,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382867-primary",
+      "relativeOutputPath": "lobster/primary/382867/lob-v2-a382867-primary.webp",
+      "altText": "Nephropsis rosea clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a museum-archive-photo scene at sculpture-park; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382868,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382868-primary",
+      "relativeOutputPath": "lobster/primary/382868/lob-v2-a382868-primary.webp",
+      "altText": "Nephropsis serrata clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a risograph-poster scene at botanical-conservatory; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382870,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382870-primary",
+      "relativeOutputPath": "lobster/primary/382870/lob-v2-a382870-primary.webp",
+      "altText": "Thaumastocheles japonicus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a stop-motion-clay scene at tram-platform; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382871,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382871-primary",
+      "relativeOutputPath": "lobster/primary/382871/lob-v2-a382871-primary.webp",
+      "altText": "Thaumastocheles zaleucus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a gouache-illustration scene at ferry-terminal; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382872,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382872-primary",
+      "relativeOutputPath": "lobster/primary/382872/lob-v2-a382872-primary.webp",
+      "altText": "Thaumastochelopsis brucei clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a fashion-editorial-photo scene at concert-backstage; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382873,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382873-primary",
+      "relativeOutputPath": "lobster/primary/382873/lob-v2-a382873-primary.webp",
+      "altText": "Thaumastochelopsis wardi clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a cel-animation-frame scene at museum-loading-bay; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382874,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382874-primary",
+      "relativeOutputPath": "lobster/primary/382874/lob-v2-a382874-primary.webp",
+      "altText": "Thymopides grobovi clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a miniature-diorama-photo scene at public-library-steps; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382875,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382875-primary",
+      "relativeOutputPath": "lobster/primary/382875/lob-v2-a382875-primary.webp",
+      "altText": "Thymopides laurentae clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a paper-cut-collage scene at regatta-finish; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382876,
+      "action": "pinch",
+      "sceneId": "lob-v2-a382876-primary",
+      "relativeOutputPath": "lobster/primary/382876/lob-v2-a382876-primary.webp",
+      "altText": "Thymops birsteini clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a street-reportage-photo scene at night-market; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382878,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382878-primary",
+      "relativeOutputPath": "lobster/primary/382878/lob-v2-a382878-primary.webp",
+      "altText": "Jasus caveorum strikes toward the target with an enlarged antenna and knocks their hat sideways in a documentary-photo scene at carnival-midway; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382879,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382879-primary",
+      "relativeOutputPath": "lobster/primary/382879/lob-v2-a382879-primary.webp",
+      "altText": "Jasus edwardsii strikes toward the target with an enlarged antenna and knocks their hat sideways in a cinematic-photo scene at harbor-market; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382880,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382880-primary",
+      "relativeOutputPath": "lobster/primary/382880/lob-v2-a382880-primary.webp",
+      "altText": "Jasus frontalis strikes toward the target with an enlarged antenna and knocks their hat sideways in a pulp-adventure-illustration scene at seaside-boardwalk; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382881,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382881-primary",
+      "relativeOutputPath": "lobster/primary/382881/lob-v2-a382881-primary.webp",
+      "altText": "Justitia longimana strikes toward the target with an enlarged antenna and knocks their hat sideways in a theatrical-production-photo scene at rooftop-garden; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382882,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382882-primary",
+      "relativeOutputPath": "lobster/primary/382882/lob-v2-a382882-primary.webp",
+      "altText": "Linuparus sordidus strikes toward the target with an enlarged antenna and knocks their hat sideways in a inked-comic-panel scene at courthouse-steps; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382883,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382883-primary",
+      "relativeOutputPath": "lobster/primary/382883/lob-v2-a382883-primary.webp",
+      "altText": "Nupalirus chani strikes toward the target with an enlarged antenna and knocks their hat sideways in a sports-broadcast-photo scene at town-square-parade; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382884,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382884-primary",
+      "relativeOutputPath": "lobster/primary/382884/lob-v2-a382884-primary.webp",
+      "altText": "Nupalirus japonicus strikes toward the target with an enlarged antenna and knocks their hat sideways in a watercolor-illustration scene at railway-concourse; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382885,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382885-primary",
+      "relativeOutputPath": "lobster/primary/382885/lob-v2-a382885-primary.webp",
+      "altText": "Nupalirus vericeli strikes toward the target with an enlarged antenna and knocks their hat sideways in a oil-painting-tableau scene at winter-festival; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382886,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382886-primary",
+      "relativeOutputPath": "lobster/primary/382886/lob-v2-a382886-primary.webp",
+      "altText": "Palibythus magnificus strikes toward the target with an enlarged antenna and knocks their hat sideways in a woodblock-print scene at lighthouse-landing; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382888,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382888-primary",
+      "relativeOutputPath": "lobster/primary/382888/lob-v2-a382888-primary.webp",
+      "altText": "Palinurus barbarae strikes toward the target with an enlarged antenna and knocks their hat sideways in a museum-archive-photo scene at castle-courtyard; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382889,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382889-primary",
+      "relativeOutputPath": "lobster/primary/382889/lob-v2-a382889-primary.webp",
+      "altText": "Palinustus truncatus strikes toward the target with an enlarged antenna and knocks their hat sideways in a risograph-poster scene at observatory-deck; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382890,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382890-primary",
+      "relativeOutputPath": "lobster/primary/382890/lob-v2-a382890-primary.webp",
+      "altText": "Palinustus holthuisi strikes toward the target with an enlarged antenna and knocks their hat sideways in a stop-motion-clay scene at archaeological-dig; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382891,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382891-primary",
+      "relativeOutputPath": "lobster/primary/382891/lob-v2-a382891-primary.webp",
+      "altText": "Panulirus argus strikes toward the target with an enlarged antenna and knocks their hat sideways in a gouache-illustration scene at community-theater-stage; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382892,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382892-primary",
+      "relativeOutputPath": "lobster/primary/382892/lob-v2-a382892-primary.webp",
+      "altText": "Panulirus brunneiflagellum strikes toward the target with an enlarged antenna and knocks their hat sideways in a fashion-editorial-photo scene at sculpture-park; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382893,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382893-primary",
+      "relativeOutputPath": "lobster/primary/382893/lob-v2-a382893-primary.webp",
+      "altText": "Panulirus cygnus strikes toward the target with an enlarged antenna and knocks their hat sideways in a cel-animation-frame scene at botanical-conservatory; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382894,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382894-primary",
+      "relativeOutputPath": "lobster/primary/382894/lob-v2-a382894-primary.webp",
+      "altText": "Panulirus femoristriga strikes toward the target with an enlarged antenna and knocks their hat sideways in a miniature-diorama-photo scene at tram-platform; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382895,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382895-primary",
+      "relativeOutputPath": "lobster/primary/382895/lob-v2-a382895-primary.webp",
+      "altText": "Panulirus gracilis strikes toward the target with an enlarged antenna and knocks their hat sideways in a paper-cut-collage scene at ferry-terminal; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382896,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382896-primary",
+      "relativeOutputPath": "lobster/primary/382896/lob-v2-a382896-primary.webp",
+      "altText": "Panulirus guttatus strikes toward the target with an enlarged antenna and knocks their hat sideways in a street-reportage-photo scene at concert-backstage; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382897,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382897-primary",
+      "relativeOutputPath": "lobster/primary/382897/lob-v2-a382897-primary.webp",
+      "altText": "Panulirus inflatus strikes toward the target with an enlarged antenna and knocks their hat sideways in a documentary-photo scene at museum-loading-bay; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382898,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382898-primary",
+      "relativeOutputPath": "lobster/primary/382898/lob-v2-a382898-primary.webp",
+      "altText": "Panulirus interruptus strikes toward the target with an enlarged antenna and knocks their hat sideways in a cinematic-photo scene at public-library-steps; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382899,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382899-primary",
+      "relativeOutputPath": "lobster/primary/382899/lob-v2-a382899-primary.webp",
+      "altText": "Panulirus laevicauda strikes toward the target with an enlarged antenna and knocks their hat sideways in a pulp-adventure-illustration scene at regatta-finish; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382900,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382900-primary",
+      "relativeOutputPath": "lobster/primary/382900/lob-v2-a382900-primary.webp",
+      "altText": "Panulirus marginatus strikes toward the target with an enlarged antenna and knocks their hat sideways in a theatrical-production-photo scene at night-market; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382901,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382901-primary",
+      "relativeOutputPath": "lobster/primary/382901/lob-v2-a382901-primary.webp",
+      "altText": "Panulirus pascuensis strikes toward the target with an enlarged antenna and knocks their hat sideways in a inked-comic-panel scene at carnival-midway; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382902,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382902-primary",
+      "relativeOutputPath": "lobster/primary/382902/lob-v2-a382902-primary.webp",
+      "altText": "Panulirus polyphagus strikes toward the target with an enlarged antenna and knocks their hat sideways in a sports-broadcast-photo scene at harbor-market; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382903,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382903-primary",
+      "relativeOutputPath": "lobster/primary/382903/lob-v2-a382903-primary.webp",
+      "altText": "Panulirus stimpsoni strikes toward the target with an enlarged antenna and knocks their hat sideways in a watercolor-illustration scene at seaside-boardwalk; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382904,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382904-primary",
+      "relativeOutputPath": "lobster/primary/382904/lob-v2-a382904-primary.webp",
+      "altText": "Projasus bahamondei strikes toward the target with an enlarged antenna and knocks their hat sideways in a oil-painting-tableau scene at rooftop-garden; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382905,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382905-primary",
+      "relativeOutputPath": "lobster/primary/382905/lob-v2-a382905-primary.webp",
+      "altText": "Puerulus velutinus strikes toward the target with an enlarged antenna and knocks their hat sideways in a woodblock-print scene at courthouse-steps; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382906,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a382906-primary",
+      "relativeOutputPath": "lobster/primary/382906/lob-v2-a382906-primary.webp",
+      "altText": "Sagmariasus verreauxi strikes toward the target with an enlarged antenna and knocks their hat sideways in a museum-archive-photo scene at town-square-parade; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382907,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382907-primary",
+      "relativeOutputPath": "lobster/primary/382907/lob-v2-a382907-primary.webp",
+      "altText": "Arctides antipodarum flatly blocks the target with plate-like second antennae in a risograph-poster scene at railway-concourse; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382908,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382908-primary",
+      "relativeOutputPath": "lobster/primary/382908/lob-v2-a382908-primary.webp",
+      "altText": "Arctides guineensis flatly blocks the target with plate-like second antennae in a stop-motion-clay scene at winter-festival; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382909,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382909-primary",
+      "relativeOutputPath": "lobster/primary/382909/lob-v2-a382909-primary.webp",
+      "altText": "Scyllarides aequinoctialis flatly blocks the target with plate-like second antennae in a gouache-illustration scene at lighthouse-landing; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382910,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382910-primary",
+      "relativeOutputPath": "lobster/primary/382910/lob-v2-a382910-primary.webp",
+      "altText": "Scyllarides astori flatly blocks the target with plate-like second antennae in a fashion-editorial-photo scene at castle-courtyard; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382911,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382911-primary",
+      "relativeOutputPath": "lobster/primary/382911/lob-v2-a382911-primary.webp",
+      "altText": "Scyllarides brasiliensis flatly blocks the target with plate-like second antennae in a cel-animation-frame scene at observatory-deck; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382912,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382912-primary",
+      "relativeOutputPath": "lobster/primary/382912/lob-v2-a382912-primary.webp",
+      "altText": "Scyllarides deceptor flatly blocks the target with plate-like second antennae in a miniature-diorama-photo scene at archaeological-dig; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382913,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382913-primary",
+      "relativeOutputPath": "lobster/primary/382913/lob-v2-a382913-primary.webp",
+      "altText": "Scyllarides haanii flatly blocks the target with plate-like second antennae in a paper-cut-collage scene at community-theater-stage; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382914,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382914-primary",
+      "relativeOutputPath": "lobster/primary/382914/lob-v2-a382914-primary.webp",
+      "altText": "Scyllarides nodifer flatly blocks the target with plate-like second antennae in a street-reportage-photo scene at sculpture-park; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382915,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382915-primary",
+      "relativeOutputPath": "lobster/primary/382915/lob-v2-a382915-primary.webp",
+      "altText": "Scyllarides obtusus flatly blocks the target with plate-like second antennae in a documentary-photo scene at botanical-conservatory; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382916,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382916-primary",
+      "relativeOutputPath": "lobster/primary/382916/lob-v2-a382916-primary.webp",
+      "altText": "Scyllarides roggeveeni flatly blocks the target with plate-like second antennae in a cinematic-photo scene at tram-platform; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382917,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382917-primary",
+      "relativeOutputPath": "lobster/primary/382917/lob-v2-a382917-primary.webp",
+      "altText": "Evibacus princeps flatly blocks the target with plate-like second antennae in a pulp-adventure-illustration scene at ferry-terminal; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382918,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382918-primary",
+      "relativeOutputPath": "lobster/primary/382918/lob-v2-a382918-primary.webp",
+      "altText": "Ibacus alticrenatus flatly blocks the target with plate-like second antennae in a theatrical-production-photo scene at concert-backstage; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382919,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382919-primary",
+      "relativeOutputPath": "lobster/primary/382919/lob-v2-a382919-primary.webp",
+      "altText": "Ibacus brevipes flatly blocks the target with plate-like second antennae in a inked-comic-panel scene at museum-loading-bay; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382920,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382920-primary",
+      "relativeOutputPath": "lobster/primary/382920/lob-v2-a382920-primary.webp",
+      "altText": "Ibacus brucei flatly blocks the target with plate-like second antennae in a sports-broadcast-photo scene at public-library-steps; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382921,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382921-primary",
+      "relativeOutputPath": "lobster/primary/382921/lob-v2-a382921-primary.webp",
+      "altText": "Ibacus chacei flatly blocks the target with plate-like second antennae in a watercolor-illustration scene at regatta-finish; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382922,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382922-primary",
+      "relativeOutputPath": "lobster/primary/382922/lob-v2-a382922-primary.webp",
+      "altText": "Ibacus ciliatus flatly blocks the target with plate-like second antennae in a oil-painting-tableau scene at night-market; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382923,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382923-primary",
+      "relativeOutputPath": "lobster/primary/382923/lob-v2-a382923-primary.webp",
+      "altText": "Ibacus peronii flatly blocks the target with plate-like second antennae in a woodblock-print scene at carnival-midway; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382924,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382924-primary",
+      "relativeOutputPath": "lobster/primary/382924/lob-v2-a382924-primary.webp",
+      "altText": "Ibacus pubescens flatly blocks the target with plate-like second antennae in a museum-archive-photo scene at harbor-market; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382925,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382925-primary",
+      "relativeOutputPath": "lobster/primary/382925/lob-v2-a382925-primary.webp",
+      "altText": "Parribacus caledonicus flatly blocks the target with plate-like second antennae in a risograph-poster scene at seaside-boardwalk; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382926,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382926-primary",
+      "relativeOutputPath": "lobster/primary/382926/lob-v2-a382926-primary.webp",
+      "altText": "Parribacus holthuisi flatly blocks the target with plate-like second antennae in a stop-motion-clay scene at rooftop-garden; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382927,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382927-primary",
+      "relativeOutputPath": "lobster/primary/382927/lob-v2-a382927-primary.webp",
+      "altText": "Parribacus japonicus flatly blocks the target with plate-like second antennae in a gouache-illustration scene at courthouse-steps; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382928,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382928-primary",
+      "relativeOutputPath": "lobster/primary/382928/lob-v2-a382928-primary.webp",
+      "altText": "Parribacus perlatus flatly blocks the target with plate-like second antennae in a fashion-editorial-photo scene at town-square-parade; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382929,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382929-primary",
+      "relativeOutputPath": "lobster/primary/382929/lob-v2-a382929-primary.webp",
+      "altText": "Parribacus scarlatinus flatly blocks the target with plate-like second antennae in a cel-animation-frame scene at railway-concourse; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382930,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382930-primary",
+      "relativeOutputPath": "lobster/primary/382930/lob-v2-a382930-primary.webp",
+      "altText": "Acantharctus delfini flatly blocks the target with plate-like second antennae in a miniature-diorama-photo scene at winter-festival; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382931,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382931-primary",
+      "relativeOutputPath": "lobster/primary/382931/lob-v2-a382931-primary.webp",
+      "altText": "Acantharctus ornatus flatly blocks the target with plate-like second antennae in a paper-cut-collage scene at lighthouse-landing; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382932,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382932-primary",
+      "relativeOutputPath": "lobster/primary/382932/lob-v2-a382932-primary.webp",
+      "altText": "Acantharctus posteli flatly blocks the target with plate-like second antennae in a street-reportage-photo scene at castle-courtyard; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382933,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382933-primary",
+      "relativeOutputPath": "lobster/primary/382933/lob-v2-a382933-primary.webp",
+      "altText": "Antarctus mawsoni flatly blocks the target with plate-like second antennae in a documentary-photo scene at observatory-deck; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382934,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382934-primary",
+      "relativeOutputPath": "lobster/primary/382934/lob-v2-a382934-primary.webp",
+      "altText": "Bathyarctus chani flatly blocks the target with plate-like second antennae in a cinematic-photo scene at archaeological-dig; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382935,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382935-primary",
+      "relativeOutputPath": "lobster/primary/382935/lob-v2-a382935-primary.webp",
+      "altText": "Bathyarctus faxoni flatly blocks the target with plate-like second antennae in a pulp-adventure-illustration scene at community-theater-stage; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382936,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382936-primary",
+      "relativeOutputPath": "lobster/primary/382936/lob-v2-a382936-primary.webp",
+      "altText": "Bathyarctus formosanus flatly blocks the target with plate-like second antennae in a theatrical-production-photo scene at sculpture-park; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382937,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382937-primary",
+      "relativeOutputPath": "lobster/primary/382937/lob-v2-a382937-primary.webp",
+      "altText": "Bathyarctus ramosae flatly blocks the target with plate-like second antennae in a inked-comic-panel scene at botanical-conservatory; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382938,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382938-primary",
+      "relativeOutputPath": "lobster/primary/382938/lob-v2-a382938-primary.webp",
+      "altText": "Bathyarctus rubens flatly blocks the target with plate-like second antennae in a sports-broadcast-photo scene at tram-platform; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382939,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382939-primary",
+      "relativeOutputPath": "lobster/primary/382939/lob-v2-a382939-primary.webp",
+      "altText": "Bathyarctus steatopygus flatly blocks the target with plate-like second antennae in a watercolor-illustration scene at ferry-terminal; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382940,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382940-primary",
+      "relativeOutputPath": "lobster/primary/382940/lob-v2-a382940-primary.webp",
+      "altText": "Biarctus dubius flatly blocks the target with plate-like second antennae in a oil-painting-tableau scene at concert-backstage; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382941,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382941-primary",
+      "relativeOutputPath": "lobster/primary/382941/lob-v2-a382941-primary.webp",
+      "altText": "Biarctus pumilus flatly blocks the target with plate-like second antennae in a woodblock-print scene at museum-loading-bay; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382942,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382942-primary",
+      "relativeOutputPath": "lobster/primary/382942/lob-v2-a382942-primary.webp",
+      "altText": "Biarctus sordidus flatly blocks the target with plate-like second antennae in a museum-archive-photo scene at public-library-steps; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382943,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382943-primary",
+      "relativeOutputPath": "lobster/primary/382943/lob-v2-a382943-primary.webp",
+      "altText": "Biarctus vitiensis flatly blocks the target with plate-like second antennae in a risograph-poster scene at regatta-finish; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382944,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382944-primary",
+      "relativeOutputPath": "lobster/primary/382944/lob-v2-a382944-primary.webp",
+      "altText": "Chelarctus aureus flatly blocks the target with plate-like second antennae in a stop-motion-clay scene at night-market; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382945,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382945-primary",
+      "relativeOutputPath": "lobster/primary/382945/lob-v2-a382945-primary.webp",
+      "altText": "Chelarctus crosnieri flatly blocks the target with plate-like second antennae in a gouache-illustration scene at carnival-midway; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382946,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382946-primary",
+      "relativeOutputPath": "lobster/primary/382946/lob-v2-a382946-primary.webp",
+      "altText": "Chelarctus cultrifer flatly blocks the target with plate-like second antennae in a fashion-editorial-photo scene at harbor-market; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382947,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382947-primary",
+      "relativeOutputPath": "lobster/primary/382947/lob-v2-a382947-primary.webp",
+      "altText": "Crenarctus bicuspidatus flatly blocks the target with plate-like second antennae in a cel-animation-frame scene at seaside-boardwalk; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382948,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382948-primary",
+      "relativeOutputPath": "lobster/primary/382948/lob-v2-a382948-primary.webp",
+      "altText": "Crenarctus crenatus flatly blocks the target with plate-like second antennae in a miniature-diorama-photo scene at rooftop-garden; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382949,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382949-primary",
+      "relativeOutputPath": "lobster/primary/382949/lob-v2-a382949-primary.webp",
+      "altText": "Eduarctus aesopius flatly blocks the target with plate-like second antennae in a paper-cut-collage scene at courthouse-steps; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382950,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382950-primary",
+      "relativeOutputPath": "lobster/primary/382950/lob-v2-a382950-primary.webp",
+      "altText": "Eduarctus lewinsohni flatly blocks the target with plate-like second antennae in a street-reportage-photo scene at town-square-parade; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382951,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382951-primary",
+      "relativeOutputPath": "lobster/primary/382951/lob-v2-a382951-primary.webp",
+      "altText": "Eduarctus marginatus flatly blocks the target with plate-like second antennae in a documentary-photo scene at railway-concourse; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382952,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382952-primary",
+      "relativeOutputPath": "lobster/primary/382952/lob-v2-a382952-primary.webp",
+      "altText": "Eduarctus martensii flatly blocks the target with plate-like second antennae in a cinematic-photo scene at winter-festival; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382953,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382953-primary",
+      "relativeOutputPath": "lobster/primary/382953/lob-v2-a382953-primary.webp",
+      "altText": "Eduarctus modestus flatly blocks the target with plate-like second antennae in a pulp-adventure-illustration scene at lighthouse-landing; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382954,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382954-primary",
+      "relativeOutputPath": "lobster/primary/382954/lob-v2-a382954-primary.webp",
+      "altText": "Eduarctus perspicillatus flatly blocks the target with plate-like second antennae in a theatrical-production-photo scene at castle-courtyard; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382955,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382955-primary",
+      "relativeOutputPath": "lobster/primary/382955/lob-v2-a382955-primary.webp",
+      "altText": "Eduarctus pyrrhonotus flatly blocks the target with plate-like second antennae in a inked-comic-panel scene at observatory-deck; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382956,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382956-primary",
+      "relativeOutputPath": "lobster/primary/382956/lob-v2-a382956-primary.webp",
+      "altText": "Eduarctus reticulatus flatly blocks the target with plate-like second antennae in a sports-broadcast-photo scene at archaeological-dig; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382957,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382957-primary",
+      "relativeOutputPath": "lobster/primary/382957/lob-v2-a382957-primary.webp",
+      "altText": "Galearctus aurora flatly blocks the target with plate-like second antennae in a watercolor-illustration scene at community-theater-stage; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382958,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382958-primary",
+      "relativeOutputPath": "lobster/primary/382958/lob-v2-a382958-primary.webp",
+      "altText": "Galearctus kitanoviriosus flatly blocks the target with plate-like second antennae in a oil-painting-tableau scene at sculpture-park; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382959,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382959-primary",
+      "relativeOutputPath": "lobster/primary/382959/lob-v2-a382959-primary.webp",
+      "altText": "Galearctus rapanus flatly blocks the target with plate-like second antennae in a woodblock-print scene at botanical-conservatory; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382960,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382960-primary",
+      "relativeOutputPath": "lobster/primary/382960/lob-v2-a382960-primary.webp",
+      "altText": "Galearctus timidus flatly blocks the target with plate-like second antennae in a museum-archive-photo scene at tram-platform; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382961,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382961-primary",
+      "relativeOutputPath": "lobster/primary/382961/lob-v2-a382961-primary.webp",
+      "altText": "Galearctus umbilicatus flatly blocks the target with plate-like second antennae in a risograph-poster scene at ferry-terminal; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382962,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382962-primary",
+      "relativeOutputPath": "lobster/primary/382962/lob-v2-a382962-primary.webp",
+      "altText": "Gibbularctus gibberosus flatly blocks the target with plate-like second antennae in a stop-motion-clay scene at concert-backstage; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382963,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382963-primary",
+      "relativeOutputPath": "lobster/primary/382963/lob-v2-a382963-primary.webp",
+      "altText": "Petrarctus brevicornis flatly blocks the target with plate-like second antennae in a gouache-illustration scene at museum-loading-bay; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382964,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382964-primary",
+      "relativeOutputPath": "lobster/primary/382964/lob-v2-a382964-primary.webp",
+      "altText": "Petrarctus demani flatly blocks the target with plate-like second antennae in a fashion-editorial-photo scene at public-library-steps; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382965,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382965-primary",
+      "relativeOutputPath": "lobster/primary/382965/lob-v2-a382965-primary.webp",
+      "altText": "Petrarctus holthuisi flatly blocks the target with plate-like second antennae in a cel-animation-frame scene at regatta-finish; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382966,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382966-primary",
+      "relativeOutputPath": "lobster/primary/382966/lob-v2-a382966-primary.webp",
+      "altText": "Petrarctus veliger flatly blocks the target with plate-like second antennae in a miniature-diorama-photo scene at night-market; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382967,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382967-primary",
+      "relativeOutputPath": "lobster/primary/382967/lob-v2-a382967-primary.webp",
+      "altText": "Remiarctus bertholdii flatly blocks the target with plate-like second antennae in a paper-cut-collage scene at carnival-midway; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382968,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382968-primary",
+      "relativeOutputPath": "lobster/primary/382968/lob-v2-a382968-primary.webp",
+      "altText": "Scyllarus americanus flatly blocks the target with plate-like second antennae in a street-reportage-photo scene at harbor-market; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382969,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382969-primary",
+      "relativeOutputPath": "lobster/primary/382969/lob-v2-a382969-primary.webp",
+      "altText": "Scyllarus chacei flatly blocks the target with plate-like second antennae in a documentary-photo scene at seaside-boardwalk; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382970,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382970-primary",
+      "relativeOutputPath": "lobster/primary/382970/lob-v2-a382970-primary.webp",
+      "altText": "Scyllarus planorbis flatly blocks the target with plate-like second antennae in a cinematic-photo scene at rooftop-garden; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382971,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382971-primary",
+      "relativeOutputPath": "lobster/primary/382971/lob-v2-a382971-primary.webp",
+      "altText": "Scyllarus subarctus flatly blocks the target with plate-like second antennae in a pulp-adventure-illustration scene at courthouse-steps; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382972,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382972-primary",
+      "relativeOutputPath": "lobster/primary/382972/lob-v2-a382972-primary.webp",
+      "altText": "Thenus australiensis flatly blocks the target with plate-like second antennae in a theatrical-production-photo scene at town-square-parade; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382973,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382973-primary",
+      "relativeOutputPath": "lobster/primary/382973/lob-v2-a382973-primary.webp",
+      "altText": "Thenus indicus flatly blocks the target with plate-like second antennae in a inked-comic-panel scene at railway-concourse; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382974,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382974-primary",
+      "relativeOutputPath": "lobster/primary/382974/lob-v2-a382974-primary.webp",
+      "altText": "Thenus parindicus flatly blocks the target with plate-like second antennae in a sports-broadcast-photo scene at winter-festival; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382975,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a382975-primary",
+      "relativeOutputPath": "lobster/primary/382975/lob-v2-a382975-primary.webp",
+      "altText": "Thenus unimaculatus flatly blocks the target with plate-like second antennae in a watercolor-illustration scene at lighthouse-landing; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382976,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382976-primary",
+      "relativeOutputPath": "lobster/primary/382976/lob-v2-a382976-primary.webp",
+      "altText": "Homeryon armarium confronts the target with the documented multiple chelate walking legs in a oil-painting-tableau scene at castle-courtyard; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382977,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382977-primary",
+      "relativeOutputPath": "lobster/primary/382977/lob-v2-a382977-primary.webp",
+      "altText": "Homeryon asper confronts the target with the documented multiple chelate walking legs in a woodblock-print scene at observatory-deck; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382978,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382978-primary",
+      "relativeOutputPath": "lobster/primary/382978/lob-v2-a382978-primary.webp",
+      "altText": "Pentacheles gibbus confronts the target with the documented multiple chelate walking legs in a museum-archive-photo scene at archaeological-dig; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382979,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382979-primary",
+      "relativeOutputPath": "lobster/primary/382979/lob-v2-a382979-primary.webp",
+      "altText": "Pentacheles laevis confronts the target with the documented multiple chelate walking legs in a risograph-poster scene at community-theater-stage; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382980,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382980-primary",
+      "relativeOutputPath": "lobster/primary/382980/lob-v2-a382980-primary.webp",
+      "altText": "Pentacheles obscurus confronts the target with the documented multiple chelate walking legs in a stop-motion-clay scene at sculpture-park; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382981,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382981-primary",
+      "relativeOutputPath": "lobster/primary/382981/lob-v2-a382981-primary.webp",
+      "altText": "Pentacheles snyderi confronts the target with the documented multiple chelate walking legs in a gouache-illustration scene at botanical-conservatory; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382983,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382983-primary",
+      "relativeOutputPath": "lobster/primary/382983/lob-v2-a382983-primary.webp",
+      "altText": "Polycheles baccatus confronts the target with the documented multiple chelate walking legs in a fashion-editorial-photo scene at tram-platform; the target starts counting claws and visibly gives up halfway.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382984,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382984-primary",
+      "relativeOutputPath": "lobster/primary/382984/lob-v2-a382984-primary.webp",
+      "altText": "Polycheles coccifer confronts the target with the documented multiple chelate walking legs in a cel-animation-frame scene at ferry-terminal; the target starts counting claws and visibly gives up halfway.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382988,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382988-primary",
+      "relativeOutputPath": "lobster/primary/382988/lob-v2-a382988-primary.webp",
+      "altText": "Polycheles tanneri confronts the target with the documented multiple chelate walking legs in a miniature-diorama-photo scene at concert-backstage; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382989,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382989-primary",
+      "relativeOutputPath": "lobster/primary/382989/lob-v2-a382989-primary.webp",
+      "altText": "Stereomastis aculeata confronts the target with the documented multiple chelate walking legs in a paper-cut-collage scene at museum-loading-bay; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382990,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382990-primary",
+      "relativeOutputPath": "lobster/primary/382990/lob-v2-a382990-primary.webp",
+      "altText": "Stereomastis alis confronts the target with the documented multiple chelate walking legs in a street-reportage-photo scene at public-library-steps; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382991,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382991-primary",
+      "relativeOutputPath": "lobster/primary/382991/lob-v2-a382991-primary.webp",
+      "altText": "Stereomastis auriculata confronts the target with the documented multiple chelate walking legs in a documentary-photo scene at regatta-finish; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382992,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382992-primary",
+      "relativeOutputPath": "lobster/primary/382992/lob-v2-a382992-primary.webp",
+      "altText": "Stereomastis cerata confronts the target with the documented multiple chelate walking legs in a cinematic-photo scene at night-market; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382993,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382993-primary",
+      "relativeOutputPath": "lobster/primary/382993/lob-v2-a382993-primary.webp",
+      "altText": "Stereomastis evexa confronts the target with the documented multiple chelate walking legs in a pulp-adventure-illustration scene at carnival-midway; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382994,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382994-primary",
+      "relativeOutputPath": "lobster/primary/382994/lob-v2-a382994-primary.webp",
+      "altText": "Stereomastis galil confronts the target with the documented multiple chelate walking legs in a theatrical-production-photo scene at harbor-market; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382995,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382995-primary",
+      "relativeOutputPath": "lobster/primary/382995/lob-v2-a382995-primary.webp",
+      "altText": "Stereomastis helleri confronts the target with the documented multiple chelate walking legs in a inked-comic-panel scene at seaside-boardwalk; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382996,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382996-primary",
+      "relativeOutputPath": "lobster/primary/382996/lob-v2-a382996-primary.webp",
+      "altText": "Stereomastis pacifica confronts the target with the documented multiple chelate walking legs in a sports-broadcast-photo scene at rooftop-garden; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382997,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382997-primary",
+      "relativeOutputPath": "lobster/primary/382997/lob-v2-a382997-primary.webp",
+      "altText": "Stereomastis panglao confronts the target with the documented multiple chelate walking legs in a watercolor-illustration scene at courthouse-steps; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382998,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382998-primary",
+      "relativeOutputPath": "lobster/primary/382998/lob-v2-a382998-primary.webp",
+      "altText": "Stereomastis phosphorus confronts the target with the documented multiple chelate walking legs in a oil-painting-tableau scene at town-square-parade; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 382999,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a382999-primary",
+      "relativeOutputPath": "lobster/primary/382999/lob-v2-a382999-primary.webp",
+      "altText": "Stereomastis polita confronts the target with the documented multiple chelate walking legs in a woodblock-print scene at railway-concourse; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 383000,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a383000-primary",
+      "relativeOutputPath": "lobster/primary/383000/lob-v2-a383000-primary.webp",
+      "altText": "Stereomastis suhmi confronts the target with the documented multiple chelate walking legs in a museum-archive-photo scene at winter-festival; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 383001,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a383001-primary",
+      "relativeOutputPath": "lobster/primary/383001/lob-v2-a383001-primary.webp",
+      "altText": "Stereomastis surda confronts the target with the documented multiple chelate walking legs in a risograph-poster scene at lighthouse-landing; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 383002,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a383002-primary",
+      "relativeOutputPath": "lobster/primary/383002/lob-v2-a383002-primary.webp",
+      "altText": "Stereomastis talismani confronts the target with the documented multiple chelate walking legs in a stop-motion-clay scene at castle-courtyard; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 383003,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a383003-primary",
+      "relativeOutputPath": "lobster/primary/383003/lob-v2-a383003-primary.webp",
+      "altText": "Stereomastis trispinosa confronts the target with the documented multiple chelate walking legs in a gouache-illustration scene at observatory-deck; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 383004,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a383004-primary",
+      "relativeOutputPath": "lobster/primary/383004/lob-v2-a383004-primary.webp",
+      "altText": "Willemoesia inornata confronts the target with the documented multiple chelate walking legs in a fashion-editorial-photo scene at archaeological-dig; a dropped snack bag becomes disputed territory.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 383030,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a383030-primary",
+      "relativeOutputPath": "lobster/primary/383030/lob-v2-a383030-primary.webp",
+      "altText": "Scammarctus batei flatly blocks the target with plate-like second antennae in a cel-animation-frame scene at community-theater-stage; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 383037,
+      "action": "pinch",
+      "sceneId": "lob-v2-a383037-primary",
+      "relativeOutputPath": "lobster/primary/383037/lob-v2-a383037-primary.webp",
+      "altText": "Hoplometopus antillensis clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a miniature-diorama-photo scene at sculpture-park; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 383039,
+      "action": "pinch",
+      "sceneId": "lob-v2-a383039-primary",
+      "relativeOutputPath": "lobster/primary/383039/lob-v2-a383039-primary.webp",
+      "altText": "Hoplometopus callistus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a paper-cut-collage scene at botanical-conservatory; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 383043,
+      "action": "pinch",
+      "sceneId": "lob-v2-a383043-primary",
+      "relativeOutputPath": "lobster/primary/383043/lob-v2-a383043-primary.webp",
+      "altText": "Hoplometopus gracilipes clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a street-reportage-photo scene at tram-platform; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 383045,
+      "action": "pinch",
+      "sceneId": "lob-v2-a383045-primary",
+      "relativeOutputPath": "lobster/primary/383045/lob-v2-a383045-primary.webp",
+      "altText": "Hoplometopus holthuisi clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a documentary-photo scene at ferry-terminal; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 383077,
+      "action": "pinch",
+      "sceneId": "lob-v2-a383077-primary",
+      "relativeOutputPath": "lobster/primary/383077/lob-v2-a383077-primary.webp",
+      "altText": "Nephropsis grandis clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a cinematic-photo scene at concert-backstage; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 531112,
+      "action": "pinch",
+      "sceneId": "lob-v2-a531112-primary",
+      "relativeOutputPath": "lobster/primary/531112/lob-v2-a531112-primary.webp",
+      "altText": "Dinochelus ausubeli clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a pulp-adventure-illustration scene at museum-loading-bay; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 712209,
+      "action": "pinch",
+      "sceneId": "lob-v2-a712209-primary",
+      "relativeOutputPath": "lobster/primary/712209/lob-v2-a712209-primary.webp",
+      "altText": "Thymops takedai clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a theatrical-production-photo scene at public-library-steps; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 762291,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a762291-primary",
+      "relativeOutputPath": "lobster/primary/762291/lob-v2-a762291-primary.webp",
+      "altText": "Linuparus meridionalis strikes toward the target with an enlarged antenna and knocks their hat sideways in a inked-comic-panel scene at regatta-finish; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 762292,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a762292-primary",
+      "relativeOutputPath": "lobster/primary/762292/lob-v2-a762292-primary.webp",
+      "altText": "Puerulus gibbosus strikes toward the target with an enlarged antenna and knocks their hat sideways in a sports-broadcast-photo scene at night-market; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 762293,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a762293-primary",
+      "relativeOutputPath": "lobster/primary/762293/lob-v2-a762293-primary.webp",
+      "altText": "Puerulus mesodontus strikes toward the target with an enlarged antenna and knocks their hat sideways in a watercolor-illustration scene at carnival-midway; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 762294,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a762294-primary",
+      "relativeOutputPath": "lobster/primary/762294/lob-v2-a762294-primary.webp",
+      "altText": "Puerulus quadridentis strikes toward the target with an enlarged antenna and knocks their hat sideways in a oil-painting-tableau scene at harbor-market; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 762295,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a762295-primary",
+      "relativeOutputPath": "lobster/primary/762295/lob-v2-a762295-primary.webp",
+      "altText": "Puerulus richeri strikes toward the target with an enlarged antenna and knocks their hat sideways in a woodblock-print scene at seaside-boardwalk; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 762296,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a762296-primary",
+      "relativeOutputPath": "lobster/primary/762296/lob-v2-a762296-primary.webp",
+      "altText": "Puerulus sericus strikes toward the target with an enlarged antenna and knocks their hat sideways in a museum-archive-photo scene at rooftop-garden; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 762297,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a762297-primary",
+      "relativeOutputPath": "lobster/primary/762297/lob-v2-a762297-primary.webp",
+      "altText": "Chelarctus virgosus flatly blocks the target with plate-like second antennae in a risograph-poster scene at courthouse-steps; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 762300,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a762300-primary",
+      "relativeOutputPath": "lobster/primary/762300/lob-v2-a762300-primary.webp",
+      "altText": "Galearctus lipkei flatly blocks the target with plate-like second antennae in a stop-motion-clay scene at town-square-parade; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 762301,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a762301-primary",
+      "relativeOutputPath": "lobster/primary/762301/lob-v2-a762301-primary.webp",
+      "altText": "Galearctus avulsus flatly blocks the target with plate-like second antennae in a gouache-illustration scene at railway-concourse; a witness attempts to present a ticket that nobody requested.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 762302,
+      "action": "pinch",
+      "sceneId": "lob-v2-a762302-primary",
+      "relativeOutputPath": "lobster/primary/762302/lob-v2-a762302-primary.webp",
+      "altText": "Thaumastocheles bipristis clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a fashion-editorial-photo scene at winter-festival; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 762303,
+      "action": "pinch",
+      "sceneId": "lob-v2-a762303-primary",
+      "relativeOutputPath": "lobster/primary/762303/lob-v2-a762303-primary.webp",
+      "altText": "Thaumastocheles massonktenos clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a cel-animation-frame scene at lighthouse-landing; a witness offers a comically tiny pair of safety scissors.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1059431,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a1059431-primary",
+      "relativeOutputPath": "lobster/primary/1059431/lob-v2-a1059431-primary.webp",
+      "altText": "Petrarctus jeppiaari flatly blocks the target with plate-like second antennae in a miniature-diorama-photo scene at castle-courtyard; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1059699,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a1059699-primary",
+      "relativeOutputPath": "lobster/primary/1059699/lob-v2-a1059699-primary.webp",
+      "altText": "Panulirus meripurpuratus strikes toward the target with an enlarged antenna and knocks their hat sideways in a paper-cut-collage scene at observatory-deck; a witness raises a scorecard before remembering there is no competition.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1434135,
+      "action": "pinch",
+      "sceneId": "lob-v2-a1434135-primary",
+      "relativeOutputPath": "lobster/primary/1434135/lob-v2-a1434135-primary.webp",
+      "altText": "Nephropsis rahayuae clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a street-reportage-photo scene at archaeological-dig; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1469105,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a1469105-primary",
+      "relativeOutputPath": "lobster/primary/1469105/lob-v2-a1469105-primary.webp",
+      "altText": "Galearctus yuanshi flatly blocks the target with plate-like second antennae in a documentary-photo scene at community-theater-stage; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1473939,
+      "action": "pinch",
+      "sceneId": "lob-v2-a1473939-primary",
+      "relativeOutputPath": "lobster/primary/1473939/lob-v2-a1473939-primary.webp",
+      "altText": "Nephropsis pygmaea clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a cinematic-photo scene at sculpture-park; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1609822,
+      "action": "pinch",
+      "sceneId": "lob-v2-a1609822-primary",
+      "relativeOutputPath": "lobster/primary/1609822/lob-v2-a1609822-primary.webp",
+      "altText": "Hoplometopus macrodontus clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a pulp-adventure-illustration scene at botanical-conservatory; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1611043,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a1611043-primary",
+      "relativeOutputPath": "lobster/primary/1611043/lob-v2-a1611043-primary.webp",
+      "altText": "Phyllamphion elegans strikes toward the target with an enlarged antenna and knocks their hat sideways in a theatrical-production-photo scene at tram-platform; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1611044,
+      "action": "antenna-strike",
+      "sceneId": "lob-v2-a1611044-primary",
+      "relativeOutputPath": "lobster/primary/1611044/lob-v2-a1611044-primary.webp",
+      "altText": "Phyllamphion gundlachi strikes toward the target with an enlarged antenna and knocks their hat sideways in a inked-comic-panel scene at ferry-terminal; the target's hat lands perfectly on a nearby traffic cone.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1653867,
+      "action": "pinch",
+      "sceneId": "lob-v2-a1653867-primary",
+      "relativeOutputPath": "lobster/primary/1653867/lob-v2-a1653867-primary.webp",
+      "altText": "Thymops nilenta clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a sports-broadcast-photo scene at concert-backstage; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1727490,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a1727490-primary",
+      "relativeOutputPath": "lobster/primary/1727490/lob-v2-a1727490-primary.webp",
+      "altText": "Dianecheles martini confronts the target with the documented multiple chelate walking legs in a watercolor-illustration scene at museum-loading-bay; the target starts counting claws and visibly gives up halfway.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1727493,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a1727493-primary",
+      "relativeOutputPath": "lobster/primary/1727493/lob-v2-a1727493-primary.webp",
+      "altText": "Neopolycheles enthrix confronts the target with the documented multiple chelate walking legs in a oil-painting-tableau scene at public-library-steps; the target starts counting claws and visibly gives up halfway.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1727494,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a1727494-primary",
+      "relativeOutputPath": "lobster/primary/1727494/lob-v2-a1727494-primary.webp",
+      "altText": "Neopolycheles amemiyai confronts the target with the documented multiple chelate walking legs in a woodblock-print scene at regatta-finish; the target starts counting claws and visibly gives up halfway.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1727495,
+      "action": "multi-chela-stand-off",
+      "sceneId": "lob-v2-a1727495-primary",
+      "relativeOutputPath": "lobster/primary/1727495/lob-v2-a1727495-primary.webp",
+      "altText": "Neopolycheles kermadecensis confronts the target with the documented multiple chelate walking legs in a museum-archive-photo scene at night-market; the target starts counting claws and visibly gives up halfway.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1765544,
+      "action": "antenna-plate-refusal",
+      "sceneId": "lob-v2-a1765544-primary",
+      "relativeOutputPath": "lobster/primary/1765544/lob-v2-a1765544-primary.webp",
+      "altText": "Bathyarctus andamanicus flatly blocks the target with plate-like second antennae in a risograph-poster scene at carnival-midway; the target's handshake meets an unmistakable crustacean stop sign.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    },
+    {
+      "AphiaID": 1877745,
+      "action": "pinch",
+      "sceneId": "lob-v2-a1877745-primary",
+      "relativeOutputPath": "lobster/primary/1877745/lob-v2-a1877745-primary.webp",
+      "altText": "Nephropsis perexigua clamps an enlarged first-leg chela onto the target's loose outerwear cuff in a stop-motion-clay scene at harbor-market; the target's sleeve is held under a visibly unofficial release schedule.",
+      "source": "generated",
+      "reviewStates": {
+        "targetRelation": "not-reviewed",
+        "actionClarity": "not-reviewed",
+        "humor": "not-reviewed",
+        "anatomy": "not-reviewed",
+        "finalArt": "not-reviewed"
+      }
+    }
+  ]
+}

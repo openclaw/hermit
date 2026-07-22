@@ -25,7 +25,7 @@ export const setLobsterImageFetcherForTesting = (
 const trustedImageOrigin = "https://raw.githubusercontent.com"
 const maximumImageBytes = 120 * 1024
 const trustedImageUrl =
-	/^https:\/\/raw\.githubusercontent\.com\/openclaw\/hermit\/[a-f0-9]{40}\/assets\/lobster\/scenes\/[1-9]\d*\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\.webp$/
+	/^https:\/\/raw\.githubusercontent\.com\/openclaw\/hermit\/[a-f0-9]{40}\/assets\/lobster\/(?:scenes|primary)\/[1-9]\d*\/[A-Za-z0-9][A-Za-z0-9_-]{0,127}\.webp$/
 
 const ascii = (bytes: Uint8Array, start: number, length: number) =>
 	String.fromCharCode(...bytes.subarray(start, start + length))

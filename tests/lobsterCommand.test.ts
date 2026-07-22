@@ -26,10 +26,13 @@ import { buildLobsterEncounterContainer } from "../src/components/lobsterButtons
 import {
 	lobsterArtworkRevision,
 	lobsterConfig,
+	lobsterDossierUrl,
+	lobsterPrimaryUrl,
 	lobsterScenePath,
 	lobsterSceneUrl
 } from "../src/config/lobster.js"
 import { lobsterMetadataRecords } from "../src/config/lobsterMetadata.js"
+import { getLobsterPrimaryArtwork } from "../src/config/lobsterPrimaryArtwork.js"
 import {
 	bindLobsterMessage,
 	createLobsterEncounter,
@@ -268,7 +271,10 @@ describe("lobster catalog and deterministic engine", () => {
 
 		expect(retry).toEqual(first)
 		expect(first.assetChecksum).toBe(
-			`pending-artwork:${first.speciesAphiaId}:${first.sceneId}`
+			`pending-primary-artwork:${first.speciesAphiaId}:${first.sceneId}`
+		)
+		expect(first.sceneId).toBe(
+			`lob-v2-a${first.speciesAphiaId}-primary`
 		)
 		expect(first.accessibilityDescription.length).toBeGreaterThan(20)
 	})
@@ -301,9 +307,49 @@ describe("lobster catalog and deterministic engine", () => {
 		expect([self, hermit, rock, bot].map((item) => item.sceneId))
 			.toEqual(Array(4).fill(self.sceneId))
 		expect(self.targetKind).toBe("self")
+		expect(self.narrative).toContain("self-inflicted")
 		expect(hermit.targetKind).toBe("hermit")
+		expect(hermit.narrative).toContain("logged the lobster as feedback")
 		expect(rock.targetKind).toBe("rock_lobster")
+		expect(rock.narrative).toContain("professional courtesy")
 		expect(bot.targetKind).toBe("bot")
+		expect(bot.narrative).toContain("untrusted input")
+	})
+
+	it("always uses the species' designated consequential primary scene", () => {
+		const strongActions = new Set([
+			"pinch",
+			"antenna-strike",
+			"large-chela-stand-off",
+			"antenna-stand-off",
+			"multi-chela-stand-off",
+			"subchelate-stand-off",
+			"antenna-plate-refusal"
+		])
+		const selectedActions = new Set<string>()
+		const sampleSize = 25_000
+
+		for (let index = 0; index < sampleSize; index += 1) {
+			const encounter = generate(`primary-scene-${index}`)
+			const primary = getLobsterPrimaryArtwork(encounter.speciesAphiaId)
+			expect(encounter.sceneId).toBe(primary?.sceneId)
+			expect(encounter.action).toBe(primary?.action)
+			expect(encounter.assetUrl).toBe(
+				lobsterPrimaryUrl(primary!.relativeOutputPath)
+			)
+			expect(strongActions.has(encounter.action)).toBe(true)
+			selectedActions.add(encounter.action)
+		}
+
+		expect(selectedActions).toEqual(
+			new Set([
+				"pinch",
+				"antenna-strike",
+				"multi-chela-stand-off",
+				"subchelate-stand-off",
+				"antenna-plate-refusal"
+			])
+		)
 	})
 })
 
@@ -321,7 +367,9 @@ describe("lobster persistence and Carbon card", () => {
 			if (first.kind === "created" && retry.kind === "existing") {
 				expect(retry.encounter).toEqual(first.encounter)
 				expect(formatLobsterEncounterId(first.encounter.id)).toBe("LOB-0001")
-				expect(first.encounter.assetChecksum).toStartWith("pending-artwork:")
+				expect(first.encounter.assetChecksum).toStartWith(
+					"pending-primary-artwork:"
+				)
 				expect(JSON.parse(first.encounter.metricsJson)).toEqual(
 					expect.objectContaining({ action: expect.any(String) })
 				)
@@ -332,7 +380,7 @@ describe("lobster persistence and Carbon card", () => {
 		}
 	})
 
-	it("renders IDs, taxonomy, species data, metrics, status, and controls with Carbon only", async () => {
+	it("renders the target, outcome, v2 metrics, dossier, and controls with Carbon only", async () => {
 		const { owner } = testDatabase()
 		try {
 			const creation = await createEncounter()
@@ -347,22 +395,36 @@ describe("lobster persistence and Carbon card", () => {
 			const text = payloadText(payload)
 			const buttons = components.filter((component) => component.type === 2)
 
-			expect(text).toContain("Lobster Encounter LOB-0001")
+			expect(text).toContain("<@target-1> GOT LOBSTERED")
+			expect(text).toContain("Deployed by <@actor-1>")
+			expect(text).toContain("Encounter LOB-0001")
+			expect(text).toContain(creation.encounter.headline)
 			expect(text).toContain(creation.encounter.speciesDisplayName)
 			expect(text).toContain(creation.encounter.speciesAcceptedName)
 			expect(text).toContain(creation.encounter.speciesFamily)
 			expect(text).toContain(`AphiaID ${creation.encounter.speciesAphiaId}`)
-			expect(text).toContain("Resolve:")
+			expect(text).toContain("MENACE:")
+			expect(text).toContain("SHELL SHOCK:")
+			expect(text).toContain("DIGNITY REMAINING:")
+			expect(text).toContain("ESCAPE CHANCE:")
+			expect(text).toContain("WHY THIS WAS SCIENTIFICALLY ALLOWED")
+			expect(text).toContain("Only you can press these buttons.")
 			expect(text).toContain(creation.encounter.taxonomySnapshotId)
 			expect(text).toContain("awaiting target response")
 			expect(buttons).toEqual([
 				expect.objectContaining({
 					custom_id: `lobster-return:id=${creation.encounter.id}`,
+					label: "Lobster Them Back",
 					disabled: false
 				}),
 				expect.objectContaining({
 					custom_id: `lobster-butter:id=${creation.encounter.id}`,
+					label: "Bribe With Butter",
 					disabled: false
+				}),
+				expect.objectContaining({
+					label: "Open Lobster Dossier",
+					url: lobsterDossierUrl(creation.encounter.speciesAphiaId)
 				})
 			])
 			expect(serialized.embeds).toBeUndefined()
@@ -374,6 +436,35 @@ describe("lobster persistence and Carbon card", () => {
 						[1, 2, 10, 12, 14, 17].includes(Number(component.type))
 					)
 			).toBe(true)
+		} finally {
+			owner.close()
+		}
+	})
+
+	it("continues to render legacy stored metrics", async () => {
+		const { owner } = testDatabase()
+		try {
+			const creation = await createEncounter()
+			if (creation.kind !== "created") {
+				throw new Error("Expected encounter")
+			}
+			const text = payloadText({
+				components: [
+					buildLobsterEncounterContainer({
+						...creation.encounter,
+						metricsJson: JSON.stringify({
+							action: "refusal",
+							resolve: 83,
+							approachDistanceCm: 42,
+							proceduralDrag: 17
+						})
+					})
+				]
+			})
+
+			expect(text).toContain("**Resolve:** 83%")
+			expect(text).toContain("**Approach distance:** 42 cm")
+			expect(text).toContain("**Procedural drag:** 17%")
 		} finally {
 			owner.close()
 		}
@@ -528,7 +619,7 @@ describe("lobster persistence and Carbon card", () => {
 					encounter: {
 						...creation.encounter,
 						assetUrl: creation.encounter.assetUrl.replace(
-							"/assets/lobster/scenes/",
+							"/assets/lobster/primary/",
 							"/assets/slap/scenes/"
 						)
 					},
@@ -751,7 +842,7 @@ describe("/lobster and Release Lobster", () => {
 				messageId: "message-command",
 				publicationStatus: "published"
 			})
-			expect(payloadText(replies[0])).toContain("Lobster Encounter LOB-0001")
+			expect(payloadText(replies[0])).toContain("Encounter LOB-0001")
 		} finally {
 			owner.close()
 		}
@@ -847,9 +938,7 @@ describe("/lobster and Release Lobster", () => {
 				publicationStatus: "published",
 				messageId: "message-after-defer-failure"
 			})
-			expect(payloadText(retryReplies[0])).toContain(
-				"Lobster Encounter LOB-0002"
-			)
+			expect(payloadText(retryReplies[0])).toContain("Encounter LOB-0002")
 		} finally {
 			consoleError.mockRestore()
 			owner.close()
@@ -905,6 +994,17 @@ describe("lobster target responses", () => {
 			expect(retry).toEqual(first)
 			expect(first.sceneId).not.toBe(encounter.sceneId)
 			expect(approvedSceneIds).toContain(first.sceneId)
+			expect([
+				"refusal",
+				"ceremonial-display",
+				"editorial-observe",
+				"editorial-pose",
+				"large-chela-stand-off",
+				"antenna-stand-off",
+				"antenna-plate-refusal",
+				"multi-chela-stand-off",
+				"subchelate-stand-off"
+			]).toContain(first.metrics.action)
 			expect(first.assetUrl).toContain(
 				`/assets/lobster/scenes/${encounter.speciesAphiaId}/`
 			)
@@ -913,9 +1013,8 @@ describe("lobster target responses", () => {
 			await handleLobsterReturn(target.interaction, { id: encounter.id })
 			expect(target.replies).toHaveLength(0)
 			expect(target.updates).toHaveLength(1)
-			expect(payloadText(target.updates[0])).toContain(
-				"returns the encounter"
-			)
+			expect(payloadText(target.updates[0])).toContain("RETURN SUCCESSFUL")
+			expect(payloadText(target.updates[0])).toContain(`<@${encounter.actorId}>`)
 			expect(payloadText(target.updates[0])).toContain(
 				"response recorded; encounter closed"
 			)
@@ -1037,10 +1136,16 @@ describe("lobster target responses", () => {
 				})
 			).filter((component) => component.type === 2)
 
-			expect(buttons).toEqual([
+			expect(buttons.slice(0, 2)).toEqual([
 				expect.objectContaining({ disabled: true }),
 				expect.objectContaining({ disabled: true })
 			])
+			expect(buttons[2]).toEqual(
+				expect.objectContaining({
+					label: "Open Lobster Dossier",
+					url: lobsterDossierUrl(creation.encounter.speciesAphiaId)
+				})
+			)
 		} finally {
 			owner.close()
 		}

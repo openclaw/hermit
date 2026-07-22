@@ -1,19 +1,15 @@
-import { renderToStaticMarkup } from "react-dom/server"
 import {
 	createStaticHandler,
 	createStaticRouter,
 	StaticRouterProvider,
 	type RouteObject
 } from "react-router"
-import { Layout } from "./components/Layout.js"
+import { renderDocument } from "./document.js"
 import { HomeRoute } from "./routes/home.js"
 import { ResultRoute } from "./routes/result.js"
 
-const document = (title: string, children: React.ReactNode) =>
-	`<!doctype html>${renderToStaticMarkup(<Layout title={title}>{children}</Layout>)}`
-
 export const renderPage = (title: string, children: React.ReactNode) =>
-	document(title, children)
+	renderDocument(title, children)
 
 export const renderResultPage = (
 	title: string,
@@ -21,7 +17,10 @@ export const renderResultPage = (
 	ok = true,
 	action?: { href: string; label: string; description?: string }
 ) =>
-	document(title, <ResultRoute title={title} message={message} ok={ok} action={action} />)
+	renderDocument(
+		title,
+		<ResultRoute title={title} message={message} ok={ok} action={action} />
+	)
 
 export const routes: RouteObject[] = [
 	{
@@ -38,7 +37,10 @@ export const renderReactRouter = async (request: Request) => {
 	}
 	const router = createStaticRouter(dataRoutes, context)
 	return new Response(
-		document("OpenClaw Forms", <StaticRouterProvider router={router} context={context} hydrate={false} />),
+		renderDocument(
+			"OpenClaw Forms",
+			<StaticRouterProvider router={router} context={context} hydrate={false} />
+		),
 		{ headers: { "content-type": "text/html; charset=utf-8" } }
 	)
 }

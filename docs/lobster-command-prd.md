@@ -1,5 +1,9 @@
 # Lobster Encounters
 
+> Runtime experience superseded by `docs/lobster-v2-prd.md` on July 21, 2026.
+> This document remains the historical source for the original taxonomy,
+> persistence, and artwork-corpus requirements.
+
 ## Status
 
 - Product status: Approved for implementation
