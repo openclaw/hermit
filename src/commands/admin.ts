@@ -3,12 +3,11 @@ import {
 	InteractionContextType,
 	type CommandInteraction,
 	ApplicationCommandOptionType,
-	CommandWithSubcommandGroups,
+	CommandWithSubcommands,
 	PermissionFlagsBits,
 	ChannelType
 } from "@buape/carbon"
 import BaseCommand from "./base.js"
-import { AdminFsc } from "./maintainer.js"
 
 const shadow = "439223656200273932"
 const inactivityWarnChannel = "1477357508833185954"
@@ -17,13 +16,12 @@ const isShadow = (interaction: CommandInteraction) => {
 	return interaction.user?.id === shadow
 }
 
-export default class AdminCommand extends CommandWithSubcommandGroups {
+export default class AdminCommand extends CommandWithSubcommands {
 	name = "admin"
 	description = "Admin commands"
 	permission = PermissionFlagsBits.Administrator
 	integrationTypes = [ApplicationIntegrationType.GuildInstall]
 	contexts = [InteractionContextType.Guild]
-	subcommandGroups = [new AdminFsc()]
 	subcommands = [
 		new Say(),
 		new InactivityWarn(),

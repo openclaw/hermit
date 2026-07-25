@@ -5,8 +5,8 @@ export const formSettings = {
 	reviewRoleId: "1477360613125787678",
 	clawhubAppealReviewChannelId: "1498032057337647295",
 	clawhubAppealReviewRoleId: "1509967254870298794",
-	shadowChannelId: "1464886408090226902",
-	shadowReviewRoleId: "1477504469473427497",
+	moderatorReportReviewChannelId: "1457498550651851005",
+	moderatorReportReviewRoleId: "1477360613125787678",
 	discordGuildId: "1456350064065904867",
 	githubOrg: "openclaw",
 	redditSubreddit: "openclaw"
@@ -211,8 +211,8 @@ export const formConfigs = [
 		title: "Report a Moderator",
 		description: "Report moderator misconduct.",
 		auth: ["discord", "github", "reddit"],
-		reviewChannelId: formSettings.shadowChannelId,
-		reviewRoleId: formSettings.shadowReviewRoleId,
+		reviewChannelId: formSettings.moderatorReportReviewChannelId,
+		reviewRoleId: formSettings.moderatorReportReviewRoleId,
 		successMessage: "Submitted.",
 		fields: [
 			{

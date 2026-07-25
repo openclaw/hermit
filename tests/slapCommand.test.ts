@@ -21,6 +21,7 @@ import {
 	serializePayload
 } from "@buape/carbon"
 import AdminCommand from "../src/commands/admin.js"
+import MaintainerCommand from "../src/commands/maintainer.js"
 import SlapCommand, {
 	FishSlapContextCommand
 } from "../src/commands/slap.js"
@@ -171,10 +172,15 @@ describe("command registration changes", () => {
 		])
 	})
 
-	it("removes trial-mod from /admin", () => {
-		expect(
-			new AdminCommand().subcommandGroups.map((command) => command.name)
-		).toEqual(["fsc"])
+	it("keeps only active admin and maintainer commands", () => {
+		expect(new AdminCommand().subcommands.map((command) => command.name)).toEqual([
+			"say",
+			"inactivity-warn",
+			"automod-bypass-toggle"
+		])
+		expect(new MaintainerCommand().subcommands.map((command) => command.name)).toEqual([
+			"whois"
+		])
 	})
 })
 

@@ -25,7 +25,6 @@ import {
 	formReviewComponents,
 	formReviewModals
 } from "./forms/reviewButtons.js"
-import { fscRequestComponents } from "./components/fscRequestButtons.js"
 import { betaPingsComponents } from "./components/betaPingsButton.js"
 import { nominationComponents } from "./components/nominationButtons.js"
 import { lobsterComponents } from "./components/lobsterButtons.js"
@@ -92,7 +91,6 @@ export const client = new Client(
 		components: [
 			...claimReviewComponents,
 			...formReviewComponents,
-			...fscRequestComponents,
 			...betaPingsComponents,
 			...nominationComponents,
 			...lobsterComponents,
