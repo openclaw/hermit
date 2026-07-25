@@ -9,12 +9,7 @@ import {
 } from "@buape/carbon"
 import BaseCommand from "./base.js"
 
-const shadow = "439223656200273932"
 const inactivityWarnChannel = "1477357508833185954"
-
-const isShadow = (interaction: CommandInteraction) => {
-	return interaction.user?.id === shadow
-}
 
 export default class AdminCommand extends CommandWithSubcommands {
 	name = "admin"
@@ -94,14 +89,6 @@ export class InactivityWarn extends BaseCommand {
 			})
 			return
 		}
-		if (!isShadow(interaction)) {
-			await interaction.reply({
-				content: "You don't have permission to use this command.",
-				ephemeral: true
-			})
-			return
-		}
-
 		const user = interaction.options.getUser("user", true)
 		const lead = interaction.options.getMentionable("lead")
 		const leadLine = lead ? `ping your lead: ${lead}.` : "ping your lead."
@@ -119,7 +106,10 @@ export class InactivityWarn extends BaseCommand {
 			name: `${user.username}`,
 			type: ChannelType.PrivateThread
 		})
-		await thread.addMember(shadow).catch(() => { })
+		const actorId = interaction.user?.id ?? interaction.userId
+		if (actorId) {
+			await thread.addMember(actorId).catch(() => { })
+		}
 
 		const deadline = Math.floor((Date.now() + 2 * 24 * 60 * 60 * 1000) / 1000)
 		await thread.send(`Hey <@${user.id}> — this is your one activity warning.
@@ -165,14 +155,6 @@ export class AutomodBypassToggle extends BaseCommand {
 			})
 			return
 		}
-		if (!isShadow(interaction)) {
-			await interaction.reply({
-				content: "You don't have permission to use this command.",
-				ephemeral: true
-			})
-			return
-		}
-
 		const user = interaction.options.getMember("user", true)
 		if (!user) {
 			await interaction.reply({

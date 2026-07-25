@@ -3,7 +3,6 @@ import {
 	type ButtonInteraction,
 	ButtonStyle,
 	type ComponentData,
-	ComponentType,
 	Container,
 	Label,
 	Modal,
@@ -20,18 +19,15 @@ import type { FormConfig } from "./types.js"
 import {
 	getFormSubmission,
 	parseSubmissionPayload,
-	recordFormDecision,
-	recordFormLock,
-	recordFormUnlock
+	recordFormDecision
 } from "./submissions.js"
 import type { FormSubmission } from "../db/schema.js"
 import { runFormActions } from "./actions.js"
 
 const reasonInputId = "form-review-reason"
 const durationInputId = "form-review-duration"
-const reviewUnlockUserId = "439223656200273932"
 
-type FormReviewStatus = "submitted" | "locked" | "accepted" | "denied"
+type FormReviewStatus = "submitted" | "accepted" | "denied"
 
 const statusColor = (status: FormReviewStatus) => {
 	if (status === "accepted") {
@@ -192,36 +188,6 @@ const answerLinesFor = (form: FormConfig, submission: FormSubmission) => {
 		.map((field) => `**${renderFormText(field.label, payload)}**\n${payload[field.id] || "—"}`)
 }
 
-const reviewHistoryLine = (action: "Locked" | "Unlocked", userId?: string) =>
-	`${action} by <@${userId ?? "unknown"}> • <t:${Math.floor(Date.now() / 1000)}:f>`
-
-const historyLinesFrom = (components: unknown) => {
-	const lines: string[] = []
-	const read = (items: unknown) => {
-		if (!Array.isArray(items)) {
-			return
-		}
-		for (const component of items) {
-			if (!component || typeof component !== "object") {
-				continue
-			}
-			const item = component as { type?: unknown; content?: unknown; components?: unknown }
-			if (item.type === ComponentType.TextDisplay && typeof item.content === "string") {
-				lines.push(
-					...item.content
-						.replace(/^-#\s*/, "")
-						.split("\n")
-						.map((line) => line.trim())
-						.filter((line) => /^(Locked|Unlocked) by <@(?:\d+|unknown)> • <t:\d+:f>$/.test(line))
-				)
-			}
-			read(item.components)
-		}
-	}
-	read(components)
-	return lines
-}
-
 export const buildFormReviewContainer = (
 	form: FormConfig,
 	submission: FormSubmission,
@@ -230,7 +196,6 @@ export const buildFormReviewContainer = (
 		decidedById?: string | null
 		decisionReason?: string | null
 		actionResult?: string | null
-		historyLines?: string[]
 	} = {}
 ) => {
 	const status = options.status ?? "submitted"
@@ -238,7 +203,6 @@ export const buildFormReviewContainer = (
 	const decidedAt = Math.floor(Date.now() / 1000)
 	const footer = [
 		`Submitted • <t:${submittedAt}:f>`,
-		...(options.historyLines ?? []),
 		...(status === "accepted" || status === "denied"
 			? [`${status === "accepted" ? "Accepted" : "Rejected"} by <@${options.decidedById ?? "unknown"}> • <t:${decidedAt}:f>`]
 			: [])
@@ -257,15 +221,11 @@ export const buildFormReviewContainer = (
 			...extra.map((line) => new TextDisplay(line)),
 			new Separator({ divider: false, spacing: "small" }),
 			new TextDisplay(`-# ${footer}`),
-			...(status === "submitted" || status === "locked"
+			...(status === "submitted"
 				? [
-					...(status === "locked" ? [new TextDisplay("Locked until further discussion.")] : []),
 					new Row([
-						new FormReviewAcceptButton(submission.id, status === "locked"),
-						new FormReviewDenyButton(submission.id, status === "locked"),
-						status === "locked"
-							? new FormReviewUnlockButton(submission.id)
-							: new FormReviewLockButton(submission.id)
+						new FormReviewAcceptButton(submission.id),
+						new FormReviewDenyButton(submission.id)
 					])
 				]
 				: [])
@@ -305,9 +265,6 @@ const loadSubmission = async (id: unknown) => {
 	}
 	if (submission.status === "accepted" || submission.status === "denied") {
 		return { error: `This submission is already ${submission.status}.` }
-	}
-	if (submission.status === "locked") {
-		return { error: "This submission is locked until further discussion." }
 	}
 	return { id, submission, form }
 }
@@ -384,8 +341,7 @@ const decide = async (
 				status,
 				decidedById: interaction.user?.id,
 				decisionReason: reason,
-				actionResult,
-				historyLines: historyLinesFrom(interaction.message?.rawData.components)
+				actionResult
 			})
 		],
 		allowedMentions: { parse: [] }
@@ -497,9 +453,8 @@ export class FormReviewAcceptButton extends Button {
 	style = ButtonStyle.Success
 	ephemeral = true
 
-	constructor(id?: number, disabled = false) {
+	constructor(id?: number) {
 		super()
-		this.disabled = disabled
 		if (id) {
 			this.customId = `form-review-accept:id=${id}`
 		}
@@ -526,9 +481,8 @@ export class FormReviewDenyButton extends Button {
 	style = ButtonStyle.Danger
 	ephemeral = true
 
-	constructor(id?: number, disabled = false) {
+	constructor(id?: number) {
 		super()
-		this.disabled = disabled
 		if (id) {
 			this.customId = `form-review-deny:id=${id}`
 		}
@@ -549,126 +503,9 @@ export class FormReviewDenyButton extends Button {
 	}
 }
 
-export class FormReviewLockButton extends Button {
-	customId = "form-review-lock"
-	label = "Lock"
-	style = ButtonStyle.Secondary
-	ephemeral = true
-
-	constructor(id?: number) {
-		super()
-		if (id) {
-			this.customId = `form-review-lock:id=${id}`
-		}
-	}
-
-	async run(interaction: ButtonInteraction, data: Record<string, unknown>) {
-		const loaded = await loadSubmission(data.id)
-		if ("error" in loaded) {
-			await interaction.reply({
-				components: [resultContainer("Invalid form submission", loaded.error ?? "Unknown error.", "#f85149")]
-			})
-			return
-		}
-		if (!(await requireReviewRole(interaction, loaded.form))) {
-			return
-		}
-		const locked = await recordFormLock(loaded.id)
-		if (!locked) {
-			await interaction.reply({
-				components: [resultContainer("Already reviewed", "This submission is no longer available to lock.", "#f85149")],
-				ephemeral: true
-			})
-			return
-		}
-		await interaction.update({
-			components: [
-				buildFormReviewContainer(loaded.form, locked, {
-					status: "locked",
-					historyLines: [
-						...historyLinesFrom(interaction.message?.rawData.components),
-						reviewHistoryLine("Locked", interaction.user?.id)
-					]
-				})
-			],
-			allowedMentions: { parse: [] }
-		})
-	}
-}
-
-export class FormReviewUnlockButton extends Button {
-	customId = "form-review-unlock"
-	label = "Unlock"
-	style = ButtonStyle.Secondary
-	ephemeral = true
-
-	constructor(id?: number) {
-		super()
-		if (id) {
-			this.customId = `form-review-unlock:id=${id}`
-		}
-	}
-
-	async run(interaction: ButtonInteraction, data: Record<string, unknown>) {
-		if (interaction.user?.id !== reviewUnlockUserId) {
-			await interaction.reply({
-				components: [resultContainer("Locked", "Only <@439223656200273932> can unlock this submission.", "#f85149")],
-				ephemeral: true,
-				allowedMentions: { parse: [] }
-			})
-			return
-		}
-		if (typeof data.id !== "number") {
-			await interaction.reply({
-				components: [resultContainer("Invalid form submission", "Missing submission id.", "#f85149")],
-				ephemeral: true
-			})
-			return
-		}
-		const submission = await getFormSubmission(data.id)
-		const form = submission ? getFormConfig(submission.formId) : null
-		if (!submission || !form) {
-			await interaction.reply({
-				components: [resultContainer("Invalid form submission", "Could not load this form submission.", "#f85149")],
-				ephemeral: true
-			})
-			return
-		}
-		if (submission.status === "accepted" || submission.status === "denied") {
-			await interaction.reply({
-				components: [resultContainer("Already reviewed", `This submission is already ${submission.status}.`, "#f85149")],
-				ephemeral: true
-			})
-			return
-		}
-		const unlocked = await recordFormUnlock(data.id)
-		if (!unlocked) {
-			await interaction.reply({
-				components: [resultContainer("Already unlocked", "This submission is no longer locked.", "#f85149")],
-				ephemeral: true
-			})
-			return
-		}
-		await interaction.update({
-			components: [
-				buildFormReviewContainer(form, unlocked, {
-					status: "submitted",
-					historyLines: [
-						...historyLinesFrom(interaction.message?.rawData.components),
-						reviewHistoryLine("Unlocked", interaction.user?.id)
-					]
-				})
-			],
-			allowedMentions: { parse: [] }
-		})
-	}
-}
-
 export const formReviewComponents = [
 	new FormReviewAcceptButton(),
 	new FormReviewDenyButton(),
-	new FormReviewLockButton(),
-	new FormReviewUnlockButton(),
 	new FormReviewCopyButton()
 ]
 

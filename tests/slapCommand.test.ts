@@ -18,6 +18,7 @@ import {
 	type ButtonInteraction,
 	type CommandInteraction,
 	InteractionContextType,
+	PermissionFlagsBits,
 	serializePayload
 } from "@buape/carbon"
 import AdminCommand from "../src/commands/admin.js"
@@ -173,7 +174,9 @@ describe("command registration changes", () => {
 	})
 
 	it("keeps only active admin and maintainer commands", () => {
-		expect(new AdminCommand().subcommands.map((command) => command.name)).toEqual([
+		const admin = new AdminCommand()
+		expect(admin.permission).toBe(PermissionFlagsBits.Administrator)
+		expect(admin.subcommands.map((command) => command.name)).toEqual([
 			"say",
 			"inactivity-warn",
 			"automod-bypass-toggle"

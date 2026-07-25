@@ -16,7 +16,7 @@
     },
     {
       "trigger": "<@387380367612706819>",
-      "message": "{user}, please don't ping Peter for issues, use <#1459642797895319552> or <#1459007081603403828> if you need help, use <#1458141495701012561> to discuss PRs, or use any of the many other channels in this server as they're intended.\n\n**If you have a problem with the Discord specifically, use <#1465158042675843142> or DM <@439223656200273932>**\n-# Your message was reposted above without the ping active for the sake of conversation.",
+      "message": "{user}, please don't ping Peter for issues, use <#1459642797895319552> or <#1459007081603403828> if you need help, use <#1458141495701012561> to discuss PRs, or use any of the many other channels in this server as they're intended.\n\n**If you have a problem with the Discord specifically, use <#1465158042675843142>.**\n-# Your message was reposted above without the ping active for the sake of conversation.",
       "redact": false
     },
     {

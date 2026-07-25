@@ -18,7 +18,6 @@ import { WhoisDeleteButton } from "../components/whoisDeleteButton.js"
 const maintainerRoleId = "1457214688806047756"
 const whoisGuildId = "1456350064065904867"
 const whoisChannelId = "1482394321100476426"
-const shadowUserId = "439223656200273932"
 
 const hasMaintainerRole = (interaction: CommandInteraction) =>
 	interaction.member?.roles.some((role) => role.id === maintainerRoleId) ?? false
@@ -101,7 +100,7 @@ export class MaintainerWhois extends BaseCommand {
 							new Separator({ divider: true, spacing: "small" }),
 							new Row([
 								new JumpToIntroductionButton(postUrl),
-								new WhoisDeleteButton(interaction.user?.id ?? interaction.userId ?? shadowUserId)
+								new WhoisDeleteButton(interaction.user?.id ?? interaction.userId)
 							])
 						])
 					],

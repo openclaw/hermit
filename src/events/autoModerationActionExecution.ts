@@ -6,7 +6,7 @@ import {
 	Routes,
 	serializePayload
 } from "@buape/carbon"
-import automodMessages from "../config/automod-messages.js"
+import automodMessages from "../config/automod-messages.json" with { type: "json" }
 import { getOrCreateChannelWebhook, sendWebhookMessage } from "../utils/channelWebhook.js"
 
 type AutomodRuleConfig = {

@@ -1,4 +1,4 @@
-import { and, eq, sql } from "drizzle-orm"
+import { eq, sql } from "drizzle-orm"
 import { getDb } from "../db.js"
 import { formSubmissions, type FormSubmission } from "../db/schema.js"
 
@@ -82,30 +82,6 @@ export const recordFormDecision = async (
 			updatedAt: now
 		})
 		.where(eq(formSubmissions.id, id))
-}
-
-export const recordFormLock = async (id: number) => {
-	const [submission] = await getDb()
-		.update(formSubmissions)
-		.set({
-			status: "locked",
-			updatedAt: now
-		})
-		.where(and(eq(formSubmissions.id, id), eq(formSubmissions.status, "submitted")))
-		.returning()
-	return submission ?? null
-}
-
-export const recordFormUnlock = async (id: number) => {
-	const [submission] = await getDb()
-		.update(formSubmissions)
-		.set({
-			status: "submitted",
-			updatedAt: now
-		})
-		.where(and(eq(formSubmissions.id, id), eq(formSubmissions.status, "locked")))
-		.returning()
-	return submission ?? null
 }
 
 export const parseSubmissionPayload = (submission: FormSubmission) => {

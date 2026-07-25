@@ -154,17 +154,17 @@ class ClaimReviewAcceptButton extends Button {
 		const currentButtonRow = currentContainerComponents.find(
 			(component) => component.type === ComponentType.ActionRow
 		)
-		const alreadyLocked =
+		const alreadyHandled =
 			currentButtonRow &&
 			"components" in currentButtonRow &&
 			currentButtonRow.components.every((component) => component.disabled)
-		if (alreadyLocked) {
+		if (alreadyHandled) {
 			await interaction.reply({
 				components: [
 					new Container(
 						[
 							new TextDisplay("### Claim already being handled"),
-							new TextDisplay("This claim request has already been accepted, rejected, or locked for review.")
+							new TextDisplay("This claim request is already being handled.")
 						],
 						{ accentColor: "#f1c40f" }
 					)
@@ -349,11 +349,11 @@ class ClaimReviewRejectButton extends Button {
 		const currentButtonRow = currentContainerComponents.find(
 			(component) => component.type === ComponentType.ActionRow
 		)
-		const alreadyLocked =
+		const alreadyHandled =
 			currentButtonRow &&
 			"components" in currentButtonRow &&
 			currentButtonRow.components.every((component) => component.disabled)
-		if (alreadyLocked) {
+		if (alreadyHandled) {
 			await interaction.reply({
 				components: [
 					new Container(
