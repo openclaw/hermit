@@ -5,10 +5,9 @@ import {
 	type Client,
 	type MessagePayloadObject
 } from "@buape/carbon"
-import { formSettings } from "../../forms.config.js"
 import { getRuntimeEnv } from "../runtime/env.js"
 
-type PublisherAbuseSignal = {
+type LegacySignal = {
 	signalId: string
 	signalType: string
 	severity: string
@@ -31,15 +30,15 @@ type PublisherAbuseSignal = {
 	publisherUrl: string | null
 }
 
-type PublisherAbuseDigest = {
+type LegacyDigest = {
 	kind: "publisher_abuse_signals_changed"
 	changedCount: number
 	hasMore: boolean
 	dashboardUrl: string
-	topSignals: PublisherAbuseSignal[]
+	topSignals: LegacySignal[]
 }
 
-type PublisherAbuseScanFailure = {
+type ScanFailure = {
 	kind: "publisher_abuse_signal_scan_failed"
 	runId: string
 	failureCount: number
@@ -48,25 +47,53 @@ type PublisherAbuseScanFailure = {
 	dashboardUrl: string
 }
 
-type PublisherAbuseNotification = PublisherAbuseDigest | PublisherAbuseScanFailure
+type SignalContext = {
+	signalId: string
+	signalType: string
+	scope: "skill" | "publisher"
+	publisher: string
+	skillSlug: string | null
+	skillDisplayName: string | null
+	dashboardUrl: string
+}
 
-type PublisherAbuseDiscordMessage = {
+type OwnerContactFailure = SignalContext & {
+	kind: "publisher_abuse_signal_owner_contact_failed"
+	failureReason: string
+	attemptCount: number
+	failedAt: number
+}
+
+type OwnerResponse = SignalContext & {
+	kind: "publisher_abuse_signal_owner_response_submitted"
+	responseKind: "expected" | "not_recognized" | "unsure"
+	responsePreview: string | null
+	submittedAt: number
+}
+
+type ActionableNotification = ScanFailure | OwnerContactFailure | OwnerResponse
+type Notification = LegacyDigest | ActionableNotification
+
+type DiscordMessage = {
 	components: Container[]
 	allowedMentions: NonNullable<MessagePayloadObject["allowedMentions"]>
 }
 
 type SendableChannel = {
-	send: (message: PublisherAbuseDiscordMessage) => Promise<unknown>
+	send: (message: DiscordMessage) => Promise<unknown>
 }
 
-type PublisherAbuseDigestApiDependencies = {
+type Dependencies = {
 	token: string
 	trustedOrigins?: string[]
+	channelId: string
+	roleId: string
 	fetchChannel: (channelId: string) => Promise<unknown>
 }
 
 const apiPath = "/api/clawhub-publisher-abuse/signals/digest"
 const defaultClawHubSiteUrl = "https://clawhub.ai"
+const maxOwnerResponsePreviewLength = 500
 
 const jsonResponse = (value: unknown, status = 200) =>
 	new Response(JSON.stringify(value), {
@@ -86,7 +113,9 @@ const requiredString = (value: unknown) =>
 	typeof value === "string" && value.trim() ? value.trim() : null
 
 const optionalString = (value: unknown) =>
-	typeof value === "string" && value.trim() ? value.trim() : null
+	value === undefined || value === null || value === ""
+		? null
+		: requiredString(value)
 
 const nonNegativeInteger = (value: unknown) =>
 	typeof value === "number" && Number.isInteger(value) && value >= 0 ? value : null
@@ -118,14 +147,19 @@ export const publisherAbuseDigestTrustedOrigins = (
 	env: Pick<Env, "CLAWHUB_SITE_URL">
 ) => [urlOrigin(env.CLAWHUB_SITE_URL?.trim() || defaultClawHubSiteUrl) ?? defaultClawHubSiteUrl]
 
+export const publisherAbuseSignalRouting = (
+	env: Partial<Pick<Env, "CLAWHUB_SIGNALS_REVIEW_CHANNEL_ID" | "CLAWHUB_SIGNALS_REVIEW_ROLE_ID">>
+) => ({
+	channelId: env.CLAWHUB_SIGNALS_REVIEW_CHANNEL_ID?.trim() ?? "",
+	roleId: env.CLAWHUB_SIGNALS_REVIEW_ROLE_ID?.trim() ?? ""
+})
+
 const trustedOriginSet = (origins: string[]) =>
 	new Set(origins.map((origin) => urlOrigin(origin.trim()) ?? origin.trim()).filter(Boolean))
 
 const validUrl = (value: unknown, trustedOrigins: ReadonlySet<string>) => {
 	const url = requiredString(value)
-	if (!url) {
-		return null
-	}
+	if (!url) return null
 	try {
 		const parsed = new URL(url)
 		return ["http:", "https:"].includes(parsed.protocol) && trustedOrigins.has(parsed.origin)
@@ -173,11 +207,9 @@ const hasInvalidOptionalRatio = (record: Record<string, unknown>) =>
 		nonNegativeNumber(record[field]) === null
 	)
 
-const parseSignal = (value: unknown, trustedOrigins: ReadonlySet<string>): PublisherAbuseSignal | null => {
+const parseLegacySignal = (value: unknown, trustedOrigins: ReadonlySet<string>): LegacySignal | null => {
 	const record = readRecord(value)
-	if (!record) {
-		return null
-	}
+	if (!record) return null
 
 	const signalId = requiredString(record.signalId)
 	const signalType = requiredString(record.signalType)
@@ -227,16 +259,14 @@ const parseSignal = (value: unknown, trustedOrigins: ReadonlySet<string>): Publi
 	}
 }
 
-const parseDigest = (value: unknown, trustedOrigins: ReadonlySet<string>): PublisherAbuseDigest | null => {
+const parseLegacyDigest = (value: unknown, trustedOrigins: ReadonlySet<string>): LegacyDigest | null => {
 	const record = readRecord(value)
-	if (!record || record.kind !== "publisher_abuse_signals_changed") {
-		return null
-	}
+	if (!record || record.kind !== "publisher_abuse_signals_changed") return null
 
 	const changedCount = nonNegativeInteger(record.changedCount)
 	const dashboardUrl = validUrl(record.dashboardUrl, trustedOrigins)
 	const topSignals = Array.isArray(record.topSignals)
-		? record.topSignals.map((signal) => parseSignal(signal, trustedOrigins))
+		? record.topSignals.map((signal) => parseLegacySignal(signal, trustedOrigins))
 		: []
 
 	if (
@@ -254,18 +284,42 @@ const parseDigest = (value: unknown, trustedOrigins: ReadonlySet<string>): Publi
 		changedCount,
 		hasMore: record.hasMore,
 		dashboardUrl,
-		topSignals: topSignals.filter((signal): signal is PublisherAbuseSignal => signal !== null)
+		topSignals: topSignals.filter((signal): signal is LegacySignal => signal !== null)
 	}
+}
+
+const parseSignalContext = (
+	record: Record<string, unknown>,
+	trustedOrigins: ReadonlySet<string>
+): SignalContext | null => {
+	const signalId = requiredString(record.signalId)
+	const signalType = requiredString(record.signalType)
+	const scope = record.scope === "skill" || record.scope === "publisher" ? record.scope : null
+	const publisher = requiredString(record.publisher)
+	const skillSlug = optionalString(record.skillSlug)
+	const skillDisplayName = optionalString(record.skillDisplayName)
+	const dashboardUrl = validUrl(record.dashboardUrl, trustedOrigins)
+	if (
+		!signalId ||
+		!signalType ||
+		!scope ||
+		!publisher ||
+		!dashboardUrl ||
+		(record.skillSlug !== undefined && record.skillSlug !== null && skillSlug === null) ||
+		(record.skillDisplayName !== undefined && record.skillDisplayName !== null && skillDisplayName === null) ||
+		(scope === "skill" && (!skillSlug || !skillDisplayName))
+	) {
+		return null
+	}
+	return { signalId, signalType, scope, publisher, skillSlug, skillDisplayName, dashboardUrl }
 }
 
 const parseScanFailure = (
 	value: unknown,
 	trustedOrigins: ReadonlySet<string>
-): PublisherAbuseScanFailure | null => {
+): ScanFailure | null => {
 	const record = readRecord(value)
-	if (!record || record.kind !== "publisher_abuse_signal_scan_failed") {
-		return null
-	}
+	if (!record || record.kind !== "publisher_abuse_signal_scan_failed") return null
 
 	const runId = requiredString(record.runId)
 	const failureCount = nonNegativeInteger(record.failureCount)
@@ -275,42 +329,94 @@ const parseScanFailure = (
 	if (!runId || failureCount === null || failureCount === 0 || !errorMessage || failedAt === null || !dashboardUrl) {
 		return null
 	}
+	return { kind: "publisher_abuse_signal_scan_failed", runId, failureCount, errorMessage, failedAt, dashboardUrl }
+}
 
+const parseOwnerContactFailure = (
+	value: unknown,
+	trustedOrigins: ReadonlySet<string>
+): OwnerContactFailure | null => {
+	const record = readRecord(value)
+	if (!record || record.kind !== "publisher_abuse_signal_owner_contact_failed") return null
+	const context = parseSignalContext(record, trustedOrigins)
+	const failureReason = requiredString(record.failureReason)
+	const attemptCount = nonNegativeInteger(record.attemptCount)
+	const failedAt = nonNegativeInteger(record.failedAt)
+	if (!context || !failureReason || attemptCount === null || attemptCount === 0 || failedAt === null) {
+		return null
+	}
 	return {
-		kind: "publisher_abuse_signal_scan_failed",
-		runId,
-		failureCount,
-		errorMessage,
-		failedAt,
-		dashboardUrl
+		...context,
+		kind: "publisher_abuse_signal_owner_contact_failed",
+		failureReason,
+		attemptCount,
+		failedAt
+	}
+}
+
+const parseOwnerResponse = (
+	value: unknown,
+	trustedOrigins: ReadonlySet<string>
+): OwnerResponse | null => {
+	const record = readRecord(value)
+	if (!record || record.kind !== "publisher_abuse_signal_owner_response_submitted") return null
+	const context = parseSignalContext(record, trustedOrigins)
+	const responseKind = ["expected", "not_recognized", "unsure"].includes(String(record.responseKind))
+		? record.responseKind as OwnerResponse["responseKind"]
+		: null
+	const responsePreview = optionalString(record.responsePreview)
+	const submittedAt = nonNegativeInteger(record.submittedAt)
+	if (
+		!context ||
+		!responseKind ||
+		submittedAt === null ||
+		(record.responsePreview !== undefined && record.responsePreview !== null && responsePreview === null)
+	) {
+		return null
+	}
+	return {
+		...context,
+		kind: "publisher_abuse_signal_owner_response_submitted",
+		responseKind,
+		responsePreview,
+		submittedAt
 	}
 }
 
 const parseNotification = (
 	value: unknown,
 	trustedOrigins: ReadonlySet<string>
-): PublisherAbuseNotification | null =>
-	parseDigest(value, trustedOrigins) ?? parseScanFailure(value, trustedOrigins)
+): Notification | null => {
+	const record = readRecord(value)
+	if (!record) return null
+	switch (record.kind) {
+		case "publisher_abuse_signals_changed":
+			return parseLegacyDigest(value, trustedOrigins)
+		case "publisher_abuse_signal_scan_failed":
+			return parseScanFailure(value, trustedOrigins)
+		case "publisher_abuse_signal_owner_contact_failed":
+			return parseOwnerContactFailure(value, trustedOrigins)
+		case "publisher_abuse_signal_owner_response_submitted":
+			return parseOwnerResponse(value, trustedOrigins)
+		default:
+			return null
+	}
+}
 
 const isSendableChannel = (channel: unknown): channel is SendableChannel => {
 	const record = readRecord(channel)
 	return typeof record?.send === "function"
 }
 
-const plural = (count: number, singular: string, pluralValue = `${singular}s`) =>
-	count === 1 ? singular : pluralValue
-
-const reviewVerb = (count: number) => count === 1 ? "needs" : "need"
-
-const titleCaseSignalType = (signalType: string) =>
-	signalType
-		.split(/[_\s-]+/)
-		.filter(Boolean)
-		.map((part) => `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
-		.join(" ")
-
 const oneLineText = (value: string) =>
 	value.replace(/[\u0000-\u001f\u007f]+/g, " ").replace(/\s+/g, " ").trim()
+
+const boundedPreview = (value: string) => {
+	const characters = [...oneLineText(value)]
+	return characters.length <= maxOwnerResponsePreviewLength
+		? characters.join("")
+		: `${characters.slice(0, maxOwnerResponsePreviewLength - 1).join("")}…`
+}
 
 const markdownText = (value: string) =>
 	oneLineText(value).replace(/([\\`*_~|>\[\]()#])/g, "\\$1")
@@ -320,84 +426,85 @@ const markdownUrl = (value: string) => {
 	return `<${safeUrl}>`
 }
 
-const metricLine = (signal: PublisherAbuseSignal) => {
-	if (
-		signal.recent7Downloads === null ||
-		signal.recent7Installs === null ||
-		signal.recent7InstallDownloadRatio === null
-	) {
-		return null
-	}
+const signalContextText = (notification: SignalContext) =>
+	notification.scope === "publisher"
+		? `**Publisher:** @${markdownText(notification.publisher)}`
+		: `**Skill:** ${markdownText(notification.skillDisplayName ?? notification.skillSlug ?? "Unknown skill")} · @${markdownText(notification.publisher)}/${markdownText(notification.skillSlug ?? "unknown")}`
 
-	return `7d: ${signal.recent7Installs.toLocaleString()} installs / ${signal.recent7Downloads.toLocaleString()} downloads (${(signal.recent7InstallDownloadRatio * 100).toFixed(1)}%)`
+const responseKindText = (kind: OwnerResponse["responseKind"]) => {
+	if (kind === "expected") return "Expected traffic"
+	if (kind === "not_recognized") return "Unrecognized traffic"
+	return "Unsure"
 }
 
-const signalLinks = (signal: PublisherAbuseSignal) => [
-	signal.skillUrl ? `[Skill](${markdownUrl(signal.skillUrl)})` : null,
-	signal.publisherUrl ? `[Publisher](${markdownUrl(signal.publisherUrl)})` : null
-].filter((link): link is string => Boolean(link))
+export const buildPublisherAbuseActionableContainer = (
+	notification: ActionableNotification,
+	roleId: string
+) => {
+	if (notification.kind === "publisher_abuse_signal_scan_failed") {
+		return new Container(
+			[
+				new TextDisplay(`<@&${roleId}>`),
+				new TextDisplay("### ClawHub signal scan stopped"),
+				new TextDisplay(
+					`Stopped after ${notification.failureCount.toLocaleString()} failed attempts.\n[Open ClawHub abuse signals](${markdownUrl(notification.dashboardUrl)})`
+				),
+				new Separator({ divider: true, spacing: "small" }),
+				new TextDisplay(`**Run:** ${markdownText(notification.runId)}\n**Error:** ${markdownText(notification.errorMessage)}`)
+			],
+			{ accentColor: "#ef4444" }
+		)
+	}
 
-const signalText = (signal: PublisherAbuseSignal) => {
-	const title = markdownText(signal.skillDisplayName ?? signal.skillSlug)
-	const links = signalLinks(signal)
-	return [
-		`**${markdownText(titleCaseSignalType(signal.signalType))}** · ${markdownText(signal.severity.toUpperCase())}`,
-		`${title} · ${markdownText(signal.publisher)}/${markdownText(signal.skillSlug)}`,
-		`Seen ${signal.seenCount}x`,
-		metricLine(signal),
-		links.length ? links.join(" · ") : null
-	].filter((line): line is string => Boolean(line)).join("\n")
+	if (notification.kind === "publisher_abuse_signal_owner_contact_failed") {
+		return new Container(
+			[
+				new TextDisplay(`<@&${roleId}>`),
+				new TextDisplay("### ClawHub owner contact failed"),
+				new TextDisplay(
+					`${signalContextText(notification)}\n**Attempts:** ${notification.attemptCount.toLocaleString()}\n**Failure:** ${markdownText(notification.failureReason)}`
+				),
+				new Separator({ divider: true, spacing: "small" }),
+				new TextDisplay(`[Open Signal](${markdownUrl(notification.dashboardUrl)})`)
+			],
+			{ accentColor: "#ef4444" }
+		)
+	}
+
+	return new Container(
+		[
+			new TextDisplay(`<@&${roleId}>`),
+			new TextDisplay("### ClawHub owner explanation received"),
+			new TextDisplay(
+				`${signalContextText(notification)}\n**Response:** ${responseKindText(notification.responseKind)}`
+			),
+			...(notification.responsePreview
+				? [
+					new Separator({ divider: true, spacing: "small" }),
+					new TextDisplay(`**Owner note:** ${markdownText(boundedPreview(notification.responsePreview))}`)
+				]
+				: []),
+			new Separator({ divider: true, spacing: "small" }),
+			new TextDisplay(`[Open Signal](${markdownUrl(notification.dashboardUrl)})`)
+		],
+		{ accentColor: "#3b82f6" }
+	)
 }
 
 export const publisherAbuseDigestApiToken = (
 	env: Partial<Pick<Env, "CLAWHUB_BAN_APPEALS_TOKEN" | "CLAWHUB_HERMIT_TOKEN">>
 ) => env.CLAWHUB_HERMIT_TOKEN?.trim() || env.CLAWHUB_BAN_APPEALS_TOKEN?.trim() || ""
 
-export const buildPublisherAbuseDigestContainer = (digest: PublisherAbuseDigest) =>
-	new Container(
-		[
-			new TextDisplay(`<@&${formSettings.clawhubAppealReviewRoleId}>`),
-			new TextDisplay("### ClawHub publisher abuse signals changed"),
-			new TextDisplay(
-				`${digest.changedCount.toLocaleString()} changed ${plural(digest.changedCount, "signal")} ${reviewVerb(digest.changedCount)} review.\n[Open ClawHub abuse signals](${markdownUrl(digest.dashboardUrl)})`
-			),
-			new Separator({ divider: true, spacing: "small" }),
-			...digest.topSignals.slice(0, 5).map((signal) => new TextDisplay(signalText(signal))),
-			...(digest.hasMore || digest.topSignals.length > 5
-				? [new TextDisplay("More signals are available in ClawHub.")]
-				: [])
-		],
-		{ accentColor: "#f2c94c" }
-	)
-
-export const buildPublisherAbuseScanFailureContainer = (failure: PublisherAbuseScanFailure) =>
-	new Container(
-		[
-			new TextDisplay(`<@&${formSettings.clawhubAppealReviewRoleId}>`),
-			new TextDisplay("### ClawHub signal scan stopped"),
-			new TextDisplay(
-				`Stopped after ${failure.failureCount.toLocaleString()} failed attempts.\n[Open ClawHub abuse signals](${markdownUrl(failure.dashboardUrl)})`
-			),
-			new Separator({ divider: true, spacing: "small" }),
-			new TextDisplay(`**Run:** ${markdownText(failure.runId)}\n**Error:** ${markdownText(failure.errorMessage)}`)
-		],
-		{ accentColor: "#ef4444" }
-	)
-
 export const handlePublisherAbuseDigestApi = async (
 	request: Request,
-	dependencies: PublisherAbuseDigestApiDependencies
+	dependencies: Dependencies
 ): Promise<Response | null> => {
 	const url = new URL(request.url)
-	if (url.pathname !== apiPath) {
-		return null
-	}
+	if (url.pathname !== apiPath) return null
 	if (!dependencies.token || bearerToken(request) !== dependencies.token) {
 		return jsonResponse({ error: "Unauthorized" }, 401)
 	}
-	if (request.method !== "POST") {
-		return jsonResponse({ error: "Method not allowed" }, 405)
-	}
+	if (request.method !== "POST") return jsonResponse({ error: "Method not allowed" }, 405)
 
 	let body: unknown
 	try {
@@ -412,34 +519,32 @@ export const handlePublisherAbuseDigestApi = async (
 		return jsonResponse({ error: "Invalid publisher abuse notification payload" }, 400)
 	}
 
-	const channel = await dependencies.fetchChannel(formSettings.clawhubAppealReviewChannelId)
+	if (notification.kind === "publisher_abuse_signals_changed") {
+		return jsonResponse({
+			ok: true,
+			delivered: false,
+			deprecated: true,
+			kind: notification.kind
+		})
+	}
+
+	if (!dependencies.channelId || !dependencies.roleId) {
+		return jsonResponse({ error: "Publisher abuse signal routing is not configured" }, 503)
+	}
+	const channel = await dependencies.fetchChannel(dependencies.channelId)
 	if (!isSendableChannel(channel)) {
-		throw new Error(`Review channel ${formSettings.clawhubAppealReviewChannelId} is not sendable.`)
+		throw new Error(`Review channel ${dependencies.channelId} is not sendable.`)
 	}
 
 	await channel.send({
-		components: [
-			notification.kind === "publisher_abuse_signals_changed"
-				? buildPublisherAbuseDigestContainer(notification)
-				: buildPublisherAbuseScanFailureContainer(notification)
-		],
+		components: [buildPublisherAbuseActionableContainer(notification, dependencies.roleId)],
 		allowedMentions: {
-			roles: [formSettings.clawhubAppealReviewRoleId],
+			roles: [dependencies.roleId],
 			users: []
 		}
 	})
 
-	return notification.kind === "publisher_abuse_signals_changed"
-		? jsonResponse({
-			ok: true,
-			delivered: true,
-			changedCount: notification.changedCount
-		})
-		: jsonResponse({
-			ok: true,
-			delivered: true,
-			kind: notification.kind
-		})
+	return jsonResponse({ ok: true, delivered: true, kind: notification.kind })
 }
 
 export const handlePublisherAbuseDigestApiRequest = (
@@ -447,9 +552,11 @@ export const handlePublisherAbuseDigestApiRequest = (
 	client: Client
 ): Promise<Response | null> => {
 	const env = getRuntimeEnv()
+	const routing = publisherAbuseSignalRouting(env)
 	return handlePublisherAbuseDigestApi(request, {
 		token: publisherAbuseDigestApiToken(env),
 		trustedOrigins: publisherAbuseDigestTrustedOrigins(env),
+		...routing,
 		fetchChannel: (channelId) => client.fetchChannel(channelId)
 	})
 }

@@ -7,6 +7,8 @@ declare global {
 		BASE_URL: string
 		CLAWHUB_BAN_APPEALS_TOKEN: string
 		CLAWHUB_HERMIT_TOKEN?: string
+		CLAWHUB_SIGNALS_REVIEW_CHANNEL_ID?: string
+		CLAWHUB_SIGNALS_REVIEW_ROLE_ID?: string
 		CLAWHUB_SITE_URL?: string
 		DEPLOY_SECRET: string
 		DISCORD_BOT_TOKEN: string
