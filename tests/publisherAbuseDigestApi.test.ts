@@ -4,8 +4,7 @@ import {
 	handlePublisherAbuseDigestApi,
 	handlePublisherAbuseDigestApiRequest,
 	publisherAbuseDigestApiToken,
-	publisherAbuseDigestTrustedOrigins,
-	publisherAbuseSignalRouting
+	publisherAbuseDigestTrustedOrigins
 } from "../src/clawhubPublisherAbuse/api.js"
 import { setRuntimeEnv } from "../src/runtime/env.js"
 
@@ -111,6 +110,7 @@ const dependencies = (options: { trustedOrigins?: string[]; configured?: boolean
 			token: "secret",
 			channelId: options.configured === false ? "" : channelId,
 			roleId: options.configured === false ? "" : roleId,
+			deliverLegacyDigest: true,
 			...(options.trustedOrigins ? { trustedOrigins: options.trustedOrigins } : {}),
 			fetchChannel: async (requestedChannelId: string) => {
 				fetchedChannels.push(requestedChannelId)
@@ -131,7 +131,7 @@ const sentText = (send: unknown) => {
 }
 
 describe("ClawHub publisher abuse event API", () => {
-	it("reads the dedicated token, trusted origin, and dedicated routing configuration", () => {
+	it("reads the dedicated token and trusted origin configuration", () => {
 		expect(publisherAbuseDigestApiToken({
 			CLAWHUB_HERMIT_TOKEN: " dedicated-token ",
 			CLAWHUB_BAN_APPEALS_TOKEN: "legacy-token"
@@ -139,14 +139,25 @@ describe("ClawHub publisher abuse event API", () => {
 		expect(publisherAbuseDigestTrustedOrigins({
 			CLAWHUB_SITE_URL: " https://clawhub.example.test/management "
 		})).toEqual(["https://clawhub.example.test"])
-		expect(publisherAbuseSignalRouting({
-			CLAWHUB_SIGNALS_REVIEW_CHANNEL_ID: " channel ",
-			CLAWHUB_SIGNALS_REVIEW_ROLE_ID: " role "
-		})).toEqual({ channelId: "channel", roleId: "role" })
 	})
 
-	it("acknowledges the legacy changed-signals request without touching Discord", async () => {
+	it("keeps legacy changed-signals delivery active during the cutover", async () => {
 		const deps = dependencies()
+		const response = await handlePublisherAbuseDigestApi(requestFor(legacyPayload), deps.value)
+
+		expect(response?.status).toBe(200)
+		expect(await response?.json()).toEqual({
+			ok: true,
+			delivered: true,
+			changedCount: 1
+		})
+		expect(deps.fetchedChannels).toEqual([channelId])
+		expect(sentText(deps.sends[0])).toContain("ClawHub publisher abuse signals changed")
+	})
+
+	it("can disable legacy digest delivery only through the coordinated config cutover", async () => {
+		const deps = dependencies()
+		deps.value.deliverLegacyDigest = false
 		const response = await handlePublisherAbuseDigestApi(requestFor(legacyPayload), deps.value)
 
 		expect(response?.status).toBe(200)
@@ -250,9 +261,7 @@ describe("ClawHub publisher abuse event API", () => {
 	it("passes runtime configuration into the production request wrapper", async () => {
 		setRuntimeEnv({
 			CLAWHUB_HERMIT_TOKEN: " dedicated-token ",
-			CLAWHUB_SITE_URL: "https://clawhub.example.test",
-			CLAWHUB_SIGNALS_REVIEW_CHANNEL_ID: "runtime-channel",
-			CLAWHUB_SIGNALS_REVIEW_ROLE_ID: "runtime-role"
+			CLAWHUB_SITE_URL: "https://clawhub.example.test"
 		} as Env)
 		const sends: unknown[] = []
 		const fetchedChannels: string[] = []
@@ -271,8 +280,8 @@ describe("ClawHub publisher abuse event API", () => {
 		)
 
 		expect(response?.status).toBe(200)
-		expect(fetchedChannels).toEqual(["runtime-channel"])
-		expect(sentText(sends[0])).toContain("<@&runtime-role>")
+		expect(fetchedChannels).toEqual(["1498032057337647295"])
+		expect(sentText(sends[0])).toContain("<@&1509967254870298794>")
 	})
 
 	it("requires bearer authentication and POST before reading a payload", async () => {

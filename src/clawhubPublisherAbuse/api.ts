@@ -5,6 +5,7 @@ import {
 	type Client,
 	type MessagePayloadObject
 } from "@buape/carbon"
+import { formSettings } from "../../forms.config.js"
 import { getRuntimeEnv } from "../runtime/env.js"
 
 type LegacySignal = {
@@ -88,6 +89,7 @@ type Dependencies = {
 	trustedOrigins?: string[]
 	channelId: string
 	roleId: string
+	deliverLegacyDigest: boolean
 	fetchChannel: (channelId: string) => Promise<unknown>
 }
 
@@ -146,13 +148,6 @@ const urlOrigin = (value: string) => {
 export const publisherAbuseDigestTrustedOrigins = (
 	env: Pick<Env, "CLAWHUB_SITE_URL">
 ) => [urlOrigin(env.CLAWHUB_SITE_URL?.trim() || defaultClawHubSiteUrl) ?? defaultClawHubSiteUrl]
-
-export const publisherAbuseSignalRouting = (
-	env: Partial<Pick<Env, "CLAWHUB_SIGNALS_REVIEW_CHANNEL_ID" | "CLAWHUB_SIGNALS_REVIEW_ROLE_ID">>
-) => ({
-	channelId: env.CLAWHUB_SIGNALS_REVIEW_CHANNEL_ID?.trim() ?? "",
-	roleId: env.CLAWHUB_SIGNALS_REVIEW_ROLE_ID?.trim() ?? ""
-})
 
 const trustedOriginSet = (origins: string[]) =>
 	new Set(origins.map((origin) => urlOrigin(origin.trim()) ?? origin.trim()).filter(Boolean))
@@ -426,6 +421,58 @@ const markdownUrl = (value: string) => {
 	return `<${safeUrl}>`
 }
 
+const plural = (count: number, singular: string, pluralValue = `${singular}s`) =>
+	count === 1 ? singular : pluralValue
+
+const reviewVerb = (count: number) => count === 1 ? "needs" : "need"
+
+const titleCaseSignalType = (signalType: string) =>
+	signalType
+		.split(/[_\s-]+/)
+		.filter(Boolean)
+		.map((part) => `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
+		.join(" ")
+
+const metricLine = (signal: LegacySignal) => {
+	if (
+		signal.recent7Downloads === null ||
+		signal.recent7Installs === null ||
+		signal.recent7InstallDownloadRatio === null
+	) return null
+	return `7d: ${signal.recent7Installs.toLocaleString()} installs / ${signal.recent7Downloads.toLocaleString()} downloads (${(signal.recent7InstallDownloadRatio * 100).toFixed(1)}%)`
+}
+
+const signalText = (signal: LegacySignal) => {
+	const links = [
+		signal.skillUrl ? `[Skill](${markdownUrl(signal.skillUrl)})` : null,
+		signal.publisherUrl ? `[Publisher](${markdownUrl(signal.publisherUrl)})` : null
+	].filter((link): link is string => Boolean(link))
+	return [
+		`**${markdownText(titleCaseSignalType(signal.signalType))}** · ${markdownText(signal.severity.toUpperCase())}`,
+		`${markdownText(signal.skillDisplayName ?? signal.skillSlug)} · ${markdownText(signal.publisher)}/${markdownText(signal.skillSlug)}`,
+		`Seen ${signal.seenCount}x`,
+		metricLine(signal),
+		links.length ? links.join(" · ") : null
+	].filter((line): line is string => Boolean(line)).join("\n")
+}
+
+export const buildPublisherAbuseDigestContainer = (digest: LegacyDigest, roleId: string) =>
+	new Container(
+		[
+			new TextDisplay(`<@&${roleId}>`),
+			new TextDisplay("### ClawHub publisher abuse signals changed"),
+			new TextDisplay(
+				`${digest.changedCount.toLocaleString()} changed ${plural(digest.changedCount, "signal")} ${reviewVerb(digest.changedCount)} review.\n[Open ClawHub abuse signals](${markdownUrl(digest.dashboardUrl)})`
+			),
+			new Separator({ divider: true, spacing: "small" }),
+			...digest.topSignals.slice(0, 5).map((signal) => new TextDisplay(signalText(signal))),
+			...(digest.hasMore || digest.topSignals.length > 5
+				? [new TextDisplay("More signals are available in ClawHub.")]
+				: [])
+		],
+		{ accentColor: "#f2c94c" }
+	)
+
 const signalContextText = (notification: SignalContext) =>
 	notification.scope === "publisher"
 		? `**Publisher:** @${markdownText(notification.publisher)}`
@@ -520,12 +567,9 @@ export const handlePublisherAbuseDigestApi = async (
 	}
 
 	if (notification.kind === "publisher_abuse_signals_changed") {
-		return jsonResponse({
-			ok: true,
-			delivered: false,
-			deprecated: true,
-			kind: notification.kind
-		})
+		if (!dependencies.deliverLegacyDigest) {
+			return jsonResponse({ ok: true, delivered: false, deprecated: true, kind: notification.kind })
+		}
 	}
 
 	if (!dependencies.channelId || !dependencies.roleId) {
@@ -537,14 +581,20 @@ export const handlePublisherAbuseDigestApi = async (
 	}
 
 	await channel.send({
-		components: [buildPublisherAbuseActionableContainer(notification, dependencies.roleId)],
+		components: [
+			notification.kind === "publisher_abuse_signals_changed"
+				? buildPublisherAbuseDigestContainer(notification, dependencies.roleId)
+				: buildPublisherAbuseActionableContainer(notification, dependencies.roleId)
+		],
 		allowedMentions: {
 			roles: [dependencies.roleId],
 			users: []
 		}
 	})
 
-	return jsonResponse({ ok: true, delivered: true, kind: notification.kind })
+	return notification.kind === "publisher_abuse_signals_changed"
+		? jsonResponse({ ok: true, delivered: true, changedCount: notification.changedCount })
+		: jsonResponse({ ok: true, delivered: true, kind: notification.kind })
 }
 
 export const handlePublisherAbuseDigestApiRequest = (
@@ -552,11 +602,12 @@ export const handlePublisherAbuseDigestApiRequest = (
 	client: Client
 ): Promise<Response | null> => {
 	const env = getRuntimeEnv()
-	const routing = publisherAbuseSignalRouting(env)
 	return handlePublisherAbuseDigestApi(request, {
 		token: publisherAbuseDigestApiToken(env),
 		trustedOrigins: publisherAbuseDigestTrustedOrigins(env),
-		...routing,
+		channelId: formSettings.clawhubAppealReviewChannelId,
+		roleId: formSettings.clawhubAppealReviewRoleId,
+		deliverLegacyDigest: formSettings.clawhubLegacySignalDigestsEnabled,
 		fetchChannel: (channelId) => client.fetchChannel(channelId)
 	})
 }

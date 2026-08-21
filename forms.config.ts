@@ -5,6 +5,7 @@ export const formSettings = {
 	reviewRoleId: "1477360613125787678",
 	clawhubAppealReviewChannelId: "1498032057337647295",
 	clawhubAppealReviewRoleId: "1509967254870298794",
+	clawhubLegacySignalDigestsEnabled: true,
 	moderatorReportReviewChannelId: "1457498550651851005",
 	moderatorReportReviewRoleId: "1477360613125787678",
 	discordGuildId: "1456350064065904867",
