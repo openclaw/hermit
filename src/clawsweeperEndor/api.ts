@@ -209,12 +209,11 @@ export const parseEndorRemediationNotification = (
 	}
 }
 
+const oneLineText = (value: string) =>
+	value.replace(/[\u0000-\u001f\u007f]+/g, " ").replace(/\s+/g, " ").trim()
+
 const markdownText = (value: string) =>
-	value
-		.replaceAll("\\", "\\\\")
-		.replace(/([`*_{}\[\]()<>#+\-.!|])/g, "\\$1")
-		.replace(/\s+/g, " ")
-		.trim()
+	oneLineText(value).replace(/([\\`*_~{}\[\]()<>#+\-.!|])/g, "\\$1")
 
 const markdownUrl = (value: string) => `<${value.replaceAll(">", "%3E")}>`
 

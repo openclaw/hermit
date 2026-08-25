@@ -229,7 +229,7 @@ describe("ClawSweeper Endor notification API", () => {
 		const parsed = parseEndorRemediationNotification({
 			...validNotification,
 			title: "Safe [click](https://evil.example) @everyone",
-			findingSummary: "No finding\n[trap](https://evil.example)"
+			findingSummary: "No finding\\path\n[trap](https://evil.example)"
 		})
 		expect(parsed).not.toBeNull()
 		if (!parsed) {
@@ -237,6 +237,7 @@ describe("ClawSweeper Endor notification API", () => {
 		}
 		const text = collectText(buildEndorRemediationContainer(parsed)).join("\n")
 		expect(text).toContain("\\[click\\]\\(https://evil\\.example\\)")
+		expect(text).toContain("No finding\\\\path")
 		expect(text).toContain("\\[trap\\]\\(https://evil\\.example\\)")
 		expect(text).not.toContain("[click](https://evil.example)")
 	})
