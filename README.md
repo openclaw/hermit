@@ -27,6 +27,8 @@ DEPLOY_SECRET=
 DISCORD_CLIENT_ID=
 DISCORD_PUBLIC_KEY=
 DISCORD_BOT_TOKEN=
+CLAWSWEEPER_ENDOR_DISCORD_CHANNEL_ID=
+CLAWSWEEPER_HERMIT_TOKEN=
 ```
 
 Optional:
@@ -126,3 +128,7 @@ bunx wrangler secret put FORWARDER_PUBLIC_KEY
 - Answer Overflow base URL is hardcoded to `https://www.answeroverflow.com`.
 - Helper thread monitor runs via Worker cron (`wrangler.jsonc` `triggers.crons`).
 - The old Cloudflare Gateway Durable Object path is not the active gateway setup.
+- `POST /api/clawsweeper/endor-remediation/reviewed` accepts authenticated,
+  structured Endor review results from ClawSweeper and posts them only to
+  `CLAWSWEEPER_ENDOR_DISCORD_CHANNEL_ID`. The shared bearer secret is
+  `CLAWSWEEPER_HERMIT_TOKEN`.

@@ -19,6 +19,26 @@ export const keyValue = sqliteTable("keyValue", {
 		.$onUpdateFn(() => new Date())
 })
 
+export const endorNotificationDeliveries = sqliteTable(
+	"endor_notification_deliveries",
+	{
+		idempotencyKey: text("idempotency_key").primaryKey(),
+		payloadDigest: text("payload_digest").notNull(),
+		nonce: text().notNull(),
+		status: text().notNull().default("pending"),
+		channelId: text("channel_id").notNull(),
+		messageId: text("message_id"),
+		createdAt: text("created_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`),
+		updatedAt: text("updated_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`),
+		deliveredAt: text("delivered_at")
+	},
+	(table) => [index("idx_endor_notification_deliveries_status").on(table.status)]
+)
+
 export const helperEvents = sqliteTable(
 	"helper_events",
 	{
@@ -447,6 +467,8 @@ export const lobsterEncounters = sqliteTable(
 
 export type KeyValue = typeof keyValue.$inferSelect
 export type NewKeyValue = typeof keyValue.$inferInsert
+export type EndorNotificationDelivery = typeof endorNotificationDeliveries.$inferSelect
+export type NewEndorNotificationDelivery = typeof endorNotificationDeliveries.$inferInsert
 export type HelperEvent = typeof helperEvents.$inferSelect
 export type NewHelperEvent = typeof helperEvents.$inferInsert
 export type TrackedThread = typeof trackedThreads.$inferSelect

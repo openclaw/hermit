@@ -47,6 +47,7 @@ import { runNominationCardSyncRecovery } from "./services/nominationCardSync.js"
 import { runThreadLengthMonitor } from "./services/threadLengthMonitor.js"
 import { handleContentRightsApiRequest } from "./clawhubContentRights/api.js"
 import { handlePublisherAbuseDigestApiRequest } from "./clawhubPublisherAbuse/api.js"
+import { handleClawSweeperEndorApiRequest } from "./clawsweeperEndor/api.js"
 import { handleLobsterDossierRequest } from "./lobsterDossiers/server.js"
 
 export const client = new Client(
@@ -152,6 +153,10 @@ export default {
 		if (publisherAbuseDigestResponse) {
 			return publisherAbuseDigestResponse
 		}
+		const clawsweeperEndorResponse = await handleClawSweeperEndorApiRequest(request, client)
+		if (clawsweeperEndorResponse) {
+			return clawsweeperEndorResponse
+		}
 		const formsResponse = await handleFormsRequest(request, client)
 		if (formsResponse) {
 			return formsResponse
@@ -205,6 +210,8 @@ declare global {
 			CLAWHUB_NOREPLY_FROM?: string;
 			CLAWHUB_HERMIT_TOKEN?: string;
 			CLAWHUB_SITE_URL?: string;
+			CLAWSWEEPER_ENDOR_DISCORD_CHANNEL_ID?: string;
+			CLAWSWEEPER_HERMIT_TOKEN?: string;
 		}
 	}
 }
