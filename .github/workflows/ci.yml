@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    name: Build and test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      WRANGLER_SEND_METRICS: "false"
+    steps:
+      - name: Check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: "1.4.0"
+
+      - name: Install artwork test tools
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: "1"
+        run: |
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          brew install imagemagick webp
+          echo "$(brew --prefix)/bin" >> "$GITHUB_PATH"
+
+      - name: Install Worker dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Install forwarder dependencies
+        working-directory: forwarder
+        run: bun install --frozen-lockfile
+
+      - name: Typecheck Worker
+        run: bun run typecheck
+
+      - name: Typecheck forwarder
+        working-directory: forwarder
+        run: bun run typecheck
+
+      - name: Build Worker without deploying
+        run: bun run deploy:dry-run
+
+      - name: Run full test suite
+        run: bun run test

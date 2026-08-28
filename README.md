@@ -73,6 +73,8 @@ bun run dev
 
 ## CI/CD
 
+GitHub Actions runs frozen installs and typechecks for both Bun packages, a Worker dry-run build, and the full test suite on pull requests and pushes to `main`. These checks share one Ubuntu job with a 20-minute timeout; CI installs ImageMagick 7 and the WebP tools needed by the artwork tests. The workflow does not deploy or require deployment secrets.
+
 Cloudflare Workers Builds deploys pushes to `main`. The deploy command should apply D1 migrations before deploying the Worker:
 
 ```bash
