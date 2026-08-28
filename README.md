@@ -67,6 +67,7 @@ bun run dev
 - `bun run deploy:dry-run` → validate the Worker bundle without deploying
 - `bun run cf-typegen` → regenerate `worker-configuration.d.ts`
 - `bun run typecheck` → TypeScript check
+- `bun run test` → generate Forms styles, then run the test suite (requires ImageMagick and the WebP CLI tools)
 - `bun run db:generate` → generate Drizzle SQL
 - `bun run db:apply:local` / `db:apply:remote` → apply D1 migrations
 

@@ -12,7 +12,7 @@
 		"deploy:dry-run": "bun run forms:css && wrangler deploy --dry-run",
 		"cf-typegen": "wrangler types",
 		"postinstall": "wrangler types",
-		"test": "bun test",
+		"test": "bun run forms:css && bun test",
 		"typecheck": "bun run forms:css && tsc --noEmit",
 		"db:generate": "drizzle-kit generate",
 		"db:apply:local": "wrangler d1 migrations apply DB --local",

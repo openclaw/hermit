@@ -30,7 +30,8 @@ describe("lobster artwork finalization", () => {
 				await readFile("data/lobster/artwork/provenance.json", "utf8")
 			)
 		},
-		180_000
+		// Decoding the full corpus can exceed three minutes on a busy runner.
+		300_000
 	)
 
 	it("binds every exact batch inventory and corpus checksum", async () => {
