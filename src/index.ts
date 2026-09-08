@@ -46,6 +46,7 @@ import {
 import { runNominationCardSyncRecovery } from "./services/nominationCardSync.js"
 import { runThreadLengthMonitor } from "./services/threadLengthMonitor.js"
 import { handleContentRightsApiRequest } from "./clawhubContentRights/api.js"
+import { handleSearchIntelligenceApiRequest } from "./clawhubSearchIntelligence/api.js"
 import { handlePublisherAbuseDigestApiRequest } from "./clawhubPublisherAbuse/api.js"
 import { handleLobsterDossierRequest } from "./lobsterDossiers/server.js"
 
@@ -152,6 +153,8 @@ export default {
 		if (publisherAbuseDigestResponse) {
 			return publisherAbuseDigestResponse
 		}
+		const searchIntelligenceResponse = await handleSearchIntelligenceApiRequest(request, client)
+		if (searchIntelligenceResponse) return searchIntelligenceResponse
 		const formsResponse = await handleFormsRequest(request, client)
 		if (formsResponse) {
 			return formsResponse
