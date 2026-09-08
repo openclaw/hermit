@@ -1,0 +1,47 @@
+name: Cloudflare toolchain diagnostic
+
+on:
+  push:
+    branches:
+      - diag/cloudflare-toolchain-20260908
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check Cloudflare default toolchain
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      WRANGLER_SEND_METRICS: "false"
+      WRANGLER_SEND_ERROR_REPORTS: "false"
+    steps:
+      - name: Check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24.18.0"
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: "1.2.15"
+
+      - name: Print runtime versions
+        run: |
+          node --version
+          bun --version
+
+      - name: Install Worker dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Typecheck Worker
+        run: bun run typecheck
+
+      - name: Build Worker without deploying
+        run: bun run deploy:dry-run
