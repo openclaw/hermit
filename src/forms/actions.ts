@@ -7,12 +7,15 @@ import { normalizeRedditUsername, upsertRedditModerationContext } from "./reddit
 
 const discordApiBase = "https://discord.com/api/v10"
 
-const resolveTarget = (target: FormTarget, submission: FormSubmission) => {
+export const resolveTarget = (target: FormTarget, submission: FormSubmission) => {
 	if (target === "authUser") {
 		return submission.applicantId ?? ""
 	}
 	if (target === "authUsername") {
 		return submission.applicantUsername ?? ""
+	}
+	if (target === "clawhubUserId") {
+		return parseSubmissionPayload(submission).clawhubUserId ?? ""
 	}
 	return parseSubmissionPayload(submission)[target] ?? target
 }
@@ -79,12 +82,12 @@ const getClawHubHeaders = () => {
 	}
 }
 
-const clawHubUnbanRequest = async (
+export const clawHubUnbanRequest = async (
 	action: Extract<FormAction, { type: "clawhub.unbanUser" }>,
 	submission: FormSubmission,
 	options: { reviewerDiscordId?: string }
 ) => {
-	const target = resolveTarget(action.target, submission)
+	const target = resolveTarget("clawhubUserId", submission)
 	if (!target) {
 		throw new Error("ClawHub user ID is missing from submission context.")
 	}
