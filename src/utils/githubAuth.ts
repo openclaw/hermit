@@ -95,12 +95,16 @@ export const getGitHubAppToken = async () => {
 	return cachedToken.token
 }
 
+export const githubPublicHeaders = {
+	Accept: "application/vnd.github+json",
+	"User-Agent": "hermit",
+	"X-GitHub-Api-Version": "2022-11-28"
+}
+
 export const getGitHubHeaders = async () => {
 	const token = await getGitHubAppToken().catch(() => null)
 	return {
-		Accept: "application/vnd.github+json",
-		"User-Agent": "hermit",
-		"X-GitHub-Api-Version": "2022-11-28",
+		...githubPublicHeaders,
 		...(token ? { Authorization: `Bearer ${token}` } : {})
 	}
 }

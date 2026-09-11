@@ -4,7 +4,7 @@ import {
 	Section,
 	TextDisplay
 } from "@buape/carbon"
-import { getGitHubHeaders } from "./githubAuth.js"
+import { getGitHubHeaders, githubPublicHeaders } from "./githubAuth.js"
 
 const importantClawsweeperLabels = new Set([
 	"clawsweeper:current-main-repro",
@@ -211,6 +211,17 @@ export const parseGitHubIssueUrls = (content: string) => {
 		})
 }
 
+const githubNamePattern = /^[A-Za-z0-9._-]+$/
+
+export const isGitHubRepoName = (value: string) =>
+	githubNamePattern.test(value) && value !== "." && value !== ".."
+
+export const isTrustedGitHubRepo = (owner: string, repo: string) =>
+	isGitHubRepoName(owner) &&
+	isGitHubRepoName(repo) &&
+	owner.toLowerCase() === "openclaw" &&
+	repo.toLowerCase() === "openclaw"
+
 export const getImportantGitHubLabels = (labels: string[]) => {
 	const groups = [
 		labels.filter((label) => label.startsWith("size:")),
@@ -229,9 +240,17 @@ export const fetchGitHubSummaryData = async (
 	repo: string,
 	number: number
 ): Promise<GitHubSummaryData | null> => {
+	if (!isGitHubRepoName(owner) || !isGitHubRepoName(repo)) {
+		return null
+	}
+
+	const headers = isTrustedGitHubRepo(owner, repo)
+		? await getGitHubHeaders()
+		: githubPublicHeaders
+
 	const response = await fetch(
 		`https://api.github.com/repos/${owner}/${repo}/issues/${number}`,
-		{ headers: await getGitHubHeaders() }
+		{ headers }
 	)
 	if (!response.ok) {
 		return null
