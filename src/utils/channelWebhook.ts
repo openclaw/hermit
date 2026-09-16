@@ -7,6 +7,7 @@ import {
 } from "@buape/carbon"
 
 const webhookCache = new Map<string, { webhook: Webhook; fetchedAt: number }>()
+const pendingWebhooks = new Map<string, Promise<Webhook>>()
 const webhookCacheTtlMs = 15 * 60 * 1000
 
 const cleanupWebhookCache = () => {
@@ -42,17 +43,30 @@ export const getOrCreateChannelWebhook = async (
 		return cached.webhook
 	}
 
-	const existingWebhooks = await fetchChannelWebhooks(client, channelId)
-	const usableWebhook = existingWebhooks.find((webhook) => webhook.token)
-	const webhookData = usableWebhook ?? (await createChannelWebhook(client, channelId, name))
-
-	if (!webhookData.token) {
-		throw new Error("Webhook token missing for channel repost")
+	const pending = pendingWebhooks.get(channelId)
+	if (pending) {
+		return pending
 	}
 
-	const webhook = new Webhook({ id: webhookData.id, token: webhookData.token })
-	webhookCache.set(channelId, { webhook, fetchedAt: Date.now() })
-	return webhook
+	const request = (async () => {
+		const existingWebhooks = await fetchChannelWebhooks(client, channelId)
+		const usableWebhook = existingWebhooks.find((webhook) => webhook.token)
+		const webhookData = usableWebhook ?? (await createChannelWebhook(client, channelId, name))
+
+		if (!webhookData.token) {
+			throw new Error("Webhook token missing for channel repost")
+		}
+
+		const webhook = new Webhook({ id: webhookData.id, token: webhookData.token })
+		webhookCache.set(channelId, { webhook, fetchedAt: Date.now() })
+		return webhook
+	})()
+	pendingWebhooks.set(channelId, request)
+	try {
+		return await request
+	} finally {
+		pendingWebhooks.delete(channelId)
+	}
 }
 
 export const sendWebhookMessage = async (

@@ -140,6 +140,10 @@ The Worker must have the matching public key:
 bunx wrangler secret put FORWARDER_PUBLIC_KEY
 ```
 
+## Automod webhooks
+
+Concurrent automod events in the same Worker instance share the channel webhook lookup and creation. Failed attempts are cleared so a later event can retry; successful webhooks retain the existing 15-minute cache. Separate Worker instances still manage their own caches.
+
 ## Notes
 
 - Answer Overflow base URL is hardcoded to `https://www.answeroverflow.com`.
