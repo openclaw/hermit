@@ -224,7 +224,7 @@ const getClawHubHeaders = () => {
 	return { Authorization: `Bearer ${token}` }
 }
 
-const latestClawHubContext = async (providerAccountId: string) => {
+export const latestClawHubContext = async (providerAccountId: string) => {
 	const url = new URL(`${clawHubApiBase()}/api/v1/users/ban-appeal-context`)
 	url.searchParams.set("githubProviderAccountId", providerAccountId)
 	const response = await fetch(url, { headers: getClawHubHeaders() })

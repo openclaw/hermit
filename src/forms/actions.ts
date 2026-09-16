@@ -2,6 +2,7 @@ import type { FormAction, FormConfig, FormTarget } from "./types.js"
 import type { FormSubmission } from "../db/schema.js"
 import { getRuntimeEnv } from "../runtime/env.js"
 import { getGitHubHeaders } from "../utils/githubAuth.js"
+import { latestClawHubContext } from "./context.js"
 import { parseSubmissionPayload } from "./submissions.js"
 import { normalizeRedditUsername, upsertRedditModerationContext } from "./redditContext.js"
 
@@ -13,6 +14,9 @@ const resolveTarget = (target: FormTarget, submission: FormSubmission) => {
 	}
 	if (target === "authUsername") {
 		return submission.applicantUsername ?? ""
+	}
+	if (target === "clawhubUserId") {
+		return parseSubmissionPayload(submission).clawhubUserId ?? ""
 	}
 	return parseSubmissionPayload(submission)[target] ?? target
 }
@@ -90,6 +94,14 @@ const clawHubUnbanRequest = async (
 	}
 	if (!options.reviewerDiscordId) {
 		throw new Error("Reviewer Discord ID is missing.")
+	}
+	if (submission.authProvider !== "github" || !submission.applicantId) {
+		throw new Error("ClawHub appeals require an authenticated GitHub applicant.")
+	}
+	// Pending appeals may predate intake validation, so verify their binding too.
+	const context = await latestClawHubContext(submission.applicantId)
+	if (typeof context.clawhubUserId !== "string" || !context.clawhubUserId || context.clawhubUserId !== target) {
+		throw new Error("ClawHub account no longer matches this appeal. Ask the applicant to submit a new appeal.")
 	}
 	const response = await fetch(`${clawHubApiBase()}/api/v1/users/ban-appeal-unban`, {
 		method: "POST",

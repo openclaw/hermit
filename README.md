@@ -145,3 +145,7 @@ bunx wrangler secret put FORWARDER_PUBLIC_KEY
 - Answer Overflow base URL is hardcoded to `https://www.answeroverflow.com`.
 - Helper thread monitor runs via Worker cron (`wrangler.jsonc` `triggers.crons`).
 - The old Cloudflare Gateway Durable Object path is not the active gateway setup.
+
+## ClawHub ban appeals
+
+Appeal submissions keep only configured input fields; account and moderation context comes from the signed-in GitHub account. Before accepting an appeal, Hermit rechecks that its stored ClawHub account ID still belongs to that GitHub applicant. This also protects pending appeals submitted before intake validation was added. A missing or mismatched binding leaves the appeal pending without sending an unban request; ask the applicant to submit a new appeal. A temporary ClawHub lookup failure can be retried.

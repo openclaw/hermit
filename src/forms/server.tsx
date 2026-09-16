@@ -37,6 +37,7 @@ import {
 	intakeContentRightsCase
 } from "../clawhubContentRights/workflow.js"
 import { sendContentRightsReceipt } from "../clawhubContentRights/receipt.js"
+import { buildSubmissionPayload, collectPayload } from "./payload.js"
 
 const discordApiBase = "https://discord.com/api/v10"
 const githubApiBase = "https://api.github.com"
@@ -101,17 +102,6 @@ const discordDmInstallAction = () => ({
 	label: "Allow Hermit to send you messages",
 	description: "Want a Discord DM when this submission is reviewed?"
 })
-
-const collectPayload = async (request: Request) => {
-	const body = await request.formData()
-	const payload: Record<string, string> = {}
-	body.forEach((value, key) => {
-		if (key !== "session") {
-			payload[key] = String(value).trim()
-		}
-	})
-	return { payload, session: String(body.get("session") ?? "") }
-}
 
 const actionLabel = (action: string) => {
 	if (action === "banned") return "ban"
@@ -375,7 +365,7 @@ const handleFormSubmit = async (request: Request, form: FormConfig, client: Clie
 			)
 		}
 	}
-	const collected = await collectPayload(request)
+	const collected = await collectPayload(request, form)
 	const sessionUser = isFormsDev() ? localUsers[getFormAuthProviders(form)[0] ?? "discord"] : await readSession(collected.session, form.id)
 	const user = sessionUser && formAllowsProvider(form, sessionUser.provider as FormAuthProvider) ? sessionUser : null
 	if (!user) {
@@ -389,10 +379,7 @@ const handleFormSubmit = async (request: Request, form: FormConfig, client: Clie
 	if (error) {
 		return new Response(renderPage(form.title, <FormRoute form={form} session={collected.session} user={user} values={context} error={error} />), { status: 400, headers: { "content-type": "text/html; charset=utf-8" } })
 	}
-	const payload = {
-		...context,
-		...collected.payload
-	}
+	const payload = buildSubmissionPayload(collected.payload, context)
 	const submission = await createFormSubmission({
 		formId: form.id,
 		authProvider: user.provider,
