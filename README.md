@@ -149,3 +149,7 @@ bunx wrangler secret put FORWARDER_PUBLIC_KEY
 ## ClawHub ban appeals
 
 Appeal submissions keep only configured input fields; account and moderation context comes from the signed-in GitHub account. Before accepting an appeal, Hermit rechecks that its stored ClawHub account ID still belongs to that GitHub applicant. This also protects pending appeals submitted before intake validation was added. A missing or mismatched binding leaves the appeal pending without sending an unban request; ask the applicant to submit a new appeal. A temporary ClawHub lookup failure can be retried.
+
+## GitHub summaries
+
+GitHub summary requests accept repository names made from letters, digits, dots, underscores, and hyphens, excluding `.` and `..`. Path separators, URL escapes, query strings, and fragments are rejected before authentication or a GitHub request. Valid repositories retain the configured GitHub App installation authentication, with the existing anonymous fallback when no token is available.

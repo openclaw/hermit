@@ -224,11 +224,18 @@ export const getImportantGitHubLabels = (labels: string[]) => {
 	return groups.flat()
 }
 
+const isGitHubRepoName = (value: string) =>
+	/^[A-Za-z0-9._-]+$/.test(value) && value !== "." && value !== ".."
+
 export const fetchGitHubSummaryData = async (
 	owner: string,
 	repo: string,
 	number: number
 ): Promise<GitHubSummaryData | null> => {
+	if (!isGitHubRepoName(owner) || !isGitHubRepoName(repo)) {
+		return null
+	}
+
 	const response = await fetch(
 		`https://api.github.com/repos/${owner}/${repo}/issues/${number}`,
 		{ headers: await getGitHubHeaders() }
