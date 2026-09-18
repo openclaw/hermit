@@ -445,6 +445,72 @@ export const lobsterEncounters = sqliteTable(
 	]
 )
 
+export const reviewObservations = sqliteTable(
+	"review_observations",
+	{
+		id: integer().primaryKey({ autoIncrement: true }),
+		messageId: text("message_id").notNull().unique(),
+		guildId: text("guild_id").notNull(),
+		channelId: text("channel_id").notNull(),
+		authorId: text("author_id").notNull(),
+		createdAt: text("created_at").notNull(),
+		replyToId: text("reply_to_id"),
+		contentLength: integer("content_length").notNull(),
+		lineCount: integer("line_count").notNull(),
+		fingerprint: text().notNull(),
+		artifacts: text().notNull(),
+		similarity: text(),
+		semanticScore: integer("semantic_score"),
+		receivedAt: text("received_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`)
+	},
+	(table) => [
+		index("idx_review_obs_guild_author").on(table.guildId, table.authorId, table.createdAt),
+		index("idx_review_obs_author").on(table.authorId, table.createdAt),
+		index("idx_review_obs_channel").on(table.channelId, table.createdAt),
+		index("idx_review_obs_message").on(table.messageId)
+	]
+)
+
+export const reviewCases = sqliteTable(
+	"review_cases",
+	{
+		id: integer().primaryKey({ autoIncrement: true }),
+		caseId: text("case_id").notNull().unique(),
+		guildId: text("guild_id").notNull(),
+		targetUserId: text("target_user_id").notNull(),
+		status: text().notNull().default("open"),
+		heuristicScore: integer("heuristic_score").notNull(),
+		concordance: text().notNull(),
+		behavioralFamilies: text("behavioral_families").notNull(),
+		evidenceMessageId: text("evidence_message_id"),
+		krillProbability: text("krill_probability"),
+		krillBrief: text("krill_brief"),
+		krillModel: text("krill_model"),
+		reviewMessageId: text("review_message_id"),
+		reviewChannelId: text("review_channel_id"),
+		deliveryStatus: text("delivery_status").notNull().default("pending"),
+		previousDeliveryStatus: text("previous_delivery_status").notNull().default("pending"),
+		cardRevision: integer("card_revision").notNull().default(1),
+		syncedCardRevision: integer("synced_card_revision").notNull().default(1),
+		expiresAt: text("expires_at"),
+		decidedById: text("decided_by_id"),
+		decisionReason: text("decision_reason"),
+		createdAt: text("created_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`),
+		updatedAt: text("updated_at")
+			.notNull()
+			.default(sql`(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))`)
+	},
+	(table) => [
+		index("idx_review_cases_guild_target").on(table.guildId, table.targetUserId),
+		index("idx_review_cases_status").on(table.status),
+		index("idx_review_cases_review_msg").on(table.reviewMessageId)
+	]
+)
+
 export type KeyValue = typeof keyValue.$inferSelect
 export type NewKeyValue = typeof keyValue.$inferInsert
 export type HelperEvent = typeof helperEvents.$inferSelect
@@ -473,3 +539,8 @@ export type ActionCooldownEvent = typeof actionCooldownEvents.$inferSelect
 export type NewActionCooldownEvent = typeof actionCooldownEvents.$inferInsert
 export type LobsterEncounter = typeof lobsterEncounters.$inferSelect
 export type NewLobsterEncounter = typeof lobsterEncounters.$inferInsert
+export type ReviewObservation = typeof reviewObservations.$inferSelect
+export type NewReviewObservation = typeof reviewObservations.$inferInsert
+export type ReviewCase = typeof reviewCases.$inferSelect
+export type NewReviewCase = typeof reviewCases.$inferInsert
+
