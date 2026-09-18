@@ -6,6 +6,7 @@ import {
 	type CommandInteraction,
 	type GuildThreadChannel,
 	InteractionContextType,
+	Permission,
 	TextDisplay
 } from "@buape/carbon"
 import BaseCommand from "./base.js"
@@ -113,6 +114,20 @@ const closeHelperThread = async (
 		return
 	}
 
+	const helperParentId = process.env.HELPER_THREAD_WELCOME_PARENT_ID?.trim()
+	if (helperParentId && channel.parentId !== helperParentId) {
+		await interaction.reply({
+			components: [
+				new Container([
+					new TextDisplay(
+						"This command can only be used in a helper thread."
+					)
+				])
+			]
+		})
+		return
+	}
+
 	await interaction.reply({
 		components: [new Container([new TextDisplay(closeThreadMessage)])]
 	})
@@ -126,6 +141,7 @@ export default class HelperRootCommand extends CommandWithSubcommands {
 	description = "Helper-channel moderation utilities"
 	integrationTypes = [ApplicationIntegrationType.GuildInstall]
 	contexts = [InteractionContextType.Guild]
+	permission = [Permission.ManageMessages, Permission.ManageThreads]
 	subcommands = [
 		new HelperWarnNewThreadCommand(),
 		new HelperCloseCommand(),
