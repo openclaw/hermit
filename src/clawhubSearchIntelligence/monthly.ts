@@ -187,88 +187,61 @@ export const validMonthlyLineup = (
 }
 
 class DashboardLink extends LinkButton {
-	label = "Review complete report"
+	label = "Full report"
 	constructor(public url: string) {
 		super()
 	}
 }
 const safe = (value: string) =>
 	value.replace(/([\\`*_~|>\[\]()#])/g, "\\$1").replace(/@/g, "@\u200b")
-const time = (value: number | null) =>
-	value === null ? "unknown" : new Date(value).toISOString()
-const day = (value: number | null) =>
-	value === null ? "unknown" : new Date(value).toISOString().slice(0, 10)
+const day = (value: number) => new Date(value).toISOString().slice(0, 10)
+const link = (value: string) =>
+	`<${new URL(value).href.replace(/</g, "%3C").replace(/>/g, "%3E")}>`
 
 export const renderMonthlyDigest = (digest: MonthlyDigest) => {
 	const preview = ["localhost", "127.0.0.1", "[::1]"].includes(
 		new URL(digest.dashboardUrl).hostname
 	)
-	const blocks: string[] = []
+	const pages: string[] = []
 	for (const [name, catalog] of [
 		["Plugins", digest.catalogs.plugins],
 		["Skills", digest.catalogs.skills]
 	] as const) {
-		const { lineup, adoption } = catalog
-		blocks.push(
-			`### ${name}: ${catalog.recommendations.length}/16 ready\nInstalls: 30 completed UTC days ${day(adoption.periodStart)} – ${day(adoption.periodEnd)} (end exclusive); final 7 days from ${day(adoption.periodStart7d)}. Counts below: 30d / 7d.\n${lineup.pendingCount} pending editorial; ${lineup.telemetryShortfall} telemetry shortfall. ${lineup.removals.length} proposed removals. Editorial revision ${lineup.editorialRevision}${lineup.staleEditorial ? ` is stale (current ${lineup.currentEditorialRevision}); regenerate before approval.` : "."}\nAggregate scan ${new Date(adoption.collectionStartedAt).toISOString()} – ${adoption.generatedAt === null ? "unknown" : new Date(adoption.generatedAt).toISOString()}; ${adoption.importedRows} imported rows. ${adoption.status === "unavailable" ? "Adoption unavailable." : ""}`
+		const { lineup } = catalog
+		const notes = [
+			...(lineup.pendingCount
+				? [
+						`${lineup.pendingCount} plugin slot${lineup.pendingCount === 1 ? "" : "s"} pending.`
+					]
+				: []),
+			...(lineup.telemetryShortfall
+				? [`${lineup.telemetryShortfall} ${name.toLowerCase()} slots unfilled.`]
+				: []),
+			...(lineup.staleEditorial
+				? ["Selection changed; refresh the report before approval."]
+				: [])
+		]
+		const rows = catalog.recommendations.map(
+			(candidate) =>
+				`• [${safe(candidate.displayName)}](${link(candidate.url)}) · ${candidate.adoption ? `${candidate.adoption.installs30d.toLocaleString("en-US")} installs` : "installs unavailable"}`
 		)
-		if (adoption.truncated)
-			blocks.push(
-				`${name} adoption metadata limited; inspected ${adoption.inspectedItems} of ${adoption.totalItems} candidates.`
-			)
-		for (let slot = 0; slot < 16; slot++) {
-			const candidate = catalog.recommendations.find(
-				(entry) => entry.slot === slot
-			)
-			const reservation = lineup.reservations[slot]
-			if (candidate)
-				blocks.push(
-					`${name} ${slot + 1}. **${safe(candidate.displayName)}** · ${safe(candidate.id)}\n${candidate.selectionBasis} · ${candidate.adoption ? `${candidate.adoption.installs30d} / ${candidate.adoption.installs7d}` : "counts unavailable"} · Metadata checked ${time(candidate.metadataCheckedAt)}\n${safe(candidate.reason)}`
-				)
-			else if (reservation)
-				blocks.push(
-					`${name} ${slot + 1}. ${reservation.id ? safe(reservation.id) : "Unassigned"} · editorial PENDING\n${reservation.reason ? safe(reservation.reason) + "\n" : ""}${reservation.pendingReasons.map(safe).join("\n")}`
-				)
+		if (!rows.length) rows.push("No qualifying recommendations.")
+		if (notes.length) rows.push(notes.join(" "))
+		// Keep links whole and retain every recommendation. Reserve room for the
+		// shared header, approval footer and delivery owner's report fingerprint.
+		let section = `**${name}**`
+		for (const row of rows) {
+			if (section.length + row.length + 1 > 3400) {
+				pages.push(section)
+				section = `**${name} (continued)**`
+			}
+			section += `\n${row}`
 		}
-		const { coverage } = catalog
-		const incomplete =
-			coverage.dataThrough === null ||
-			coverage.dataThrough < digest.weekEnd ||
-			coverage.collectionStartedAt === null ||
-			coverage.collectionStartedAt > digest.weekStart ||
-			coverage.gapStart !== null
-		blocks.push(
-			`### ${name} weekly search context\n${catalog.totalSearches} searches · Web ${catalog.sourceCounts.clawhubWeb} · Control UI ${catalog.sourceCounts.openclawControlUi}\nData through ${time(coverage.dataThrough)}; collection started ${time(coverage.collectionStartedAt)}.${incomplete ? " Incomplete collection history." : ""}${coverage.gapStart !== null ? ` Gap ${time(coverage.gapStart)} – ${time(coverage.gapEnd)}.` : ""}\nClassification ${catalog.classificationStatus}; search metadata ${catalog.currentMetadataStatus}. Search counts do not affect monthly install rank.`
-		)
-		for (const [title, rows] of [
-			["company opportunities", catalog.companyOpportunities],
-			["official gaps", catalog.officialGaps],
-			["movers", catalog.movers]
-		] as const) {
-			blocks.push(
-				`**${name} ${title}**${rows.length ? "" : "\nNone qualified."}`
-			)
-			for (const row of rows)
-				blocks.push(
-					`${safe(row.query)} (${row.scope}): ${row.searches} searches · previous ${row.previousSearches} · ${row.officialGaps} official gaps${"companyProductName" in row && row.companyProductName ? ` · ${safe(row.companyProductName)}` : ""}${"confidence" in row ? ` · ${Math.round(row.confidence * 100)}% classifier confidence` : ""}`
-				)
-		}
+		const last = pages.length - 1
+		if (last >= 0 && pages[last].length + section.length + 2 <= 3400)
+			pages[last] += `\n\n${section}`
+		else pages.push(section)
 	}
-	// Retain every slot and rationale. A valid 30KB report can exceed one
-	// message; pack deterministically before claiming any delivery receipts.
-	const pages: string[] = []
-	for (const block of blocks) {
-		const chunks = block.length <= 3400 ? [block] : block.split("\n")
-		for (const chunk of chunks) {
-			if (
-				!pages.length ||
-				pages[pages.length - 1].length + chunk.length + 1 > 3400
-			)
-				pages.push(chunk)
-			else pages[pages.length - 1] += "\n" + chunk
-		}
-	}
-
 	const dashboardUrl =
 		digest.dashboardUrl.length <= 512
 			? digest.dashboardUrl
@@ -281,9 +254,10 @@ export const renderMonthlyDigest = (digest: MonthlyDigest) => {
 			components: [
 				new Container([
 					new TextDisplay(
-						`### ${preview ? "LOCAL PREVIEW · " : ""}ClawHub monthly Featured review · ${index + 1}/${pages.length}\nAdvisory; approval required. Search context ${day(digest.weekStart)} – ${day(digest.weekEnd)} is separate from install ranking. Full search links and removal reasons remain on the dashboard.${digest.truncated ? "\nSome evidence details omitted; all proposed slots retained." : ""}`
+						`### ${preview ? "LOCAL PREVIEW · " : ""}Featured recommendations · ${day(digest.weekEnd)}${pages.length > 1 ? ` · ${index + 1}/${pages.length}` : ""}\n30-day installs · ${day(digest.weekEnd - 30 * 86400000)} – ${day(digest.weekEnd - 86400000)} UTC`
 					),
 					new TextDisplay(page),
+					new TextDisplay("Approval required to change Featured."),
 					new Row([new DashboardLink(dashboardUrl)])
 				])
 			],

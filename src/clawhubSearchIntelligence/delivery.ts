@@ -167,15 +167,15 @@ export const deliverWeeklyDigest = async (
 		.first<{ value: string }>()
 	if (!existing) return response({ error: "Delivery state unavailable" }, 503)
 	const state = JSON.parse(existing.value) as typeof claim
-	if (
-		state.hash !== payloadHash ||
-		state.version !== 2 ||
-		canonical(state.partHashes) !== canonical(partHashes)
-	)
+	if (state.hash !== payloadHash || state.version !== 2)
 		return response({ error: "Weekly payload conflict" }, 409)
 	const success = () =>
 		response({ ok: true, delivered: true, weekEnd: digest.weekEnd })
+	// A completed receipt acknowledges the same report across presentation changes.
+	// Incomplete deliveries stay bound to their original parts to prevent duplicates.
 	if (state.status === "sent") return success()
+	if (canonical(state.partHashes) !== canonical(partHashes))
+		return response({ error: "Weekly payload conflict" }, 409)
 	for (let index = 0; index < rendered.length; index++) {
 		const result = await deliverMessage(
 			client,

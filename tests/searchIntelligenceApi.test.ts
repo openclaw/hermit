@@ -1,6 +1,12 @@
 import { afterEach, describe, expect, it, spyOn } from "bun:test"
 import { readFileSync } from "node:fs"
-import type { Client } from "@buape/carbon"
+import {
+	Container,
+	TextDisplay,
+	serializePayload,
+	type Client
+} from "@buape/carbon"
+import { deliverWeeklyDigest } from "../src/clawhubSearchIntelligence/delivery.js"
 import { handleSearchIntelligenceApiRequest } from "../src/clawhubSearchIntelligence/api.js"
 import { setRuntimeEnv } from "../src/runtime/env.js"
 import { SqliteD1Database } from "./helpers/sqliteD1.js"
@@ -232,7 +238,7 @@ const lineupPayload = () => {
 		}
 	}
 }
-const monthlyPayload = (longReasons = false) => {
+const monthlyPayload = (longRows = false) => {
 	const base = evidencePayload()
 	const catalog = (
 		source: typeof base.catalogs.plugins | typeof base.catalogs.skills
@@ -242,17 +248,13 @@ const monthlyPayload = (longReasons = false) => {
 		const recommendations = Array.from({ length: 16 }, (_, slot) => ({
 			...row,
 			id: `${row.id}-${slot}`,
-			displayName: `Discovery ${row.artifactKind} ${slot}`,
-			url: `${row.url}-${slot}`,
+			displayName: `Discovery ${row.artifactKind} ${slot}${longRows ? "_".repeat(80) : ""}`,
+			url: `${row.url}-${slot}${longRows ? "?ref=" + "x".repeat(100) : ""}`,
 			version: "1.0.0",
 			slot,
 			selectionBasis: plugin && slot < 8 ? "editorial" : "telemetry",
 			reason:
-				plugin && slot < 8
-					? longReasons
-						? "_".repeat(480)
-						: "Useful workflow."
-					: "Monthly install priority.",
+				plugin && slot < 8 ? "Useful workflow." : "Monthly install priority.",
 			support: "adoption-only",
 			search: null,
 			adoption: {
@@ -401,7 +403,7 @@ afterEach(() => {
 })
 
 describe("ClawHub weekly search intelligence receiver", () => {
-	it("delivers every monthly slot and replays the immutable complete report", async () => {
+	it("delivers every linked monthly recommendation in one compact message and replays it", async () => {
 		const { client, posts } = setup()
 		const payload = monthlyPayload()
 		expect(
@@ -411,9 +413,8 @@ describe("ClawHub weekly search intelligence receiver", () => {
 		const rendered = posts.flatMap(({ body }) => texts(body)).join("\n")
 		for (const catalog of Object.values(payload.catalogs))
 			for (const row of catalog.recommendations) {
-				expect(rendered).toContain(row.id)
 				expect(rendered).toContain(
-					`${row.adoption.installs30d} / ${row.adoption.installs7d}`
+					`• [${row.displayName}](<${row.url}>) · ${row.adoption.installs30d} installs`
 				)
 			}
 		for (const { body } of posts) {
@@ -421,6 +422,7 @@ describe("ClawHub weekly search intelligence receiver", () => {
 			expect(componentCount(body) - 1).toBeLessThanOrEqual(40)
 			expect(body.allowed_mentions).toEqual({ parse: [] })
 		}
+		expect(posts).toHaveLength(1)
 		const count = posts.length
 		expect(
 			(await handleSearchIntelligenceApiRequest(request(payload), client))
@@ -429,83 +431,48 @@ describe("ClawHub weekly search intelligence receiver", () => {
 		expect(posts).toHaveLength(count)
 	})
 
-	it("preserves weekly search totals, coverage and every existing nonempty section in v4", async () => {
+	it("keeps detailed evidence on the dashboard while preserving linked recommendations", async () => {
 		const { client, posts } = setup()
 		const payload = monthlyPayload()
+		payload.truncated = true
+		payload.catalogs.plugins.adoption.truncated = true
 		expect(
 			(await handleSearchIntelligenceApiRequest(request(payload), client))
 				?.status
 		).toBe(200)
 		const rendered = posts.flatMap(({ body }) => texts(body)).join("\n")
-		for (const title of ["company opportunities", "official gaps", "movers"]) {
-			expect(rendered).toContain(`Plugins ${title}`)
-			expect(rendered).toContain(`Skills ${title}`)
-		}
-		expect(rendered).toContain("12 searches · Web 8 · Control UI 4")
-		expect(rendered).toContain(
-			"notion (catalog): 5 searches · previous 3 · 5 official gaps"
+		expect(rendered).toContain("Featured recommendations")
+		expect(rendered).toContain("30-day installs · 2026-08-08 – 2026-09-06 UTC")
+		expect(rendered).toContain("**Plugins**")
+		expect(rendered).toContain("**Skills**")
+		for (const detail of [
+			"notion",
+			"Metadata checked",
+			"Aggregate scan",
+			"editorial",
+			"monthly Featured review"
+		])
+			expect(rendered).not.toContain(detail)
+		expect(posts.flatMap(({ body }) => links(body))).toContain(
+			payload.dashboardUrl
 		)
-		expect(rendered).toContain("collection started 2026-08-01")
-		expect(rendered).toContain("Metadata checked 2026-09-07")
-		expect(rendered).toContain(
-			payload.catalogs.skills.recommendations[0].displayName
+		const urls = [...rendered.matchAll(/\]\(<([^>]+)>\)/g)].map(
+			(match) => match[1]
 		)
-		expect(rendered).toContain("None qualified.")
-		for (const { body } of posts)
-			expect(texts(body).join("\n").length).toBeLessThanOrEqual(4000)
+		expect(urls).toEqual(
+			Object.values(payload.catalogs).flatMap((catalog) =>
+				catalog.recommendations.map((row) => row.url)
+			)
+		)
 	})
 
-	it.each([
-		[false, false],
-		[true, false],
-		[false, true],
-		[true, true]
-	])(
-		"shows monthly evidence limitations independently (digest %s, adoption %s)",
-		async (digestLimited, adoptionLimited) => {
-			const { client, posts } = setup()
-			const payload = monthlyPayload()
-			payload.truncated = digestLimited
-			Object.assign(payload.catalogs.plugins.adoption, {
-				totalItems: 101,
-				inspectedItems: 100,
-				truncated: adoptionLimited
-			})
-			expect(
-				(await handleSearchIntelligenceApiRequest(request(payload), client))
-					?.status
-			).toBe(200)
-			const rendered = posts.flatMap(({ body }) => texts(body)).join("\n")
-			expect(
-				rendered.includes(
-					"Some evidence details omitted; all proposed slots retained."
-				)
-			).toBe(digestLimited)
-			expect(
-				rendered.includes(
-					"Plugins adoption metadata limited; inspected 100 of 101 candidates."
-				)
-			).toBe(adoptionLimited)
-			expect(rendered).not.toContain("Skills adoption metadata limited")
-			for (const catalog of Object.values(payload.catalogs))
-				for (const row of catalog.recommendations)
-					expect(rendered).toContain(row.id)
-			for (const { body } of posts)
-				expect(texts(body).join("\n").length).toBeLessThanOrEqual(4000)
-		}
-	)
-
-	it("keeps pending editorial slots, full rationales and unavailable counts distinct", async () => {
+	it("summarizes pending slots and stale selection without presenting missing counts as zero", async () => {
 		const { client, posts } = setup()
 		const payload = monthlyPayload()
 		const plugins = payload.catalogs.plugins
 		const pending = plugins.lineup.reservations[3]
 		pending.status = "pending"
-		pending.reason = "_".repeat(500)
-		pending.pendingReasons = Array.from(
-			{ length: 12 },
-			(_, i) => `Reason ${i} ` + "_".repeat(230)
-		)
+		pending.pendingReasons = ["no-public-version"]
 		plugins.recommendations = plugins.recommendations.filter(
 			({ slot }) => slot !== 3
 		)
@@ -516,18 +483,91 @@ describe("ClawHub weekly search intelligence receiver", () => {
 		plugins.lineup.shortfall = 1
 		plugins.lineup.currentEditorialRevision++
 		plugins.lineup.staleEditorial = true
+		Object.assign(plugins.recommendations[0], {
+			adoption: null,
+			support: "current-only"
+		})
+		Object.assign(plugins.recommendations[1].adoption, {
+			installs30d: 0,
+			installs7d: 0
+		})
 		expect(
 			(await handleSearchIntelligenceApiRequest(request(payload), client))
 				?.status
 		).toBe(200)
 		const rendered = posts.flatMap(({ body }) => texts(body)).join("\n")
-		expect(rendered).toContain(`${pending.id} · editorial PENDING`)
-		expect(rendered).toContain("1 pending editorial; 0 telemetry shortfall")
-		expect(rendered).toContain("regenerate before approval")
-		for (let i = 0; i < 12; i++) expect(rendered).toContain(`Reason ${i}`)
-		for (const { body } of posts)
-			expect(texts(body).join("\n").length).toBeLessThanOrEqual(4000)
+		expect(rendered).toContain("1 plugin slot pending")
+		expect(rendered).toContain("refresh the report before approval")
+		expect(rendered).toContain(
+			`• [${plugins.recommendations[0].displayName}](<${plugins.recommendations[0].url}>) · installs unavailable`
+		)
+		expect(rendered).toContain(
+			`• [${plugins.recommendations[1].displayName}](<${plugins.recommendations[1].url}>) · 0 installs`
+		)
+		expect(rendered).not.toContain(pending.id)
 	})
+
+	it("acknowledges a fully delivered report after its presentation changes without reposting", async () => {
+		const { client, posts } = setup()
+		const payload = monthlyPayload()
+		expect(
+			(
+				await deliverWeeklyDigest(client, payload, [
+					serializePayload({
+						components: [
+							new Container([
+								new TextDisplay("Previously deployed presentation")
+							])
+						]
+					})
+				])
+			).status
+		).toBe(200)
+		expect(
+			(await handleSearchIntelligenceApiRequest(request(payload), client))
+				?.status
+		).toBe(200)
+		expect(posts).toHaveLength(1)
+		payload.catalogs.skills.recommendations[0].reason =
+			"Changed recommendation evidence"
+		expect(
+			(await handleSearchIntelligenceApiRequest(request(payload), client))
+				?.status
+		).toBe(409)
+		expect(posts).toHaveLength(1)
+	})
+
+	it("pages long linked recommendations without dropping counts, breaking links or enabling mentions", async () => {
+		const { client, posts } = setup()
+		const payload = monthlyPayload(true)
+		const row = payload.catalogs.plugins.recommendations[0]
+		row.displayName = "@everyone [link](https://evil.example)"
+		row.url = "https://clawhub.ai/plugins/" + "x".repeat(1900) + "?q=<test>"
+		row.adoption.installs30d = 1234
+		expect(
+			(await handleSearchIntelligenceApiRequest(request(payload), client))
+				?.status
+		).toBe(200)
+		expect(posts.length).toBeGreaterThan(1)
+		const rendered = posts.flatMap(({ body }) => texts(body)).join("\n")
+		const urls = [...rendered.matchAll(/\]\(<([^>]+)>\)/g)].map(
+			(match) => match[1]
+		)
+		expect(urls).toEqual(
+			Object.values(payload.catalogs).flatMap((catalog) =>
+				catalog.recommendations.map((r) => new URL(r.url).href)
+			)
+		)
+		expect(rendered).toContain("1,234 installs")
+		expect(rendered).not.toContain("@everyone")
+		expect(rendered).not.toContain("[link](https://evil.example)")
+		for (const { body } of posts) {
+			expect(texts(body).join("\n").length).toBeLessThanOrEqual(4000)
+			expect(componentCount(body) - 1).toBeLessThanOrEqual(40)
+			expect(body.allowed_mentions).toEqual({ parse: [] })
+		}
+	})
+
 	it("rejects monthly privacy, source, slot and period violations before durable claims", async () => {
 		const { client, owner, posts } = setup()
 		const mutations: ((p: ReturnType<typeof monthlyPayload>) => void)[] = [
@@ -666,7 +706,7 @@ describe("ClawHub weekly search intelligence receiver", () => {
 			1
 		)
 		expect(posts.flatMap(({ body }) => texts(body)).join("\n")).toContain(
-			payload.catalogs.skills.recommendations[15].id
+			payload.catalogs.skills.recommendations[15].url
 		)
 	})
 	it("reconciles an uncertain middle monthly part before continuing the same report", async () => {
