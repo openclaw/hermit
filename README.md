@@ -157,3 +157,5 @@ Appeal submissions keep only configured input fields; account and moderation con
 ## GitHub summaries
 
 GitHub summary requests accept repository names made from letters, digits, dots, underscores, and hyphens, excluding `.` and `..`. Path separators, URL escapes, query strings, and fragments are rejected before authentication or a GitHub request. Valid repositories retain the configured GitHub App installation authentication, with the existing anonymous fallback when no token is available.
+
+GitHub App authentication accepts both the PKCS#1 (`BEGIN RSA PRIVATE KEY`) key downloaded from GitHub and PKCS#8 (`BEGIN PRIVATE KEY`) PEM keys in `GITHUB_APP_PRIVATE_KEY`. Configure it together with `GITHUB_APP_ID` and `GITHUB_APP_INSTALLATION_ID`.
