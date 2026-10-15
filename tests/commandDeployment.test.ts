@@ -1,59 +1,82 @@
-import { describe, expect, it, mock } from "bun:test"
-import { createCommandDeploymentTracker } from "../src/runtime/commandDeployment.js"
+import { expect, it } from "bun:test"
+import { readdirSync, readFileSync } from "node:fs"
+import { SqliteD1Database } from "./helpers/sqliteD1.js"
 
-describe("command deployment lifecycle", () => {
-	it("tracks one deployment per worker isolate", async () => {
-		const deployCommands = mock(async () => ({ usedDevGuilds: false }))
-		const tracked: Promise<unknown>[] = []
-		const trackDeployment = createCommandDeploymentTracker(deployCommands)
+it("registers commands explicitly, without writing to Discord on Worker requests", async () => {
+	const settings = {
+		BASE_URL: "https://example.test",
+		DEPLOY_SECRET: "test-secret",
+		DISCORD_CLIENT_ID: "1",
+		DISCORD_PUBLIC_KEY: "00",
+		DISCORD_BOT_TOKEN: "test-token"
+	}
+	const previousEnv = Object.fromEntries(
+		Object.keys(settings).map((key) => [key, process.env[key]])
+	)
+	const previousFetch = globalThis.fetch
+	const calls: { method: string; path: string }[] = []
+	const database = new SqliteD1Database()
+	const migrations = readdirSync("drizzle")
+		.filter((path) => /^000[4-9]_.*\.sql$/.test(path))
+		.sort()
+	for (const path of migrations) {
+		database.database.exec(readFileSync(`drizzle/${path}`, "utf8"))
+	}
+	Object.assign(process.env, settings)
+	globalThis.fetch = async (input, init) => {
+		const url = new URL(String(input))
+		if (url.hostname !== "discord.com") throw new Error("Unexpected request")
+		const method = init?.method ?? "GET"
+		calls.push({ method, path: url.pathname })
+		if (method === "GET") return Response.json([])
+		const body = JSON.parse(String(init?.body))
+		return Response.json(
+			Array.isArray(body)
+				? body.map((command, index) => ({ ...command, id: String(index + 1) }))
+				: { ...body, id: String(calls.length) }
+		)
+	}
+	try {
+		const { default: worker } = await import("../src/index.js")
+		const pending: Promise<unknown>[] = []
 		const context = {
-			waitUntil(promise: Promise<unknown>) {
-				tracked.push(promise)
+			waitUntil: (promise: Promise<unknown>) => {
+				pending.push(promise)
 			}
+		} as ExecutionContext
+		const request = () => worker.fetch(
+			new Request("https://example.test/__registration_test__"),
+			settings as unknown as Env,
+			context
+		)
+		expect((await request()).status).toBe(404)
+		await Promise.all(pending)
+		expect(calls).toEqual([])
+		worker.scheduled(
+			{ cron: "*/5 * * * *" } as ScheduledController,
+			{ ...settings, DB: database } as unknown as Env,
+			context
+		)
+		await Promise.all(pending)
+		expect(calls).toEqual([])
+
+		// Exercise the actual operator script and Carbon's pinned HTTP contract.
+		await import("../scripts/deploy-commands.ts")
+		expect(calls.some(({ method, path }) =>
+			method === "PUT" && path.includes("/guilds/")
+		)).toBe(true)
+		expect(calls.some(({ method, path }) =>
+			method === "GET" && path === "/api/applications/1/commands"
+		)).toBe(true)
+		const registrationCalls = calls.length
+		expect((await request()).status).toBe(404)
+		expect(calls.length).toBe(registrationCalls)
+	} finally {
+		database.close()
+		globalThis.fetch = previousFetch
+		for (const [key, value] of Object.entries(previousEnv)) {
+			if (value === undefined) delete process.env[key]
+			else process.env[key] = value
 		}
-
-		const first = trackDeployment(context)
-		const second = trackDeployment(context)
-
-		expect(deployCommands).toHaveBeenCalledTimes(1)
-		expect(deployCommands).toHaveBeenCalledWith({ mode: "reconcile" })
-		expect(first).toBe(second)
-		expect(tracked).toEqual([first, first])
-		await first
-	})
-
-	it("allows a later request to retry after deployment fails", async () => {
-		const consoleError = mock(() => {})
-		const previousConsoleError = console.error
-		console.error = consoleError
-		let attempts = 0
-		const deployCommands = mock(async () => {
-			attempts += 1
-			if (attempts === 1) {
-				throw new Error("Discord unavailable")
-			}
-			return { usedDevGuilds: false }
-		})
-		const trackDeployment = createCommandDeploymentTracker(deployCommands)
-		const context = { waitUntil() {} }
-
-		try {
-			await expect(trackDeployment(context)).rejects.toThrow(
-				"Discord unavailable"
-			)
-			await expect(trackDeployment(context)).resolves.toEqual({
-				usedDevGuilds: false
-			})
-			expect(deployCommands).toHaveBeenCalledTimes(2)
-			expect(deployCommands).toHaveBeenNthCalledWith(1, {
-				mode: "reconcile"
-			})
-			expect(deployCommands).toHaveBeenNthCalledWith(2, {
-				mode: "reconcile"
-			})
-			expect(consoleError).toHaveBeenCalledTimes(1)
-		} finally {
-			console.error = previousConsoleError
-		}
-	})
+	}
 })

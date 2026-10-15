@@ -61,6 +61,9 @@ bun run db:apply:remote
 bun run dev
 ```
 
+After the first Worker deployment, register the Discord commands with
+`bun run commands:deploy` using the same bot credentials.
+
 ## Helper logs API
 
 `GET /api/events` and `GET /api/threads` require `Authorization: Bearer <DEPLOY_SECRET>`. Update any scripts consuming these endpoints to send that header. Missing or incorrect credentials return HTTP 401; the endpoints also reject requests when `DEPLOY_SECRET` is unset.
@@ -79,6 +82,7 @@ Discord, GitHub, and Reddit appeals plus moderator reports notify `1546936406272
 - `bun run deploy` → deploy worker locally with `.env`
 - `bun run deploy:cf` → apply remote D1 migrations, then deploy Worker for Cloudflare Builds
 - `bun run deploy:dry-run` → validate the Worker bundle without deploying
+- `bun run commands:deploy` → explicitly register Discord commands using the configured bot credentials
 - `bun run cf-typegen` → regenerate `worker-configuration.d.ts`
 - `bun run typecheck` → TypeScript check
 - `bun run test` → generate Forms styles, then run the test suite (requires ImageMagick and the WebP CLI tools)
@@ -94,6 +98,21 @@ Cloudflare Workers Builds deploys pushes to `main`. The deploy command should ap
 ```bash
 bun run deploy:cf
 ```
+
+After the first deployment and whenever command definitions change, the release
+operator registers them once from the deployed revision with the existing Discord
+credentials in their local `.env` or environment:
+
+```bash
+bun run commands:deploy
+```
+
+Ordinary Worker requests and cron events no longer register commands automatically.
+The existing secret-protected `/deploy` endpoint remains an explicit registration
+alternative. Carbon's reconcile mode avoids rewriting unchanged global commands,
+but still overwrites guild commands; running registration in each Worker isolate
+can exhaust Discord's rate limit.
+Ordinary Worker deployments without command changes do not need this step.
 
 Drizzle only generates SQL migrations. Wrangler applies them to D1:
 
