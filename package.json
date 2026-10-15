@@ -6,6 +6,7 @@
 	"main": "./src/index.ts",
 	"scripts": {
 		"dev": "bun run dev:hermit",
+		"commands:deploy": "bun run forms:css && bun run scripts/deploy-commands.ts",
 		"deploy": "bun run forms:css && wrangler deploy --env-file .env",
 		"deploy:cf": "bunx wrangler d1 migrations apply DB --remote && bun run forms:css && wrangler deploy",
 		"deploy:cf:preview": "bun run forms:css && wrangler deploy --env-file .env --keep-vars --var FORMS_DEV:1",

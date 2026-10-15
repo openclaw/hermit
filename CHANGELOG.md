@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Stop automatically registering Discord commands on Worker requests and cron events; run `bun run commands:deploy` after the first deployment and command-definition changes to avoid repeated guild-command writes and rate limits.
 - Refresh Worker and forwarder runtime/build dependencies and Cloudflare types, including React 19.3, React Router 8.4, PostCSS CLI 12, and Wrangler; document the existing Node.js 22.22.0 build minimum.
 - Authenticate GitHub summaries with downloaded GitHub App RSA keys as well as PKCS#8 keys, instead of silently falling back to anonymous requests.
 
