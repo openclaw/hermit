@@ -99,7 +99,7 @@ describe("official support routing", () => {
 		})
 	}
 
-	for (const length of [3772, 3773, 3900, 4000]) {
+	for (const length of [3783, 3784, 3900, 4000]) {
 		it(`preserves delivery for a ${length}-character custom welcome`, async () => {
 			await withWelcomeEnv("x".repeat(length), async () => {
 				const db = new SqliteD1Database()
