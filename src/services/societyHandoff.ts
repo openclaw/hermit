@@ -295,7 +295,9 @@ export async function handleSocietyHandoff(
 				keys
 			)
 		)
-	} catch {
-		return json({ error: "handoff_failed" }, 502)
+	} catch (error) {
+		const message = error instanceof Error ? error.message : ""
+		const detail = /^(Discord \d{3}|Application mismatch|Bot identity mismatch|Malformed command inventory|Command retirement readback failed)$/.test(message) ? message : "internal"
+		return json({ error: "handoff_failed", detail }, 502)
 	}
 }
