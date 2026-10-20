@@ -110,7 +110,7 @@ async function discord(env: HermitEnv, path: string, method = "GET") {
 		response = await fetch(`https://discord.com/api/v10${path}`, {
 			method,
 			headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` },
-			redirect: "error"
+			redirect: "manual"
 		})
 	} catch (error) {
 		const name =
