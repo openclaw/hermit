@@ -5,7 +5,7 @@ import {
 } from "@buape/carbon"
 import SayCommand from "./sayCommand.js"
 
-const supportChannelId = "1459642797895319552"
+const supportLink = "https://community.openclaw.ai/"
 const faqLink = "https://docs.openclaw.ai/help/faq"
 const contributingLink =
 	"https://github.com/openclaw/openclaw/blob/main/CONTRIBUTING.md"
@@ -13,7 +13,7 @@ const contributingLink =
 class SayHelpCommand extends SayCommand {
 	name = "help"
 	description = "Share help instructions"
-	protected message = `For OpenClaw setup or troubleshooting help, create a post in <#${supportChannelId}>. Include your operating system, OpenClaw version, what you expected, what happened, and relevant redacted logs. Check the troubleshooting FAQ first: <${faqLink}>.`
+	protected message = `[Get support](${supportLink}) is the official OpenClaw support pathway for setup, usage questions, and troubleshooting. Find or create a relevant topic there. Include your operating system, OpenClaw version, what you expected, what happened, and relevant redacted logs. Check the troubleshooting FAQ first: <${faqLink}>.`
 }
 
 class SayPrReviewCommand extends SayCommand {

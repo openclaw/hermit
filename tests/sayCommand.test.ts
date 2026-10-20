@@ -50,8 +50,11 @@ describe("/say", () => {
 	it("points help requests to the support forum", async () => {
 		const message = await renderSubcommand("help")
 
-		expect(message).toContain("<#1459642797895319552>")
-		expect(message).toContain("create a post")
+		expect(message).toContain("[Get support](https://community.openclaw.ai/)")
+		expect(message).toContain("official OpenClaw support")
+		expect(message).toContain("relevant topic")
+		expect(message).toContain("redacted logs")
+		expect(message).not.toContain("<#1459642797895319552>")
 		expect(message).toContain("https://docs.openclaw.ai/help/faq")
 		expect(message).not.toContain("old-help")
 	})
