@@ -1,6 +1,6 @@
 import { describe, expect, it } from "bun:test"
 import { readFileSync } from "node:fs"
-import { ChannelType, Client, type ListenerEventData, Webhook } from "@buape/carbon"
+import { ChannelType, Client, Webhook } from "@buape/carbon"
 import ThreadCreateWelcome from "../src/events/threadCreateWelcome.js"
 import AutoModerationActionExecution from "../src/events/autoModerationActionExecution.js"
 import { setRuntimeEnv } from "../src/runtime/env.js"
@@ -129,7 +129,7 @@ describe("official support routing", () => {
 			matched_keyword: "<@387380367612706819>",
 			user_id: "member-test",
 			content: "<@387380367612706819> I need setup help"
-		} as ListenerEventData[typeof listener.type], client)
+		} as Parameters<AutoModerationActionExecution["handle"]>[0], client)
 		expect(reposts).toHaveLength(1)
 		expect(calls).toHaveLength(1)
 		const message = calls[0]!.body.content as string
