@@ -43,6 +43,7 @@ import {
 	runNominationGrantRecovery
 } from "./services/nominationExpiry.js"
 import { runNominationCardSyncRecovery } from "./services/nominationCardSync.js"
+import { runNominationCommandRecovery } from "./services/nominationCommandRecovery.js"
 import { runThreadLengthMonitor } from "./services/threadLengthMonitor.js"
 import { handleContentRightsApiRequest } from "./clawhubContentRights/api.js"
 import { handleSearchIntelligenceApiRequest } from "./clawhubSearchIntelligence/api.js"
@@ -164,6 +165,9 @@ export default {
 		ctx.waitUntil(runNominationExpiry(client))
 		ctx.waitUntil(runNominationGrantRecovery(client))
 		ctx.waitUntil(runNominationCardSyncRecovery(client))
+		if (controller.cron === "*/15 * * * *") {
+			ctx.waitUntil(runNominationCommandRecovery(client, env))
+		}
 		if (!controller.cron || controller.cron === "0 */2 * * *") {
 			ctx.waitUntil(runThreadLengthMonitor(client))
 		}

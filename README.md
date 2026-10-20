@@ -107,12 +107,31 @@ credentials in their local `.env` or environment:
 bun run commands:deploy
 ```
 
-Ordinary Worker requests and cron events no longer register commands automatically.
-The existing secret-protected `/deploy` endpoint remains an explicit registration
-alternative. Carbon's reconcile mode avoids rewriting unchanged global commands,
+Bulk command registration remains explicit and never runs on ordinary Worker
+requests or cron events. The bounded missing-`/nominate` recovery below is the only
+automatic registration exception. The existing secret-protected `/deploy` endpoint
+remains an explicit registration alternative. Carbon's reconcile mode avoids rewriting unchanged global commands,
 but still overwrites guild commands; running registration in each Worker isolate
 can exhaust Discord's rate limit.
 Ordinary Worker deployments without command changes do not need this step.
+
+### Missing nomination command recovery
+
+The existing 15-minute Worker cron also checks for a missing `/nominate`, using
+Hermit's runtime Discord credentials. The check is durably limited to once per
+hour per application through the existing D1 `keyValue` table, across all Worker
+isolates. It reads the global and configured guild inventories before creating
+only the absent slash command from its current source definition. Existing
+commands and their permissions are not changed; dev-guild mode is excluded.
+
+A successful code deployment therefore enables recovery on the next eligible
+cron run without a separate console login or operator registration. This does
+not bulk-register commands, does not run on ordinary HTTP requests, and never
+creates a nomination or grants a role. Errors retain the cooldown, Discord's
+longer `retry_after` is honored, and uncertain creates are checked against live
+inventory before retrying. Recovery emits `nomination_command_recovery` logs for
+creation/failure. If `/nominate` is already registered but hidden by integration
+permissions, this check deliberately leaves those permissions unchanged.
 
 Drizzle only generates SQL migrations. Wrangler applies them to D1:
 

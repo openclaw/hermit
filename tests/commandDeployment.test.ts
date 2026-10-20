@@ -2,7 +2,7 @@ import { expect, it } from "bun:test"
 import { readdirSync, readFileSync } from "node:fs"
 import { SqliteD1Database } from "./helpers/sqliteD1.js"
 
-it("registers commands explicitly, without writing to Discord on Worker requests", async () => {
+it("keeps request registration explicit and recovers only missing nominate on the guarded cron", async () => {
 	const settings = {
 		BASE_URL: "https://example.test",
 		DEPLOY_SECRET: "test-secret",
@@ -17,7 +17,7 @@ it("registers commands explicitly, without writing to Discord on Worker requests
 	const calls: { method: string; path: string }[] = []
 	const database = new SqliteD1Database()
 	const migrations = readdirSync("drizzle")
-		.filter((path) => /^000[4-9]_.*\.sql$/.test(path))
+		.filter((path) => /^(0000_|000[4-9]_).*\.sql$/.test(path))
 		.sort()
 	for (const path of migrations) {
 		database.database.exec(readFileSync(`drizzle/${path}`, "utf8"))
@@ -59,6 +59,13 @@ it("registers commands explicitly, without writing to Discord on Worker requests
 		)
 		await Promise.all(pending)
 		expect(calls).toEqual([])
+		worker.scheduled(
+			{ cron: "0 */2 * * *" } as ScheduledController,
+			{ ...settings, DB: database } as unknown as Env,
+			context
+		)
+		await Promise.all(pending)
+		expect(calls).toEqual([])
 
 		// Exercise the actual operator script and Carbon's pinned HTTP contract.
 		await import("../scripts/deploy-commands.ts")
@@ -71,6 +78,26 @@ it("registers commands explicitly, without writing to Discord on Worker requests
 		const registrationCalls = calls.length
 		expect((await request()).status).toBe(404)
 		expect(calls.length).toBe(registrationCalls)
+
+		worker.scheduled(
+			{ cron: "*/15 * * * *" } as ScheduledController,
+			{ ...settings, DB: database } as unknown as Env,
+			context
+		)
+		await Promise.all(pending)
+		expect(calls.slice(registrationCalls)).toEqual([
+			{ method: "GET", path: "/api/applications/1/commands" },
+			{ method: "GET", path: "/api/applications/1/guilds/1456350064065904867/commands" },
+			{ method: "POST", path: "/api/applications/1/commands" }
+		])
+		const recoveredCalls = calls.length
+		worker.scheduled(
+			{ cron: "*/15 * * * *" } as ScheduledController,
+			{ ...settings, DB: database } as unknown as Env,
+			context
+		)
+		await Promise.all(pending)
+		expect(calls.length).toBe(recoveredCalls)
 	} finally {
 		database.close()
 		globalThis.fetch = previousFetch
