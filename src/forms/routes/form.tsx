@@ -1,5 +1,5 @@
 import { getFormAuthProviders, renderFormText } from "../forms.js"
-import type { FormConfig, FormField } from "../types.js"
+import type { FormAuthProvider, FormConfig, FormField } from "../types.js"
 import {
 	Alert,
 	Button,
@@ -85,9 +85,8 @@ const Field = ({ field, values }: { field: FormField; values?: Record<string, st
 	)
 }
 
-const providerName = (provider: "discord" | "github" | "reddit") => {
+const providerName = (provider: FormAuthProvider) => {
 	if (provider === "github") return "GitHub"
-	if (provider === "reddit") return "Reddit"
 	return "Discord"
 }
 

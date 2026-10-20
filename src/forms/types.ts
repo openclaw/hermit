@@ -37,7 +37,7 @@ export type FormField =
 		placeholder?: string
 	}
 
-export type FormAuthProvider = "discord" | "github" | "reddit"
+export type FormAuthProvider = "discord" | "github"
 
 export type FormTarget = "authUser" | "authUsername" | string
 
@@ -69,4 +69,3 @@ export type FormAction =
 	| { type: "github.blockOrgUser"; org: string; target: FormTarget }
 	| { type: "github.unblockOrgUser"; org: string; target: FormTarget }
 	| { type: "clawhub.unbanUser"; target: FormTarget; reason?: string }
-	| { type: "reddit.unbanSubredditUser"; subreddit: string; target: FormTarget; reason?: string }

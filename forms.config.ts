@@ -9,8 +9,7 @@ export const formSettings = {
 	moderatorReportReviewChannelId: "1457498550651851005",
 	moderatorReportReviewRoleId: "1477360613125787678",
 	discordGuildId: "1456350064065904867",
-	githubOrg: "openclaw",
-	redditSubreddit: "openclaw"
+	githubOrg: "openclaw"
 }
 
 /*
@@ -189,33 +188,10 @@ export const formConfigs = [
 		actions: { accept: [], deny: [] }
 	},
 	{
-		id: "reddit",
-		title: "Reddit Ban Appeal",
-		description: "Request a Reddit ban review.",
-		auth: "reddit",
-		requiredAction: "banned",
-		reviewChannelId: formSettings.reviewChannelId,
-		reviewRoleId: formSettings.reviewRoleId,
-		reviewPingRoleId: formSettings.reviewPingRoleId,
-		successMessage: "Submitted.",
-		fields: appealFields,
-		actions: {
-			accept: [
-				{
-					type: "reddit.unbanSubredditUser",
-					subreddit: formSettings.redditSubreddit,
-					target: "authUsername",
-					reason: "Appeal accepted."
-				}
-			],
-			deny: []
-		}
-	},
-	{
 		id: "report-mod",
 		title: "Report a Moderator",
 		description: "Report moderator misconduct.",
-		auth: ["discord", "github", "reddit"],
+		auth: ["discord", "github"],
 		reviewChannelId: formSettings.moderatorReportReviewChannelId,
 		reviewRoleId: formSettings.moderatorReportReviewRoleId,
 		reviewPingRoleId: formSettings.reviewPingRoleId,

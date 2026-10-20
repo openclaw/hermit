@@ -74,7 +74,7 @@ The HTML index at `/` remains public and contains only endpoint links and filter
 
 Configure forms in `forms.config.ts`. `reviewRoleId` controls who can accept or deny submissions; optional `reviewPingRoleId` selects the role notified on new submissions and defaults to `reviewRoleId`.
 
-Discord, GitHub, and Reddit appeals plus moderator reports notify `1546936406272778271`, while Community Team (`1477360613125787678`) retains review access. ClawHub notifications and review access use `1509967254870298794`.
+Discord and GitHub appeals plus moderator reports notify `1546936406272778271`, while Community Team (`1477360613125787678`) retains review access. ClawHub notifications and review access use `1509967254870298794`.
 
 ## Scripts
 
@@ -139,6 +139,18 @@ Barnacle. Explicit command registration must remove Hermit's old command after
 the Worker revision is deployed. Retain original review history; do not delete
 tables or replay old role grants. A source commit alone does not verify the live
 handoff or remove Discord registrations.
+
+## Reddit moderation retirement
+
+Reddit ban appeals, Reddit OAuth (including moderator report sign-in), and the
+Devvit context/unban bridge have been removed. Existing Reddit review buttons
+cannot accept or deny appeals after this revision is deployed.
+
+Existing form submissions and the D1 `reddit_moderation_contexts` table remain
+historical data. Its schema lives in `src/db/archived-reddit.ts`, used only by
+Drizzle generation to preserve history; the Worker does not import it. Original
+migrations remain unchanged. Reddit OAuth and Devvit environment variables are
+no longer used.
 
 ## Clawtributor claim review
 

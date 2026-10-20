@@ -1,6 +1,5 @@
 import type { Client } from "@buape/carbon"
 import { buildFormReviewMessage } from "./reviewButtons.js"
-import { formSettings } from "../../forms.config.js"
 import { getAvailableFormConfigs, getFormAuthProviders, getFormConfig, renderFormText } from "./forms.js"
 import type { FormAuthProvider, FormConfig } from "./types.js"
 import {
@@ -12,7 +11,6 @@ import {
 } from "./submissions.js"
 import { getRuntimeEnv } from "../runtime/env.js"
 import { fetchFormContext } from "./context.js"
-import { upsertRedditModerationContext } from "./redditContext.js"
 import {
 	createOAuthState,
 	createSession,
@@ -47,24 +45,17 @@ import { buildSubmissionPayload, collectPayload } from "./payload.js"
 
 const discordApiBase = "https://discord.com/api/v10"
 const githubApiBase = "https://api.github.com"
-const redditApiBase = "https://oauth.reddit.com"
 const formHosts = new Set(["appeals.openclaw.ai", "forms.openclaw.ai"])
 const localUsers: Record<FormAuthProvider, { id: string; username: string; provider: FormAuthProvider }> = {
 	discord: { id: "679604208940351488", username: "peetiegonzalez", provider: "discord" },
-	github: { id: "123456", username: "thewilloftheshadow", provider: "github" },
-	reddit: { id: "t2_openclaw", username: "u/openclaw", provider: "reddit" }
+	github: { id: "123456", username: "thewilloftheshadow", provider: "github" }
 }
 
 const isFormsDev = () => process.env.FORMS_DEV === "1"
 const isFormHost = (url: URL) => formHosts.has(url.hostname) || isFormsDev()
 
-const devvitRedditContextPath = "/api/devvit/reddit/context"
-
 const isFormsRequest = (request: Request) => {
 	const url = new URL(request.url)
-	if (url.pathname === devvitRedditContextPath) {
-		return true
-	}
 	const formPath = getAvailableFormConfigs().some((form) =>
 		url.pathname === `/${form.id}` ||
 		url.pathname === `/${form.id}/submit`
@@ -240,38 +231,6 @@ const githubCallback = async (request: Request) => {
 		return new Response(renderResultPage("Sign in failed", "GitHub did not return a user.", false), { status: 400, headers: { "content-type": "text/html; charset=utf-8" } })
 	}
 	const session = await createSession({ formId: state.formId, provider: "github", id: String(user.id), username: user.login })
-	return Response.redirect(`${state.origin}/${state.formId}?session=${encodeURIComponent(session)}`, 302)
-}
-
-const redditCallback = async (request: Request) => {
-	const url = new URL(request.url)
-	const state = await readSignedToken(url.searchParams.get("state"))
-	const clientId = process.env.REDDIT_OAUTH_CLIENT_ID
-	const clientSecret = process.env.REDDIT_OAUTH_CLIENT_SECRET
-	if (!state || state.provider !== "reddit" || typeof state.formId !== "string" || typeof state.origin !== "string" || !clientId || !clientSecret) {
-		return new Response(renderResultPage("Sign in failed", "Reddit OAuth is not configured or the sign-in expired.", false), { status: 400, headers: { "content-type": "text/html; charset=utf-8" } })
-	}
-	const credentials = btoa(`${clientId}:${clientSecret}`)
-	const response = await fetch("https://www.reddit.com/api/v1/access_token", {
-		method: "POST",
-		headers: {
-			Authorization: `Basic ${credentials}`,
-			"User-Agent": "OpenClaw Hermit Forms",
-			"content-type": "application/x-www-form-urlencoded"
-		},
-		body: new URLSearchParams({
-			grant_type: "authorization_code",
-			code: url.searchParams.get("code") ?? "",
-			redirect_uri: `${state.origin}/oauth/reddit/callback`
-		})
-	})
-	const token = response.ok ? (await response.json() as { access_token?: string }).access_token : null
-	const userResponse = token ? await fetch(`${redditApiBase}/api/v1/me`, { headers: { Authorization: `Bearer ${token}`, "User-Agent": "OpenClaw Hermit Forms" } }) : null
-	const user = userResponse?.ok ? await userResponse.json() as { id: string; name: string } : null
-	if (!user) {
-		return new Response(renderResultPage("Sign in failed", "Reddit did not return a user.", false), { status: 400, headers: { "content-type": "text/html; charset=utf-8" } })
-	}
-	const session = await createSession({ formId: state.formId, provider: "reddit", id: user.id, username: `u/${user.name}` })
 	return Response.redirect(`${state.origin}/${state.formId}?session=${encodeURIComponent(session)}`, 302)
 }
 
@@ -471,54 +430,6 @@ const handleFormSubmit = async (request: Request, form: FormConfig, client: Clie
 	)
 }
 
-const handleDevvitRedditContext = async (request: Request) => {
-	if (request.method !== "POST") {
-		return new Response("Method not allowed", { status: 405 })
-	}
-	const secret = process.env.DEVVIT_REDDIT_BRIDGE_SECRET
-	const authorization = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "")
-	const headerSecret = request.headers.get("x-devvit-secret")
-	if (!secret || (authorization !== secret && headerSecret !== secret)) {
-		return new Response("Unauthorized", { status: 401 })
-	}
-	const body = await request.json().catch(() => null) as null | {
-		subreddit?: unknown
-		username?: unknown
-		action?: unknown
-		unaction?: unknown
-		banReason?: unknown
-		moderator?: unknown
-		bannedAt?: unknown
-		expiresAt?: unknown
-	}
-	if (!body || typeof body.username !== "string") {
-		return new Response(JSON.stringify({ error: "username is required" }), {
-			status: 400,
-			headers: { "content-type": "application/json" }
-		})
-	}
-	const action = body.action === "banned" || body.action === "muted" || body.action === "moderated"
-		? body.action
-		: "banned"
-	const unaction = typeof body.unaction === "string"
-		? body.unaction
-		: action === "banned" ? "unbanned" : action === "muted" ? "unmuted" : "reviewed"
-	const context = await upsertRedditModerationContext({
-		subreddit: typeof body.subreddit === "string" ? body.subreddit : formSettings.redditSubreddit,
-		username: body.username,
-		action,
-		unaction,
-		banReason: typeof body.banReason === "string" ? body.banReason : null,
-		moderator: typeof body.moderator === "string" ? body.moderator : null,
-		bannedAt: typeof body.bannedAt === "string" ? body.bannedAt : null,
-		expiresAt: typeof body.expiresAt === "string" ? body.expiresAt : null,
-		rawPayload: JSON.stringify(body)
-	})
-	return new Response(JSON.stringify({ ok: true, id: context.id }), {
-		headers: { "content-type": "application/json" }
-	})
-}
-
 const startOAuth = async (request: Request, provider: FormAuthProvider) => {
 	const url = new URL(request.url)
 	const form = getFormConfig(url.searchParams.get("form") ?? "")
@@ -556,18 +467,7 @@ const startOAuth = async (request: Request, provider: FormAuthProvider) => {
 		oauthUrl.searchParams.set("state", state)
 		return Response.redirect(oauthUrl.toString(), 302)
 	}
-	const clientId = process.env.REDDIT_OAUTH_CLIENT_ID
-	if (!clientId) {
-		return new Response(renderResultPage("Reddit OAuth unavailable", "Configure REDDIT_OAUTH_CLIENT_ID and REDDIT_OAUTH_CLIENT_SECRET first.", false), { status: 400, headers: { "content-type": "text/html; charset=utf-8" } })
-	}
-	const oauthUrl = new URL("https://www.reddit.com/api/v1/authorize")
-	oauthUrl.searchParams.set("client_id", clientId)
-	oauthUrl.searchParams.set("redirect_uri", `${origin}/oauth/reddit/callback`)
-	oauthUrl.searchParams.set("response_type", "code")
-	oauthUrl.searchParams.set("duration", "temporary")
-	oauthUrl.searchParams.set("scope", "identity read")
-	oauthUrl.searchParams.set("state", state)
-	return Response.redirect(oauthUrl.toString(), 302)
+	return new Response("Unknown sign-in method", { status: 400 })
 }
 
 export const handleFormsRequest = async (request: Request, client: Client) => {
@@ -576,13 +476,11 @@ export const handleFormsRequest = async (request: Request, client: Client) => {
 	}
 	const normalized = normalizeFormsRequest(request)
 	const url = new URL(normalized.url)
-	if (url.pathname === devvitRedditContextPath) return handleDevvitRedditContext(normalized)
 	if (url.pathname === "/oauth/discord/callback") return discordCallback(normalized)
 	if (url.pathname === "/oauth/github/callback") return githubCallback(normalized)
-	if (url.pathname === "/oauth/reddit/callback") return redditCallback(normalized)
 	if (url.pathname === "/oauth/discord/start") return startOAuth(normalized, "discord")
 	if (url.pathname === "/oauth/github/start") return startOAuth(normalized, "github")
-	if (url.pathname === "/oauth/reddit/start") return startOAuth(normalized, "reddit")
+	if (url.pathname.startsWith("/oauth/")) return new Response("Unknown sign-in method", { status: 404 })
 	const form = getAvailableFormConfigs().find((item) => url.pathname === `/${item.id}` || url.pathname === `/${item.id}/submit`)
 	if (form && normalized.method === "GET") return handleFormGet(normalized, form)
 	if (form && normalized.method === "POST") return handleFormSubmit(normalized, form, client)
