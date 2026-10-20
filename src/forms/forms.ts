@@ -5,14 +5,12 @@ export const formConfigs = configuredFormConfigs
 
 const discordConfigured = () => Boolean(process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET)
 const githubConfigured = () => Boolean(process.env.GITHUB_OAUTH_CLIENT_ID && process.env.GITHUB_OAUTH_CLIENT_SECRET)
-const redditConfigured = () => Boolean(process.env.REDDIT_OAUTH_CLIENT_ID && process.env.REDDIT_OAUTH_CLIENT_SECRET)
 const clawHubConfigured = () => Boolean(process.env["CLAWHUB_BAN_APPEALS_TOKEN"])
 
 export const isFormAuthProviderAvailable = (provider: FormAuthProvider) => {
 	if (provider === "discord") return discordConfigured()
 	if (provider === "github") return githubConfigured()
-	if (provider === "reddit") return redditConfigured()
-	return true
+	return false
 }
 
 const isFormIntegrationAvailable = (form: FormConfig) => {

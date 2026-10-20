@@ -58,9 +58,6 @@ const titleFor = (form: FormConfig, submission: FormSubmission) => {
 		const payload = parseSubmissionPayload(submission)
 		return `ClawHub Content Rights Request - ${truncateText(payload.organization || payload.requesterName, contentRightsReviewLimits.titleName) || "Unknown"}`
 	}
-	if (form.id === "reddit") {
-		return `Reddit Ban Appeal sent by @${applicantName(submission)}`
-	}
 	return `${form.title} sent by @${applicantName(submission)}`
 }
 
@@ -199,15 +196,6 @@ const detailComponentsFor = (form: FormConfig, submission: FormSubmission) => {
 				detailField("ClawHub URLs", truncateLines(payload.clawhubUrls, contentRightsReviewLimits.clawhubUrls, "URLs"))
 			].join("\n"))
 		]
-	}
-	if (form.id === "reddit") {
-		return [new TextDisplay([
-			detailField("Reddit user", applicantName(submission)),
-			detailField("Reddit ID", submission.applicantId ?? "Unknown"),
-			detailField("Scope", payload.scope || "Unknown"),
-			detailField("Reason", payload.banReason),
-			detailField("Links", payload.links)
-		].join("\n"))]
 	}
 	return [new TextDisplay([
 		detailField("Applicant", `@${applicantName(submission)}`),

@@ -4,7 +4,6 @@ import { getRuntimeEnv } from "../runtime/env.js"
 import { getGitHubHeaders } from "../utils/githubAuth.js"
 import { latestClawHubContext } from "./context.js"
 import { parseSubmissionPayload } from "./submissions.js"
-import { normalizeRedditUsername, upsertRedditModerationContext } from "./redditContext.js"
 
 const discordApiBase = "https://discord.com/api/v10"
 
@@ -118,37 +117,6 @@ const clawHubUnbanRequest = async (
 	return "clawhub.unbanUser"
 }
 
-const redditRequest = async (action: Extract<FormAction, { type: "reddit.unbanSubredditUser" }>, submission: FormSubmission) => {
-	const url = requireValue(process.env.DEVVIT_REDDIT_ACTION_URL ?? "", "DEVVIT_REDDIT_ACTION_URL")
-	const secret = requireValue(process.env.DEVVIT_REDDIT_BRIDGE_SECRET ?? "", "DEVVIT_REDDIT_BRIDGE_SECRET")
-	const username = normalizeRedditUsername(resolveTarget(action.target, submission))
-	const response = await fetch(url, {
-		method: "POST",
-		headers: {
-			Authorization: `Bearer ${secret}`,
-			"content-type": "application/json"
-		},
-		body: JSON.stringify({
-			action: "unban",
-			subreddit: action.subreddit,
-			username,
-			reason: action.reason ?? `Form ${submission.id}`
-		})
-	})
-	if (!response.ok) {
-		throw new Error(`Devvit Reddit action ${response.status}: ${await response.text()}`)
-	}
-	await upsertRedditModerationContext({
-		subreddit: action.subreddit,
-		username,
-		action: "moderated",
-		unaction: "reviewed",
-		banReason: null,
-		rawPayload: JSON.stringify({ source: "form-action", formSubmissionId: submission.id })
-	})
-	return "reddit.unbanSubredditUser"
-}
-
 const runAction = async (
 	action: FormAction,
 	submission: FormSubmission,
@@ -156,9 +124,6 @@ const runAction = async (
 ) => {
 	if (action.type === "discord.resolveAppeal") {
 		return resolveDiscordAppeal(action, submission)
-	}
-	if (action.type === "reddit.unbanSubredditUser") {
-		return redditRequest(action, submission)
 	}
 	if (action.type === "clawhub.unbanUser") {
 		return clawHubUnbanRequest(action, submission, options)

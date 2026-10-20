@@ -182,10 +182,6 @@ declare global {
 			GITHUB_OAUTH_CLIENT_SECRET?: string;
 			FORMS_BASE_URL?: string;
 			FORMS_DEV?: string;
-			REDDIT_OAUTH_CLIENT_ID?: string;
-			REDDIT_OAUTH_CLIENT_SECRET?: string;
-			DEVVIT_REDDIT_BRIDGE_SECRET?: string;
-			DEVVIT_REDDIT_ACTION_URL?: string;
 			RESEND_API_KEY?: string;
 			CLAWHUB_NOREPLY_FROM?: string;
 			CLAWHUB_HERMIT_TOKEN?: string;

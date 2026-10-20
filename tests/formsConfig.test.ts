@@ -43,7 +43,7 @@ describe("form review routing", () => {
 		expect(form?.reviewRoleId).toBe(formSettings.moderatorReportReviewRoleId)
 	})
 
-	it.each(["discord-ban", "discord-mute", "github", "reddit", "report-mod"])(
+	it.each(["discord-ban", "discord-mute", "github", "report-mod"])(
 		"pings the notification role for %s while retaining Community Team review access",
 		(formId) => {
 			const form = formConfigs.find((item) => item.id === formId)!

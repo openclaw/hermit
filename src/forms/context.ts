@@ -2,7 +2,6 @@ import { formSettings } from "../../forms.config.js"
 import type { FormConfig } from "./types.js"
 import { getRuntimeEnv } from "../runtime/env.js"
 import { getGitHubHeaders } from "../utils/githubAuth.js"
-import { getRedditModerationContext, normalizeRedditUsername } from "./redditContext.js"
 
 const discordApiBase = "https://discord.com/api/v10"
 const githubApiBase = "https://api.github.com"
@@ -248,23 +247,6 @@ export const latestClawHubContext = async (providerAccountId: string) => {
 	}
 }
 
-const latestRedditContext = async (username: string) => {
-	const subreddit = formSettings.redditSubreddit
-	const normalized = normalizeRedditUsername(username)
-	const context = await getRedditModerationContext({ subreddit, username: normalized })
-	return {
-		action: context?.action ?? "moderated",
-		unaction: context?.unaction ?? "reviewed",
-		redditUser: `u/${normalized}`,
-		banReason: context?.banReason || noListedReason,
-		moderator: context?.moderator || notAvailable,
-		scope: `r/${subreddit}`,
-		links: `https://reddit.com/u/${normalized}`,
-		...(context?.bannedAt ? { date: context.bannedAt } : {}),
-		...(context?.expiresAt ? { expiresAt: context.expiresAt } : {})
-	}
-}
-
 export const fetchFormContext = async (
 	form: FormConfig,
 	user: { id: string; username: string }
@@ -280,9 +262,6 @@ export const fetchFormContext = async (
 	}
 	if (form.id === "clawhub") {
 		return latestClawHubContext(user.id)
-	}
-	if (form.id === "reddit") {
-		return latestRedditContext(user.username)
 	}
 	return {}
 }
