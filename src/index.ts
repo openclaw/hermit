@@ -48,6 +48,7 @@ import { handleContentRightsApiRequest } from "./clawhubContentRights/api.js"
 import { handleSearchIntelligenceApiRequest } from "./clawhubSearchIntelligence/api.js"
 import { handlePublisherAbuseDigestApiRequest } from "./clawhubPublisherAbuse/api.js"
 import { handleLobsterDossierRequest } from "./lobsterDossiers/server.js"
+import { handleSocietyHandoff, societyIsRetired } from "./services/societyHandoff.js"
 
 export const client = new Client(
 	{
@@ -136,6 +137,8 @@ const handler = createHandler(client)
 export default {
 	async fetch(request: Request, env: HermitEnv, ctx: ExecutionContext) {
 		hydrateRuntimeEnv(env)
+		const societyHandoff = await handleSocietyHandoff(request, env)
+		if (societyHandoff) return societyHandoff
 		const lobsterDossierResponse = handleLobsterDossierRequest(request)
 		if (lobsterDossierResponse) {
 			return lobsterDossierResponse
@@ -161,9 +164,10 @@ export default {
 	},
 	scheduled(controller: ScheduledController, env: HermitEnv, ctx: ExecutionContext) {
 		hydrateRuntimeEnv(env)
-		ctx.waitUntil(runNominationExpiry(client))
-		ctx.waitUntil(runNominationGrantRecovery(client))
-		ctx.waitUntil(runNominationCardSyncRecovery(client))
+		ctx.waitUntil((async () => {
+			if (await societyIsRetired(env)) return
+			await Promise.all([runNominationExpiry(client), runNominationGrantRecovery(client), runNominationCardSyncRecovery(client)])
+		})())
 		if (!controller.cron || controller.cron === "0 */2 * * *") {
 			ctx.waitUntil(runThreadLengthMonitor(client))
 		}

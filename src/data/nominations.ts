@@ -116,16 +116,14 @@ const mapNominationRow = (row: Record<string, unknown>): Nomination => ({
 export const createNomination = async (
 	input: CreateNominationInput
 ): Promise<Nomination | null> => {
-	const [nomination] = await getPrimaryDb()
-		.insert(nominations)
-		.values({
-			...input,
-			status: "submitted"
-		})
-		.onConflictDoNothing()
-		.returning()
-
-	return nomination ?? null
+	const result = await getPrimaryDb().$client.prepare(`INSERT INTO nominations
+		(guild_id,channel_id,nominee_id,nominator_id,reason,expires_at,target_role_id,required_approvals,status)
+		SELECT ?,?,?,?,?,?,?,?,'submitted'
+		WHERE NOT EXISTS(SELECT 1 FROM keyValue WHERE key='shell-society-owner-v1')
+		ON CONFLICT DO NOTHING RETURNING *`)
+		.bind(input.guildId,input.channelId,input.nomineeId,input.nominatorId,input.reason,input.expiresAt,input.targetRoleId,input.requiredApprovals)
+		.all<Record<string, unknown>>()
+	return result.results[0] ? mapNominationRow(result.results[0]) : null
 }
 
 export const getNomination = async (id: number): Promise<Nomination | null> => {

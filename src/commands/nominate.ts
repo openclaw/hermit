@@ -22,6 +22,8 @@ import {
 } from "../data/nominations.js"
 import { editNominationMessageExpired } from "../services/nominationExpiry.js"
 import BaseCommand from "./base.js"
+import { societyIsFrozen } from "../services/societyHandoff.js"
+import { getRuntimeEnv } from "../runtime/env.js"
 
 const getNominationExpiresAt = () =>
 	new Date(
@@ -63,6 +65,10 @@ export default class NominateCommand extends BaseCommand {
 	}
 
 	async run(interaction: CommandInteraction) {
+		if (await societyIsFrozen(getRuntimeEnv())) {
+			await this.replyWithNotice(interaction, "Shell Society nominations are moving to Barnacle. New nominations are paused during the handoff.")
+			return
+		}
 		const channelId = interaction.rawData.channel_id ?? interaction.channel?.id
 		if (channelId !== nominationConfig.nominationChannelId) {
 			await this.replyWithNotice(interaction, nominationConfig.copy.wrongChannel)

@@ -121,6 +121,23 @@ bun run db:generate
 bun run db:apply:remote
 ```
 
+## Temporary Shell Society handoff
+
+This preparation revision exposes one temporary signed operation for the
+Barnacle migration. It accepts only inspect, freeze and terminal export; it
+cannot execute arbitrary SQL, return bot credentials, grant roles or administer
+other features. Its committed public verification key expires after one day;
+the private signing/decryption keys remain with the migration operator.
+Requests are timestamped, nonce-protected and signed, and export responses are
+sealed to that operator's public encryption key. No plaintext nomination reason
+is published through an unauthenticated endpoint or deployment artifact.
+
+Freeze pauses nomination intake atomically, removes only the exact old nominate
+slash commands after authenticated inventory/readback, and leaves existing review
+and recovery running. Terminal export retires Society jobs only after zero active
+nominations/grants and zero pending card revisions. The next coordinated revision
+removes nomination runtime and this temporary operation. D1 history is preserved.
+
 ## Clawtributor claim review
 
 If saving a rejection fails, Hermit does not notify the applicant and restores the review buttons for another attempt. If Discord also rejects the message update, the reviewer receives an error explaining that the review could not be reopened automatically and needs moderator recovery.

@@ -1,0 +1,14 @@
+{
+  "expiresAt": 1792606368586,
+  "signing": {
+    "kty": "EC",
+    "x": "bXSZDHiUoOOhVxB8vNbjPx35_T2-GJX-CL9I2a0OaAU",
+    "y": "MPW5X08YvvQ-zi3V9KzDz4V5zvkfnLss_zdmM84oeLM",
+    "crv": "P-256"
+  },
+  "encryption": {
+    "kty": "RSA",
+    "n": "1TLaoJLi1ehwzd2OgIr0DgkfPs5uQxMjGYhGsllpjsbeCP1m4MRSjQqrh5fOvrfSxgROgW31gL7CLyCfSY5QYAUqUkThbcSKcEH-_v21AvvNiiS-nw3Y8sNUcoA6vU-rHG6DMVKXQ_it8KHL7f2hQKqnBpQyQNhjzfIGda7SthlyCENDr6B3Omu8NQXGjgnzyDKdbMA-K3uicLbE0tjK7IBwoyU8M3kzPWUcsf9oAGJUldlwL_YSQoZQ9Hd-oh47mWJopBRnf7RjOYbkvENjty4sDxSR6nYt7EKWeX0_wuOvT8SxPmOfQ5t4zy0HEA5ZpjCvcPBIJOoGjjXln-QU-ebWWxHGdBcBIA3SB8qdQo7GMaC_y5fsNoRNAsiy7285mXH0MUlOQwmW8bpaMZoLNUJgrMKO4sJ1rXT4m5Zl74bouV60j_wQArcH3Mf3Ki1lQKSyxjN_3ZRhORMctqtLiXE55U1dPt0j_XMaJoRrTvXjeJrrWm6w5QaUs2b0D6Kh",
+    "e": "AQAB"
+  }
+}

@@ -6,3 +6,4 @@ tmp/
 src/forms/styles.generated.css
 src/forms/styles.generated.ts
 .wrangler/
+.local/

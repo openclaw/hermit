@@ -77,6 +77,8 @@ export class SqliteD1Database {
 	}
 
 	withSession() {
+		// Feature-only fixtures still need production's base key/value contract.
+		this.database.exec('CREATE TABLE IF NOT EXISTS keyValue(key TEXT PRIMARY KEY,value TEXT NOT NULL,createdAt INTEGER NOT NULL,updatedAt INTEGER NOT NULL)')
 		return this
 	}
 
