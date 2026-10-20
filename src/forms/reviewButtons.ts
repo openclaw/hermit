@@ -56,7 +56,7 @@ const titleFor = (form: FormConfig, submission: FormSubmission) => {
 	}
 	if (form.id === "clawhub-content-rights") {
 		const payload = parseSubmissionPayload(submission)
-		return `ClawHub Content Rights Request - ${payload.organization || payload.requesterName || "Unknown"}`
+		return `ClawHub Content Rights Request - ${truncateText(payload.organization || payload.requesterName, contentRightsReviewLimits.titleName) || "Unknown"}`
 	}
 	if (form.id === "reddit") {
 		return `Reddit Ban Appeal sent by @${applicantName(submission)}`
@@ -85,6 +85,61 @@ const formatDuration = (value?: string) => {
 }
 
 const detailField = (label: string, value?: string | null) => `**${label}:** ${value || "Not provided"}`
+
+/**
+ * Per-field caps for the public content rights review card. Together with the
+ * intake limits they keep the card under Discord's 4000-character total text
+ * limit for Components v2 messages, including a later decision reason.
+ */
+export const contentRightsReviewLimits = {
+	titleName: 100,
+	requesterName: 120,
+	organization: 120,
+	email: 254,
+	clawhubUrls: 600,
+	explanation: 900,
+	attachments: 240
+} as const
+
+const contentRightsTruncationNote = "\n-# Truncated; the full text is in the case record."
+
+const truncateText = (value: string | undefined, maxLength: number, note = "") => {
+	if (!value || value.length <= maxLength) {
+		return value
+	}
+	return `${value.slice(0, Math.max(0, maxLength - 1)).trimEnd()}…${note}`
+}
+
+const truncateLines = (value: string | undefined, maxLength: number, noun: string) => {
+	if (!value || value.length <= maxLength) {
+		return value
+	}
+	const lines = value.split("\n")
+	const kept: string[] = []
+	let length = 0
+	for (const line of lines) {
+		const next = length + (kept.length ? 1 : 0) + line.length
+		if (next > maxLength) {
+			break
+		}
+		kept.push(line)
+		length = next
+	}
+	if (!kept.length) {
+		return truncateText(lines.join(" "), maxLength, contentRightsTruncationNote)
+	}
+	return `${kept.join("\n")}\n-# …and ${lines.length - kept.length} more ${noun} in the case record`
+}
+
+const contentRightsAnswer = (fieldId: string, value: string | undefined) => {
+	if (fieldId === "explanation") {
+		return truncateText(value, contentRightsReviewLimits.explanation, contentRightsTruncationNote)
+	}
+	if (fieldId === "attachments") {
+		return truncateLines(value, contentRightsReviewLimits.attachments, "attachments")
+	}
+	return truncateText(value, contentRightsReviewLimits.explanation, contentRightsTruncationNote)
+}
 
 const detailComponentsFor = (form: FormConfig, submission: FormSubmission) => {
 	const payload = parseSubmissionPayload(submission)
@@ -138,10 +193,10 @@ const detailComponentsFor = (form: FormConfig, submission: FormSubmission) => {
 				new FormReviewCopyButton(submission.id, "caseId", "Copy Case ID")
 			),
 			new TextDisplay([
-				detailField("Requester", payload.requesterName),
-				detailField("Organization", payload.organization),
-				detailField("Email", payload.email),
-				detailField("ClawHub URLs", payload.clawhubUrls)
+				detailField("Requester", truncateText(payload.requesterName, contentRightsReviewLimits.requesterName)),
+				detailField("Organization", truncateText(payload.organization, contentRightsReviewLimits.organization)),
+				detailField("Email", truncateText(payload.email, contentRightsReviewLimits.email)),
+				detailField("ClawHub URLs", truncateLines(payload.clawhubUrls, contentRightsReviewLimits.clawhubUrls, "URLs"))
 			].join("\n"))
 		]
 	}
@@ -186,7 +241,12 @@ const answerLinesFor = (form: FormConfig, submission: FormSubmission) => {
 			}
 			return true
 		})
-		.map((field) => `**${renderFormText(field.label, payload)}**\n${payload[field.id] || "—"}`)
+		.map((field) => {
+			const value = form.id === "clawhub-content-rights"
+				? contentRightsAnswer(field.id, payload[field.id])
+				: payload[field.id]
+			return `**${renderFormText(field.label, payload)}**\n${value || "—"}`
+		})
 }
 
 export const buildFormReviewContainer = (

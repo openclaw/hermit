@@ -26,7 +26,7 @@ import {
 	renderReactRouter,
 	renderResultPage
 } from "./render.js"
-import { storeEvidenceFile } from "../clawhubContentRights/intake.js"
+import { contentRightsFormId, storeEvidenceFile } from "../clawhubContentRights/intake.js"
 import {
 	appendContentRightsEvent,
 	createContentRightsCase,
@@ -34,8 +34,14 @@ import {
 } from "../clawhubContentRights/cases.js"
 import {
 	ContentRightsValidationError,
-	intakeContentRightsCase
+	intakeContentRightsCase,
+	type ContentRightsWorkflowDependencies
 } from "../clawhubContentRights/workflow.js"
+import {
+	isContentRightsSubmissionAllowed,
+	type ContentRightsRateLimiter
+} from "../clawhubContentRights/rateLimit.js"
+import type { FormSubmission } from "../db/schema.js"
 import { sendContentRightsReceipt } from "../clawhubContentRights/receipt.js"
 import { buildSubmissionPayload, collectPayload } from "./payload.js"
 
@@ -306,64 +312,129 @@ const handleFormGet = async (request: Request, form: FormConfig) => {
 	return new Response(renderPage(form.title, <FormRoute form={form} session={session ?? "local"} user={user} values={values} />), { headers: { "content-type": "text/html; charset=utf-8" } })
 }
 
-const handleFormSubmit = async (request: Request, form: FormConfig, client: Client) => {
-	if (form.id === "clawhub-content-rights" && form.auth === null) {
-		try {
-			const body = await request.formData()
-			const result = await intakeContentRightsCase(body, {
-				createSubmission: (payload) => createFormSubmission({
-					formId: form.id,
-					authProvider: null,
-					applicantId: null,
-					applicantUsername: null,
-					payload,
-					reviewChannelId: form.reviewChannelId
-				}),
-				updateSubmissionPayload: updateFormSubmissionPayload,
-				createCase: createContentRightsCase,
-				storeFile: (caseId, kind, file) =>
-					storeEvidenceFile(getRuntimeEnv().CLAWHUB_CASE_FILES, caseId, kind, file),
-				recordFile: recordContentRightsFile,
-				appendEvent: appendContentRightsEvent,
-				sendReceipt: sendContentRightsReceipt
-			})
-			const submission = await getFormSubmission(result.submission.id)
-			if (!submission) {
-				throw new Error(`Could not reload content rights submission ${result.submission.id}.`)
-			}
-			await sendReview(client, form, submission)
-			await appendContentRightsEvent({
-				caseId: result.caseId,
-				eventType: "discord_review_posted",
-				metadata: { reviewChannelId: form.reviewChannelId }
-			})
+const htmlHeaders = { "content-type": "text/html; charset=utf-8" }
+
+type ContentRightsEvent = Parameters<typeof appendContentRightsEvent>[0]
+
+export type ContentRightsSubmitDependencies = {
+	rateLimiter: ContentRightsRateLimiter | null | undefined
+	intake: ContentRightsWorkflowDependencies<FormSubmission>
+	reloadSubmission: (id: number) => Promise<FormSubmission | null | undefined>
+	postReview: (submission: FormSubmission) => Promise<void>
+	appendEvent: (input: ContentRightsEvent) => Promise<void>
+}
+
+const contentRightsSubmitDependencies = (
+	client: Client,
+	form: FormConfig
+): ContentRightsSubmitDependencies => {
+	const env = getRuntimeEnv() as Partial<Env>
+	return {
+		rateLimiter: env.CONTENT_RIGHTS_RATE_LIMITER,
+		intake: {
+			createSubmission: (payload) => createFormSubmission({
+				formId: form.id,
+				authProvider: null,
+				applicantId: null,
+				applicantUsername: null,
+				payload,
+				reviewChannelId: form.reviewChannelId
+			}),
+			updateSubmissionPayload: updateFormSubmissionPayload,
+			createCase: createContentRightsCase,
+			storeFile: (caseId, kind, file) =>
+				storeEvidenceFile(getRuntimeEnv().CLAWHUB_CASE_FILES, caseId, kind, file),
+			recordFile: recordContentRightsFile,
+			appendEvent: appendContentRightsEvent,
+			sendReceipt: sendContentRightsReceipt
+		},
+		reloadSubmission: getFormSubmission,
+		postReview: (submission) => sendReview(client, form, submission),
+		appendEvent: appendContentRightsEvent
+	}
+}
+
+const errorMessage = (error: unknown) =>
+	(error instanceof Error ? error.message : String(error)).slice(0, 500)
+
+export const handleContentRightsSubmit = async (
+	request: Request,
+	form: FormConfig,
+	dependencies: ContentRightsSubmitDependencies
+) => {
+	if (!await isContentRightsSubmissionAllowed(request, dependencies.rateLimiter)) {
+		return new Response(
+			renderResultPage(
+				form.title,
+				"Too many requests were submitted from your network. Please wait a minute and try again.",
+				false
+			),
+			{ status: 429, headers: { ...htmlHeaders, "retry-after": "60" } }
+		)
+	}
+	let result: Awaited<ReturnType<typeof intakeContentRightsCase<FormSubmission>>>
+	try {
+		const body = await request.formData()
+		result = await intakeContentRightsCase(body, dependencies.intake)
+	} catch (error) {
+		if (error instanceof ContentRightsValidationError) {
 			return new Response(
-				renderResultPage(
-					"Submitted",
-					result.receiptSent
-						? form.successMessage
-						: "Submitted. We received your request, but could not send the email receipt.",
-					true
-				),
-				{ headers: { "content-type": "text/html; charset=utf-8" } }
-			)
-		} catch (error) {
-			if (error instanceof ContentRightsValidationError) {
-				return new Response(
-					renderPage(form.title, <FormRoute form={form} session={null} user={null} error={error.message} />),
-					{ status: 400, headers: { "content-type": "text/html; charset=utf-8" } }
-				)
-			}
-			console.error("Failed to submit ClawHub content rights request", error)
-			return new Response(
-				renderResultPage(
-					form.title,
-					"We could not submit this request right now. Please try again later.",
-					false
-				),
-				{ status: 503, headers: { "content-type": "text/html; charset=utf-8" } }
+				renderPage(form.title, <FormRoute form={form} session={null} user={null} error={error.message} />),
+				{ status: 400, headers: htmlHeaders }
 			)
 		}
+		console.error("Failed to submit ClawHub content rights request", error)
+		return new Response(
+			renderResultPage(
+				form.title,
+				"We could not submit this request right now. Please try again later.",
+				false
+			),
+			{ status: 503, headers: htmlHeaders }
+		)
+	}
+	// The case is stored and the receipt was attempted. A Discord failure from here on
+	// must not surface as an error page, which would invite a duplicate submission.
+	let reviewPosted = false
+	try {
+		const submission = await dependencies.reloadSubmission(result.submission.id)
+		if (!submission) {
+			throw new Error(`Could not reload content rights submission ${result.submission.id}.`)
+		}
+		await dependencies.postReview(submission)
+		reviewPosted = true
+		await dependencies.appendEvent({
+			caseId: result.caseId,
+			eventType: "discord_review_posted",
+			metadata: { reviewChannelId: form.reviewChannelId }
+		})
+	} catch (error) {
+		console.error(`Failed to post ClawHub content rights review for ${result.caseId}`, error)
+		if (!reviewPosted) {
+			await dependencies.appendEvent({
+				caseId: result.caseId,
+				eventType: "discord_review_failed",
+				metadata: { reviewChannelId: form.reviewChannelId, error: errorMessage(error) }
+			}).catch((eventError) => {
+				console.error(`Failed to record discord_review_failed for ${result.caseId}`, eventError)
+			})
+		}
+	}
+	return new Response(
+		renderResultPage(
+			"Submitted",
+			result.receiptSent
+				? form.successMessage
+				: "Submitted. We received your request, but could not send the email receipt.",
+			true
+		),
+		{ headers: htmlHeaders }
+	)
+}
+
+const handleFormSubmit = async (request: Request, form: FormConfig, client: Client) => {
+	if (form.id === contentRightsFormId && form.auth === null) {
+		return handleContentRightsSubmit(request, form, contentRightsSubmitDependencies(client, form))
 	}
 	const collected = await collectPayload(request, form)
 	const sessionUser = isFormsDev() ? localUsers[getFormAuthProviders(form)[0] ?? "discord"] : await readSession(collected.session, form.id)
