@@ -105,15 +105,28 @@ async function boundedBody(request: Request) {
 	return new TextDecoder().decode(all)
 }
 async function discord(env: HermitEnv, path: string, method = "GET") {
-	const response = await fetch(`https://discord.com/api/v10${path}`, {
-		method,
-		headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` },
-		redirect: "error",
-		signal: AbortSignal.timeout(15000)
-	})
+	let response: Response
+	try {
+		response = await fetch(`https://discord.com/api/v10${path}`, {
+			method,
+			headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` },
+			redirect: "error"
+		})
+	} catch (error) {
+		const name =
+			error instanceof Error &&
+			["TypeError", "TimeoutError", "AbortError"].includes(error.name)
+				? error.name
+				: "Error"
+		throw Error(`Discord network ${name}`)
+	}
 	if (method === "DELETE" && [204, 404].includes(response.status)) return null
 	if (!response.ok) throw Error(`Discord ${response.status}`)
-	return response.json()
+	try {
+		return await response.json()
+	} catch {
+		throw Error("Discord invalid_json")
+	}
 }
 async function retireCommand(env: HermitEnv) {
 	if (env.DISCORD_CLIENT_ID !== applicationId)
@@ -297,7 +310,12 @@ export async function handleSocietyHandoff(
 		)
 	} catch (error) {
 		const message = error instanceof Error ? error.message : ""
-		const detail = /^(Discord \d{3}|Application mismatch|Bot identity mismatch|Malformed command inventory|Command retirement readback failed)$/.test(message) ? message : "internal"
+		const detail =
+			/^(Discord \d{3}|Discord network (Error|TypeError|TimeoutError|AbortError)|Discord invalid_json|Application mismatch|Bot identity mismatch|Malformed command inventory|Command retirement readback failed)$/.test(
+				message
+			)
+				? message
+				: "internal"
 		return json({ error: "handoff_failed", detail }, 502)
 	}
 }
