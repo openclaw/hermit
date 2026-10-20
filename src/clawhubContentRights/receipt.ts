@@ -3,15 +3,17 @@ import type { ContentRightsIntake } from "./intake.js"
 type ReceiptInput = ContentRightsIntake & { caseId: string }
 const defaultFrom = "ClawHub <noreply@notifications.openclaw.ai>"
 
-export const buildContentRightsReceipt = (input: ReceiptInput) => ({
+// The receipt goes to an unverified address, so it must not echo requester-supplied
+// free text (name, organization, explanation). Only the case ID and canonical
+// clawhub.ai URLs produced by intake validation are included.
+export const buildContentRightsReceipt = (input: Pick<ReceiptInput, "caseId" | "clawhubUrls">) => ({
 	subject: `ClawHub content rights request receipt: ${input.caseId}`,
 	text: [
-		`Hello ${input.requesterName},`,
+		"Hello,",
 		"",
 		"We received your ClawHub content rights request.",
 		"",
 		`Case ID: ${input.caseId}`,
-		`Organization: ${input.organization}`,
 		"Reported ClawHub URLs:",
 		...input.clawhubUrls.map((url) => `- ${url}`),
 		"",

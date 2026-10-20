@@ -49,6 +49,17 @@
       "bucket_name": "clawhub-case-files"
     }
   ],
+  // Per-IP limit for public ClawHub content rights submissions.
+  "ratelimits": [
+    {
+      "name": "CONTENT_RIGHTS_RATE_LIMITER",
+      "namespace_id": "20261020",
+      "simple": {
+        "limit": 3,
+        "period": 60
+      }
+    }
+  ],
   "triggers": {
     "crons": ["0 */2 * * *"]
   }
