@@ -41,7 +41,11 @@ export default class ThreadCreateWelcome extends ThreadCreateListener {
 			configuredTemplate && configuredTemplate.trim().length > 0
 				? configuredTemplate
 				: defaultWelcomeTemplate
-		const welcomeMessage = `${template}\n\n[Get support](https://community.openclaw.ai/) is the official OpenClaw support pathway for setup, usage questions, and troubleshooting. Find or create a relevant topic there, and redact tokens and secrets from logs.`
+		const supportMessage = "[Get support](https://community.openclaw.ai/) is the official OpenClaw support pathway for setup, usage questions, and troubleshooting. Find or create a relevant topic there, and redact tokens and secrets from logs."
+		const welcomeMessage = `${template}\n\n${supportMessage}`
+		const messages = welcomeMessage.length <= 4000
+			? [welcomeMessage]
+			: [template, supportMessage]
 
 		const createdAt = thread.createTimestamp ?? new Date().toISOString()
 		const initialMessageCount =
@@ -82,9 +86,11 @@ export default class ThreadCreateWelcome extends ThreadCreateListener {
 		}
 
 		try {
-			await thread.send({
-				components: [new Container([new TextDisplay(welcomeMessage)])]
-			})
+			for (const message of messages) {
+				await thread.send({
+					components: [new Container([new TextDisplay(message)])]
+				})
+			}
 		} catch (error) {
 			console.error("Failed to send thread welcome message:", error)
 		}

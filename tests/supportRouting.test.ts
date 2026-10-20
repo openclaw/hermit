@@ -99,6 +99,31 @@ describe("official support routing", () => {
 		})
 	}
 
+	for (const length of [3772, 3773, 3900, 4000]) {
+		it(`preserves delivery for a ${length}-character custom welcome`, async () => {
+			await withWelcomeEnv("x".repeat(length), async () => {
+				const db = new SqliteD1Database()
+				for (const statement of readFileSync("drizzle/0000_productive_tinkerer.sql", "utf8").split("--> statement-breakpoint")) {
+					if (statement.trim()) db.database.run(statement)
+				}
+				setRuntimeEnv({ DB: db as unknown as D1Database } as Env)
+				try {
+					const { client, calls } = clientFor()
+					const listener = new ThreadCreateWelcome()
+					await listener.handle(threadData(listener, client), client)
+					const messages = calls.map((call) => textFrom(call.body))
+					expect(messages.every((message) => message.length <= 4000)).toBe(true)
+					expect(messages.join("\n\n")).toStartWith("x".repeat(length))
+					expect(messages.join("\n\n")).toContain(supportLink)
+					const totalLength = messages.join("\n\n").length
+					expect(calls).toHaveLength(totalLength <= 4000 ? 1 : 2)
+				} finally {
+					db.database.close()
+				}
+			})
+		})
+	}
+
 	it("does not welcome archived threads or unrelated parent channels", async () => {
 		await withWelcomeEnv(undefined, async () => {
 			const { client, calls } = clientFor()

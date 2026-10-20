@@ -44,7 +44,7 @@ THREAD_LENGTH_CHECK_INTERVAL_HOURS=
 
 `/say help` directs setup, usage, and troubleshooting questions to [Get support](https://community.openclaw.ai/), the official OpenClaw support pathway. Discord remains available for social conversation, collaboration, and existing helper assistance; development bugs, security reports, and moderation matters keep their separate routes.
 
-When `HELPER_THREAD_WELCOME_PARENT_ID` enables helper-thread welcomes, the welcome always includes the official support route. `HELPER_THREAD_WELCOME_TEMPLATE` customizes the introduction, but the support link and log-redaction reminder are appended even when that override is set. Blank overrides use the default helper welcome. No environment changes are required for the updated routing.
+When `HELPER_THREAD_WELCOME_PARENT_ID` enables helper-thread welcomes, the welcome always includes the official support route. `HELPER_THREAD_WELCOME_TEMPLATE` customizes the introduction, but the support link and log-redaction reminder are appended even when that override is set. If the combined text exceeds Discord’s 4,000-character message budget, the support reminder is sent separately to preserve valid custom welcomes. Blank overrides use the default helper welcome. No environment changes are required for the updated routing.
 
 3. Configure `wrangler.jsonc` D1 binding:
 
