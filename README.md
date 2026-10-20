@@ -121,22 +121,24 @@ bun run db:generate
 bun run db:apply:remote
 ```
 
-## Temporary Shell Society handoff
+## Shell Society retirement
 
-This preparation revision exposes one temporary signed operation for the
-Barnacle migration. It accepts only inspect, freeze and terminal export; it
-cannot execute arbitrary SQL, return bot credentials, grant roles or administer
-other features. Its committed public verification key expires after one day;
-the private signing/decryption keys remain with the migration operator.
-Requests are timestamped, nonce-protected and signed, and export responses are
-sealed to that operator's public encryption key. No plaintext nomination reason
-is published through an unauthenticated endpoint or deployment artifact.
+This revision removes Shell Society nomination intake, voting buttons, expiry,
+role grants, card recovery and the nomination-only 15-minute cron. Barnacle is the
+destination for that workflow; its existing role welcome remains the welcome owner.
+Social commands retain their original guild through `src/config/guild.ts`.
 
-Freeze pauses nomination intake atomically, removes only the exact old nominate
-slash commands after authenticated inventory/readback, and leaves existing review
-and recovery running. Terminal export retires Society jobs only after zero active
-nominations/grants and zero pending card revisions. The next coordinated revision
-removes nomination runtime and this temporary operation. D1 history is preserved.
+The D1 `nominations` and `nomination_approvals` tables and original migrations are
+historical data, not active services. Their definitions live in
+`src/db/archived-society.ts`, used only by Drizzle schema generation to prevent a
+future migration from dropping history. The Worker does not import that archive.
+
+Before production removal, retire nomination entry and drain `submitted` and
+`granting` work, preserve a consistent export, and record the owner handoff to
+Barnacle. Explicit command registration must remove Hermit's old command after
+the Worker revision is deployed. Retain original review history; do not delete
+tables or replay old role grants. A source commit alone does not verify the live
+handoff or remove Discord registrations.
 
 ## Clawtributor claim review
 

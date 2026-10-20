@@ -6,7 +6,6 @@ import ClaimCommand from "./commands/claim.js"
 import GithubCommand from "./commands/github.js"
 import MaintainerCommand from "./commands/maintainer.js"
 import HelperRootCommand from "./commands/helper.js"
-import NominateCommand from "./commands/nominate.js"
 import RoleCommand from "./commands/role.js"
 import SayRootCommand from "./commands/say.js"
 import LobsterCommand, {
@@ -26,7 +25,6 @@ import {
 	formReviewModals
 } from "./forms/reviewButtons.js"
 import { betaPingsComponents } from "./components/betaPingsButton.js"
-import { nominationComponents } from "./components/nominationButtons.js"
 import { lobsterComponents } from "./components/lobsterButtons.js"
 import { slapComponents } from "./components/slapButtons.js"
 import { whoisDeleteComponents } from "./components/whoisDeleteButton.js"
@@ -38,17 +36,11 @@ import {
 } from "./server/claimServer.js"
 import { handleFormsRequest } from "./forms/server.js"
 import { registerHelperLogsRoutes } from "./server/helperLogsServer.js"
-import {
-	runNominationExpiry,
-	runNominationGrantRecovery
-} from "./services/nominationExpiry.js"
-import { runNominationCardSyncRecovery } from "./services/nominationCardSync.js"
 import { runThreadLengthMonitor } from "./services/threadLengthMonitor.js"
 import { handleContentRightsApiRequest } from "./clawhubContentRights/api.js"
 import { handleSearchIntelligenceApiRequest } from "./clawhubSearchIntelligence/api.js"
 import { handlePublisherAbuseDigestApiRequest } from "./clawhubPublisherAbuse/api.js"
 import { handleLobsterDossierRequest } from "./lobsterDossiers/server.js"
-import { handleSocietyHandoff, societyIsRetired } from "./services/societyHandoff.js"
 
 export const client = new Client(
 	{
@@ -72,7 +64,6 @@ export const client = new Client(
 			new BetaPingsCommand(),
 			new HelperRootCommand(),
 			new ClaimCommand(),
-			new NominateCommand(),
 			new LobsterCommand(),
 			new ReleaseLobsterContextCommand(),
 			new SlapCommand(),
@@ -93,7 +84,6 @@ export const client = new Client(
 			...claimReviewComponents,
 			...formReviewComponents,
 			...betaPingsComponents,
-			...nominationComponents,
 			...lobsterComponents,
 			...slapComponents,
 			...whoisDeleteComponents
@@ -137,8 +127,6 @@ const handler = createHandler(client)
 export default {
 	async fetch(request: Request, env: HermitEnv, ctx: ExecutionContext) {
 		hydrateRuntimeEnv(env)
-		const societyHandoff = await handleSocietyHandoff(request, env)
-		if (societyHandoff) return societyHandoff
 		const lobsterDossierResponse = handleLobsterDossierRequest(request)
 		if (lobsterDossierResponse) {
 			return lobsterDossierResponse
@@ -164,10 +152,6 @@ export default {
 	},
 	scheduled(controller: ScheduledController, env: HermitEnv, ctx: ExecutionContext) {
 		hydrateRuntimeEnv(env)
-		ctx.waitUntil((async () => {
-			if (await societyIsRetired(env)) return
-			await Promise.all([runNominationExpiry(client), runNominationGrantRecovery(client), runNominationCardSyncRecovery(client)])
-		})())
 		if (!controller.cron || controller.cron === "0 */2 * * *") {
 			ctx.waitUntil(runThreadLengthMonitor(client))
 		}

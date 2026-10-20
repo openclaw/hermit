@@ -1,4 +1,4 @@
-import { nominationConfig } from "./nominations.js"
+import { openClawGuildId } from "./guild.js"
 
 export type SlapRarity = "common" | "uncommon" | "rare" | "epic" | "legendary"
 
@@ -52,7 +52,7 @@ export const slapSceneUrl = (
 	`https://raw.githubusercontent.com/openclaw/hermit/${slapSceneRevision}/assets/slap/scenes/${fishSlug}/${outcome}-${variant.toString().padStart(2, "0")}.webp`
 
 export const slapConfig = {
-	guildId: nominationConfig.guildId,
+	guildId: openClawGuildId,
 	authorizedRoleIds: [
 		"1477360613125787678",
 		"1457214688806047756",

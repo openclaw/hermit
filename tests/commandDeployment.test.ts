@@ -15,6 +15,7 @@ it("registers commands explicitly, without writing to Discord on Worker requests
 	)
 	const previousFetch = globalThis.fetch
 	const calls: { method: string; path: string }[] = []
+	const registeredNames = new Set<string>()
 	const database = new SqliteD1Database()
 	const migrations = readdirSync("drizzle")
 		.filter((path) => /^000[4-9]_.*\.sql$/.test(path))
@@ -30,6 +31,7 @@ it("registers commands explicitly, without writing to Discord on Worker requests
 		calls.push({ method, path: url.pathname })
 		if (method === "GET") return Response.json([])
 		const body = JSON.parse(String(init?.body))
+		for (const command of Array.isArray(body) ? body : [body]) if (typeof command.name === "string") registeredNames.add(command.name)
 		return Response.json(
 			Array.isArray(body)
 				? body.map((command, index) => ({ ...command, id: String(index + 1) }))
@@ -52,6 +54,14 @@ it("registers commands explicitly, without writing to Discord on Worker requests
 		expect((await request()).status).toBe(404)
 		await Promise.all(pending)
 		expect(calls).toEqual([])
+		// Retired Society cron must not touch D1 or attempt a role/card operation.
+		worker.scheduled(
+			{ cron: "*/15 * * * *" } as ScheduledController,
+			{ ...settings, DB: { withSession: () => { throw new Error("Retired Society accessed D1") } } } as unknown as Env,
+			context
+		)
+		await Promise.all(pending)
+		expect(calls).toEqual([])
 		worker.scheduled(
 			{ cron: "*/5 * * * *" } as ScheduledController,
 			{ ...settings, DB: database } as unknown as Env,
@@ -62,6 +72,8 @@ it("registers commands explicitly, without writing to Discord on Worker requests
 
 		// Exercise the actual operator script and Carbon's pinned HTTP contract.
 		await import("../scripts/deploy-commands.ts")
+		expect(registeredNames.has("nominate")).toBe(false)
+		for (const name of ["lobster", "slap", "role", "claim", "helper", "github"]) expect(registeredNames.has(name)).toBe(true)
 		expect(calls.some(({ method, path }) =>
 			method === "PUT" && path.includes("/guilds/")
 		)).toBe(true)

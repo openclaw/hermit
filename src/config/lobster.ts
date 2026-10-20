@@ -1,4 +1,4 @@
-import { nominationConfig } from "./nominations.js"
+import { openClawGuildId } from "./guild.js"
 
 export const lobsterArtworkRevision =
 	"03fe3c5f1de149f6cae9121bb0094287b22cbfe5"
@@ -25,7 +25,7 @@ export const lobsterDossierUrl = (aphiaId: number) =>
 	`https://hermit-discord.openclaw.ai/lobsters/${aphiaId}`
 
 export const lobsterConfig = {
-	guildId: nominationConfig.guildId,
+	guildId: openClawGuildId,
 	authorizedRoleIds: [
 		"1477360613125787678",
 		"1457214688806047756",
