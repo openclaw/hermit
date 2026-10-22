@@ -11,7 +11,7 @@ Discord bot built with Carbon on Cloudflare Workers.
 
 ## Setup
 
-Use Bun 1.4.2 and Node.js 22.22.0 or later for the build tools (CI uses Node.js 24).
+Use Bun 1.4.2 and the Node.js version pinned in `.node-version` for the build tools. GitHub Actions and Cloudflare Workers Builds read this file.
 
 1. Install deps:
 
