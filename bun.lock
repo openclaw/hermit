@@ -28,6 +28,7 @@
   "overrides": {
     "esbuild": "0.28.2",
     "postcss": "8.5.29",
+    "workerd": "1.20261021.1",
     "ws": "8.22.0",
   },
   "packages": {
@@ -39,15 +40,15 @@
 
     "@cloudflare/unenv-preset": ["@cloudflare/unenv-preset@2.16.2", "", { "peerDependencies": { "unenv": "2.0.0-rc.24", "workerd": ">1.20260305.0 <2.0.0-0" }, "optionalPeers": ["workerd"] }, "sha512-JBP1+Z7ZSNG/d4mRP+y8VC5dka3tZVMLEZRvS+rzQ4DGV1EoxRFQckcJTTkXbHSQiTj0DtNI01Zwb/V2fX0mvQ=="],
 
-    "@cloudflare/workerd-darwin-64": ["@cloudflare/workerd-darwin-64@1.20261006.1", "", { "os": "darwin", "cpu": "x64" }, "sha512-lCX6avJO2It9AyDEYitjmOtJRVp/xmaW0TziyoLAnfxlzozyyRbSFfIIMMCiDx/sTP1++E4VLbV+7BHSD33f0Q=="],
+    "@cloudflare/workerd-darwin-64": ["@cloudflare/workerd-darwin-64@1.20261021.1", "", { "os": "darwin", "cpu": "x64" }, "sha512-BTBzLYgRVBy81ifFTKYJRplVXrSw4ZcUFHeBRG4z35vlDu2L5YZEvxDfKAwy+DcD17i84OKrzJ7peU6J/tOSww=="],
 
-    "@cloudflare/workerd-darwin-arm64": ["@cloudflare/workerd-darwin-arm64@1.20261006.1", "", { "os": "darwin", "cpu": "arm64" }, "sha512-PyFGjOaldtppnLuKsdkoYWXfLVpDjuf8u+uoykX+1Xvxo2EPmCVViq0iDKm+U7c7PRno85ehS3/MPVXyk2HwHw=="],
+    "@cloudflare/workerd-darwin-arm64": ["@cloudflare/workerd-darwin-arm64@1.20261021.1", "", { "os": "darwin", "cpu": "arm64" }, "sha512-OZ6Qkc9EwNl6kOyEBBQIOmOsbIfWCeR7F6h0EcScdjQLIB6drsmSpEZuBC3gAgz/eqDqjDrDCbPAA7jDllxIMw=="],
 
-    "@cloudflare/workerd-linux-64": ["@cloudflare/workerd-linux-64@1.20261006.1", "", { "os": "linux", "cpu": "x64" }, "sha512-Ntf9S8eesmVufdjaT2kzWlz6Ng9XGYTc6cHQVRKAg59lFufwsIabGeMT6U4KkrpEeSIxgHq8aPtuLbZXE19tCA=="],
+    "@cloudflare/workerd-linux-64": ["@cloudflare/workerd-linux-64@1.20261021.1", "", { "os": "linux", "cpu": "x64" }, "sha512-VXbg0Ih2WLnnIkhn/9XbncMOW4YyAbyevYF9+0TOIVQAjbRwnS4xYjwzCT0+a8rKrm4m/wnXcLqtP9jE5XtriQ=="],
 
-    "@cloudflare/workerd-linux-arm64": ["@cloudflare/workerd-linux-arm64@1.20261006.1", "", { "os": "linux", "cpu": "arm64" }, "sha512-JyeDBymVWw5tVRebSsVE8ojDYxd6UlZrAseHU8G+NpIyd5wF61tXlF/axLeCUqu0pOhBFHb8I5QKi0jwrCK41Q=="],
+    "@cloudflare/workerd-linux-arm64": ["@cloudflare/workerd-linux-arm64@1.20261021.1", "", { "os": "linux", "cpu": "arm64" }, "sha512-wB5MxGza5HNDfOHXv6RNW9/duwBq6WXkGe2E0+2fMARZmhQBjJqNaNXfah/unkxywcKAKMNmDKLmzsAga5UHVw=="],
 
-    "@cloudflare/workerd-windows-64": ["@cloudflare/workerd-windows-64@1.20261006.1", "", { "os": "win32", "cpu": "x64" }, "sha512-nWP0URNqOBN9fa/gZ7eh/w051DwjOXN8j4lDZDYVXyQPsux6sV3DfyYZT+CjR/rt9nKBSmJT9QE9/bWT18+84w=="],
+    "@cloudflare/workerd-windows-64": ["@cloudflare/workerd-windows-64@1.20261021.1", "", { "os": "win32", "cpu": "x64" }, "sha512-WhI+HBs0NWfeIo8SVEADVnAlEM4qDPv5KCWxe9oMfd5102ABiCaCpTEof0xtWWAl1pzHihq2vn0MWLTcEPOTLg=="],
 
     "@cloudflare/workers-types": ["@cloudflare/workers-types@4.20260405.1", "", {}, "sha512-PokTmySa+D6MY01R1UfYH48korsN462NK/fl3aw47Hg7XuLuSo/RTpjT0vtWaJhJoFY5tHGOBBIbDcIc8wltLg=="],
 
@@ -469,7 +470,7 @@
 
     "unenv": ["unenv@2.0.0-rc.24", "", { "dependencies": { "pathe": "^2.0.3" } }, "sha512-i7qRCmY42zmCwnYlh9H2SvLEypEFGye5iRmEMKjcGi7zk9UquigRjFtTLz0TYqr0ZGLZhaMHl/foy1bZR+Cwlw=="],
 
-    "workerd": ["workerd@1.20261006.1", "", { "optionalDependencies": { "@cloudflare/workerd-darwin-64": "1.20261006.1", "@cloudflare/workerd-darwin-arm64": "1.20261006.1", "@cloudflare/workerd-linux-64": "1.20261006.1", "@cloudflare/workerd-linux-arm64": "1.20261006.1", "@cloudflare/workerd-windows-64": "1.20261006.1" }, "bin": { "workerd": "bin/workerd" } }, "sha512-8MadBuffZ5NdpLwZjUmsqT5QlaKXq4gjgT6wzcKeynZTICNXyePhc+5QVoKiK7+MMhFTLNrRO2KXLlpk8Q6BkA=="],
+    "workerd": ["workerd@1.20261021.1", "", { "optionalDependencies": { "@cloudflare/workerd-darwin-64": "1.20261021.1", "@cloudflare/workerd-darwin-arm64": "1.20261021.1", "@cloudflare/workerd-linux-64": "1.20261021.1", "@cloudflare/workerd-linux-arm64": "1.20261021.1", "@cloudflare/workerd-windows-64": "1.20261021.1" }, "hasInstallScript": true, "bin": { "workerd": "bin/workerd" } }, "sha512-oLfldARRCpkInF0gN9BgAQykcYH7UIQvgL1ZVIik3u+52qcWULK7Zd+Nj7eMvXwvJA1QfeM0tw0V1vy36ed2rw=="],
 
     "wrangler": ["wrangler@4.148.0", "", { "dependencies": { "@cloudflare/kv-asset-handler": "0.5.0", "@cloudflare/unenv-preset": "2.16.2", "blake3-wasm": "2.1.5", "esbuild": "0.28.1", "miniflare": "5.20261006.0-alpha", "path-to-regexp": "6.3.0", "unenv": "2.0.0-rc.24", "workerd": "1.20261006.1" }, "optionalDependencies": { "fsevents": "2.3.3" }, "peerDependencies": { "@cloudflare/workers-types": "^5.20261006.1" }, "optionalPeers": ["@cloudflare/workers-types"], "bin": { "wrangler": "bin/wrangler.js", "wrangler2": "bin/wrangler.js", "cf-wrangler": "bin/cf-wrangler.js" } }, "sha512-wgbll8cA/7qOMJSoYQuJrw9M9lmedGzYtg6wvUK2p/7G1KaE88jFmQ/CvtQzVUF9C8PQtC4Y5p9vbpAsJGAlpA=="],
 
