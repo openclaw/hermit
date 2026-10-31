@@ -13,8 +13,11 @@ import { deliverWeeklyDigest } from "./delivery.js"
 
 import { parseDigest, type Digest, type Row } from "./contract.js"
 import { parseEvidenceDigest, renderEvidenceDigest } from "./evidence.js"
+import { renderMonthlyDigest, renderMonthlySearchDigest } from "./monthly.js"
 
 const apiPath = "/api/clawhub-search-intelligence/weekly"
+// Frozen week identity, not request time or mutable config, selects presentation.
+const featuredCutoverWeekEnd = Date.UTC(2026, 10, 2)
 // Bound bytes while consuming the stream, not after allocating an arbitrary body.
 const readBody = async (request: Request): Promise<unknown> => {
 	const reader = request.body?.getReader()
@@ -191,6 +194,8 @@ export const handleSearchIntelligenceApiRequest = async (
 	if (!digest)
 		return json({ error: "Invalid search intelligence payload" }, 400)
 	try {
+		if (digest.kind === "search_intelligence_weekly_v4" && digest.weekEnd >= featuredCutoverWeekEnd)
+			return await deliverWeeklyDigest(client, digest, renderMonthlySearchDigest(digest), renderMonthlyDigest(digest))
 		return await deliverWeeklyDigest(
 			client,
 			digest,

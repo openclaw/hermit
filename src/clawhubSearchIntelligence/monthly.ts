@@ -265,3 +265,71 @@ export const renderMonthlyDigest = (digest: MonthlyDigest) => {
 		})
 	)
 }
+
+// Keep the legacy formatter above unchanged: frozen part hashes depend on it.
+export const renderMonthlySearchDigest = (digest: MonthlyDigest) => {
+	const dashboardUrl =
+		digest.dashboardUrl.length <= 512
+			? digest.dashboardUrl
+			: new URL(
+					`/management?view=search-insights&endDay=${digest.weekEnd}`,
+					digest.dashboardUrl
+				).href
+	const brief = (value: string) =>
+		safe(value.length > 80 ? `${value.slice(0, 79)}…` : value)
+	const rowText = (row: Catalog["movers"][number]) =>
+		`[${brief(row.query)}](${link(row.searchUrl.length <= 512 ? row.searchUrl : dashboardUrl)}) (${row.scope}) · ${row.searches} searches · ${row.officialGaps} gaps · previous ${row.previousSearches}`
+	const preview = ["localhost", "127.0.0.1", "[::1]"].includes(
+		new URL(digest.dashboardUrl).hostname
+	)
+	return ([
+		["Plugins", digest.catalogs.plugins],
+		["Skills", digest.catalogs.skills]
+	] as const).flatMap(([name, catalog]) => {
+		const { coverage } = catalog
+		const time = (value: number | null) => value === null ? "unknown" : day(value)
+		const incomplete = coverage.dataThrough === null ||
+			coverage.dataThrough < digest.weekEnd ||
+			coverage.collectionStartedAt === null ||
+			coverage.collectionStartedAt > digest.weekStart || coverage.gapStart !== null
+		const header = [
+			`### ${preview ? "LOCAL PREVIEW · " : ""}ClawHub weekly search intelligence · ${name}`,
+			`${day(digest.weekStart)} – ${day(digest.weekEnd)} (UTC, end exclusive)`,
+			`${catalog.totalSearches} searches · Web ${catalog.sourceCounts.clawhubWeb} · Control UI ${catalog.sourceCounts.openclawControlUi}`,
+			`Data through ${time(coverage.dataThrough)}; collection started ${time(coverage.collectionStartedAt)}.${incomplete ? " Incomplete collection history." : ""}`,
+			...(coverage.gapStart !== null && coverage.gapEnd !== null
+				? [`Collection gap ${day(coverage.gapStart)} – ${day(coverage.gapEnd)} UTC.`] : []),
+			`Classification ${catalog.classificationStatus}; search metadata ${catalog.currentMetadataStatus}.`
+		].join("\n")
+		const sections = [
+			["company opportunities", catalog.companyOpportunities.map(row =>
+				`${rowText(row)}${row.companyProductName ? ` · ${brief(row.companyProductName)}` : ""} · ${Math.round(row.confidence * 100)}% classifier confidence`)],
+			["official gaps", catalog.officialGaps.map(rowText)],
+			["movers", catalog.movers.map(rowText)]
+		] as const
+		const pages: string[] = []
+		let page = ""
+		for (const [title, rows] of sections) {
+			const heading = `**${name} ${title}**`
+			for (const row of [heading, ...(rows.length ? rows : ["None qualified."])]) {
+				// Whole bounded rows only; reserve space for metadata and receipt fingerprint.
+				if (page.length + row.length + 1 > 2600) {
+					pages.push(page)
+					page = `${heading} (continued)`
+				}
+				page += `\n${row}`
+			}
+		}
+		pages.push(page)
+		return pages.map(page => serializePayload({
+			components: [new Container([
+				new TextDisplay(header),
+				new TextDisplay(page),
+				new TextDisplay("Company classification is advisory. At least 3 searches required: either week for movers, current week for other rows. Long links open the full report." +
+					(digest.truncated ? " Input capped; more evidence on the dashboard." : "")),
+				new Row([new DashboardLink(dashboardUrl)])
+			])],
+			allowedMentions: { parse: [] }
+		}))
+	})
+}
