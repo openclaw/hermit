@@ -8,6 +8,8 @@ import {
 } from "@buape/carbon"
 import { deliverWeeklyDigest } from "../src/clawhubSearchIntelligence/delivery.js"
 import { handleSearchIntelligenceApiRequest } from "../src/clawhubSearchIntelligence/api.js"
+import { parseEvidenceDigest } from "../src/clawhubSearchIntelligence/evidence.js"
+import { renderMonthlyDigest } from "../src/clawhubSearchIntelligence/monthly.js"
 import { setRuntimeEnv } from "../src/runtime/env.js"
 import { SqliteD1Database } from "./helpers/sqliteD1.js"
 
@@ -324,6 +326,23 @@ const monthlyPayload = (longRows = false) => {
 		}
 	}
 }
+const datedMonthlyPayload = (longRows = false, weekEnd = Date.UTC(2026, 10, 2)) => {
+	const delta = weekEnd - validPayload.weekEnd
+	return JSON.parse(
+		JSON.stringify(monthlyPayload(longRows), (_key, value) =>
+			typeof value === "number" &&
+			value >= validPayload.coverage.collectionStartedAt
+				? value + delta
+				: value
+		)
+	) as ReturnType<typeof monthlyPayload>
+}
+const legacyMonthlyRendering = (payload: ReturnType<typeof monthlyPayload>) => {
+	const digest = parseEvidenceDigest(payload, ["https://clawhub.ai"])
+	if (!digest || digest.kind !== "search_intelligence_weekly_v4")
+		throw new Error("Invalid monthly fixture")
+	return renderMonthlyDigest(digest)
+}
 const links = (value: unknown): string[] => {
 	if (!value || typeof value !== "object") return []
 	const row = value as { url?: string; components?: unknown[] }
@@ -403,6 +422,254 @@ afterEach(() => {
 })
 
 describe("ClawHub weekly search intelligence receiver", () => {
+	it("keeps both catalogs' search opportunities when new cutoff-week claims move Featured out of Discord", async () => {
+		const { client, posts } = setup()
+		const payload = datedMonthlyPayload()
+		const skills = payload.catalogs.skills
+		skills.totalSearches = 9
+		skills.sourceCounts = { clawhubWeb: 6, openclawControlUi: 3 }
+		skills.classificationStatus = "available"
+		skills.companyOpportunities = [{
+			...payload.catalogs.plugins.companyOpportunities[0],
+			query: "calendar",
+			companyProductName: "Calendar",
+			searchUrl: "https://clawhub.ai/skills?q=calendar"
+		}]
+		skills.officialGaps = [{
+			...payload.catalogs.plugins.officialGaps[0],
+			query: "calendar",
+			searchUrl: "https://clawhub.ai/skills?q=calendar"
+		}]
+		skills.movers = [...skills.officialGaps]
+		expect(
+			(await handleSearchIntelligenceApiRequest(request(payload), client))?.status
+		).toBe(200)
+		const rendered = posts.flatMap(({ body }) => texts(body)).join("\n")
+		for (const fact of ["12 searches", "9 searches", "Notion", "Calendar", "company opportunities", "official gaps", "movers"])
+			expect(rendered).toContain(fact)
+		for (const catalog of Object.values(payload.catalogs))
+			for (const row of catalog.recommendations)
+				expect(rendered).not.toContain(row.url)
+		for (const { body } of posts) {
+			expect(texts(body).join("\n").length).toBeLessThanOrEqual(4000)
+			expect(componentCount(body) - 1).toBeLessThanOrEqual(40)
+			expect(body.allowed_mentions).toEqual({ parse: [] })
+		}
+		const count = posts.length
+		expect(
+			(await handleSearchIntelligenceApiRequest(request(payload), client))?.status
+		).toBe(200)
+		expect(posts).toHaveLength(count)
+	})
+	it.each(["retryable", "uncertain"] as const)("resumes an existing %s legacy cutoff-week manifest without rewriting or repeating its parts", async state => {
+		const { client, posts } = setup()
+		const payload = datedMonthlyPayload(true)
+		const original = client.rest.post.bind(client.rest)
+		let calls = 0
+		client.rest.post = (async (...args: Parameters<typeof original>) => {
+			if (++calls === 2) {
+				if (state === "retryable")
+					throw Object.assign(new Error("Rejected"), { status: 429 })
+				await original(...args)
+				throw new Error("Response lost")
+			}
+			return original(...args)
+		}) as typeof client.rest.post
+		// This is the previous HTTP handler's unchanged delivery call, not a second receipt owner.
+		expect((await deliverWeeklyDigest(client, payload, legacyMonthlyRendering(payload))).status)
+			.toBe(state === "retryable" ? 502 : 503)
+		const confirmedNonce = posts[0].body.nonce
+		client.rest.post = original
+		if (state === "uncertain") {
+			expect((await handleSearchIntelligenceApiRequest(request(payload), client))?.status).toBe(503)
+			expect(posts).toHaveLength(2)
+			client.rest.get = async () => [{
+				id: "original-part-2",
+				author: { id: "bot-user", bot: true },
+				timestamp: new Date().toISOString(),
+				components: posts[1].body.components
+			}] as never
+		}
+		expect((await handleSearchIntelligenceApiRequest(request(payload), client))?.status).toBe(200)
+		expect(posts.filter(({ body }) => body.nonce === confirmedNonce)).toHaveLength(1)
+		expect(new Set(posts.map(({ body }) => body.nonce)).size).toBe(posts.length)
+		const rendered = posts.flatMap(({ body }) => texts(body)).join("\n")
+		expect(rendered).toContain(payload.catalogs.skills.recommendations[15].url)
+		expect(rendered).not.toContain("company opportunities")
+		const count = posts.length
+		expect((await handleSearchIntelligenceApiRequest(request(payload), client))?.status).toBe(200)
+		expect(posts).toHaveLength(count)
+	})
+	it.each(["legacy", "search"] as const)("keeps the atomic %s winner when old and new cutoff-week writers race", async winner => {
+		const { client, posts } = setup()
+		const payload = datedMonthlyPayload(true)
+		const legacy = () => deliverWeeklyDigest(client, payload, legacyMonthlyRendering(payload))
+		const current = () => handleSearchIntelligenceApiRequest(request(payload), client)
+		const original = client.rest.post.bind(client.rest)
+		let release!: () => void
+		let entered!: () => void
+		const ready = new Promise<void>(resolve => { entered = resolve })
+		const gate = new Promise<void>(resolve => { release = resolve })
+		client.rest.post = (async (...args: Parameters<typeof original>) => {
+			entered()
+			await gate
+			return original(...args)
+		}) as typeof client.rest.post
+		const first = winner === "legacy" ? legacy() : current()
+		await ready
+		try {
+			expect((await (winner === "legacy" ? current() : legacy()))?.status).toBe(409)
+			const changed = structuredClone(payload)
+			changed.catalogs.skills.recommendations[0].reason = "Different full payload"
+			expect((await handleSearchIntelligenceApiRequest(request(changed), client))?.status).toBe(409)
+		} finally {
+			release()
+		}
+		expect((await first)?.status).toBe(200)
+		const count = posts.length
+		expect((await current())?.status).toBe(200)
+		expect(posts).toHaveLength(count)
+		expect(new Set(posts.map(({ body }) => body.nonce)).size).toBe(count)
+		const rendered = posts.flatMap(({ body }) => texts(body)).join("\n")
+		if (winner === "legacy") {
+			expect(rendered).toContain(payload.catalogs.skills.recommendations[15].url)
+			expect(rendered).not.toContain("company opportunities")
+		} else {
+			expect(rendered).toContain("company opportunities")
+			expect(rendered).not.toContain(payload.catalogs.skills.recommendations[15].url)
+		}
+	})
+	it("keeps pre-cutoff producer-frozen weeks byte-identical even when first received after cutover", async () => {
+		const payload = datedMonthlyPayload(true, Date.UTC(2026, 9, 26))
+		const baseline = setup()
+		expect((await deliverWeeklyDigest(baseline.client, payload, legacyMonthlyRendering(payload))).status).toBe(200)
+		const { client, posts } = setup()
+		mockClock = spyOn(Date, "now").mockReturnValue(Date.UTC(2040, 0, 1))
+		expect((await handleSearchIntelligenceApiRequest(request(payload), client))?.status).toBe(200)
+		expect(posts).toEqual(baseline.posts)
+		mockClock.mockReturnValue(Date.UTC(2020, 0, 1))
+		expect((await handleSearchIntelligenceApiRequest(request(payload), client))?.status).toBe(200)
+		expect(posts).toEqual(baseline.posts)
+	})
+	it("rejects unknown incomplete manifests instead of treating them as legacy compatibility", async () => {
+		const { client, posts } = setup()
+		const payload = datedMonthlyPayload()
+		const original = client.rest.post.bind(client.rest)
+		client.rest.post = (async () => {
+			throw Object.assign(new Error("Rejected"), { status: 429 })
+		}) as typeof client.rest.post
+		expect((await deliverWeeklyDigest(client, payload, [serializePayload({
+			components: [new Container([new TextDisplay("Unknown old renderer")])]
+		})])).status).toBe(502)
+		client.rest.post = original
+		expect((await handleSearchIntelligenceApiRequest(request(payload), client))?.status).toBe(409)
+		expect(posts).toHaveLength(0)
+	})
+	it.each(["retryable", "uncertain"] as const)("keeps new search-only %s retries on their original nonces and bodies", async state => {
+		const { client, posts } = setup()
+		const payload = datedMonthlyPayload()
+		const original = client.rest.post.bind(client.rest)
+		let calls = 0
+		client.rest.post = (async (...args: Parameters<typeof original>) => {
+			if (++calls === 2) {
+				if (state === "retryable") throw Object.assign(new Error("Rejected"), { status: 429 })
+				await original(...args)
+				throw new Error("Response lost")
+			}
+			return original(...args)
+		}) as typeof client.rest.post
+		expect((await handleSearchIntelligenceApiRequest(request(payload), client))?.status)
+			.toBe(state === "retryable" ? 502 : 503)
+		const previous = structuredClone(posts)
+		client.rest.post = original
+		if (state === "uncertain") {
+			expect((await handleSearchIntelligenceApiRequest(request(payload), client))?.status).toBe(503)
+			expect(posts).toEqual(previous)
+			client.rest.get = async () => [{
+				id: "search-part-2",
+				author: { id: "bot-user", bot: true },
+				timestamp: new Date().toISOString(),
+				components: previous[1].body.components
+			}] as never
+		}
+		expect((await handleSearchIntelligenceApiRequest(request(payload), client))?.status).toBe(200)
+		expect(posts.slice(0, previous.length)).toEqual(previous)
+		expect(new Set(posts.map(({ body }) => body.nonce)).size).toBe(posts.length)
+		const count = posts.length
+		expect((await handleSearchIntelligenceApiRequest(request(payload), client))?.status).toBe(200)
+		expect(posts).toHaveLength(count)
+		expect(posts.flatMap(({ body }) => texts(body)).join("\n")).not.toContain(payload.catalogs.plugins.recommendations[0].url)
+		const changed = structuredClone(payload)
+		changed.catalogs.skills.recommendations[0].reason = "Changed invisible evidence"
+		expect((await handleSearchIntelligenceApiRequest(request(changed), client))?.status).toBe(409)
+		expect(posts).toHaveLength(count)
+	})
+	it("still validates hidden Featured evidence and trusted search facts before a new claim", async () => {
+		const { client, posts } = setup()
+		const payload = datedMonthlyPayload()
+		for (const mutate of [
+			(p: typeof payload) => { p.catalogs.plugins.recommendations[0].adoption.installs7d = 101 },
+			(p: typeof payload) => { p.catalogs.plugins.companyOpportunities[0].searchUrl = "https://evil.example/search" },
+			(p: typeof payload) => { p.catalogs.plugins.companyOpportunities[0].searches = 2 },
+			(p: typeof payload) => { Object.assign(p.catalogs.plugins, { userId: "private" }) }
+		]) {
+			const invalid = structuredClone(payload)
+			mutate(invalid)
+			expect((await handleSearchIntelligenceApiRequest(request(invalid), client))?.status).toBe(400)
+		}
+		expect(posts).toHaveLength(0)
+		mockClock = spyOn(Date, "now").mockReturnValue(Date.UTC(2020, 0, 1))
+		expect((await handleSearchIntelligenceApiRequest(request(payload), client))?.status).toBe(200)
+		const rendered = posts.flatMap(({ body }) => texts(body)).join("\n")
+		expect(rendered).toContain("company opportunities")
+		expect(rendered).not.toContain(payload.catalogs.plugins.recommendations[0].url)
+	})
+	it("retains bounded company, gap and zero-current movers without mentions or oversized search links", async () => {
+		const { client, posts } = setup()
+		const payload = datedMonthlyPayload()
+		const plugins = payload.catalogs.plugins
+		plugins.totalSearches = 1000
+		plugins.sourceCounts = { clawhubWeb: 600, openclawControlUi: 400 }
+		plugins.companyOpportunities = Array.from({ length: 5 }, (_, index) => ({
+			...plugins.companyOpportunities[0],
+			query: `topic-${index} ${"x".repeat(100)}`,
+			companyProductName: `Campaign ${index} @everyone [name]`,
+			searchUrl: `https://clawhub.ai/plugins?q=${index === 0 ? "x".repeat(1900) : `topic-${index}`}`
+		}))
+		plugins.officialGaps = plugins.companyOpportunities.map(({ query }, index) => ({
+			...plugins.officialGaps[0], query, searchUrl: `https://clawhub.ai/plugins?q=topic-${index}`
+		}))
+		plugins.movers = plugins.officialGaps.map((row, index) => ({
+			...row, query: `dropped-${index}`, searches: 0, officialGaps: 0, previousSearches: 5
+		}))
+		expect((await handleSearchIntelligenceApiRequest(request(payload), client))?.status).toBe(200)
+		const rendered = posts.flatMap(({ body }) => texts(body)).join("\n")
+		for (let index = 0; index < 5; index++) {
+			expect(rendered).toContain(`Campaign ${index}`)
+			expect(rendered.match(new RegExp(`\\[topic-${index} `, "g"))).toHaveLength(2)
+			expect(rendered).toContain(`dropped-${index}`)
+		}
+		expect(rendered).toContain("0 searches · 0 gaps · previous 5")
+		expect(rendered).not.toContain("@everyone")
+		expect(rendered).not.toContain(plugins.companyOpportunities[0].searchUrl)
+		expect(rendered).toContain(payload.dashboardUrl)
+		for (const { body } of posts) {
+			expect(texts(body).join("\n").length).toBeLessThanOrEqual(4000)
+			expect(componentCount(body) - 1).toBeLessThanOrEqual(40)
+			expect(body.allowed_mentions).toEqual({ parse: [] })
+		}
+	})
+	it("distinguishes unknown collection history from zero searches after cutover", async () => {
+		const { client, posts } = setup()
+		const payload = datedMonthlyPayload()
+		Object.assign(payload.catalogs.plugins.coverage, { dataThrough: null, collectionStartedAt: null })
+		expect((await handleSearchIntelligenceApiRequest(request(payload), client))?.status).toBe(200)
+		const rendered = posts.flatMap(({ body }) => texts(body)).join("\n")
+		expect(rendered).toContain("Data through unknown; collection started unknown. Incomplete collection history.")
+		expect(rendered).toContain("0 searches · Web 0 · Control UI 0")
+		expect(rendered).toContain("Classification unavailable")
+	})
+
 	it("delivers every linked monthly recommendation in one compact message and replays it", async () => {
 		const { client, posts } = setup()
 		const payload = monthlyPayload()
@@ -745,12 +1012,15 @@ describe("ClawHub weekly search intelligence receiver", () => {
 		expect(posts.length).toBeGreaterThan(2)
 		expect(new Set(posts.map(({ body }) => body.nonce)).size).toBe(posts.length)
 	})
-	it("recovers a final monthly receipt write failure without repeating its confirmed parts", async () => {
+	it.each([
+		["legacy", monthlyPayload],
+		["search-only", datedMonthlyPayload]
+	] as const)("recovers a final %s receipt write failure without repeating its confirmed parts", async (_kind, makePayload) => {
 		const { client, posts, owner } = setup()
 		owner.database.exec(`CREATE TRIGGER fail_monthly_completion BEFORE UPDATE ON keyValue
 			WHEN json_extract(NEW.value, '$.version') = 2 AND json_extract(NEW.value, '$.status') = 'sent'
 			BEGIN SELECT RAISE(ABORT, 'fixture receipt unavailable'); END`)
-		const payload = monthlyPayload(true)
+		const payload = makePayload(true)
 		expect(
 			(await handleSearchIntelligenceApiRequest(request(payload), client))
 				?.status

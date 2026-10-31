@@ -126,7 +126,8 @@ const fingerprint = (body: MessageBody, value: string): MessageBody => ({
 export const deliverWeeklyDigest = async (
 	client: Client,
 	digest: DigestIdentity,
-	rendered: MessageBody | MessageBody[]
+	rendered: MessageBody | MessageBody[],
+	legacyRendered?: MessageBody[]
 ): Promise<Response> => {
 	const key = `clawhub-search-weekly:${new URL(digest.dashboardUrl).origin}:${digest.weekStart}`
 	const payloadHash = await hash(canonical(digest))
@@ -174,8 +175,18 @@ export const deliverWeeklyDigest = async (
 	// A completed receipt acknowledges the same report across presentation changes.
 	// Incomplete deliveries stay bound to their original parts to prevent duplicates.
 	if (state.status === "sent") return success()
-	if (canonical(state.partHashes) !== canonical(partHashes))
-		return response({ error: "Weekly payload conflict" }, 409)
+	if (canonical(state.partHashes) !== canonical(partHashes)) {
+		// An old writer may already own the cutoff week. Only the SAME payload and
+		// exact original manifest can select legacy output; never replace its claim.
+		if (!legacyRendered)
+			return response({ error: "Weekly payload conflict" }, 409)
+		const legacyPartHashes = await Promise.all(
+			legacyRendered.map(body => hash(canonical(body)))
+		)
+		if (canonical(state.partHashes) !== canonical(legacyPartHashes))
+			return response({ error: "Weekly payload conflict" }, 409)
+		rendered = legacyRendered
+	}
 	for (let index = 0; index < rendered.length; index++) {
 		const result = await deliverMessage(
 			client,

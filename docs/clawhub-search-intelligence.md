@@ -85,14 +85,10 @@ snapshot. Search evidence still has its separate completed-week window and query
 privacy threshold. Missing adoption stays unavailable, not zero. Hermit neither
 re-ranks the report nor publishes Featured selections.
 
-The compact Carbon layout retains every proposed ID, slot, selection basis,
-30d/7d install count and rationale, metadata freshness, plus all pending reservations.
-Weekly search totals, source counts, coverage and bounded company-opportunity,
-official-gap and mover rows remain separate sections. The complete
-wire payload remains capped at 30,000 bytes. Reports that fit use one message;
-longer reports are packed deterministically into bounded parts, without dropping
-selection rows or reasons. Each part uses at most 4000 text characters and 40
-components, with a dashboard link for full search links and removal details.
+The complete wire payload remains capped at 30,000 bytes, including all Featured
+evidence even when Discord does not display it. Pre-cutoff v4 reports retain the
+compact linked-name/30-day-install formatter, pending-slot warnings and full-report
+button. Each part uses at most 4000 text characters and 40 components.
 
 V4 freezes the complete digest hash and ordered rendered-part hashes at the same
 origin/week key. Each part reuses the existing message receipt, nonce and
@@ -103,6 +99,31 @@ A changed report or rendering manifest conflicts instead of silently replacing a
 partially delivered week. Frozen v1/v2/v3 payloads retain their original validation,
 rendering, hashes and single-message receipts. Deploy receiver support before
 sending v4. Read-only dry runs must not call the delivery endpoint.
+
+### Discord Featured presentation cutover
+
+For v4 weeks ending **2026-11-02T00:00:00Z or later**, new delivery claims show
+both catalogs' weekly search totals, source counts, coverage, classification,
+company opportunities, official gaps and movers. Featured recommendations move
+to the separate advisory review workflow; the Discord formatter never changes
+Featured membership. Strict full-payload validation, privacy thresholds and
+trusted-origin checks still apply. Bounded Carbon pages retain every supplied
+search row; oversized search links open the full report instead.
+
+The original full digest still owns the hash, origin/week key and part nonces.
+An existing incomplete cutoff-week receipt can resume the unchanged legacy
+formatter only when the original payload hash **and ordered legacy part hashes**
+match. The atomic delivery owner chooses the winning manifest; it never replaces
+an existing claim. Changed payloads and unknown incomplete manifests still
+conflict, and uncertain sends still require reconciliation. No manual proof that
+the cutoff week is unclaimed is needed.
+
+Pre-cutoff producer-frozen reports use the byte-identical old formatter even
+when first received after cutover. V1/v2/v3 behavior is unchanged. The cutoff is
+an immutable UTC week identity, independent of request time or environment
+settings. A rollback must retain this selector and both formatters for the
+retained receipt lifetime; deploying a formatter-only historical revision after
+new claims exist can conflict with their manifests.
 
 ## Delivery state and failure semantics
 
