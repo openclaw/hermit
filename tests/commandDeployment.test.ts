@@ -73,7 +73,7 @@ it("registers commands explicitly, without writing to Discord on Worker requests
 		// Exercise the actual operator script and Carbon's pinned HTTP contract.
 		await import("../scripts/deploy-commands.ts")
 		expect(registeredNames.has("nominate")).toBe(false)
-		for (const name of ["lobster", "slap", "role", "claim", "helper", "github"]) expect(registeredNames.has(name)).toBe(true)
+		for (const name of ["lobster", "slap", "role", "claim", "helper", "github", "beta", "beta-pings"]) expect(registeredNames.has(name)).toBe(true)
 		expect(calls.some(({ method, path }) =>
 			method === "PUT" && path.includes("/guilds/")
 		)).toBe(true)

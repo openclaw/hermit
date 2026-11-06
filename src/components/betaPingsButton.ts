@@ -2,6 +2,7 @@ import {
 	Button,
 	type ButtonInteraction,
 	ButtonStyle,
+	type CommandInteraction,
 	Container,
 	Section,
 	TextDisplay
@@ -22,7 +23,7 @@ const noticeContainer = (message: string, accentColor?: string) =>
 	new Container([new TextDisplay(message)], { accentColor })
 
 export const handleBetaPingsToggle = async (
-	interaction: ButtonInteraction,
+	interaction: ButtonInteraction | CommandInteraction,
 	fetchMember: FetchMember = (guildId, userId) =>
 		interaction.client.fetchMember(guildId, userId)
 ) => {

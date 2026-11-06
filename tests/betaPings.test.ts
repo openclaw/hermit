@@ -7,6 +7,7 @@ import {
 	Permission,
 	serializePayload
 } from "@buape/carbon"
+import BetaCommand from "../src/commands/beta.js"
 import BetaPingsCommand from "../src/commands/betaPings.js"
 import {
 	buildBetaPingsContainer,
@@ -113,22 +114,7 @@ describe("Beta Pings post", () => {
 		expect(command.permission).toBe(Permission.ManageRoles)
 	})
 
-	it("publishes in any channel in the configured guild", async () => {
-		const replies: unknown[] = []
-		const interaction = {
-			rawData: {
-				guild_id: betaPingsConfig.guildId,
-				channel_id: "another-channel"
-			},
-			reply: async (payload: unknown) => {
-				replies.push(payload)
-			}
-		} as unknown as CommandInteraction
 
-		await new BetaPingsCommand().run(interaction)
-
-		expect(payloadText(replies[0])).toContain(betaPingsConfig.copy.title)
-	})
 })
 
 describe("Beta Pings role toggle", () => {
@@ -227,4 +213,97 @@ describe("Beta Pings role toggle", () => {
 			betaPingsConfig.copy.updateFailed
 		)
 	})
+})
+
+
+describe("public /beta command", () => {
+	const makeCommandInteraction = (member: BetaPingsMember, options: {
+		guildId?: string | null
+		userId?: string | null
+		fetchError?: boolean
+	} = {}) => {
+		const replies: unknown[] = []
+		const fetched: Array<[string, string]> = []
+		const interaction = {
+			rawData: { guild_id: options.guildId === null ? undefined : options.guildId ?? betaPingsConfig.guildId },
+			userId: options.userId === null ? undefined : options.userId ?? "caller",
+			// Deliberately stale interaction member; the fresh member must win.
+			member: { roles: [{ id: "unrelated-role" }] },
+			client: { fetchMember: async (guildId: string, userId: string) => {
+				fetched.push([guildId, userId])
+				if (options.fetchError) throw new Error("Discord unavailable")
+				return member
+			} },
+			reply: async (payload: unknown) => { replies.push(payload) }
+		} as unknown as CommandInteraction
+		return { interaction, replies, fetched }
+	}
+
+	it("is a public, zero-option, guild-installed private deferred command", () => {
+		const command = new BetaCommand()
+		expect(command.name).toBe("beta")
+		expect(command.permission).toBeUndefined()
+		expect(command.serialize().default_member_permissions).toBeNull()
+		expect(command.serialize().options ?? []).toEqual([])
+		expect(command.contexts).toEqual([InteractionContextType.Guild])
+		expect(command.integrationTypes).toEqual([ApplicationIntegrationType.GuildInstall])
+		expect(command.guildIds).toEqual([betaPingsConfig.guildId])
+		expect(command.defer).toBe(true)
+		expect(command.ephemeral).toBe(true)
+	})
+
+	for (const enabled of [false, true]) {
+		it("toggles only the caller's fresh membership " + (enabled ? "off" : "on"), async () => {
+			const { member, added, removed } = makeMember(enabled ? [betaPingsConfig.roleId, "unrelated-role"] : ["unrelated-role"])
+			const { interaction, replies, fetched } = makeCommandInteraction(member)
+			await new BetaCommand().run(interaction)
+			expect(fetched).toEqual([[betaPingsConfig.guildId, "caller"]])
+			expect(added.map(([id]) => id)).toEqual(enabled ? [] : [betaPingsConfig.roleId])
+			expect(removed.map(([id]) => id)).toEqual(enabled ? [betaPingsConfig.roleId] : [])
+			expect(replies).toHaveLength(1)
+			expect(payloadText(replies[0])).toContain(enabled ? betaPingsConfig.copy.disabled : betaPingsConfig.copy.enabled)
+			expect(serializePayload(replies[0])).toMatchObject({ allowed_mentions: { parse: [] }, components: [{ type: 17, components: [{ type: 10 }] }] })
+		})
+	}
+
+	it("uses the authenticated user rather than an interaction member or target", async () => {
+		const { member } = makeMember()
+		const { interaction, fetched } = makeCommandInteraction(member)
+		Object.assign(interaction, { user: { id: "authenticated-caller" }, member: { id: "not-a-target" } })
+		await new BetaCommand().run(interaction)
+		expect(fetched).toEqual([[betaPingsConfig.guildId, "authenticated-caller"]])
+	})
+
+	for (const guildId of [null, "wrong-guild"]) {
+		it("rejects an absent or wrong guild before fetching membership: " + guildId, async () => {
+			const { member, added, removed } = makeMember()
+			const { interaction, replies, fetched } = makeCommandInteraction(member, { guildId })
+			await new BetaCommand().run(interaction)
+			expect(fetched).toEqual([])
+			expect([...added, ...removed]).toEqual([])
+			expect(payloadText(replies[0])).toContain(betaPingsConfig.copy.wrongGuild)
+		})
+	}
+
+	it("rejects missing caller identity without fetching or changing roles", async () => {
+		const { member, added, removed } = makeMember()
+		const { interaction, replies, fetched } = makeCommandInteraction(member, { userId: null })
+		await new BetaCommand().run(interaction)
+		expect(fetched).toEqual([])
+		expect([...added, ...removed]).toEqual([])
+		expect(payloadText(replies[0])).toContain(betaPingsConfig.copy.userNotFound)
+	})
+
+	for (const failure of ["fetch", "add", "remove"]) {
+		it("reports a " + failure + " failure without claiming success", async () => {
+			const { member } = makeMember(failure === "remove" ? [betaPingsConfig.roleId] : [])
+			if (failure === "add") member.addRole = async () => { throw new Error("Forbidden") }
+			if (failure === "remove") member.removeRole = async () => { throw new Error("Forbidden") }
+			const { interaction, replies } = makeCommandInteraction(member, { fetchError: failure === "fetch" })
+			const consoleError = spyOn(console, "error").mockImplementation(() => {})
+			try { await new BetaCommand().run(interaction) } finally { consoleError.mockRestore() }
+			expect(replies).toHaveLength(1)
+			expect(payloadText(replies[0])).toContain(betaPingsConfig.copy.updateFailed)
+		})
+	}
 })

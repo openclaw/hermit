@@ -1,6 +1,7 @@
 import { Client } from "@buape/carbon"
 import { createHandler } from "@buape/carbon/adapters/fetch"
 import AdminCommand from "./commands/admin.js"
+import BetaCommand from "./commands/beta.js"
 import BetaPingsCommand from "./commands/betaPings.js"
 import ClaimCommand from "./commands/claim.js"
 import GithubCommand from "./commands/github.js"
@@ -61,6 +62,7 @@ export const client = new Client(
 			new SolvedModCommand(),
 			new SayRootCommand(),
 			new RoleCommand(),
+			new BetaCommand(),
 			new BetaPingsCommand(),
 			new HelperRootCommand(),
 			new ClaimCommand(),
