@@ -15,7 +15,7 @@ function hasCorrectBeta(commands: unknown): boolean {
 	if (!matches.length) return false
 	const command = matches[0]
 	const metadata = expected()
-	// Discord may omit contexts/integration_types for guild-scoped commands.
+	// Guild responses may omit contexts/integration_types or return null contexts.
 	if (matches.length !== 1 || command.type !== metadata.type ||
 		command.description !== new BetaCommand().description ||
 		(command.default_member_permissions ?? null) !== metadata.default_member_permissions ||
@@ -23,7 +23,7 @@ function hasCorrectBeta(commands: unknown): boolean {
 		(command.nsfw ?? false) !== false ||
 		Object.keys(command.name_localizations ?? {}).length !== 0 ||
 		Object.keys(command.description_localizations ?? {}).length !== 0 ||
-		(command.contexts !== undefined && JSON.stringify(command.contexts) !== JSON.stringify(metadata.contexts)) ||
+		(command.contexts != null && JSON.stringify(command.contexts) !== JSON.stringify(metadata.contexts)) ||
 		(command.integration_types !== undefined && JSON.stringify(command.integration_types) !== JSON.stringify(metadata.integration_types))) {
 		throw new BetaRegistrationError("An existing /beta command conflicts with the expected configuration. Nothing was overwritten; ask an operator to review it.")
 	}

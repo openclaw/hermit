@@ -7,7 +7,7 @@ The staff-only /beta-pings command also ensures its companion /beta command exis
 - The signed interaction must come from the configured guild, and its member permission bitset must include Manage Roles or Administrator. Missing/malformed permissions fail closed, independently of Discord's configurable default command permissions.
 - Carbon defers /beta-pings privately. The command edits that private acknowledgement before sending the successful menu as a separate public Carbon followup. Registration/auth/conflict failures never send a public menu.
 - Use the existing bot REST client, with its existing queueRequests:false (automatic 429 retries disabled) and default 15-second request timeout. Refuse registration if queued retries become enabled.
-- GET the configured application's guild commands on every new explicit invocation. A matching /beta is read-only; unexpected /beta metadata fails privately, never overwrites. Discord's guild API may omit global-only contexts/integration_types; if supplied they must match. Ignore unrelated commands.
+- GET the configured application's guild commands on every new explicit invocation. A matching /beta is read-only; unexpected /beta metadata fails privately, never overwrites. Discord's guild API may omit global-only contexts/integration_types or return null contexts; supplied context arrays and integration_types must match (null integration_types is rejected). Ignore unrelated commands.
 - Only create a missing /beta, using BetaCommand.serialize() verbatim. No bulk PUT, reconciliation, application-wide changes, or automatic POST retry.
 
 ## Concurrency and uncertain outcomes

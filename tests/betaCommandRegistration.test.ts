@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "bun:test"
-import { Client, type CommandInteraction, Permission, Routes, serializePayload } from "@buape/carbon"
+import { Client, type CommandInteraction, Permission, RequestClient, Routes, serializePayload } from "@buape/carbon"
 import BetaCommand from "../src/commands/beta.js"
 import BetaPingsCommand from "../src/commands/betaPings.js"
 import { betaPingsConfig } from "../src/config/betaPings.js"
@@ -124,10 +124,24 @@ describe("explicit /beta-pings registration", () => {
 		expect((await f.invoke()).menus).toHaveLength(1)
 		expect(creates(f)).toHaveLength(0)
 	})
+	it("accepts existing guild command with null contexts without writing", async () => {
+		const f = fixture()
+		f.setCommands([{ ...expected(), contexts: null }])
+		expect((await f.invoke()).menus).toHaveLength(1)
+		expect(f.calls.map((call) => call.method)).toEqual(["GET"])
+	})
+	it("accepts null contexts in post-create readback", async () => {
+		const f = fixture()
+		let reads = 0
+		f.client.rest.get = async () => ++reads < 3 ? [] : [{ ...expected(), contexts: null }]
+		expect((await f.invoke()).menus).toHaveLength(1)
+		expect(creates(f)).toHaveLength(1)
+		expect(reads).toBe(3)
+	})
 	it.each([
 		{ description: "different" }, { options: [{ name: "target", type: 6 }] },
 		{ default_member_permissions: "0" }, { contexts: [1] }, { integration_types: [1] },
-		{ type: 2 }, { nsfw: true }, { name_localizations: { de: "test" } }
+		{ integration_types: null }, { type: 2 }, { nsfw: true }, { name_localizations: { de: "test" } }
 	])("refuses conflicting metadata without overwriting: %j", async (change) => {
 		const f = fixture()
 		f.setCommands([{ ...expected(), ...change }])
@@ -242,6 +256,46 @@ describe("explicit /beta-pings registration", () => {
 		expect(f.calls.map((call) => call.method)).toEqual(["POST", "PATCH"])
 		expect((f.calls[0]?.body as { data: { flags: number } }).data.flags).toBe(64)
 		expect((f.calls[1]?.body as { flags: number }).flags).toBe(32832)
+	})
+	it.each(["network", "500", "429"])("pinned Carbon queueRequests:false sends one fetch on %s failure", async (failure) => {
+		let fetches = 0
+		const rest = new RequestClient("fake-test-token", {
+			queueRequests: false,
+			fetch: async () => {
+				fetches++
+				if (failure === "network") throw new Error("network failure")
+				return new Response(JSON.stringify(failure === "429"
+					? { message: "rate limited", retry_after: 30, global: false }
+					: { message: "upstream failure", code: 0 }), {
+					status: Number(failure), headers: { "content-type": "application/json" }
+				})
+			}
+		})
+		await expect(rest.post(Routes.applicationGuildCommands("123", betaPingsConfig.guildId), {
+			body: new BetaCommand().serialize()
+		})).rejects.toThrow()
+		expect(fetches).toBe(1)
+	})
+	it("failed public followup updates only the private original without retrying", async () => {
+		const f = fixture()
+		f.setCommands([expected()])
+		const post = f.client.rest.post
+		f.client.rest.post = async (path, data, query) => {
+			const result = await post(path, data, query)
+			if (path.includes("/webhooks/")) throw new Error("uncertain followup delivery")
+			return result
+		}
+		hydrateRuntimeEnv({ DB: f.db } as Env)
+		await f.client.commandHandler.handleCommandInteraction(f.raw() as never)
+		const patches = f.calls.filter((call) => call.method === "PATCH")
+		expect(patches).toHaveLength(2)
+		for (const patch of patches) {
+			expect(patch.route).toBe(Routes.webhookMessage(f.client.options.clientId, "interaction-token", "@original"))
+			expect((patch.body as { flags: number }).flags).toBe(32832)
+		}
+		expect(JSON.stringify(patches[1]?.body)).toContain("Could not confirm")
+		expect(JSON.stringify(patches[1]?.body)).not.toContain("uncertain followup delivery")
+		expect(f.calls.filter((call) => call.method === "POST" && call.route.includes("/webhooks/"))).toHaveLength(1)
 	})
 	it("real Carbon dispatcher defers privately, edits privately, then posts a public menu", async () => {
 		const f = fixture()
