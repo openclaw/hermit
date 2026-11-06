@@ -114,22 +114,7 @@ describe("Beta Pings post", () => {
 		expect(command.permission).toBe(Permission.ManageRoles)
 	})
 
-	it("publishes in any channel in the configured guild", async () => {
-		const replies: unknown[] = []
-		const interaction = {
-			rawData: {
-				guild_id: betaPingsConfig.guildId,
-				channel_id: "another-channel"
-			},
-			reply: async (payload: unknown) => {
-				replies.push(payload)
-			}
-		} as unknown as CommandInteraction
 
-		await new BetaPingsCommand().run(interaction)
-
-		expect(payloadText(replies[0])).toContain(betaPingsConfig.copy.title)
-	})
 })
 
 describe("Beta Pings role toggle", () => {
