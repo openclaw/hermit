@@ -24,27 +24,27 @@
 	},
 	"dependencies": {
 		"@buape/carbon": "0.16.0",
-		"drizzle-orm": "0.45.3",
-		"react": "19.3.0",
-		"react-dom": "19.3.0",
-		"react-router": "8.4.0"
+		"drizzle-orm": "0.45.4",
+		"react": "19.3.1",
+		"react-dom": "19.3.1",
+		"react-router": "8.5.1"
 	},
 	"devDependencies": {
-		"@tailwindcss/postcss": "4.3.3",
-		"@types/node": "26.6.4",
+		"@tailwindcss/postcss": "4.3.5",
+		"@types/node": "26.6.6",
 		"@types/react": "19.3.0",
 		"@types/react-dom": "19.3.0",
 		"drizzle-kit": "0.31.11",
-		"postcss": "8.5.29",
+		"postcss": "8.5.33",
 		"postcss-cli": "12.0.0",
-		"tailwindcss": "4.3.3",
+		"tailwindcss": "4.3.5",
 		"typescript": "7.0.2",
 		"wrangler": "4.148.0"
 	},
 	"overrides": {
 		"esbuild": "0.28.2",
-		"postcss": "8.5.29",
-		"ws": "8.22.0",
+		"postcss": "8.5.33",
+		"ws": "8.23.0",
 		"workerd": "1.20261021.1"
 	}
 }
