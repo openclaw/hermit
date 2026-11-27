@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Schedule weekly CodeQL scans of main while retaining normal PR and manual security scans.
+
 - Remove Shell Society nomination commands, voting, role-grant/card/expiry recovery and the nomination-only cron for the Barnacle handoff. Preserve archived D1 history and decouple social guild configuration.
 - Stop automatically registering Discord commands on Worker requests and cron events; run `bun run commands:deploy` after the first deployment and command-definition changes to avoid repeated guild-command writes and rate limits.
 - Refresh Worker and forwarder runtime/build dependencies and Cloudflare types, including React 19.3, React Router 8.4, PostCSS CLI 12, and Wrangler; document the existing Node.js 22.22.0 build minimum.
